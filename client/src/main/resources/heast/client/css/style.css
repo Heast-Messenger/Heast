@@ -1,0 +1,40 @@
+.line {
+    -fx-border-color: transparent;
+}
+
+/* Scroll Bar Styling */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #61636a;
+    -fx-background-radius: 5em;
+}
+
+/* List View Styling */
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5px 0px 5px 0px;
+    -fx-text-fill: white;
+}
