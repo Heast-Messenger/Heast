@@ -1,6 +1,5 @@
 package heast.client.control.network;
 
-import heast.client.view.ClientGui;
 import heast.client.view.dialog.Dialog;
 import javafx.application.Platform;
 import heast.client.model.Settings;

@@ -4,11 +4,11 @@
   <parent>
     <artifactId>heast-msg</artifactId>
     <groupId>heast</groupId>
-    <version>0.1</version>
+    <version>1.0</version>
   </parent>
 
   <artifactId>core</artifactId>
-  <version>0.1</version>
+  <version>1.0</version>
 
   <name>core</name>
 
@@ -19,11 +19,7 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>heast</groupId>
-      <artifactId>heast-msg</artifactId>
-      <version>0.1</version>
-    </dependency>
+
   </dependencies>
 
   <build>
@@ -70,15 +66,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                  <source>8</source>
-                  <target>8</target>
-              </configuration>
-          </plugin>
-      </plugins>
   </build>
 </project>
