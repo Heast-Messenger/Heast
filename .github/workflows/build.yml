@@ -25,14 +25,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: DMG file
-          path: jpackagefx-main/target/installer/*.dmg
+          path: client/target/installer/*.dmg
       - name: Upload PKG
         uses: actions/upload-artifact@v2
         with:
           name: PKG file
-          path: jpackagefx-main/target/installer/*.pkg
+          path: client/target/installer/*.pkg
       - name: Upload APP
         uses: actions/upload-artifact@v2
         with:
           name: APP file
-          path: jpackagefx-main/target/installer/*.app
+          path: client/target/installer/*.app
