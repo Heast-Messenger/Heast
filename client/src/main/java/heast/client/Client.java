@@ -68,8 +68,7 @@ public final class Client {
 						);
 					}
 				})
-				.connect(host, port)
-				.syncUninterruptibly().addListener(future -> { // Runs when connecting is done
+				.connect(host, port).addListener(future -> {
 					if (future.isSuccess()) {
 						System.out.println("Connected to server");
 						System.out.println("Requesting server public key...");
@@ -80,7 +79,7 @@ public final class Client {
 						System.err.println("Failed to connect to server: " + future.cause().getMessage());
 					}
 				})
-
+				.syncUninterruptibly()
 				.channel()
 				.closeFuture()
 				.syncUninterruptibly();

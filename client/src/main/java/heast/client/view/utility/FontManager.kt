@@ -1,5 +1,6 @@
 package heast.client.view.utility
 
+import heast.client.Client
 import javafx.scene.control.Label
 import javafx.scene.text.Font
 import heast.client.model.Settings
@@ -8,8 +9,8 @@ import heast.client.view.ClientGui
 object FontManager {
 	fun regularFont(size: Double = 14.0) : Font {
 		return Font.loadFont(
-			ClientGui::class.java.getResourceAsStream(
-				"../font/inter-medium.ttf"
+			Client::class.java.getResourceAsStream(
+				"font/inter-medium.ttf"
 			), size
 		)
 	}
@@ -24,8 +25,8 @@ object FontManager {
 
 	fun boldFont(size: Double = 14.0) : Font {
 		return Font.loadFont(
-			ClientGui::class.java.getResourceAsStream(
-				"../font/poppins-bold.ttf"
+			Client::class.java.getResourceAsStream(
+				"font/poppins-bold.ttf"
 			), size
 		)
 	}

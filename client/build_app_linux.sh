@@ -13,7 +13,7 @@ JAVA_VERSION=17
 MAIN_JAR="client-$PROJECT_VERSION.jar"
 
 # Set desired installer type: "app-image", "rpm" or "deb".
-INSTALLER_TYPE=rpm
+INSTALLER_TYPEs=("app-image" "rpm" "deb")
 
 echo "java home: $JAVA_HOME"
 echo "project version: $PROJECT_VERSION"
@@ -83,18 +83,21 @@ $JAVA_HOME/bin/jlink \
 # ------ PACKAGING ----------------------------------------------------------
 # In the end we will find the package inside the target/installer directory.
 
-echo "Creating installer of type $INSTALLER_TYPE"
+for installer_type in "${INSTALLER_TYPES[@]}"
+do
+  echo "creating installer of type: ${installer_type}"
 
-$JAVA_HOME/bin/jpackage \
---type $INSTALLER_TYPE \
---dest target/installer \
---input target/installer/input/libs \
---name "Heast Messenger" \
---main-class heast.client.Client \
---main-jar ${MAIN_JAR} \
---java-options -Xmx2048m \
---runtime-image target/java-runtime \
---icon src/main/resources/heast/client/images/logo/deploy/linux.png \
---app-version ${APP_VERSION} \
---vendor "Heast Inc." \
---copyright "Copyright © 2022-22 Heast Inc."
+  $JAVA_HOME/bin/jpackage \
+  --type ${installer_type} \
+  --dest target/installer \
+  --input target/installer/input/libs \
+  --name "Heast Messenger" \
+  --main-class heast.client.Client \
+  --main-jar ${MAIN_JAR} \
+  --java-options -Xmx2048m \
+  --runtime-image target/java-runtime \
+  --icon src/main/resources/heast/client/images/logo/deploy/linux.png \
+  --app-version ${APP_VERSION} \
+  --vendor "Heast Messenger" \
+  --copyright "Copyright © 2022 Heast Messenger"
+done

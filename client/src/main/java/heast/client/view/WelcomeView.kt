@@ -17,15 +17,13 @@ import heast.client.view.utility.FlexItem
 import heast.client.view.utility.FontManager
 
 object WelcomeView : StackPane() {
+	init {
+		setPane(WelcomePane)
+	}
+
 	fun setPane(node: Node) {
 		this.children.clear()
 		this.children.add(node)
-	}
-
-	init {
-		this.children.addAll(
-			WelcomePane
-		)
 	}
 
 	object WelcomePane : VBox() {

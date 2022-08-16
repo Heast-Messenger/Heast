@@ -62,7 +62,9 @@ object ClientGui {
 		 */
 		override fun start(s: Stage) {
 			s.apply {
-				this.icons.add(Image("/heast/client/images/logo/heast-rounded.png"))
+				this.icons.add(
+					Image("/heast/client/images/logo/heast-rounded.png")
+				)
 			}
 
 			Settings.account.addListener { _, _, newValue ->
