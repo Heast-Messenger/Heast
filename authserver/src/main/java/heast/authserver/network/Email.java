@@ -25,7 +25,7 @@ public final class Email {
         System.out.println("Initializing email service...");
         try {
             String[] parts = Files.readString(
-                Path.of("/Users/fabian/Documents/Very Secure Folder/email-connection.txt")
+                Path.of("C:\\Users\\Admin\\Documents\\Very Secure Folder\\email-connection.txt")
             ).split(",");
 
             sender = parts[0];

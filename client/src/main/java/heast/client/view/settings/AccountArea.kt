@@ -8,12 +8,16 @@ import javafx.scene.paint.ImagePattern
 import javafx.scene.shape.Circle
 import heast.client.control.network.ClientNetwork
 import heast.client.model.Settings
+import heast.client.view.ClientGui
 import heast.client.view.SettingsView
+import heast.client.view.WelcomeView
 import heast.client.view.template.Button
 import heast.client.view.utility.FlexExpander
 import heast.client.view.utility.FlexItem
 import heast.client.view.utility.FlexSpacer
 import heast.client.view.utility.FontManager
+import javafx.scene.Node
+import javafx.scene.Scene
 import java.time.format.DateTimeFormatter
 import kotlin.math.min
 
@@ -53,7 +57,7 @@ object AccountArea : VBox() {
 									this.textProperty().bind(
 										Bindings.createObjectBinding({
 											val email = Settings.account.value?.email
-												?: "guest@wwm"
+												?: "guest@heast"
 											return@createObjectBinding "${
 												email.substring(0..4)
 											}[...]${
@@ -138,7 +142,14 @@ object AccountArea : VBox() {
 					Button("Log out", Color.web("#FF6F6F"), Image(
 						"/heast/client/images/settings/logout.png"
 					)) {
-						ClientNetwork.INSTANCE.logout()
+						ClientNetwork.INSTANCE.logout()	//TODO: Return to Welcome-View
+						Settings.account.value=null
+
+					},
+					Button("Delete Account", Color.web("#FF2C44"), Image(
+						"/heast/client/images/settings/delete.png"
+					)) {
+						//ClientNetwork.INSTANCE.delete()	//TODO: Create a Pane, where your login-info has to be entered first
 					},
 					Button("Switch account", Color.web("#ECF0FF"), Image(
 						"/heast/client/images/settings/switchacc.png"

@@ -26,7 +26,7 @@ public final class Database {
 
         try {
             String[] parts = Files.readString(
-                Path.of("/Users/fabian/Documents/Very Secure Folder/database-connection.txt")
+                Path.of("C:\\Users\\Admin\\Documents\\Very Secure Folder\\database-connection.txt")
             ).split(",");
 
             try {

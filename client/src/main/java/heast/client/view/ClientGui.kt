@@ -69,7 +69,7 @@ object ClientGui {
 
 			Settings.account.addListener { _, _, newValue ->
 				when (newValue) {
-					null -> welcome(s)
+					null -> welcome(s)	//TODO: Exception (WelcomeView is already set as root of another scene) when called - debug tomorrow!!!
 					else -> chatting(s)
 				}
 			}

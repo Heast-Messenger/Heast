@@ -71,15 +71,17 @@ public final class Client {
 				.connect(host, port).addListener(future -> {
 					if (future.isSuccess()) {
 						System.out.println("Connected to server");
-						System.out.println("Requesting server public key...");
-						ClientNetwork.INSTANCE.connection.send(
-							new ServerKeyC2SPacket()
-						);
-					} else {
-						System.err.println("Failed to connect to server: " + future.cause().getMessage());
-					}
-				})
-				.syncUninterruptibly()
+					} else{
+						System.err.println("Failed to connect to server: " + future.cause());
+					}})
+					.syncUninterruptibly().addListener(future -> {
+						if (future.isSuccess()) {
+							System.out.println("Requesting server public key...");
+							ClientNetwork.INSTANCE.connection.send(
+									new ServerKeyC2SPacket()
+							);
+						}
+					})
 				.channel()
 				.closeFuture()
 				.syncUninterruptibly();

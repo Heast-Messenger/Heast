@@ -26,7 +26,7 @@ object HomeView : ViewPane() {
 			this.opacity = 0.3
 			this.children.addAll(
 				VBox(
-					FontManager.boldLabel("Whörld Wide Messenger", 30.0),
+					FontManager.boldLabel("Heast Messenger", 30.0),
 					FlexSpacer(10.0, vBox = true),
 					FontManager.regularLabel("The solution for your daily messenger.", 20.0).apply {
 						this.isWrapText = true
