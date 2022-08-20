@@ -8,6 +8,7 @@ import javafx.stage.Stage
 import heast.client.control.network.ClientNetwork
 import heast.client.model.Internal
 import heast.client.model.Settings
+import javafx.scene.Parent
 
 object ClientGui {
 	fun initialize() {
@@ -34,7 +35,14 @@ object ClientGui {
 			fun welcome(s: Stage) {
 				stage = s.apply {
 					this.titleProperty().bind(Internal.welcomeTitle)
-					this.scene = Scene(WelcomeView, 400.0, 450.0)
+					if(scene==null) {
+						this.scene = Scene(WelcomeView, 400.0, 450.0)
+					}
+					else{
+						this.scene.root = WelcomeView
+						this.width = 400.0
+						this.height = 450.0
+					}
 					this.isResizable = false
 					this.show()
 				}
@@ -47,10 +55,21 @@ object ClientGui {
 					this.titleProperty().bind(
 						Internal.mainTitle.concat(" - ").concat(Internal.titleQuote)
 					)
-					this.scene = Scene(MainView, 1100.0, 600.0).apply {
-						this.stylesheets.add(
-							"heast/client/css/style.css"
-						)
+					if(scene==null) {
+						this.scene = Scene(MainView, 1100.0, 600.0).apply {
+							this.stylesheets.add(
+									"heast/client/css/style.css"
+							)
+						}
+					}
+					else{
+						this.scene.root= MainView.apply {
+							this.stylesheets.add(
+									"heast/client/css/style.css"
+							)
+						}
+						this.width= 1100.0
+						this.height= 600.0
 					}
 					this.show()
 				}
@@ -69,8 +88,14 @@ object ClientGui {
 
 			Settings.account.addListener { _, _, newValue ->
 				when (newValue) {
-					null -> welcome(s)	//TODO: Exception (WelcomeView is already set as root of another scene) when called - debug tomorrow!!!
-					else -> chatting(s)
+					null -> {
+						MainView.reset()	//resets the view to normal
+						welcome(s)
+					}
+					else -> {
+						WelcomeView.setPane(WelcomeView.WelcomePane)	//resets the view to normal
+						chatting(s)
+					}
 				}
 			}
 

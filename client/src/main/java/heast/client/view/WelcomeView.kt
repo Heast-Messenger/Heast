@@ -15,6 +15,7 @@ import heast.client.view.template.TextField
 import heast.client.view.utility.FlexExpander
 import heast.client.view.utility.FlexItem
 import heast.client.view.utility.FontManager
+import javafx.scene.control.Label
 
 object WelcomeView : StackPane() {
 	init {
@@ -73,9 +74,49 @@ object WelcomeView : StackPane() {
 		}
 	}
 
+	object LoadingPane : VBox() {
+		init {
+			this.backgroundProperty().bind(
+					Bindings.createObjectBinding({
+						Background(
+								BackgroundFill(
+										Settings.colors["Secondary Color"]!!.color.value,
+										CornerRadii(10.0),
+										Insets(30.0)
+								)
+						)
+					}, Settings.colors["Secondary Color"]!!.color)
+			)
+
+			this.padding = Insets(50.0)
+			this.spacing = 20.0
+			this.alignment = Pos.CENTER
+			this.children.addAll(
+					FlexExpander(
+							vBox = true
+					),
+
+					FontManager.boldLabel("A professional Loading animation", 26.0),
+
+					FontManager.regularLabel("-Just pretend that this text is a rotating circle-", 16.0).apply {
+						this.opacity = 0.5
+					},
+
+					FontManager.regularLabel("Your verification-code will be sent to your email.", 16.0).apply {
+						this.opacity = 0.5
+					}
+			)
+		}
+	}
+
 	object LoginPane : VBox() {
 		private val emailField : TextField
 		private val passwordField : TextField
+
+		private fun clearFields(){
+			this.emailField.text=""
+			this.passwordField.text=""
+		}
 		init {
 			this.padding = Insets(30.0)
 			this.spacing = 20.0
@@ -115,6 +156,8 @@ object WelcomeView : StackPane() {
 						ClientNetwork.INSTANCE.reset(
 							emailField.text, passwordField.text
 						)
+						Dialog.show(LoadingPane, WelcomeView)
+						clearFields()
 					}.apply {
 						this.alignment = Pos.CENTER
 					},
@@ -126,6 +169,8 @@ object WelcomeView : StackPane() {
 							emailField.text,
 							passwordField.text
 						)
+						Dialog.show(LoadingPane, WelcomeView)
+						clearFields()
 					}.apply {
 						this.alignment = Pos.CENTER
 					},
@@ -134,6 +179,7 @@ object WelcomeView : StackPane() {
 						"/heast/client/images/misc/back.png"
 					)) {
 						ClientGui.resize(450.0)
+						clearFields()
 						setPane(WelcomePane)
 					}.apply {
 						this.alignment = Pos.CENTER
@@ -150,6 +196,12 @@ object WelcomeView : StackPane() {
 		private val usernameField : TextField
 		private val emailField : TextField
 		private val passwordField : TextField
+
+		private fun clearFields(){
+			this.usernameField.text=""
+			this.emailField.text=""
+			this.passwordField.text=""
+		}
 
 		init {
 			this.padding = Insets(30.0)
@@ -197,6 +249,8 @@ object WelcomeView : StackPane() {
 							emailField.text,
 							passwordField.text
 						)
+						Dialog.show(LoadingPane, WelcomeView)
+						clearFields()
 					}.apply {
 						this.alignment = Pos.CENTER
 					},
@@ -206,6 +260,7 @@ object WelcomeView : StackPane() {
 					)) {
 						ClientGui.resize(450.0)
 						setPane(WelcomePane)
+						clearFields()
 					}.apply {
 						this.alignment = Pos.CENTER
 					}
@@ -266,6 +321,7 @@ object WelcomeView : StackPane() {
 						ClientNetwork.INSTANCE.verify(
 							verificationField.text.uppercase()
 						)
+						verificationField.text=""
 					}.apply {
 						this.alignment = Pos.CENTER
 					}

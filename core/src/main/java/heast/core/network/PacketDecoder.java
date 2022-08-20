@@ -18,6 +18,7 @@ public final class PacketDecoder extends ReplayingDecoder<Packet<?>> {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         PacketBuf buffer = new PacketBuf(in);
         int packetId = buffer.readVarInt();
+
         Packet<?> packet = ctx.channel()
             .attr(ClientConnection.PROTOCOL_KEY).get()
             .getPacketHandler(side)

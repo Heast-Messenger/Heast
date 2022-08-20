@@ -47,7 +47,7 @@ public final class Database {
      * @param email The email address of the user.
      * @param password The hashed password of the account.
      */
-    public static boolean addEntry(String name, String email, String password) {
+    public static boolean addEntry(String name, String email, String password) {    //TODO: Doesn't work if table is fully cleared?
         try {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO accounts (name, since, email, password) VALUES (?, ?, ?, ?)");
             stmt.setString(1, name);
@@ -60,6 +60,18 @@ public final class Database {
             return true;
         } catch (SQLException e) {
             System.err.println("Failed to add entry to database for " + email);
+            return false;
+        }
+    }
+
+    public static boolean removeEntry(String email){
+        try {
+            PreparedStatement stmt = connection.prepareStatement("DELETE FROM accounts WHERE email = ?");
+            stmt.setString(1,email);
+            stmt.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Failed to delete entry from database for " + email);
             return false;
         }
     }

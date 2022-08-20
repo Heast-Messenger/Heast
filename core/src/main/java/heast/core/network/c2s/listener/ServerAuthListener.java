@@ -8,6 +8,8 @@ public interface ServerAuthListener extends PacketListener {
 
     void onSignup(SignupC2SPacket buf);
 
+    void onDeleteAc(DeleteAcC2SPacket buf);
+
     void onReset(ResetC2SPacket buf);
 
     void onLogout(LogoutC2SPacket buf);

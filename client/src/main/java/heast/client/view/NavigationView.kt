@@ -27,7 +27,7 @@ import heast.client.view.utility.Interpolator
 import java.util.*
 
 object NavigationView : VBox() {
-	private val toggleGroup = ToggleGroup()
+	val toggleGroup = ToggleGroup()
 	init {
 		this.padding = Insets(10.0, 0.0, 20.0, 0.0)
 		this.spacing = 20.0
@@ -102,6 +102,14 @@ object NavigationView : VBox() {
 				} else {
 					b.active.set(false)
 				}
+			}
+		}
+		fun reset() {
+			if(buttons.size>0){
+				for(b in buttons) {
+					b.active.set(false)
+				}
+				buttons[0].active.set(true)
 			}
 		}
 	}

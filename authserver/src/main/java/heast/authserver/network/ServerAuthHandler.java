@@ -4,10 +4,7 @@ import heast.core.network.UserAccount;
 import heast.core.network.c2s.*;
 import heast.core.network.c2s.listener.ServerAuthListener;
 import heast.core.network.ClientConnection;
-import heast.core.network.s2c.LoginResponseS2CPacket;
-import heast.core.network.s2c.ResetResponseS2CPacket;
-import heast.core.network.s2c.ServerKeyResponseS2CPacket;
-import heast.core.network.s2c.SignupResponseS2CPacket;
+import heast.core.network.s2c.*;
 import heast.core.utility.Validator;
 
 public final class ServerAuthHandler implements ServerAuthListener {
@@ -100,6 +97,45 @@ public final class ServerAuthHandler implements ServerAuthListener {
                     ));
                 }
             }
+        );
+    }
+
+    @Override
+    public void onDeleteAc(DeleteAcC2SPacket buf) {
+        buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(),ServerNetwork.getServerKey().getModulus());//decrypts packet
+        String email = buf.getEmail();
+
+        if (!Validator.isEmailValid(email)) {
+            connection.send(new DeleteAcResponseS2CPacket(
+                DeleteAcResponseS2CPacket.Status.INVALID_CREDENTIALS
+            ));
+            return;
+        }
+
+        boolean userExists = Database.checkEntry(email);
+        if (!userExists) {
+            connection.send(new DeleteAcResponseS2CPacket(
+                DeleteAcResponseS2CPacket.Status.USER_NOT_FOUND
+            ));
+            return;
+        }
+
+
+        ServerNetwork.sendVerificationCode(
+                connection, email, () -> connection.send(new DeleteAcResponseS2CPacket(
+                    DeleteAcResponseS2CPacket.Status.CODE_SENT
+                )), () -> {
+                    boolean successful = ServerNetwork.deleteClient(email);
+                    if (successful) {
+                        connection.send(new DeleteAcResponseS2CPacket(
+                                DeleteAcResponseS2CPacket.Status.OK
+                        ));
+                    } else {
+                        connection.send(new DeleteAcResponseS2CPacket(
+                                DeleteAcResponseS2CPacket.Status.USER_NOT_FOUND
+                        ));
+                    }
+                }
         );
     }
 

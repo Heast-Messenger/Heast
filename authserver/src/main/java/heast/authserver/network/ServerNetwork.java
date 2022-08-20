@@ -85,6 +85,17 @@ public final class ServerNetwork {
         return clients.values().remove(connection);
     }
 
+    public static boolean deleteClient(String email){
+        System.out.println("Account deletion request for " + email);
+        if (Database.removeEntry(email)) {
+            System.out.println("Successfully deleted the account of: " + email + "!");
+            return true;
+        } else {
+            System.err.println("Failed to delete the account of: " + email + "!");
+            return false;
+        }
+    }
+
     public static boolean registerClient(String uname, String email, String password) {
         System.out.println("Signup request for " + uname + " with email " + email + " and password " + password);
         String hashedPassword = PBKDF2.hash(password.toCharArray());

@@ -61,6 +61,18 @@ public final class ClientNetwork {
         );
     }
 
+    public void deleteAccount(String email){
+        if (!Validator.isEmailValid(email.trim())) {
+            System.err.println("Invalid email");
+            return;
+        }
+        connection.send(
+                new DeleteAcC2SPacket(
+                        email, serverPublicKey, serverModulus
+                )
+        );
+    }
+
     public void login(String email, String password) {
         System.out.println("Logging in...");
         String address = email.trim();

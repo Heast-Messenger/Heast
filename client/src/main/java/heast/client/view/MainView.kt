@@ -11,6 +11,13 @@ import heast.client.view.utility.MultiStack
 object MainView : BorderPane() {
 	val stackPane: StackPane
 
+	fun reset(){
+		setView(HomeView)
+		SidebarView.hide()
+		NavigationView.toggleGroup.reset()
+		Current.panel.set("Welcome!")
+	}
+
 	init {
 		this.center = BorderPane().apply {
 			this.top = MenubarView

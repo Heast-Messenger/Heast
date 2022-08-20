@@ -1,5 +1,6 @@
 package heast.client.control.network;
 
+import heast.client.view.ClientGui;
 import heast.client.view.dialog.Dialog;
 import javafx.application.Platform;
 import heast.client.model.Settings;
@@ -102,5 +103,34 @@ public final class ClientAuthHandler implements ClientAuthListener {
         System.out.println("Server: Public key + Modulus received!");
         ClientNetwork.INSTANCE.serverPublicKey = buf.getPublicKey();
         ClientNetwork.INSTANCE.serverModulus = buf.getModulus();
+    }
+
+    @Override
+    public void onDeleteAcResponse(DeleteAcResponseS2CPacket buf) {
+        switch (buf.getStatus()) {
+            case OK -> {
+                System.out.println("Server: Account was successfully deleted");
+                Platform.runLater(() -> {
+                    WelcomeView.INSTANCE.setPane(WelcomeView.LoginPane.INSTANCE);
+                    ClientGui.INSTANCE.resize(700.0);
+                });
+            }
+
+            case CODE_SENT -> {
+                System.out.println("Server: Code sent!");
+                Platform.runLater(() -> {
+                    Dialog.INSTANCE.close(WelcomeView.LoadingPane.INSTANCE, WelcomeView.INSTANCE);
+                    Dialog.INSTANCE.show(WelcomeView.VerificationPane.INSTANCE, WelcomeView.INSTANCE);
+                });
+            }
+
+            case INVALID_CREDENTIALS -> {
+                System.out.println("Server: Invalid credentials");
+            }
+
+            case USER_NOT_FOUND -> {
+                System.out.println("Server: User does not exist");
+            }
+        }
     }
 }

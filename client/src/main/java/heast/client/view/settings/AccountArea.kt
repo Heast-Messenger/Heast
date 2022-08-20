@@ -1,3 +1,13 @@
+import heast.client.control.network.ClientNetwork
+import heast.client.model.Settings
+import heast.client.view.SettingsView
+import heast.client.view.WelcomeView
+import heast.client.view.dialog.Dialog
+import heast.client.view.template.Button
+import heast.client.view.utility.FlexExpander
+import heast.client.view.utility.FlexItem
+import heast.client.view.utility.FlexSpacer
+import heast.client.view.utility.FontManager
 import javafx.beans.binding.Bindings
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -6,18 +16,6 @@ import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.paint.ImagePattern
 import javafx.scene.shape.Circle
-import heast.client.control.network.ClientNetwork
-import heast.client.model.Settings
-import heast.client.view.ClientGui
-import heast.client.view.SettingsView
-import heast.client.view.WelcomeView
-import heast.client.view.template.Button
-import heast.client.view.utility.FlexExpander
-import heast.client.view.utility.FlexItem
-import heast.client.view.utility.FlexSpacer
-import heast.client.view.utility.FontManager
-import javafx.scene.Node
-import javafx.scene.Scene
 import java.time.format.DateTimeFormatter
 import kotlin.math.min
 
@@ -142,14 +140,17 @@ object AccountArea : VBox() {
 					Button("Log out", Color.web("#FF6F6F"), Image(
 						"/heast/client/images/settings/logout.png"
 					)) {
-						ClientNetwork.INSTANCE.logout()	//TODO: Return to Welcome-View
+						ClientNetwork.INSTANCE.logout()
 						Settings.account.value=null
 
 					},
-					Button("Delete Account", Color.web("#FF2C44"), Image(
+					Button("Delete Account", Color.web("#FF2F41"), Image(
 						"/heast/client/images/settings/delete.png"
 					)) {
-						//ClientNetwork.INSTANCE.delete()	//TODO: Create a Pane, where your login-info has to be entered first
+						Dialog.show(WelcomeView.LoadingPane, WelcomeView)
+						ClientNetwork.INSTANCE.deleteAccount(Settings.account.value?.email ?: "")
+						ClientNetwork.INSTANCE.logout()
+						Settings.account.value=null
 					},
 					Button("Switch account", Color.web("#ECF0FF"), Image(
 						"/heast/client/images/settings/switchacc.png"
