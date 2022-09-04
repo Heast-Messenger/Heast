@@ -11,11 +11,12 @@ public final class ClientNetwork {
 
     public static final ClientNetwork INSTANCE = new ClientNetwork();
 
-    public ClientConnection connection;
+    public ClientConnection connection;         //connection to the auth-server
+    public ClientConnection chatConnection;     //connection to the chat-server
     public byte[] symmetricKey;
 
-    public BigInteger serverPublicKey;
-    public BigInteger serverModulus;
+    public BigInteger serverPublicKey;//auth-server rn
+    public BigInteger serverModulus;//auth-server rn
 
     public void initialize() {
         System.out.println("Initializing client network...");
@@ -28,6 +29,12 @@ public final class ClientNetwork {
                 new LogoutC2SPacket(LogoutC2SPacket.Reason.CLIENT_QUIT)
             );
             Channel channel = connection.getChannel();
+            if (channel != null) {
+                channel.close();
+            }
+        }
+        if(this.chatConnection!=null){
+            Channel channel= chatConnection.getChannel();
             if (channel != null) {
                 channel.close();
             }

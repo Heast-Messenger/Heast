@@ -1,5 +1,6 @@
 package heast.authserver;
 
+import heast.core.network.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -9,10 +10,6 @@ import heast.authserver.network.Email;
 import heast.authserver.network.Database;
 import heast.authserver.network.ServerAuthHandler;
 import heast.authserver.network.ServerNetwork;
-import heast.core.network.ClientConnection;
-import heast.core.network.NetworkSide;
-import heast.core.network.PacketDecoder;
-import heast.core.network.PacketEncoder;
 
 public final class Server {
 
@@ -54,7 +51,7 @@ public final class Server {
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 					@Override
 					public void initChannel(SocketChannel ch) {
-						ClientConnection connection = new ClientConnection(NetworkSide.SERVER);
+						ClientConnection connection = new ClientConnection(NetworkSide.SERVER, NetworkState.AUTHENTICATION);
 						connection.setListener(new ServerAuthHandler(connection));
 						ch.pipeline()
 							.addLast(new PacketDecoder(NetworkSide.CLIENT))

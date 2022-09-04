@@ -11,14 +11,18 @@ public final class ClientConnection extends SimpleChannelInboundHandler<Packet<?
     public static final AttributeKey<NetworkState> PROTOCOL_KEY = AttributeKey.valueOf("protocol");
 
     private final NetworkSide side;
+
+    private final NetworkState state;
+
     private Channel channel;
     private PacketListener listener;
 
     private String verificationCode;
     private Runnable onVerificationCode;
 
-    public ClientConnection(NetworkSide side) {
+    public ClientConnection(NetworkSide side, NetworkState state) {
         this.side = side;
+        this.state = state;
     }
 
     public NetworkSide getSide() {
@@ -64,9 +68,7 @@ public final class ClientConnection extends SimpleChannelInboundHandler<Packet<?
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         channel = ctx.channel();
-        channel.attr(PROTOCOL_KEY).set(
-            NetworkState.AUTHENTICATION
-        );
+        channel.attr(PROTOCOL_KEY).set(state);
     }
 
     @Override

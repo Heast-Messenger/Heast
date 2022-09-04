@@ -2,8 +2,10 @@ package heast.core.network;
 
 import heast.core.network.c2s.*;
 import heast.core.network.c2s.listener.ServerAuthListener;
+import heast.core.network.c2s.listener.ServerChatListener;
 import heast.core.network.s2c.*;
 import heast.core.network.s2c.listener.ClientAuthListener;
+import heast.core.network.s2c.listener.ClientChatListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,14 @@ public enum NetworkState {
             .register(ResetResponseS2CPacket.class, ResetResponseS2CPacket::new)
             .register(ServerKeyResponseS2CPacket.class, ServerKeyResponseS2CPacket::new)
             .register(DeleteAcResponseS2CPacket.class, DeleteAcResponseS2CPacket::new)
+        )
+    ),
+    CHAT(new PacketHandlerInitializer()
+        .setup(NetworkSide.CLIENT, new PacketHandler<ServerChatListener>()
+            .register(TestC2SPacket.class, TestC2SPacket::new)
+        )
+        .setup(NetworkSide.SERVER, new PacketHandler<ClientChatListener>()
+            .register(TestS2CPacket.class, TestS2CPacket::new)
         )
     );
 
@@ -83,7 +93,7 @@ public enum NetworkState {
     /**
      * A packet handler is a function that creates a packet from a packet id and a packet buffer.
      * Packet Handlers can contain multiple packets in the same "area" of the network, and these are stored in the packetIds map.
-     * For example, the Login, Signup and Account Reset packets are all handled by the same handler, the {@link heast.authserver.network.ServerAuthHandler}.
+     * For example, the Login, Signup and Account Reset packets are all handled by the same handler, the {@link ServerAuthListener}.
      *
      * The packetFactories list is used to construct the packets from a {@link PacketBuf} instance.
      * The constructor to use to create the packet is determined by the packetFactory parameter.

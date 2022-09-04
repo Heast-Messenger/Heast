@@ -1,10 +1,9 @@
 package heast.client;
 
-import heast.core.network.ClientConnection;
-import heast.core.network.NetworkSide;
-import heast.core.network.PacketDecoder;
-import heast.core.network.PacketEncoder;
+import heast.client.control.network.ClientChatHandler;
+import heast.core.network.*;
 import heast.core.network.c2s.ServerKeyC2SPacket;
+import heast.core.network.c2s.TestC2SPacket;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
@@ -31,6 +30,12 @@ public final class Client {
 			: 8080;
 
 		Client client= new Client(host, port);
+		//client.connectToChatServer("localhost",6969);	//needs to be on a different thread
+
+		Runnable runnable = () -> { client.connectToChatServer("localhost",6969); };
+		Thread thread = new Thread(runnable);
+		thread.start();
+
 		client.start();
 	}
 
@@ -57,7 +62,7 @@ public final class Client {
 					@Override
 					public void initChannel(SocketChannel ch) {
 						ClientNetwork.INSTANCE.initialize();
-						ClientConnection connection = new ClientConnection(NetworkSide.CLIENT);
+						ClientConnection connection = new ClientConnection(NetworkSide.CLIENT, NetworkState.AUTHENTICATION);
 						ClientNetwork.INSTANCE.connection = connection;
 						connection.setListener(new ClientAuthHandler(connection));
 
@@ -85,6 +90,63 @@ public final class Client {
 				.channel()
 				.closeFuture()
 				.syncUninterruptibly();
+		} finally {
+			workerGroup.shutdownGracefully();
+		}
+	}
+
+	public void connectToGate(){}//use later
+
+	public void connectToChatServer(String host, int port){
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
+		try{
+			new Bootstrap()
+					.group(workerGroup)
+					.channel(NioSocketChannel.class)
+					.option(ChannelOption.SO_KEEPALIVE, true)
+					.handler(new ChannelInitializer<SocketChannel>() {
+
+						@Override
+						public void channelInactive(ChannelHandlerContext ctx) {
+							System.out.println("Disconnected from chat-server");
+						}
+
+						@Override
+						public void initChannel(SocketChannel ch) {	//TODO: Important Objects need to be instanced
+							ClientConnection connection = new ClientConnection(NetworkSide.CLIENT, NetworkState.CHAT);
+							ClientNetwork.INSTANCE.chatConnection = connection;
+							connection.setListener(new ClientChatHandler(connection));
+
+							ch.pipeline().addLast(
+									new PacketEncoder(NetworkSide.CLIENT),
+									new PacketDecoder(NetworkSide.SERVER),
+									connection
+							);
+						}
+					})
+					.connect(host, port).addListener(future -> {
+						if (future.isSuccess()) {
+							System.out.println("Connected to chat-server");
+						} else{
+							System.err.println("Failed to connect to chat-server: " + future.cause());
+						}})
+					.syncUninterruptibly().addListener(future -> {
+						if (future.isSuccess()) {
+							/*System.out.println("Requesting server public key...");
+							ClientNetwork.INSTANCE.connection.send(
+									new ServerKeyC2SPacket()
+							);*/
+
+							//Sending Test-Packet
+							ClientNetwork.INSTANCE.chatConnection.setState(NetworkState.CHAT);
+							ClientNetwork.INSTANCE.chatConnection.send(
+									new TestC2SPacket()
+							);
+						}
+					})
+					.channel()
+					.closeFuture()
+					.syncUninterruptibly();
 		} finally {
 			workerGroup.shutdownGracefully();
 		}
