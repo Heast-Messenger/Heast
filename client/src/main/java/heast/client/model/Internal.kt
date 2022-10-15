@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.Node
-import heast.client.view.settings.AppearanceArea
-import heast.client.view.settings.NetworkArea
+import heast.client.gui.settings.AppearanceArea
+import heast.client.gui.settings.NetworkArea
 
 object Internal {
 	val version = SimpleStringProperty(

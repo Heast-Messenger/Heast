@@ -1,14 +1,18 @@
 package heast.authserver;
 
+import heast.core.logging.IO;
 import heast.core.network.*;
+import heast.core.network.pipeline.ClientConnection;
+import heast.core.network.pipeline.PacketDecoder;
+import heast.core.network.pipeline.PacketEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import heast.authserver.network.Email;
-import heast.authserver.network.Database;
-import heast.authserver.network.ServerAuthHandler;
+import heast.authserver.components.Email;
+import heast.authserver.components.Database;
+import heast.authserver.network.ServerLoginHandler;
 import heast.authserver.network.ServerNetwork;
 
 public final class Server {
@@ -22,48 +26,37 @@ public final class Server {
 	}
 
 	public static void start(int port) {
-		EventLoopGroup bossGroup = new NioEventLoopGroup();
-		EventLoopGroup workerGroup = new NioEventLoopGroup();
+		var bossGroup = new NioEventLoopGroup();
+		var workerGroup = new NioEventLoopGroup();
 		try {
 			new ServerBootstrap()
 				.group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
-				.handler(new ChannelInitializer<>() {
-					@Override
-					public void initChannel(Channel ch) {
-						ch.pipeline()
-							.addLast(new ChannelHandlerAdapter() {
-								@Override
-								public void channelActive(ChannelHandlerContext ctx) {
-									ServerNetwork.initialize();
-									Database.initialize();
-									Email.initialize();
-									System.out.println("Server active!");
-								}
-
-								@Override
-								public void channelInactive(ChannelHandlerContext ctx) {
-									System.out.println("Server shutdown!");
-								}
-							});
-					}
-				})
 				.childHandler(new ChannelInitializer<SocketChannel>() {
-					@Override
 					public void initChannel(SocketChannel ch) {
-						ClientConnection connection = new ClientConnection(NetworkSide.SERVER, NetworkState.AUTHENTICATION);
-						connection.setListener(new ServerAuthHandler(connection));
+						ch.config().setOption(ChannelOption.TCP_NODELAY, true);
+						var connection = new ClientConnection(NetworkSide.SERVER);
+						connection.setListener(new ServerLoginHandler(connection));
 						ch.pipeline()
-							.addLast(new PacketDecoder(NetworkSide.CLIENT))
-							.addLast(new PacketEncoder(NetworkSide.SERVER))
-							.addLast(connection);
+							// Here will be the packet decryptor
+							.addLast("decoder", new PacketDecoder(NetworkSide.CLIENT))
+							// Here will be the packet encryptor
+							.addLast("encoder", new PacketEncoder(NetworkSide.SERVER))
+							.addLast("handler", connection);
 					}
 				})
 				.option(ChannelOption.SO_BACKLOG, 128)
 				.childOption(ChannelOption.SO_KEEPALIVE, true)
+				.childOption(ChannelOption.TCP_NODELAY, true)
 				.bind(port)
-				.syncUninterruptibly()
-
+				.syncUninterruptibly().addListener(future -> {
+					if (future.isSuccess()) {
+						ServerNetwork.initialize();
+						Database.initialize();
+						Email.initialize();
+						IO.info.println("Server started on port " + port + ".");
+					}
+				})
 				.channel()
 				.closeFuture()
 				.syncUninterruptibly();

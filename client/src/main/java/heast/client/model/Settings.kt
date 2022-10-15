@@ -8,16 +8,14 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.paint.Color
-import heast.core.network.UserAccount
+import heast.core.model.UserAccount
 
 object Settings {
 
 	/**
 	 * The user account that is used to log in on startup
 	 */
-    val account = SimpleObjectProperty<UserAccount?>(
-		null
-	)
+    val account = SimpleObjectProperty<UserAccount?>(null)
 
 	/**
 	 * A list of registered servers on this account. Updates to this list will be reflected in the listview.

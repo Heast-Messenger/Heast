@@ -1,89 +1,65 @@
 package heast.core.security;
 
+import heast.core.logging.IO;
+
 import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.Base64;
 
 public final class AES {
 
-    public static final AES INSTANCE = new AES();
+    private static final String ALGORITHM = "AES/CFB8/NoPadding";
+    private static final int KEY_LENGTH = 128;
 
-    /**
-     * Generates a new symmetric AES key.
-     * @return The symmetric key.
-     */
-    public byte[] genKey(){
-        StringBuilder key= new StringBuilder();
-        SecureRandom r= new SecureRandom();
-        for (int i=0;i<64;i++) {
-            int x = r.nextInt(128);
-            key.append((char) x);
-        }
-        return key.toString().getBytes();
-    }
-
-    /**
-     * Returns a secret KeySpec for the given key using SHA-1.
-     * @param myKey The key.
-     * @return The secret KeySpec.
-     */
-    private SecretKeySpec getKeySpec(final byte[] myKey) {
+    public static SecretKey generateKey() {
         try {
-            byte[] key = myKey;
-            key = MessageDigest.getInstance("SHA-1")
-                .digest(key);
-            key = Arrays.copyOf(
-                key, 16
-            );
-            return new SecretKeySpec(key, "AES");
+            var keygen = KeyGenerator.getInstance("AES");
+            keygen.init(KEY_LENGTH, new SecureRandom());
+            return keygen.generateKey();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
+            IO.error.println("Failed to generate AES key: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
-    /**
-     * Encrypts the given plaintext with the given key.
-     * @param str The plaintext to encrypt.
-     * @param secret The key.
-     * @return The ciphertext.
-     */
-    public byte[] encrypt(final byte[] str, final byte[] secret) {
+    public static Cipher cipherFromKey(SecretKey key, int mode) {
         try {
-            SecretKeySpec secretKey = getKeySpec(secret);
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder()
-                .encodeToString(cipher.doFinal(str))
-                .getBytes();
+            var cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(mode, key, new IvParameterSpec(key.getEncoded()));
+            return cipher;
         } catch (Exception e) {
-            System.out.println("Error while encrypting: " + e);
+            IO.error.println("Failed to create AES  cipher: " + e.getMessage());
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    /**
-     * Decrypts the given ciphertext with the given key.
-     * @param str The ciphertext to decrypt.
-     * @param secret The key.
-     * @return The plaintext.
-     */
-    public byte[] decrypt(final byte[] str, final byte[] secret) {
+    private static byte[] crypt(SecretKey key, byte[] data, int mode) throws RuntimeException {
         try {
-            SecretKeySpec secretKey = getKeySpec(secret);
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder()
-                .decode(str)))
-                .getBytes();
+            return cipherFromKey(key, mode).doFinal(data);
         } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e);
-            return null;
+            throw new RuntimeException("Failed to crypt data: " + e.getMessage());
+        }
+    }
+
+    public static byte[] encrypt(SecretKey key, byte[] data) {
+        try {
+            return crypt(key, data, Cipher.ENCRYPT_MODE);
+        } catch (Exception e) {
+            IO.error.println("Failed to encrypt data: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] decrypt(SecretKey key, byte[] data) {
+        try {
+            return crypt(key, data, Cipher.DECRYPT_MODE);
+        } catch (Exception e) {
+            IO.error.println("Failed to decrypt data: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

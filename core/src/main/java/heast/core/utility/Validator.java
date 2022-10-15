@@ -18,7 +18,7 @@ public final class Validator {
     }
 
     public static boolean isIpAddressValid(String ipAddress) {
-        return ipAddress.matches("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}");
+        return ipAddress.matches("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}") || ipAddress.equals("localhost");
     }
 
     public static boolean isPortValid(int port) {

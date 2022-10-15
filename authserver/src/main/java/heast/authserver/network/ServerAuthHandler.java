@@ -1,10 +1,11 @@
 package heast.authserver.network;
 
-import heast.core.network.UserAccount;
-import heast.core.network.c2s.*;
-import heast.core.network.c2s.listener.ServerAuthListener;
-import heast.core.network.ClientConnection;
-import heast.core.network.s2c.*;
+import heast.authserver.components.Database;
+import heast.core.logging.IO;
+import heast.core.network.listeners.ServerAuthListener;
+import heast.core.network.packets.c2s.auth.*;
+import heast.core.network.packets.s2c.auth.*;
+import heast.core.network.pipeline.ClientConnection;
 import heast.core.utility.Validator;
 
 public final class ServerAuthHandler implements ServerAuthListener {
@@ -15,202 +16,201 @@ public final class ServerAuthHandler implements ServerAuthListener {
         this.connection = connection;
     }
 
+    /**
+     * Called when the client registers a new account on the platform
+     */
     @Override
-    public void onLogin(LoginC2SPacket buf) {
-        buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(),ServerNetwork.getServerKey().getModulus());//decrypts packet
-        String email = buf.getEmail();
-        String password = buf.getPassword();
+    public void onSignup(SignupC2SPacket packet) {
+        var username = packet.getUsername();
+        var email = packet.getEmail();
+        var password = packet.getPassword();
 
-        if (!Validator.isEmailValid(email) ||
-            !Validator.isPasswordValid(password)
-        ) {
-            connection.send(new LoginResponseS2CPacket(
-                LoginResponseS2CPacket.Status.INVALID_CREDENTIALS, null
-            ));
-            return;
-        }
-
-        boolean userExists = Database.checkEntry(email);
-        if (!userExists) {
-            connection.send(new LoginResponseS2CPacket(
-                LoginResponseS2CPacket.Status.USER_NOT_FOUND, null)
-            );
-            return;
-        }
-
-        ServerNetwork.sendVerificationCode(
-            connection, email, () -> connection.send(new LoginResponseS2CPacket(
-                LoginResponseS2CPacket.Status.CODE_SENT, null
-            )), () -> {
-                UserAccount user = ServerNetwork.loginClient(email, password);
-                if (user != null) {
-                    ServerNetwork.mapConnection(user.getId(), connection);
-                    connection.send(new LoginResponseS2CPacket(
-                        LoginResponseS2CPacket.Status.OK, user
-                    ));
-                } else {
-                    connection.send(new LoginResponseS2CPacket(
-                        LoginResponseS2CPacket.Status.INVALID_CREDENTIALS, null
-                    ));
-                }
-            }
-        );
-    }
-
-    @Override
-    public void onSignup(SignupC2SPacket buf) {
-        buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(),ServerNetwork.getServerKey().getModulus());//decrypts packet
-        String uname = buf.getUsername();
-        String email = buf.getEmail();
-        String password = buf.getPassword();
-
-        if (!Validator.isUsernameValid(uname) ||
-            !Validator.isEmailValid(email) ||
-            !Validator.isPasswordValid(password)
-        ) {
+        if (!Validator.isUsernameValid(username) || !Validator.isEmailValid(email) || !Validator.isPasswordValid(password)) {
             connection.send(new SignupResponseS2CPacket(
                 SignupResponseS2CPacket.Status.INVALID_CREDENTIALS
-            ));
+            ), () -> {
+                IO.info.format("Client tried to sign up with invalid credentials: %s; %s; %s%n", username, email, password);
+            });
             return;
         }
 
-        boolean userExists = Database.checkEntry(email);
-        if (userExists) {
+        if (Database.userExists(email)) {
             connection.send(new SignupResponseS2CPacket(
                 SignupResponseS2CPacket.Status.USER_EXISTS
-            ));
+            ), () -> {
+                IO.info.format("Client tried to sign up with %s, which is already registered.%n", email);
+            });
             return;
         }
 
-        ServerNetwork.sendVerificationCode(
-            connection, email, () -> connection.send(new SignupResponseS2CPacket(
-                SignupResponseS2CPacket.Status.CODE_SENT
-            )), () -> {
-                boolean successful = ServerNetwork.registerClient(uname, email, password);
-                if (successful) {
-                    connection.send(new SignupResponseS2CPacket(
-                        SignupResponseS2CPacket.Status.OK
-                    ));
-                } else {
-                    connection.send(new SignupResponseS2CPacket(
-                        SignupResponseS2CPacket.Status.USER_EXISTS
-                    ));
-                }
+        ServerNetwork.sendVerificationCode(connection, email, () -> {
+            connection.send(new SignupResponseS2CPacket(
+                SignupResponseS2CPacket.Status.AWAIT_VERIFICATION
+            ));
+        }, () -> {
+            boolean successful = ServerNetwork.registerClient(username, email, password);
+            if (successful) {
+                connection.send(new SignupResponseS2CPacket(
+                    SignupResponseS2CPacket.Status.SUCCESS
+                ));
+            } else {
+                connection.send(new SignupResponseS2CPacket(
+                    SignupResponseS2CPacket.Status.ERROR
+                ));
             }
-        );
+        });
     }
 
+    /**
+     * Called when the client logs into their account
+     */
     @Override
-    public void onDeleteAc(DeleteAcC2SPacket buf) {
-        buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(),ServerNetwork.getServerKey().getModulus());//decrypts packet
-        String email = buf.getEmail();
+    public void onLogin(LoginC2SPacket packet) {
+        var email = packet.getEmail();
+        var password = packet.getPassword();
 
-        if (!Validator.isEmailValid(email)) {
-            connection.send(new DeleteAcResponseS2CPacket(
-                DeleteAcResponseS2CPacket.Status.INVALID_CREDENTIALS
-            ));
+        if (!Validator.isEmailValid(email) || !Validator.isPasswordValid(password) || Database.userExists(email, password)) {
+            connection.send(new LoginResponseS2CPacket(
+                LoginResponseS2CPacket.Status.INVALID_CREDENTIALS, null
+            ), () -> {
+                IO.info.format("Client tried to login with invalid credentials: %s; %s%n", email, password);
+            });
             return;
         }
 
-        boolean userExists = Database.checkEntry(email);
-        if (!userExists) {
-            connection.send(new DeleteAcResponseS2CPacket(
-                DeleteAcResponseS2CPacket.Status.USER_NOT_FOUND
-            ));
+        if (!Database.userExists(email)) {
+            connection.send(new LoginResponseS2CPacket(
+                LoginResponseS2CPacket.Status.USER_NOT_FOUND, null
+            ), () -> {
+                IO.info.format("Client tried to login with %s, which is not registered%n", email);
+            });
             return;
         }
 
-
-        ServerNetwork.sendVerificationCode(
-                connection, email, () -> connection.send(new DeleteAcResponseS2CPacket(
-                    DeleteAcResponseS2CPacket.Status.CODE_SENT
-                )), () -> {
-                    boolean successful = ServerNetwork.deleteClient(email);
-                    if (successful) {
-                        connection.send(new DeleteAcResponseS2CPacket(
-                                DeleteAcResponseS2CPacket.Status.OK
-                        ));
-                    } else {
-                        connection.send(new DeleteAcResponseS2CPacket(
-                                DeleteAcResponseS2CPacket.Status.USER_NOT_FOUND
-                        ));
-                    }
-                }
-        );
+        ServerNetwork.sendVerificationCode(connection, email, () -> {
+            connection.send(new LoginResponseS2CPacket(
+                LoginResponseS2CPacket.Status.AWAIT_VERIFICATION, null
+            ));
+        }, () -> {
+            var account = ServerNetwork.loginClient(email, password);
+            if (account != null) {
+                ServerNetwork.addClient(connection);
+                connection.send(new LoginResponseS2CPacket(
+                    LoginResponseS2CPacket.Status.SUCCESS, account
+                ));
+            } else {
+                connection.send(new LoginResponseS2CPacket(
+                    LoginResponseS2CPacket.Status.ERROR, null
+                ));
+            }
+        });
     }
 
+    /**
+     * Called when the client resets their account password
+     * Note that the password parameter is the new account password
+     */
     @Override
-    public void onReset(ResetC2SPacket buf) {
-        buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(),ServerNetwork.getServerKey().getModulus());//decrypts packet
-        String email = buf.getEmail();
-        String newPassword = buf.getNewPassword();
+    public void onReset(ResetC2SPacket packet) {
+        var email = packet.getEmail();
+        var password = packet.getPassword();
 
-        if (!Validator.isEmailValid(email) ||
-            !Validator.isPasswordValid(newPassword)
-        ) {
+        if (!Validator.isEmailValid(email) || !Validator.isPasswordValid(password)) {
             connection.send(new ResetResponseS2CPacket(
                 ResetResponseS2CPacket.Status.INVALID_CREDENTIALS
-            ));
+            ), () -> {
+                IO.info.format("Client tried to reset their password with invalid credentials: %s; %s%n", email, password);
+            });
             return;
         }
 
-        boolean userExists = Database.checkEntry(email);
-        if (!userExists) {
+        if (!Database.userExists(email)) {
             connection.send(new ResetResponseS2CPacket(
                 ResetResponseS2CPacket.Status.USER_NOT_FOUND
-            ));
+            ), () -> {
+                IO.info.format("Client tried to reset their password with %s, which is not registered%n", email);
+            });
             return;
         }
 
-        ServerNetwork.sendVerificationCode(
-            connection, email, () -> connection.send(new ResetResponseS2CPacket(
-                ResetResponseS2CPacket.Status.CODE_SENT
-            )), () -> {
-                boolean successful = ServerNetwork.resetClientPassword(email, newPassword);
-                if (successful) {
-                    connection.send(new ResetResponseS2CPacket(
-                        ResetResponseS2CPacket.Status.OK
-                    ));
-                } else {
-                    connection.send(new ResetResponseS2CPacket(
-                        ResetResponseS2CPacket.Status.FAILED
-                    ));
-                }
-            }
-        );
-    }
-
-    @Override
-    public void onLogout(LogoutC2SPacket buf) {
-        if(ServerNetwork.removeConnection(connection)) {
-            System.out.println("Client logged out, reason: " + buf.getReason());
-        } else {
-            System.err.println("Client logout failed.");
-        }
-    }
-
-    @Override
-    public void onVerification(VerificationC2SPacket buf) {
-        if (connection.getVerificationCode() != null) {
-            buf.decrypt(ServerNetwork.getServerKey().getPrivateKey(), ServerNetwork.getServerKey().getModulus()); //decrypts packet
-            String verificationCode = buf.getVerificationCode();
-            if (connection.getVerificationCode().equals(verificationCode)) {
-                System.out.println("Verification successful");
-                connection.onVerificationCode();
+        ServerNetwork.sendVerificationCode(connection, email, () -> {
+            connection.send(new ResetResponseS2CPacket(
+                ResetResponseS2CPacket.Status.AWAIT_VERIFICATION
+            ));
+        }, () -> {
+            boolean successful = ServerNetwork.resetClientPassword(email, password);
+            if (successful) {
+                connection.send(new ResetResponseS2CPacket(
+                    ResetResponseS2CPacket.Status.SUCCESS
+                ));
             } else {
-                System.err.println("Verification failed");
+                connection.send(new ResetResponseS2CPacket(
+                    ResetResponseS2CPacket.Status.ERROR
+                ));
             }
+        });
+    }
+
+    /**
+     * Called when the client deletes their account
+     */
+    @Override
+    public void onDelete(DeleteC2SPacket packet) {
+        var email = packet.getEmail();
+
+        if (!Validator.isEmailValid(email)) {
+            connection.send(new DeleteResponseS2CPacket(
+                DeleteResponseS2CPacket.Status.INVALID_EMAIL
+            ), () -> {
+                IO.info.format("Client tried to delete their account with invalid credentials: %s%n", email);
+            });
+            return;
+        }
+
+        ServerNetwork.sendVerificationCode(connection, email, () -> {
+            connection.send(new DeleteResponseS2CPacket(
+                DeleteResponseS2CPacket.Status.AWAIT_VERIFICATION
+            ));
+        }, () -> {
+            boolean successful = ServerNetwork.deleteClient(email);
+            if (successful) {
+                connection.send(new DeleteResponseS2CPacket(
+                    DeleteResponseS2CPacket.Status.SUCCESS
+                ));
+            } else {
+                connection.send(new DeleteResponseS2CPacket(
+                    DeleteResponseS2CPacket.Status.ERROR
+                ));
+            }
+        });
+    }
+
+    /**
+     * Called when the client logs out of their account
+     */
+    @Override
+    public void onLogout() {
+        boolean successful = ServerNetwork.logoutClient(connection);
+        if (successful) {
+            connection.send(new LogoutResponseS2CPacket(
+                LogoutResponseS2CPacket.Status.SUCCESS
+            ));
+        } else {
+            connection.send(new LogoutResponseS2CPacket(
+                LogoutResponseS2CPacket.Status.ERROR
+            ));
         }
     }
 
+    /**
+     * Called when the client verifies their account
+     */
     @Override
-    public void onServerKeyRequest(ServerKeyC2SPacket buf) {
-        System.out.println("Requesting server key");
-        connection.send(
-            new ServerKeyResponseS2CPacket(
-                ServerNetwork.getServerKey().getPublicKey(),
-                ServerNetwork.getServerKey().getModulus()
-            )
-        );
+    public void onVerify(VerifyC2SPacket packet) {
+        if (packet.getCode().equalsIgnoreCase(connection.getVerificationCode())) {
+            connection.onVerifySuccess();
+        } else {
+            connection.send(new VerifyFailedS2CPacket());
+        }
     }
 }
