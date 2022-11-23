@@ -1,6 +1,6 @@
 package heast.client;
 
-import heast.client.gui.ClientGui;
+import heast.client.gui.GuiMain;
 import heast.client.network.ClientNetwork;
 
 public final class Client {
@@ -26,7 +26,7 @@ public final class Client {
 	}
 
 	private void start() {
-		ClientGui.INSTANCE.initialize();
+		GuiMain.initialize();
 		ClientNetwork.initialize(host, port);
 	}
 }

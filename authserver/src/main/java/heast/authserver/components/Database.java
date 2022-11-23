@@ -30,7 +30,7 @@ public final class Database {
 
             try {
                 connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + parts[0] + ":" + parts[1] + "/" + parts[2] + "?user=" + parts[3] + "&password=" + (parts[4].isBlank() ? "" : parts[4])
+                    "jdbc:mysql://" + parts[0] + ":" + parts[1] + "/" + parts[2] + "?user=" + parts[3] + "&password=" + parts[4]
                 );
 
                 createDatabase();

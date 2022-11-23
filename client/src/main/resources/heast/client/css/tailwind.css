@@ -1,0 +1,68 @@
+* {
+    -fx-background-color: transparent;
+    /*-fx-text-fill: "$white";*/
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(heast/client/fonts/poppins-bold.ttf);
+    -fx-font-weight: bold;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(heast/client/fonts/poppins-medium.ttf);
+    -fx-font-weight: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(heast/client/fonts/inter-bold.ttf);
+    -fx-font-weight: bold;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(heast/client/fonts/inter-medium.ttf);
+    -fx-font-weight: normal;
+}
+
+.font-poppins-bold {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+}
+
+.font-poppins-medium {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: normal;
+}
+
+.font-inter-bold {
+    -fx-font-family: "Inter";
+    -fx-font-weight: bold;
+}
+
+.font-inter-medium {
+    -fx-font-family: "Inter";
+    -fx-font-weight: normal;
+}
+
+.text-fette { -fx-font-size: 34px; }
+.text-normal { -fx-font-size: 24px; }
+.text-small { -fx-font-size: 18px; }
+
+.text-black { -fx-text-fill: "$black"; }
+.text-white { -fx-text-fill: "$white"; }
+.text-primary { -fx-text-fill: "$primary"; }
+.text-secondary { -fx-text-fill: "$secondary"; }
+.text-border { -fx-text-fill: "$border"; }
+.text-selected { -fx-text-fill: "$selected"; }
+.text-accent { -fx-text-fill: "$accent"; }
+
+.bg-black { -fx-background-color: "$black"; }
+.bg-white { -fx-background-color: "$white"; }
+.bg-primary { -fx-background-color: "$primary"; }
+.bg-secondary { -fx-background-color: "$secondary"; }
+.bg-border { -fx-background-color: "$border"; }
+.bg-selected { -fx-background-color: "$selected"; }
+.bg-accent { -fx-background-color: "$accent"; }

@@ -1,6 +1,5 @@
 package heast.client.network;
 
-import heast.client.model.Settings;
 import heast.core.logging.IO;
 import heast.core.model.ClientInfo;
 import heast.core.network.packets.c2s.auth.*;
