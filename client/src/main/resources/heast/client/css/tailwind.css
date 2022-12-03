@@ -66,3 +66,49 @@
 .bg-border { -fx-background-color: "$border"; }
 .bg-selected { -fx-background-color: "$selected"; }
 .bg-accent { -fx-background-color: "$accent"; }
+
+.spacing-1 { -fx-spacing: 4px }
+.spacing-2 { -fx-spacing: 8px }
+.spacing-3 { -fx-spacing: 12px }
+.spacing-4 { -fx-spacing: 16px }
+.spacing-6 { -fx-spacing: 24px }
+.spacing-8 { -fx-spacing: 32px }
+.spacing-12 { -fx-spacing: 48px }
+.spacing-16 { -fx-spacing: 64px }
+
+.align-top-left { -fx-alignment: top-left }
+.align-top-center { -fx-alignment: top-center }
+.align-top-right { -fx-alignment: top-right }
+.align-center-left { -fx-alignment: center-left }
+.align-center { -fx-alignment: center }
+.align-center-right { -fx-alignment: center-right }
+.align-bottom-left { -fx-alignment: bottom-left }
+.align-bottom-center { -fx-alignment: bottom-center }
+.align-bottom-right { -fx-alignment: bottom-right }
+
+.p-1 { -fx-padding: 4px }
+.p-2 { -fx-padding: 8px }
+.p-3 { -fx-padding: 12px }
+.p-4 { -fx-padding: 16px }
+.p-6 { -fx-padding: 24px }
+.p-8 { -fx-padding: 32px }
+.p-12 { -fx-padding: 48px }
+.p-16 { -fx-padding: 64px }
+
+.px-1 { -fx-padding: 0px 4px 0px 4px }
+.px-2 { -fx-padding: 0px 8px 0px 8px }
+.px-3 { -fx-padding: 0px 12px 0px 12px }
+.px-4 { -fx-padding: 0px 16px 0px 16px }
+.px-6 { -fx-padding: 0px 24px 0px 24px }
+.px-8 { -fx-padding: 0px 32px 0px 32px }
+.px-12 { -fx-padding: 0px 48px 0px 48px }
+.px-16 { -fx-padding: 0px 64px 0px 64px }
+
+.py-1 { -fx-padding: 4px 0px 4px 0px }
+.py-2 { -fx-padding: 8px 0px 8px 0px }
+.py-3 { -fx-padding: 12px 0px 12px 0px }
+.py-4 { -fx-padding: 16px 0px 16px 0px }
+.py-6 { -fx-padding: 24px 0px 24px 0px }
+.py-8 { -fx-padding: 32px 0px 32px 0px }
+.py-12 { -fx-padding: 48px 0px 48px 0px }
+.py-16 { -fx-padding: 64px 0px 64px 0px }

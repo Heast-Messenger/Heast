@@ -18,15 +18,17 @@ import javax.swing.SwingUtilities
 import kotlin.reflect.KClass
 
 class Window {
-	private var title: String = "Window"
-	private var width: Int = 500
-	private var height: Int = 500
-	private var background: Color = Color.WHITE
-	private var isResizable: Boolean = true
-	private var draggableBody: Boolean = false
-	private var isTitleBarHidden: Boolean = false
-	private var isFullWindowContent: Boolean = false
-	private var isWindowTitleVisible: Boolean = false
+	var title: String = "Window"
+	var width: Int = 500
+	var height: Int = 500
+	var background: Color = Color.WHITE
+	var isResizable: Boolean = true
+	var draggableBody: Boolean = false
+	var isTitleBarHidden: Boolean = false
+	var isFullWindowContent: Boolean = false
+	var isWindowTitleVisible: Boolean = false
+	var isAWTManager: Boolean = false
+	var titleBarHeight: Int = 30
 
 	fun withTitle(title: String) = apply { this.title = title }
 	fun withWidth(width: Int) = apply { this.width = width }
@@ -37,9 +39,12 @@ class Window {
 	fun isTitleBarHidden(isTitleBarHidden: Boolean) = apply { this.isTitleBarHidden = isTitleBarHidden }
 	fun isFullWindowContent(isFullWindowContent: Boolean) = apply { this.isFullWindowContent = isFullWindowContent }
 	fun isWindowTitleVisible(isWindowTitleVisible: Boolean) = apply { this.isWindowTitleVisible = isWindowTitleVisible }
+	fun isAWTManager(isAWTManager: Boolean) = apply { this.isAWTManager = isAWTManager }
+	fun withTitleBarHeight(titleBarHeight: Int) = apply { this.titleBarHeight = titleBarHeight }
 
 	lateinit var frame: JFrame
 	lateinit var jfxPanel: JFXPanel
+	lateinit var mantle : Mantle
 
 	init { initProperties() }
 
@@ -47,22 +52,23 @@ class Window {
 		if (OS.isWindows() && JBR.isAvailable()) {
 			if (JBR.isCustomWindowDecorationSupported()) {
 				JBR.getCustomWindowDecoration().setCustomDecorationEnabled(frame, true)
-				JBR.getCustomWindowDecoration().setCustomDecorationTitleBarHeight(frame, 30)
-			}
-
-			if (JBR.isRoundedCornersManagerSupported()) {
-				JBR.getRoundedCornersManager().setRoundedCorners(frame, "default")
+				JBR.getCustomWindowDecoration().setCustomDecorationTitleBarHeight(frame, titleBarHeight)
 			}
 		}
 	}
 
 	private fun initOSX(frame: JFrame) {
-		if (OS.isMac()) {
+		if (OS.isMac() && isAWTManager) {
 			frame.rootPane.putClientProperty("apple.awt.fullWindowContent", isFullWindowContent)
 			frame.rootPane.putClientProperty("apple.awt.transparentTitleBar", isTitleBarHidden)
 			frame.rootPane.putClientProperty("apple.awt.draggableWindowBackground", draggableBody)
 			frame.rootPane.putClientProperty("apple.awt.windowTitleVisible", isWindowTitleVisible)
 			frame.rootPane.putClientProperty("apple.awt.fullscreenable", isResizable)
+		} else if (OS.isMac() && JBR.isAvailable()) {
+			if (JBR.isCustomWindowDecorationSupported()) {
+				JBR.getCustomWindowDecoration().setCustomDecorationEnabled(frame, true)
+				JBR.getCustomWindowDecoration().setCustomDecorationTitleBarHeight(frame, titleBarHeight)
+			}
 		}
 	}
 
@@ -97,15 +103,14 @@ class Window {
 
 	private fun initFX(content: KClass<out Parent>) {
 		jfxPanel.scene = Scene(
-			content.objectInstance!!,
+			Mantle(content.objectInstance!!).apply { mantle = this },
 			this@Window.width.toDouble(),
 			this@Window.height.toDouble(),
 			this@Window.background
 		).apply {
 			initCss(this)
 			SwingUtilities.invokeLater {
-				frame.isVisible = true
-			}
+				frame.isVisible = true }
 		}
 	}
 

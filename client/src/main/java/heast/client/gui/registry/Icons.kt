@@ -20,7 +20,7 @@ object Icons {
 		"email" to ClientResources.getResource("icons/verification/email.png"),
 		"google" to ClientResources.getResource("icons/verification/google.png"),
 		"verify" to ClientResources.getResource("icons/verification/verify.png"),
-		"TEST_QR_CODE" to ClientResources.getResource("icons/verification/TEST_QR_CODE.png"),
+		"qr_code_TEMPORARY" to ClientResources.getResource("icons/verification/TEST_QR_CODE.png"),
 	)
 
 	fun String.toImg() : Image {

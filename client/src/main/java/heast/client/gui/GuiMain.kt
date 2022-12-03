@@ -1,7 +1,7 @@
 package heast.client.gui
 
 import heast.client.gui.registry.Colors
-import heast.client.gui.scenes.Welcome
+import heast.client.gui.scenes.Start
 import heast.client.gui.windowapi.Window
 
 object GuiMain {
@@ -19,6 +19,8 @@ object GuiMain {
 			.isFullWindowContent(true)
 			.isWindowTitleVisible(false)
 			.isDraggableBody(true)
-			.build(Welcome::class)
+			.isAWTManager(false)
+			.withTitleBarHeight(60)
+			.build(Start::class)
 	}
 }
