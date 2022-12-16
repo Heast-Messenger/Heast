@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
-public class ClientResources {
+public final class ClientResources {
     public static String getResource(String path) {
         return Objects.requireNonNull(ClientResources.class.getResource(path)).toExternalForm();
     }

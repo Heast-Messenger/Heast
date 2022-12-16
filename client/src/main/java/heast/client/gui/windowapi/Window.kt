@@ -2,9 +2,8 @@ package heast.client.gui.windowapi
 
 import com.jetbrains.JBR
 import heast.client.ClientResources
-import heast.client.gui.registry.Colors
-import heast.client.gui.registry.Colors.toHex
-import heast.client.gui.utility.ColorExtension.toAWT
+import heast.client.gui.registry.Fonts
+import heast.client.gui.registry.Colors.toAWT
 import heast.core.logging.IO
 import heast.core.utility.OS
 import javafx.application.Platform
@@ -48,13 +47,17 @@ class Window {
 
 	init { initProperties() }
 
-	private fun initWin(frame: JFrame) {
-		if (OS.isWindows() && JBR.isAvailable()) {
-			if (JBR.isCustomWindowDecorationSupported()) {
-				JBR.getCustomWindowDecoration().setCustomDecorationEnabled(frame, true)
-				JBR.getCustomWindowDecoration().setCustomDecorationTitleBarHeight(frame, titleBarHeight)
-			}
+	@JvmName("setWindowHeight")
+	fun setHeight(height: Int) {
+		this.height = height
+		jfxPanel.size = Dimension(width, height)
+		SwingUtilities.invokeLater {
+			frame.size = Dimension(width, height)
 		}
+	}
+
+	private fun initWin(frame: JFrame) {
+		initJBR()
 	}
 
 	private fun initOSX(frame: JFrame) {
@@ -64,10 +67,22 @@ class Window {
 			frame.rootPane.putClientProperty("apple.awt.draggableWindowBackground", draggableBody)
 			frame.rootPane.putClientProperty("apple.awt.windowTitleVisible", isWindowTitleVisible)
 			frame.rootPane.putClientProperty("apple.awt.fullscreenable", isResizable)
-		} else if (OS.isMac() && JBR.isAvailable()) {
+		} else {
+			initJBR()
+		}
+	}
+
+	private fun initJBR() {
+		if (JBR.isAvailable()) {
 			if (JBR.isCustomWindowDecorationSupported()) {
 				JBR.getCustomWindowDecoration().setCustomDecorationEnabled(frame, true)
 				JBR.getCustomWindowDecoration().setCustomDecorationTitleBarHeight(frame, titleBarHeight)
+//				JBR.getCustomWindowDecoration().setCustomDecorationHitTestSpots(frame, listOf(
+//					mapOf(Rectangle(width - 60, 0, 60, titleBarHeight) to CustomWindowDecoration.OTHER_HIT_SPOT).entries.first()
+//				))
+			}
+			if (JBR.isRoundedCornersManagerSupported()) {
+				JBR.getRoundedCornersManager().setRoundedCorners(frame, "full")
 			}
 		}
 	}
@@ -102,12 +117,14 @@ class Window {
 	}
 
 	private fun initFX(content: KClass<out Parent>) {
+		Fonts.init()
 		jfxPanel.scene = Scene(
 			Mantle(content.objectInstance!!).apply { mantle = this },
 			this@Window.width.toDouble(),
 			this@Window.height.toDouble(),
 			this@Window.background
 		).apply {
+			this.fill = this@Window.background
 			initCss(this)
 			SwingUtilities.invokeLater {
 				frame.isVisible = true }
@@ -119,11 +136,11 @@ class Window {
 		scene.userAgentStylesheet
 
 		ClientResources.getResourceFile("css").listFiles { file -> file.extension == "css" }?.forEach { file ->
-			var content = file.readText()
-			Colors.colors().forEach { c ->
-				content = content.replace("\$${c.key}", c.value.toHex())
-			}
-			file.writeText(content)
+//			var content = file.readText()
+//			Colors.colors().forEach { c ->
+//				content = content.replace("\$${c.key}", c.value.toHex())
+//			}
+//			file.writeText(content)
 			scene.stylesheets.add(file.toURI().toURL().toExternalForm())
 			IO.info.println("Loaded CSS: ${file.name} - ${file.absolutePath}")
 		}

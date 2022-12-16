@@ -27,6 +27,6 @@ public final class Client {
 
 	private void start() {
 		GuiMain.initialize();
-		ClientNetwork.initialize(host, port);
+//		ClientNetwork.initialize(host, port);
 	}
 }

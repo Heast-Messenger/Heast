@@ -1,5 +1,7 @@
 package heast.client.gui.utility
 
+import javafx.scene.text.Text
+
 object TextExtension {
-	fun String.toText() = javafx.scene.control.Label(this)
+	fun String.toText() = Text(this)
 }

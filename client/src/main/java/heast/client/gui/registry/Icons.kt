@@ -4,24 +4,25 @@ import heast.client.ClientResources
 import javafx.scene.image.Image
 
 object Icons {
-	val logo = mapOf(
-		"big" to ClientResources.getResource("icons/logo/big.png"),
-		"small" to ClientResources.getResource("icons/logo/small.png"),
-	)
+	object Logo {
+		val BIG : String = ClientResources.getResource("icons/logo/big.png")
+		val SMALL : String = ClientResources.getResource("icons/logo/small.png")
+	}
 
-	val menu = mapOf(
-		"back" to ClientResources.getResource("icons/welcome/navigate_back.png"),
-		"next" to ClientResources.getResource("icons/welcome/navigate_next.png"),
-		"sign_up" to ClientResources.getResource("icons/welcome/sign_up.png"),
-		"log_in" to ClientResources.getResource("icons/welcome/log_in.png"),
-	)
+	object Menu {
+		val BACK : String = ClientResources.getResource("icons/welcome/navigate_back.png")
+		val NEXT : String = ClientResources.getResource("icons/welcome/navigate_next.png")
+		val SIGNUP : String = ClientResources.getResource("icons/welcome/sign_up.png")
+		val LOGIN : String = ClientResources.getResource("icons/welcome/log_in.png")
+		val RESET : String = ClientResources.getResource("icons/welcome/reset.png")
+	}
 
-	val verify = mapOf(
-		"email" to ClientResources.getResource("icons/verification/email.png"),
-		"google" to ClientResources.getResource("icons/verification/google.png"),
-		"verify" to ClientResources.getResource("icons/verification/verify.png"),
-		"qr_code_TEMPORARY" to ClientResources.getResource("icons/verification/TEST_QR_CODE.png"),
-	)
+	object Verify {
+		val EMAIL : String = ClientResources.getResource("icons/verification/email.png")
+		val GOOGLE : String = ClientResources.getResource("icons/verification/google.png")
+		val VERIFY : String = ClientResources.getResource("icons/verification/verify.png")
+		val QR_CODE : String = ClientResources.getResource("icons/verification/TEST_QR_CODE.png")
+	}
 
 	fun String.toImg() : Image {
 		return Image(this)

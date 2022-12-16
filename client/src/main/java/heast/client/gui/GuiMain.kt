@@ -11,9 +11,9 @@ object GuiMain {
 	@JvmStatic
 	fun initialize() {
 		window = Window()
-			.withBackground(Colors.primary)
-			.withWidth(450)
-			.withHeight(610)
+			.withBackground(Colors.PRIMARY)
+			.withWidth(400)
+			.withHeight(520)
 			.isResizable(false)
 			.isTitleBarHidden(true)
 			.isFullWindowContent(true)

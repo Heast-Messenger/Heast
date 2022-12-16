@@ -1,28 +1,29 @@
-package heast.client.gui.components.welcome
+package heast.client.gui.components.window
 
 import heast.client.gui.GuiMain
+import heast.client.gui.cssengine.Align
+import heast.client.gui.cssengine.CSSProperty.Companion.css
+import heast.client.gui.cssengine.Cursor
+import heast.client.gui.cssengine.Padding
 import heast.client.gui.registry.Icons.toImg
+import heast.client.gui.registry.Interpolators
 import heast.client.gui.utility.Transition
-import javafx.animation.Interpolator
 import javafx.animation.RotateTransition
 import javafx.event.EventHandler
 import javafx.scene.Parent
 import javafx.scene.image.ImageView
 import javafx.scene.layout.StackPane
 import javafx.util.Duration
-import kotlin.math.pow
-import kotlin.math.sin
-import kotlin.random.Random
 import kotlin.reflect.KClass
 
 class Navigator(img : String, target : KClass<out Parent>?) : StackPane() {
 	private val icon: ImageView
 
 	init {
-		println("Navigator: $target")
-		this.styleClass.addAll(
-			"py-4",
-			"align-center")
+		this.css = listOf(
+			Align.center,
+			Cursor.pointer,
+			Padding().y(4))
 
 		this.children.addAll(
 			ImageView(img.toImg()).apply {
@@ -49,12 +50,8 @@ class Navigator(img : String, target : KClass<out Parent>?) : StackPane() {
 				this.node = icon
 				this.duration = Duration.millis(1000.0)
 				this.fromAngle = 0.0
-				this.toAngle = 50.0
-
-				val randomDirection = Random.nextInt(0, 2) * 2 - 1
-				this.interpolator = object : Interpolator() {
-					override fun curve(t : Double) = randomDirection * sin(10*t)*2.0.pow(-5*t)
-				}
+				this.toAngle = 20.0
+				this.interpolator = Interpolators.NAVIGATOR
 				this.play() }
 		}
 
