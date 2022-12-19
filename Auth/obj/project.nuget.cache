@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ffMBnUFxMm19NjJ7c+U+suRS1j67ygYX7z0SA/ujT+HxkmulVof3C4lLX+LX5ACKIhokZYmpoXb1rPMwX87JeQ==",
+  "success": true,
+  "projectFilePath": "/Users/fabian/Documents/Projects/CSharp/Heast/Auth/Auth.csproj",
+  "expectedPackageFiles": [
+    "/Users/fabian/.nuget/packages/microsoft.netcore.app.ref/6.0.12/microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
+    "/Users/fabian/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.12/microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
+    "/Users/fabian/.nuget/packages/microsoft.netcore.app.host.osx-x64/6.0.12/microsoft.netcore.app.host.osx-x64.6.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

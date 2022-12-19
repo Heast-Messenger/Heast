@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "wr5K6JkRhEukeYirAAoenRnSmBKu/VJaYaaBYdsme9hdvvLO4drdANXPqp5LslJeyDVqYplv1LuSqRDY/gVoPw==",
+  "success": true,
+  "projectFilePath": "/Users/fabian/Documents/Projects/CSharp/Heast/Chat/Chat.csproj",
+  "expectedPackageFiles": [
+    "/Users/fabian/.nuget/packages/microsoft.netcore.app.ref/6.0.12/microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
+    "/Users/fabian/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.12/microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
+    "/Users/fabian/.nuget/packages/microsoft.netcore.app.host.osx-x64/6.0.12/microsoft.netcore.app.host.osx-x64.6.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

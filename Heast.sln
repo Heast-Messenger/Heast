@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{B55AF215-1CC5-41BA-BCE4-09EFB40A686A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{52E939A9-E738-4065-96BE-D37A9A4D5B3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{4B587879-57FE-4375-BF0C-E3C72001094B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat", "Chat\Chat.csproj", "{7930A4B3-AEF8-4641-B5CE-2FBA6EA8C6A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B55AF215-1CC5-41BA-BCE4-09EFB40A686A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B55AF215-1CC5-41BA-BCE4-09EFB40A686A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B55AF215-1CC5-41BA-BCE4-09EFB40A686A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B55AF215-1CC5-41BA-BCE4-09EFB40A686A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E939A9-E738-4065-96BE-D37A9A4D5B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E939A9-E738-4065-96BE-D37A9A4D5B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E939A9-E738-4065-96BE-D37A9A4D5B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E939A9-E738-4065-96BE-D37A9A4D5B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B587879-57FE-4375-BF0C-E3C72001094B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B587879-57FE-4375-BF0C-E3C72001094B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B587879-57FE-4375-BF0C-E3C72001094B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B587879-57FE-4375-BF0C-E3C72001094B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7930A4B3-AEF8-4641-B5CE-2FBA6EA8C6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7930A4B3-AEF8-4641-B5CE-2FBA6EA8C6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7930A4B3-AEF8-4641-B5CE-2FBA6EA8C6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7930A4B3-AEF8-4641-B5CE-2FBA6EA8C6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
