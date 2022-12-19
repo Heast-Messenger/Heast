@@ -1,2 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, Chat Server!");
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using ChatServer.network;
+using ChatServer.permissionengine;
+
+namespace ChatServer
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Database.init();
+            PermissionsEngine.init();
+        }
+    }
+}
+
