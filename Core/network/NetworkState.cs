@@ -21,15 +21,15 @@ public class NetworkState {
         return this;
     }
 
-    private IPacketHandler<TPl> GetPacketHandler<TPl>(NetworkSide side) where TPl : IPacketListener {
-        return (_handlers[side] as IPacketHandler<TPl>)!;
+    public IPacketHandler<IPacketListener> GetPacketHandler(NetworkSide side) {
+        return _handlers[side];
     }
     
     public int GetPacketId<TPl>(NetworkSide side, IPacket<TPl> packet) where TPl : IPacketListener {
-        return GetPacketHandler<TPl>(side).GetId(packet.GetType());
+        return GetPacketHandler(side).GetId(packet.GetType());
     }
     
-    private interface IPacketHandler<out TPl> where TPl : IPacketListener {
+    public interface IPacketHandler<out TPl> where TPl : IPacketListener {
         IPacketHandler<TPl> Register(Type type, Func<PacketBuf, IPacket<TPl>> packetFactory);
         int GetId(Type packet);
     }

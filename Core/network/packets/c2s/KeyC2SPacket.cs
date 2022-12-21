@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Core.network.listeners;
 
 namespace Core.network.packets.c2s; 
