@@ -8,8 +8,8 @@ namespace ChatServer
     {
         public static void Main(string[] args)
         {
-            Database.init();
-            PermissionsEngine.init();
+            Database.Init();
+            //PermissionsEngine.init();
         }
     }
 }

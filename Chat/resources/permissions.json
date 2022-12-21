@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "SimplePermission",
+    "Description": "Permission",
+    "Id": 1,
+    "Target": 0
+  },
+  {
+    "Name": "TargetPermission",
+    "Description": "Permission2",
+    "Id": 2,
+    "Target": 2
+  }
+]
