@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using NpgsqlTypes;
@@ -13,12 +14,12 @@ public class Database
     private static string connString = "Host=localhost;Port=5432;Username=admin;Password=;Database=heast";
     private static NpgsqlConnection conn;
     
-    public static void Init()
+    public static async void Init()
     {
         CreateConnection();
         //Console.WriteLine(TestConnection().Result);
-        CreateDatabase();
-        CreateTables();
+        await CreateDatabase();
+        await CreateTables();
     }
 
     /// <summary>
@@ -69,58 +70,70 @@ public class Database
         return false;
     }
     
-    private static async void CreateDatabase()
+    private static async Task<bool> CreateDatabase()
     {
         if (await DatabaseExists("heast"))
         {
             Console.WriteLine("Database already exists, skipping creation");
-            return;
+            return false;
         }
         
         await using var command = new NpgsqlCommand("CREATE DATABASE heast", conn);
         await command.ExecuteNonQueryAsync();
 
         Console.WriteLine("Database created");
+
+        return await DatabaseExists("heast");
     }
     
     
     /**
      * Creates a new database, if there is none
      */
-    private static async void CreateTables()
+    private static async Task<bool> CreateTables()
     {
-        //Default Tables
-        await using var cmd = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS r_roles(" +
-                                                "r_id int primary key," +
-                                                "r_name varchar(255)," +
-                                                "r_permissions bytea," +
-                                                "r_hierarchy int)", conn);
-        await cmd.ExecuteNonQueryAsync();
-        
-        await using var cmd2 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS u_users(" +
-                                                 "u_id int primary key," +
-                                                 "u_name varchar(255)", conn);
-        await cmd2.ExecuteNonQueryAsync();
-        
-        await using var cmd3 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ch_channels(" +
-                                                 "ch_id int primary key," +
-                                                 "ch_name varchar(255)", conn);
-        await cmd3.ExecuteNonQueryAsync();
-        
-        //N-M Tables
-        
-        await using var cmd4 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ur_hasroles(" +
-                                                "ur_u_id int," +
-                                                "ur_r_id int," +
-                                                "primary key(ur_u_id, ur_r_id)", conn);
-        await cmd4.ExecuteNonQueryAsync();
-        
-        await using var cmd5 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS c_channelpermissions(" +
-                                                 "c_ch_id int," +
-                                                 "c_r_id int," +
-                                                 "c_permissions bytea," +
-                                                 "primary key(ur_u_id, ur_r_id)", conn);
-        await cmd5.ExecuteNonQueryAsync();
+        try
+        {
+            //Default Tables
+            await using var cmd = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS r_roles(" +
+                                                    "r_id int primary key," +
+                                                    "r_name varchar(255)," +
+                                                    "r_permissions bytea," +
+                                                    "r_hierarchy int)", conn);
+            await cmd.ExecuteNonQueryAsync();
+
+            await using var cmd2 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS u_users(" +
+                                                     "u_id int primary key," +
+                                                     "u_name varchar(255))", conn);
+            await cmd2.ExecuteNonQueryAsync();
+
+            await using var cmd3 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ch_channels(" +
+                                                     "ch_id int primary key," +
+                                                     "ch_name varchar(255))", conn);
+            await cmd3.ExecuteNonQueryAsync();
+
+            //N-M Tables
+
+            await using var cmd4 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ur_hasroles(" +
+                                                     "ur_u_id INTEGER," +
+                                                     "ur_r_id INTEGER," +
+                                                     "primary key(ur_u_id, ur_r_id))", conn);
+            await cmd4.ExecuteNonQueryAsync();
+
+            await using var cmd5 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS c_channelpermissions(" +
+                                                     "c_ch_id int," +
+                                                     "c_r_id int," +
+                                                     "c_permissions bytea," +
+                                                     "primary key(c_ch_id, c_r_id))", conn);
+            await cmd5.ExecuteNonQueryAsync();
+        }
+        catch (NpgsqlException e)
+        {
+            Console.WriteLine(e.StackTrace);
+            return false;
+        }
+
+        return true;
     }
 
     public static void ShutdownGracefully()
