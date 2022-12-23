@@ -29,9 +29,10 @@ public class NetworkState {
         return GetPacketHandler(side).GetId(packet.GetType());
     }
     
-    public interface IPacketHandler<out TPl> where TPl : IPacketListener {
+    public interface IPacketHandler<TPl> where TPl : IPacketListener {
         IPacketHandler<TPl> Register(Type type, Func<PacketBuf, IPacket<TPl>> packetFactory);
         int GetId(Type packet);
+        IPacket<TPl>? CreatePacket(int id, PacketBuf buf);
     }
 
     private class PacketHandler<TPl> : IPacketHandler<TPl> where TPl : IPacketListener {
@@ -49,8 +50,9 @@ public class NetworkState {
             return id < 0 ? -1 : id;
         }
 
-        public IPacket<TPl> CreatePacket(int id, PacketBuf buf) {
-            return this.PacketFactories[id](buf);
+        public IPacket<TPl>? CreatePacket(int id, PacketBuf buf) {
+            return this.PacketFactories.Count > id ?
+                this.PacketFactories[id](buf) : null;
         }
     }
 }
