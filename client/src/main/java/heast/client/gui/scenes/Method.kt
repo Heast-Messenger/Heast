@@ -1,5 +1,6 @@
 package heast.client.gui.scenes
 
+import heast.client.gui.components.layout.Link.linkTo
 import heast.client.gui.components.layout.VerticalButton
 import heast.client.gui.components.window.Default
 import heast.client.gui.components.window.Header
@@ -35,14 +36,16 @@ object Method : Default() {
 					.withText("Email")
 					.withIcon(Icons.Verify.EMAIL)
 					.onClick { println("Verifying via email") }
-					.build())
+					.build()
+					.linkTo(VerifyEmail::class))
 
 			this.children.add(
 				VerticalButton.builder()
 					.withText("Google")
 					.withIcon(Icons.Verify.GOOGLE)
 					.onClick { println("Verifying via Google Authenticator") }
-					.build())
+					.build()
+					.linkTo(VerifyGoogle::class))
 
 			this.css = listOf(
 				Align.center,

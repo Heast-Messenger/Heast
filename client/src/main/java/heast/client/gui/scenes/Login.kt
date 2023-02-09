@@ -30,7 +30,7 @@ object Login : Default() {
 
 	override val title : Node
 		get() = Header("Welcome back!",
-			"Click on %bReset %rto change your %bpassword %rin case you forgot it.")
+			"Click on %bReset %rto change your %bpassword %rin case you forgot it")
 
 	override val layout : Node
 		get() = VBox().apply {

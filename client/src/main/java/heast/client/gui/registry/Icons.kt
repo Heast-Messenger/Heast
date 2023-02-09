@@ -21,6 +21,7 @@ object Icons {
 		val EMAIL : String = ClientResources.getResource("icons/verification/email.png")
 		val GOOGLE : String = ClientResources.getResource("icons/verification/google.png")
 		val VERIFY : String = ClientResources.getResource("icons/verification/verify.png")
+		val TWO_FACTOR : String = ClientResources.getResource("icons/verification/2fa.png")
 		val QR_CODE : String = ClientResources.getResource("icons/verification/TEST_QR_CODE.png")
 	}
 

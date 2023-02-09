@@ -38,6 +38,8 @@ abstract class Default : BorderPane() {
 			this.css = listOf(
 				Align.center,
 				Padding().x(4))
+		} else {
+			this.bottom = Pad.vbox(40.0)
 		}
 
 		this.center = BorderPane().apply {
