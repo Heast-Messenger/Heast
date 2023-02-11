@@ -4,10 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="Assets\Navigation\Illustrator.ai" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,14 +16,61 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.18" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
+    <PackageReference Include="Avalonia" Version="11.0.0-preview5" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview5" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0-preview5" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\Navigation\Chat.svg" />
+    <AvaloniaResource Include="Assets\Navigation\Explore.svg" />
+    <AvaloniaResource Include="Assets\Navigation\People.svg" />
+    <AvaloniaResource Include="Assets\Navigation\Servers.svg" />
+    <AvaloniaResource Include="Assets\Navigation\Settings.svg" />
+    
+    <AvaloniaResource Include="Assets\Fonts\Inter-Medium.ttf" />
+    
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Black.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-BlackItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Bold.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-BoldItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraBold.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraBoldItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraLight.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraLightItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Italic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Light.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-LightItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Medium.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-MediumItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Regular.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBold.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-Thin.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Titlebar" />
+    <Folder Include="Model" />
+    <Folder Include="ViewModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Navigation.axaml.cs">
+      <DependentUpon>Navigation.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

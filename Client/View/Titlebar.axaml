@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Client.View.Titlebar"
+             Height="38">
+	<UserControl.Resources>
+		
+	</UserControl.Resources>
+	
+	<UserControl.Styles>
+		<Style Selector="TextBlock.Bold">
+			<Setter Property="FontSize" Value="16.0" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+			<Setter Property="FontFamily" Value="{StaticResource Poppins}" />
+			<Setter Property="Foreground" Value="{DynamicResource White}" />
+		</Style>
+	</UserControl.Styles>
+	
+	<DockPanel>
+		<!-- ReSharper Disable InconsistentNaming -->
+		<Rectangle Name="OSXControlSpacer"
+		           Width="70.0"
+		           DockPanel.Dock="Left"/>
+		
+		<TextBlock DockPanel.Dock="Left"
+		           VerticalAlignment="Center"
+		           Text="Welcome Back!"
+		           Classes="Bold"/>
+		
+		<Rectangle Name="WinControlSpacer"
+		           Width="70.0"
+		           DockPanel.Dock="Right"/>
+		
+		<!-- Rounded user profile image -->
+		<Image DockPanel.Dock="Right" />
+		
+		<TextBlock DockPanel.Dock="Right"
+		           VerticalAlignment="Center"
+		           Text="Username"
+		           Classes="Bold"/>
+		
+		<Border Background="Transparent" />
+	</DockPanel>
+</UserControl>

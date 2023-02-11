@@ -2,6 +2,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Client.App">
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
+        <SimpleTheme/>
+        
+        <Style Selector="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="ClickMode" Value="Release" />
+        </Style>
     </Application.Styles>
+    
+    <Application.Resources>
+        <Color x:Key="Dark">#1E1E24</Color>
+        <Color x:Key="Mid">#26262D</Color>
+        <Color x:Key="Light">#545770</Color>
+        <Color x:Key="White">#EBF2FF</Color>
+        <Color x:Key="Accent">#FEBC2E</Color>
+        <Color x:Key="Red">#F45449</Color>
+        <Color x:Key="Green">#67FF76</Color>
+        <Color x:Key="Blue">#67B6FF</Color>
+        
+        <FontFamily x:Key="Poppins">avares://Client/Assets/Fonts#Poppins</FontFamily>
+        <FontFamily x:Key="Inter">avares://Client/Assets/Fonts#Inter</FontFamily>
+    </Application.Resources>
 </Application>
