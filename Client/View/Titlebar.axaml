@@ -27,7 +27,7 @@
 		           Classes="Bold"/>
 		
 		<Rectangle Name="WinControlSpacer"
-		           Width="70.0"
+		           Width="140.0"
 		           DockPanel.Dock="Right"/>
 		
 		<!-- Rounded user profile image -->

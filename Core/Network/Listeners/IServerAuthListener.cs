@@ -1,4 +1,4 @@
-namespace Core.network.listeners; 
+namespace Core.Network.Listeners; 
 
 public interface IServerAuthListener : IPacketListener {
     // void OnSignup(SignupC2SPacket packet);

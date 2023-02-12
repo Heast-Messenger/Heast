@@ -11,4 +11,21 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets" />
+    <Folder Include="Modules\Database" />
+    <Folder Include="Modules\Email" />
+    <Folder Include="Structure" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Crayon" Version="2.0.69" />
+  </ItemGroup>
+
 </Project>

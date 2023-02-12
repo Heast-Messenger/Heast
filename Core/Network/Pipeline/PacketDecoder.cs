@@ -1,9 +1,9 @@
-using Core.exceptions;
-using Core.network.codecs;
+using Core.Exceptions;
+using Core.Network.Codecs;
 using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
 
-namespace Core.network.pipeline; 
+namespace Core.Network.Pipeline; 
 
 public class PacketDecoder : ReplayingDecoder<IPacket<IPacketListener>> {
     

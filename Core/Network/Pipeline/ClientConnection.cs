@@ -1,10 +1,10 @@
-using Core.exceptions;
+using Core.Exceptions;
 using DotNetty.Common.Utilities;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 
-namespace Core.network.pipeline; 
+namespace Core.Network.Pipeline; 
 
 public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListener>> {
 
@@ -65,7 +65,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
         msg.Apply(Listener);
     }
     
-    public Task Send(IPacket<IPacketListener> packet) {
+    public Task Send<T>(IPacket<T> packet) where T : IPacketListener {
         return Channel is { Open: true } ?
             Channel.WriteAndFlushAsync(packet) :
             throw new IllegalStateException("Channel was null whilst trying to send a packet");

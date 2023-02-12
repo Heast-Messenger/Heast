@@ -1,8 +1,8 @@
-using Core.network.listeners;
-using Core.network.packets.c2s;
-using Core.network.packets.s2c;
+using Core.Network.Listeners;
+using Core.Network.Packets.C2S;
+using Core.Network.Packets.S2C;
 
-namespace Core.network; 
+namespace Core.Network; 
 
 public class NetworkState {
 
@@ -13,6 +13,10 @@ public class NetworkState {
         .Setup(NetworkSide.Server, new PacketHandler<IClientLoginListener>()
             .Register(typeof(HelloS2CPacket), buf => new HelloS2CPacket(buf))
             .Register(typeof(SuccessS2CPacket), buf => new SuccessS2CPacket(buf)));
+
+    public static NetworkState Auth { get; } = new NetworkState()
+        .Setup(NetworkSide.Client, new PacketHandler<IServerAuthListener>())
+        .Setup(NetworkSide.Server, new PacketHandler<IClientAuthListener>());
 
     private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 

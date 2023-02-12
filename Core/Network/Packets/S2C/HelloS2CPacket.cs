@@ -1,6 +1,6 @@
-using Core.network.listeners;
+using Core.Network.Listeners;
 
-namespace Core.network.packets.s2c; 
+namespace Core.Network.Packets.S2C; 
 
 public class HelloS2CPacket : IPacket<IClientLoginListener> {
     

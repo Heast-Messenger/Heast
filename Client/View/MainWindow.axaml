@@ -26,7 +26,9 @@
             <Border CornerRadius="20"
                     BorderThickness="0"
                     Background="{DynamicResource Dark}"
-                    Margin="0.0 0.0 10.0 10.0"/>
-        </DockPanel>
+                    Margin="0.0 0.0 10.0 10.0">
+	            
+            </Border>
+		</DockPanel>
     </Panel>
 </Window>

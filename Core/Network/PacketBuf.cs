@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using DotNetty.Buffers;
 
-namespace Core.network;
+namespace Core.Network;
 
 public class PacketBuf : ByteBufImpl {
     public PacketBuf(IByteBuffer buf) : base(buf) { }
@@ -58,8 +58,8 @@ public class PacketBuf : ByteBufImpl {
         WriteVarInt((int) (object) value);
     }
     
-    public T ReadEnum<T>(Type clazz) where T : Enum {
-        return (T) Enum.GetValues(clazz).GetValue(ReadVarInt())!;
+    public T ReadEnum<T>() where T : Enum {
+        return (T) Enum.GetValues(typeof(T)).GetValue(ReadVarInt())!;
     }
     
     public void WriteTimestamp(DateTime timestamp) {

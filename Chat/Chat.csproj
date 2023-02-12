@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Crayon" Version="2.0.69" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 using DotNetty.Codecs;
 
-namespace Core.network.codecs;
+namespace Core.Network.Codecs;
 
 using System;
 using System.Collections.Generic;

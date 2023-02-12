@@ -1,4 +1,4 @@
-namespace Core.network; 
+namespace Core.Network; 
 
 public interface IPacketListener {
     

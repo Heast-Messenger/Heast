@@ -1,8 +1,9 @@
-using Core.network.packets.c2s;
+using Core.Network.Packets.C2S;
 
-namespace Core.network.listeners; 
+namespace Core.Network.Listeners; 
 
 public interface IServerLoginListener : IPacketListener {
     void OnHello(HelloC2SPacket packet);
     void OnKey(KeyC2SPacket packet);
+    void OnError(ErrorC2SPacket packet);
 }

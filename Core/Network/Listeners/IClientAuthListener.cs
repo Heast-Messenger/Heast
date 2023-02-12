@@ -1,4 +1,4 @@
-namespace Core.network.listeners; 
+namespace Core.Network.Listeners; 
 
 public interface IClientAuthListener : IPacketListener {
     // void OnSignupResponse(SignupResponseS2CPacket packet);
