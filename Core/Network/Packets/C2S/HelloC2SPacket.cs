@@ -1,6 +1,6 @@
 using Core.Network.Listeners;
 
-namespace Core.Network.Packets.C2S; 
+namespace Core.Network.Packets.C2S;
 
 public class HelloC2SPacket : IPacket<IServerLoginListener> {
     

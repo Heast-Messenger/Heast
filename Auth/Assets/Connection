@@ -1,0 +1,1 @@
+server={host};database={db};port={port};uid=admin;password=Test1234;

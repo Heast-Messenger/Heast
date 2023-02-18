@@ -1,5 +1,5 @@
-using Core.Exceptions;
-using Core.Network.Codecs;
+using Core.exceptions;
+using Core.Network.codecs;
 using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
 
@@ -10,7 +10,7 @@ public class PacketDecoder : ReplayingDecoder<IPacket<IPacketListener>> {
     public NetworkSide Side { get; }
 
     public PacketDecoder(NetworkSide side) {
-        this.Side = side;
+        Side = side;
     }
 
     protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object?> output) {

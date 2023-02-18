@@ -12,13 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets" />
-    <Folder Include="Modules\Database" />
-    <Folder Include="Modules\Email" />
-    <Folder Include="Structure" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Assets\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -26,6 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="Crayon" Version="2.0.69" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-using Core.Exceptions;
+using System.Security.Cryptography;
+using Core.exceptions;
 using DotNetty.Common.Utilities;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
@@ -11,11 +12,13 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
     public static AttributeKey<NetworkState> ProtocolKey => AttributeKey<NetworkState>.ValueOf("protocol");
 
     public NetworkSide Side { get; }
-    public IChannel? Channel { get; private set; }
-    public IPacketListener? Listener { get; private set; }
+
+    public IChannel Channel { get; set; } = null!;
+
+    public IPacketListener Listener { get; set; } = null!;
 
     public ClientConnection(NetworkSide side) {
-        this.Side = side;
+        Side = side;
     }
     
     public static Task GetConnection(string host, int port) {
@@ -32,19 +35,11 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
     }
     
     public void SetState(NetworkState state) {
-        Channel?.GetAttribute(ProtocolKey).Set(state);
+        Channel.GetAttribute(ProtocolKey).Set(state);
     }
     
     public NetworkState? GetState() { 
-        return Channel?.GetAttribute(ProtocolKey).Get();
-    }
-    
-    public void SetListener(IPacketListener listener) {
-        this.Listener = listener;
-    }
-    
-    public IPacketListener? GetListener() {
-        return this.Listener;
+        return Channel.GetAttribute(ProtocolKey).Get();
     }
 
     public override void ChannelActive(IChannelHandlerContext context) {
@@ -70,6 +65,11 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
             Channel.WriteAndFlushAsync(packet) :
             throw new IllegalStateException("Channel was null whilst trying to send a packet");
     }
+    
+    public void EnableEncryption(Aes key) {
+        Channel.Pipeline.AddBefore("encoder", "encryptor", new PacketEncryptor(key));
+        Channel.Pipeline.AddBefore("decoder", "decryptor", new PacketDecryptor(key));
+    }
 }
 
 public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel> {
@@ -81,6 +81,7 @@ public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel> {
     
     protected override void InitChannel(ISocketChannel channel) {
         channel.Configuration.SetOption(ChannelOption.TcpNodelay, true);
+        channel.Configuration.SetOption(ChannelOption.SoKeepalive, true);
         channel.Pipeline
             // Here will be the packet decryptor
             .AddLast("decoder", new PacketDecoder(NetworkSide.Server))

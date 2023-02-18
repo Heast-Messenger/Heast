@@ -1,4 +1,5 @@
-using Core.Exceptions;
+using System.Threading.Channels;
+using Core.exceptions;
 using DotNetty.Codecs;
 using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
@@ -10,7 +11,7 @@ public class PacketEncoder : MessageToByteEncoder<IPacket<IPacketListener>> {
     public NetworkSide Side { get; }
     
     public PacketEncoder(NetworkSide side) {
-        this.Side = side;
+        Side = side;
     }
     
     protected override void Encode(IChannelHandlerContext ctx, IPacket<IPacketListener> message, IByteBuffer output) {

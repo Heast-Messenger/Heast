@@ -5,5 +5,5 @@ namespace Core.Network.Listeners;
 public interface IClientLoginListener : IPacketListener {
     void OnHello(HelloS2CPacket packet);
     void OnSuccess();
-    void OnError(ErrorS2CPacket error);
+    void OnError(ErrorS2CPacket packet);
 }

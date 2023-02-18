@@ -28,13 +28,20 @@ public class ServerLoginHandler : IServerLoginListener {
 	/// </summary>
 	/// <param name="packet">The received packet containing the client's AES key.</param>
 	public void OnKey(KeyC2SPacket packet) {
-		Span<byte> key = stackalloc byte[256];
+		Span<byte> key = new();
+		Span<byte> iv = new();
 		var success = ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.OaepSHA256, out _);
+			success &= ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.OaepSHA256, out _);
+		
 		if (success) {
-			// Connection.EnableEncryption(key);
+			var keypair = Aes.Create();
+			keypair.Key = key.ToArray();
+			keypair.IV = iv.ToArray();
+			
+			Connection.EnableEncryption(keypair);
 			Connection.Send(new SuccessS2CPacket());
 			Connection.SetState(NetworkState.Auth);
-			Connection.SetListener(new ServerAuthHandler(Connection));
+			Connection.Listener = new ServerAuthHandler(Connection);
 			return;
 		}
 		

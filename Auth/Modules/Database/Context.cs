@@ -1,0 +1,22 @@
+using Auth.Model;
+using Microsoft.EntityFrameworkCore;
+
+namespace Auth.Modules.Database;
+
+public class Context : DbContext {
+    public DbSet<User> Accounts => Set<User>();
+    // public DbSet<Server> Servers => Set<Server>();
+    
+    public Context(DbContextOptions<Context> options) : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<User>().ToTable("accounts");
+        // modelBuilder.Entity<Server>().ToTable("servers");
+        
+        modelBuilder.Entity<User>(e => {
+            // e.HasIndex(u => u.Name).IsUnique();
+            // e.HasIndex(u => u.Email).IsUnique();
+        });
+    }
+}
