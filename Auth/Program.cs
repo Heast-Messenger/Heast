@@ -8,8 +8,6 @@ public static class AuthServer {
     public static void Main(string[] args)
     {
         try {
-            Array.Resize(ref args, 1);
-            args[0] = "start";
             Dispatcher.Dispatch(args);
         }
         catch (Exception e) {

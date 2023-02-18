@@ -48,10 +48,10 @@ public static class Dispatcher {
                     ServerNetwork.Port = int.Parse(arg);
                     break;
                 case $"{Prefix}dbh" or $"{Prefix}{Prefix}dbhost":
-                    //Database.Host = arg;
+                    Database.Host = arg;
                     break;
                 case $"{Prefix}dbp" or $"{Prefix}{Prefix}dbport":
-                    //Database.Port = int.Parse(arg);
+                    Database.Port = int.Parse(arg);
                     break;
                 case $"{Prefix}h" or $"{Prefix}{Prefix}help":
                     PrintHelp();
@@ -108,14 +108,17 @@ public static class Dispatcher {
         }
     }
 
-    private static void Start() { // TODO: make async
+    private static void Start() {
+        // TODO: make async
         Console.WriteLine("> Starting server...");
 
         Database.Initialize();
         ServerBootstrap.Initialize();
         ServerNetwork.Initialize();
         
-        while(true) {
+        Console.WriteLine("> Server started!");
+
+        while (true) {
             Console.ReadLine();
         }
     }

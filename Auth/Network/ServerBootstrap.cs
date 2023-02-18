@@ -12,7 +12,7 @@ public static class ServerBootstrap
 {
     public static IChannel Channel { get; private set; } = null!;
 
-    public static async Task Initialize() {
+    public static async void Initialize() {
         Console.WriteLine("Initializing netty bootstrap...");
         var bossGroup = new MultithreadEventLoopGroup(1);
         var workerGroup = new MultithreadEventLoopGroup();

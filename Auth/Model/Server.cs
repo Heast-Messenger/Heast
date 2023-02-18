@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Auth.Model;
 
+[Table("servers")]
 public class Server {
     [Key]
     public int Id { get; private set; }
