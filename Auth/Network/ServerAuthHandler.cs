@@ -5,13 +5,15 @@ using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
 using Core.Network.Pipeline;
 
-namespace Auth.Network; 
+namespace Auth.Network;
 
-public class ServerAuthHandler : IServerAuthListener {
-	
+public class ServerAuthHandler : IServerAuthListener
+{
+
 	private ClientConnection Connection { get; }
 
-	public ServerAuthHandler(ClientConnection connection) {
+	public ServerAuthHandler(ClientConnection connection)
+	{
 		this.Connection = connection;
 	}
 }

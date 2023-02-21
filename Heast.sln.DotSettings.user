@@ -4,4 +4,5 @@
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\mscorlib.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\zzzdr\Downloads\Heast\Auth\bin\Debug\net6.0\Humanizer.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=4b587879_002D57fe_002D4375_002Dbf0c_002De3c72001094b_0023Client/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Initializable/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

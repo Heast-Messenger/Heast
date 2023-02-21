@@ -1,0 +1,25 @@
+{
+	"args_help_description": "Commands you can use",
+	"args_help_help": "Show this help message and exit.",
+	"args_help_version": "Show the version and exit.",
+	"args_help_stop": "Stop running server instances.",
+	"args_help_start": "Start a server instance.",
+	"args_help_start_ip": "The IP address to bind to (defaults to localhost).",
+	"args_help_start_port": "The port to bind to (defaults to 8080).",
+	"args_help_start_dbhost": "The host address for the database (defaults to localhost).",
+	"args_help_start_dbport": "The port for the database (defaults to 3306).",
+	"args_unknown": "Unknown action: '%1'",
+
+	"args_help_version_version": "Version",
+	"args_help_version_build": "Build",
+	"args_help_version_website": "Website",
+	"args_help_version_github": "GitHub",
+	"args_help_version_dotnet": "DotNet",
+	"args_help_version_os": "OS",
+
+	"server_starting": "Starting server...",
+	"server_started": "Server started!",
+	"server_noinstances": "No running instances found",
+	"server_exiting": "Exiting...",
+	"server_chooseprocess": "Which process do you want to kill? (0 to exit)"
+}

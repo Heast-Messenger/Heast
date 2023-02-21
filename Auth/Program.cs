@@ -1,17 +1,26 @@
-﻿namespace Auth;
+﻿using Auth.Modules;
+using Auth.Structure;
+using Microsoft.Extensions.DependencyInjection;
 
-public static class AuthServer {
+namespace Auth;
 
-    public const string Version = "1.0.0";
-    public const string Build = "Dev 0.1"; 
+public static class Program
+{
+	public static void Main(string[] args)
+	{
+		try
+		{
+			Dispatcher.Dispatch(args);
+		}
+		catch (Exception e)
+		{
+			Dispatcher.Crash(e);
+		}
+	}
+}
 
-    public static void Main(string[] args)
-    {
-        try {
-            Dispatcher.Dispatch(args);
-        }
-        catch (Exception e) {
-            Dispatcher.Crash(e);
-        }
-    }
+public class Startup
+{
+	public void ConfigureServices(IServiceCollection services)
+		=> services.AddDbContext<AuthContext>();
 }

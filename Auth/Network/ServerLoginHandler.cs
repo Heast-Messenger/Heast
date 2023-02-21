@@ -5,21 +5,24 @@ using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
 using Core.Network.Pipeline;
 
-namespace Auth.Network; 
+namespace Auth.Network;
 
-public class ServerLoginHandler : IServerLoginListener {
-	
+public class ServerLoginHandler : IServerLoginListener
+{
+
 	private ClientConnection Connection { get; }
 
-	public ServerLoginHandler(ClientConnection connection) {
+	public ServerLoginHandler(ClientConnection connection)
+	{
 		this.Connection = connection;
 	}
-	
+
 	/// <summary>
 	/// Called when the client wants to connect to the server.
 	/// </summary>
 	/// <param name="packet">The received packet containing client information.</param>
-	public void OnHello(HelloC2SPacket packet) {
+	public void OnHello(HelloC2SPacket packet)
+	{
 		Connection.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
 	}
 
@@ -27,24 +30,26 @@ public class ServerLoginHandler : IServerLoginListener {
 	/// Called when the client sends their symmetric communication key.
 	/// </summary>
 	/// <param name="packet">The received packet containing the client's AES key.</param>
-	public void OnKey(KeyC2SPacket packet) {
+	public void OnKey(KeyC2SPacket packet)
+	{
 		Span<byte> key = new();
 		Span<byte> iv = new();
 		var success = ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.OaepSHA256, out _);
-			success &= ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.OaepSHA256, out _);
-		
-		if (success) {
+		success &= ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.OaepSHA256, out _);
+
+		if (success)
+		{
 			var keypair = Aes.Create();
 			keypair.Key = key.ToArray();
 			keypair.IV = iv.ToArray();
-			
+
 			Connection.EnableEncryption(keypair);
 			Connection.Send(new SuccessS2CPacket());
 			Connection.SetState(NetworkState.Auth);
 			Connection.Listener = new ServerAuthHandler(Connection);
 			return;
 		}
-		
+
 		Connection.Send(new ErrorS2CPacket(Error.InvalidKey));
 		ServerNetwork.Disconnect(Connection);
 	}
@@ -53,7 +58,8 @@ public class ServerLoginHandler : IServerLoginListener {
 	/// Called when the client has experienced some kind of error.
 	/// </summary>
 	/// <param name="packet">The received packet containing the error type.</param>
-	public void OnError(ErrorC2SPacket packet) {
-		
+	public void OnError(ErrorC2SPacket packet)
+	{
+
 	}
 }

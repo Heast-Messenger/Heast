@@ -1,158 +1,178 @@
 using System.Diagnostics;
 using System.Text;
-using Auth.Model;
-using Auth.Modules.Database;
-//using Auth.Modules.Database;
+using Auth.Modules;
 using Auth.Network;
-using Microsoft.Extensions.DependencyInjection;
 using static Crayon.Output;
 
-namespace Auth; 
+namespace Auth;
 
-public static class Dispatcher {
-    private const string Prefix = "-";
-    
-    private static readonly List<(string[], string, (string[], string)[]?)> Help = new() {
-        (new []{$"{Prefix}h", $"{Prefix}{Prefix}help"}, "Show this help message and exit.", null),
-        (new []{$"{Prefix}v", $"{Prefix}{Prefix}version"}, "Show the version and exit.", null),
-        (new []{"stop"}, "Stop running server instances.", null),
-        (new []{"start"}, "Start a server instance.", new[] {
-            (new []{$"{Prefix}i", $"{Prefix}{Prefix}ip"}, "The IP address to bind to (defaults to localhost)."),
-            (new []{$"{Prefix}p", $"{Prefix}{Prefix}port"}, "The port to bind to (defaults to 8080)."),
-            (new []{$"{Prefix}dbh", $"{Prefix}{Prefix}dbhost"}, "The host address for the database (defaults to localhost)."),
-            (new []{$"{Prefix}dbp", $"{Prefix}{Prefix}dbport"}, "The port for the database (defaults to 3306)."),
-        }),
-    };
+public static class Dispatcher
+{
+	private const string Prefix = "-";
 
-    private static readonly List<(string, string)> Version = new() {
-        ("Version", AuthServer.Version),
-        ("Build", AuthServer.Build),
-        ("Website", "https://heast.net/"),
-        ("GitHub", "https://github.com/Heast-Messenger/Heast"),
-        ("DotNet", Environment.Version.ToString()),
-        ("OS", $"{System.Runtime.InteropServices.RuntimeInformation.OSDescription} ({System.Runtime.InteropServices.RuntimeInformation.OSArchitecture})")
-    };
+	private static readonly List<(string[], string, (string[], string)[]?)> Help = new() {
+		(new []{$"{Prefix}h", $"{Prefix}{Prefix}help"}, Global.Translation.ArgsHelpHelp, null),
+		(new []{$"{Prefix}v", $"{Prefix}{Prefix}version"}, Global.Translation.ArgsHelpVersion, null),
+		(new []{"stop"}, Global.Translation.ArgsHelpStop, null),
+		(new []{"start"}, Global.Translation.ArgsHelpStart, new[] {
+			(new []{$"{Prefix}i", $"{Prefix}{Prefix}ip"}, Global.Translation.ArgsHelpStartIp),
+			(new []{$"{Prefix}p", $"{Prefix}{Prefix}port"}, Global.Translation.ArgsHelpStartPort),
+			(new []{$"{Prefix}dbh", $"{Prefix}{Prefix}dbhost"}, Global.Translation.ArgsHelpStartDbhost),
+			(new []{$"{Prefix}dbp", $"{Prefix}{Prefix}dbport"}, Global.Translation.ArgsHelpStartDbport),
+		}),
+	};
 
-    public static void Dispatch(string[] args) {
-        if (args.Length <= 0) {
-            PrintHelp();
-            return;
-        }
-        
-        foreach (var arg in args) {
-            switch (arg) {
-                case $"{Prefix}i" or $"{Prefix}{Prefix}ip":
-                    ServerNetwork.Host = arg;
-                    break;
-                case $"{Prefix}p" or $"{Prefix}{Prefix}port":
-                    ServerNetwork.Port = int.Parse(arg);
-                    break;
-                case $"{Prefix}dbh" or $"{Prefix}{Prefix}dbhost":
-                    Database.Host = arg;
-                    break;
-                case $"{Prefix}dbp" or $"{Prefix}{Prefix}dbport":
-                    Database.Port = int.Parse(arg);
-                    break;
-                case $"{Prefix}h" or $"{Prefix}{Prefix}help":
-                    PrintHelp();
-                    return;
-                case $"{Prefix}v" or $"{Prefix}{Prefix}version":
-                    PrintVersion();
-                    return;
-            }
-        }
+	private static readonly List<(string, string)> Version = new() {
+		(Global.Translation.ArgsHelpVersionVersion, Global.Version),
+		(Global.Translation.ArgsHelpVersionBuild, Global.Build),
+		(Global.Translation.ArgsHelpVersionWebsite, Global.Website),
+		(Global.Translation.ArgsHelpVersionGithub, Global.Github),
+		(Global.Translation.ArgsHelpVersionDotnet, Global.DotNetInfo),
+		(Global.Translation.ArgsHelpVersionOs, Global.OsInfo)
+	};
 
-        var action = args[0];
-        switch (action) {
-            case "start":
-                Start();
-                return;
-            case "stop":
-                Stop();
-                return;
-        }
-        
-        throw new ArgumentException($"Unknown action: '{action}'");
-    }
-    
-    public static void Crash(Exception e) {
-        PrintCrash(e);
-        Environment.Exit(1);
-    }
+	public static void Dispatch(string[] args)
+	{
+		if (args.Length <= 0)
+		{
+			PrintHelp();
+			return;
+		}
 
-    private static void PrintCrash(Exception e) {
-        Console.OutputEncoding = Encoding.Default;
-        Console.WriteLine(Bold($"\n  {White("$h!t,")} {Red("the server crashed!")} \n"));
-        Console.WriteLine($"  {White().Text("Error:")} {Bold().Red(e.Message)}");
-        Console.WriteLine($"  {White().Text("Stacktrace:")} {Bold().Red(e.StackTrace != null ? $"\n{e.StackTrace}" : Bold().White("No stacktrace available."))}");
-    }
+		foreach (var arg in args)
+		{
+			switch (arg)
+			{
+				case $"{Prefix}i" or $"{Prefix}{Prefix}ip":
+					ServerNetwork.Host = arg;
+					break;
+				case $"{Prefix}p" or $"{Prefix}{Prefix}port":
+					ServerNetwork.Port = int.Parse(arg);
+					break;
+				case $"{Prefix}dbh" or $"{Prefix}{Prefix}dbhost":
+					Database.Host = arg;
+					break;
+				case $"{Prefix}dbp" or $"{Prefix}{Prefix}dbport":
+					Database.Port = int.Parse(arg);
+					break;
+				case $"{Prefix}h" or $"{Prefix}{Prefix}help":
+					PrintHelp();
+					return;
+				case $"{Prefix}v" or $"{Prefix}{Prefix}version":
+					PrintVersion();
+					return;
+			}
+		}
 
-    private static void PrintVersion() {
-        Console.OutputEncoding = Encoding.Default;
-        Console.WriteLine($"\n  {Bold().Cyan("Authentication Server")} {White("by")} {Bold().White("Heast Kom")} \n");
-        foreach (var (description, value) in Version) {
-            Console.WriteLine($"  {Green().Text("\u279C")}  {Bold().White().Text($"{string.Join(", ", description)}:")}".PadRight(40) + $"{value}");
-        }
-    }
+		var action = args[0];
+		switch (action)
+		{
+			case "start":
+				Start();
+				return;
+			case "stop":
+				Stop();
+				return;
+		}
 
-    private static void PrintHelp() {
-        Console.OutputEncoding = Encoding.Default;
-        Console.WriteLine("  Commands you can use: \"./server [...]\"\n");
-        foreach (var (options, description, subcommands) in Help) {
-            Console.WriteLine($"  {Green().Text("\u279C")}  {Bold().White().Text($"{string.Join(", ", options)}:")}".PadRight(45) + $"{description}");
+		throw new ArgumentException($"{Global.Translation.ArgsUnknown}".Replace("%1", action));
+	}
 
-            if (subcommands == null) continue;
-            foreach (var (subOptions, subDescription) in subcommands) {
-                Console.WriteLine($"       {Bold().White().Text($"{string.Join(", ", subOptions)}:")}".PadRight(40) + $"{subDescription}");
-            }
-        }
-    }
+	public static void Crash(Exception e)
+	{
+		PrintCrash(e);
+		Environment.Exit(1);
+	}
 
-    private static void Start() {
-        // TODO: make async
-        Console.WriteLine("> Starting server...");
+	private static void PrintCrash(Exception e)
+	{
+		Console.OutputEncoding = Encoding.Default;
+		Console.WriteLine(Bold($"\n  {White("$h!t,")} {Red("the server crashed!")} \n"));
+		Console.WriteLine($"  {White().Text("Error:")} {Bold().Red(e.Message)}");
+		Console.WriteLine($"  {White().Text("Stacktrace:")} {Bold().Red(e.StackTrace != null ? $"\n{e.StackTrace}" : Bold().White("No stacktrace available."))}");
+	}
 
-        Database.Initialize();
-        ServerBootstrap.Initialize();
-        ServerNetwork.Initialize();
-        
-        Console.WriteLine("> Server started!");
+	private static void PrintVersion()
+	{
+		Console.OutputEncoding = Encoding.Default;
+		Console.WriteLine($"\n  {Bold().Cyan("Authentication Server")} {White("by")} {Bold().White("Heast Kom")} \n");
+		foreach (var (description, value) in Version)
+		{
+			Console.WriteLine($"  {Green().Text("\u279C")}  {Bold().White().Text($"{string.Join(", ", description)}:")}".PadRight(40) + $"{value}");
+		}
+	}
 
-        while (true) {
-            Console.ReadLine();
-        }
-    }
+	private static void PrintHelp()
+	{
+		Console.OutputEncoding = Encoding.Default;
+		Console.WriteLine($"  {Global.Translation.ArgsHelpDescription}: \"./server [...]\"\n");
+		foreach (var (options, description, subcommands) in Help)
+		{
+			Console.WriteLine($"  {Green().Text("\u279C")}  {Bold().White().Text($"{string.Join(", ", options)}:")}".PadRight(45) + $"{description}");
 
-    private static void Stop() {
-        var processes = Process.GetProcessesByName("Auth");
+			if (subcommands == null) continue;
+			foreach (var (subOptions, subDescription) in subcommands)
+			{
+				Console.WriteLine($"       {Bold().White().Text($"{string.Join(", ", subOptions)}:")}".PadRight(40) + $"{subDescription}");
+			}
+		}
+	}
 
-        if (processes.Length <= 0) {
-            Console.WriteLine("No running instances found");
-            return;
-        }
+	private static void Start()
+	{
+		// TODO: make async
+		Console.WriteLine($"> {Global.Translation.ServerStarting}");
 
-        if (processes.Length == 1) {
-            processes[0].Kill();
-            return;
-        }
+		Database.Initialize();
+		ServerBootstrap.Initialize();
+		ServerNetwork.Initialize();
 
-        while (true) {
-            Console.WriteLine("Which process do you want to kill? (0 to exit)");
-            for (var i = 0; i < processes.Length; i++) {
-                var p = processes[i];
-                Console.WriteLine($"({i+1}) {p.ProcessName} - {p.Id}");
-            }
-            var input = Console.ReadLine();
-            if (int.TryParse(input, out var index)) {
-                if (index == 0) {
-                    Console.WriteLine("Exiting...");
-                    return;
-                }
-                if (index > 0 && index <= processes.Length) {
-                    processes[index-1].Kill();
-                    return;
-                }
-            }
-        }
-    }
+		Console.WriteLine($"> {Global.Translation.ServerStarted}");
+
+		while (true)
+		{
+			Console.ReadLine();
+		}
+	}
+
+	private static void Stop()
+	{
+		var processes = Process.GetProcessesByName("Auth");
+
+		if (processes.Length <= 0)
+		{
+			Console.WriteLine($"{Global.Translation.ServerNoinstances}");
+			return;
+		}
+
+		if (processes.Length == 1)
+		{
+			processes[0].Kill();
+			return;
+		}
+
+		while (true)
+		{
+			Console.WriteLine();
+			for (var i = 0; i < processes.Length; i++)
+			{
+				var p = processes[i];
+				Console.WriteLine($"({i + 1}) {p.ProcessName} - {p.Id}");
+			}
+			var input = Console.ReadLine();
+			if (int.TryParse(input, out var index))
+			{
+				if (index == 0)
+				{
+					Console.WriteLine($"{Global.Translation.ServerExiting}");
+					return;
+				}
+				if (index > 0 && index <= processes.Length)
+				{
+					processes[index - 1].Kill();
+					return;
+				}
+			}
+		}
+	}
 }
