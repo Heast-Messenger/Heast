@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Avalonia.Animation;
-using Avalonia.Animation.Animators;
+using System;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using Avalonia.Styling;
-using Avalonia.Threading;
-using Avalonia.Reactive;
+using Client.Model;
 
 namespace Client.View;
 
@@ -33,15 +25,6 @@ public partial class Navigation : UserControl {
 
 	private void Button_OnChat(object sender, RoutedEventArgs e) {
 		Console.WriteLine("clicked chat");
-
-		Dispatcher.UIThread.InvokeAsync(async () => {
-			await Task.Delay(1000);
-			(sender as Button)!.IsVisible = false;
-			await Task.Delay(1000);
-			Console.WriteLine("hiding chat button done");
-		});
-		
-		
 	}
 	
 	private void Button_OnExplore(object sender, RoutedEventArgs e) {

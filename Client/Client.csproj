@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <RootNamespace>Client</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
@@ -55,22 +56,5 @@
     <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-Thin.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\Titlebar" />
-    <Folder Include="Model" />
-    <Folder Include="ViewModel" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="View\MainWindow.axaml.cs">
-      <DependentUpon>MainWindow.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Navigation.axaml.cs">
-      <DependentUpon>Navigation.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

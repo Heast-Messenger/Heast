@@ -1,7 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:view="using:Client.View"
-
         x:Class="Client.View.MainWindow"
         ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
         ExtendClientAreaToDecorationsHint="True"
@@ -16,19 +15,15 @@
 		
 		<DockPanel Margin="0 38 0 0">
 			<view:Sidebar DockPanel.Dock="Right"
-			              Padding="10.0"/>
+			              IsHitTestVisible="True"/>
 
             <view:Navigation DockPanel.Dock="Left"
                              IsHitTestVisible="True"
                              Padding="10.0"
                              Margin="0.0 5.0 00.0 5.0"/>
 
-            <Border CornerRadius="20"
-                    BorderThickness="0"
-                    Background="{DynamicResource Dark}"
-                    Margin="0.0 0.0 10.0 10.0">
-	            
-            </Border>
+            <view:Content IsHitTestVisible="True"
+                          Margin="0.0 0.0 10.0 10.0"/>
 		</DockPanel>
     </Panel>
 </Window>

@@ -33,9 +33,11 @@ public class Translation
 		try
 		{
 			var data = File.ReadAllText($"Assets/Lang/{name}.json");
-			var translation = JsonConvert.DeserializeObject<Translation>(data, new JsonSerializerSettings {
-				ContractResolver = new DefaultContractResolver {
-					NamingStrategy = new SnakeCaseNamingStrategy()
+			var translation = JsonConvert.DeserializeObject<Translation>(data, new JsonSerializerSettings
+			{
+				ContractResolver = new DefaultContractResolver
+				{
+					NamingStrategy = new DotCaseNamingStrategy()
 				}
 			});
 			if (translation == null) throw new JsonSerializationException("Could not deserialize translation");

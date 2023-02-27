@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Client.View.Sidebars.ServerList"
+             Width="150.0">
+	<DockPanel>
+		<Rectangle DockPanel.Dock="Left"
+		           Width="20"
+		           Fill="Red"/>
+		
+		<Rectangle DockPanel.Dock="Right"
+		           Width="20"
+		           Fill="Green"/>
+		
+		<Rectangle Fill="Yellow" />
+	</DockPanel>
+</UserControl>
