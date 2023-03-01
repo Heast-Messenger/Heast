@@ -9,8 +9,12 @@ public class MainWindowViewModel : ViewModelBase {
         
         ContentViewModel = new ContentViewModel();
         Global.Content = ContentViewModel;
+        
+        NavigationViewModel = new NavigationViewModel();
+        Global.Navigation = NavigationViewModel;
     }
     
     public SidebarViewModel SidebarViewModel { get; }
     public ContentViewModel ContentViewModel { get; }
+    public NavigationViewModel NavigationViewModel { get; }
 }

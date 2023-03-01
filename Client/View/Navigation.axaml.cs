@@ -2,7 +2,8 @@ using System;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Client.Model;
+using Client.Control;
+using Client.View.Sidebars;
 
 namespace Client.View;
 
@@ -22,24 +23,27 @@ public partial class Navigation : UserControl {
 			sender.Classes.Add("Hover");
 		}
 	}
-
-	private void Button_OnChat(object sender, RoutedEventArgs e) {
+	
+	public void Button_OnChat(object sender, RoutedEventArgs e) {
 		Console.WriteLine("clicked chat");
 	}
 	
-	private void Button_OnExplore(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked explore");
+	public void Button_OnExplore(object sender, RoutedEventArgs e) {
+		Console.WriteLine("clicked explore (sidebar hidden)");
+		Dispatcher.SetSidebar(null);
 	}
 	
-	private void Button_OnPeople(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked people");
+	public void Button_OnPeople(object sender, RoutedEventArgs e) {
+		Console.WriteLine("clicked people (sidebar shown with friends list)");
+		Dispatcher.SetSidebar(new FriendList());
 	}
 	
-	private void Button_OnServers(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked servers");
+	public void Button_OnServers(object sender, RoutedEventArgs e) {
+		Console.WriteLine("clicked servers (sidebar shown with server list)");
+		Dispatcher.SetSidebar(new ServerList());
 	}
 	
-	private void Button_OnSettings(object sender, RoutedEventArgs e) {
+	public void Button_OnSettings(object sender, RoutedEventArgs e) {
 		Console.WriteLine("clicked settings");
 	}
 }

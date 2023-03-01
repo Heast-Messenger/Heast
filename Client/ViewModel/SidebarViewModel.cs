@@ -1,12 +1,19 @@
-using Avalonia.Controls;
 using Avalonia.Layout;
+using Client.View.Sidebars;
 
 namespace Client.ViewModel; 
 
 public class SidebarViewModel : ViewModelBase {
     
     public SidebarViewModel() {
-        _currentSidebar = new Panel();
+        _isOpened = false;
+        _currentSidebar = new EmptySidebar();
+    }
+    
+    private bool _isOpened;
+    public bool IsOpened {
+        get => _isOpened;
+        set => RaiseAndSetIfChanged(ref _isOpened, value);
     }
     
     private Layoutable _currentSidebar;

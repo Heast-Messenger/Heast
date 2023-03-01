@@ -2,10 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Client.View; 
+namespace Client.View.Content; 
 
-public partial class Content : UserControl {
-    public Content() {
+public partial class HomePanel : AbstractContent {
+    public HomePanel() {
         InitializeComponent();
     }
 

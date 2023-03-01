@@ -1,6 +1,7 @@
 using System;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 
 namespace Client.View;
 
@@ -20,5 +21,9 @@ public class SidebarEasing : Easing {
 public partial class Sidebar : UserControl {
     public Sidebar() {
         InitializeComponent();
+    }
+    
+    private void InitializeComponent() {
+        AvaloniaXamlLoader.Load(this);
     }
 }

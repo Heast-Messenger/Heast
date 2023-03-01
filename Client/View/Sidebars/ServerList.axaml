@@ -1,7 +1,8 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="Client.View.Sidebars.ServerList"
-             Width="150.0">
+<view:AbstractSidebar xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:view="clr-namespace:Client.View.Sidebars"
+                      x:Class="Client.View.Sidebars.ServerList"
+                      Width="150.0">
 	<DockPanel>
 		<Rectangle DockPanel.Dock="Left"
 		           Width="20"
@@ -13,4 +14,4 @@
 		
 		<Rectangle Fill="Yellow" />
 	</DockPanel>
-</UserControl>
+</view:AbstractSidebar>
