@@ -7,8 +7,4 @@ public partial class MainContent : UserControl {
     public MainContent() {
         InitializeComponent();
     }
-
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

@@ -8,8 +8,4 @@ public partial class EmptyPanel : AbstractContent {
     public EmptyPanel() {
         InitializeComponent();
     }
-
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

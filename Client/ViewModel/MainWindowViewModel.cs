@@ -1,17 +1,10 @@
-using Client.Model;
-
 namespace Client.ViewModel;
 
 public class MainWindowViewModel : ViewModelBase {
     public MainWindowViewModel() {
         SidebarViewModel = new SidebarViewModel();
-        Global.Sidebar = SidebarViewModel;
-        
         ContentViewModel = new ContentViewModel();
-        Global.Content = ContentViewModel;
-        
-        NavigationViewModel = new NavigationViewModel();
-        Global.Navigation = NavigationViewModel;
+        NavigationViewModel = new NavigationViewModel(SidebarViewModel);
     }
     
     public SidebarViewModel SidebarViewModel { get; }

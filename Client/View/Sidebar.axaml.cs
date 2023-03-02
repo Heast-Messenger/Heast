@@ -22,8 +22,4 @@ public partial class Sidebar : UserControl {
     public Sidebar() {
         InitializeComponent();
     }
-    
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

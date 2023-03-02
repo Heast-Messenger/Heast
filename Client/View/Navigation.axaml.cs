@@ -2,8 +2,8 @@ using System;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Client.Control;
-using Client.View.Sidebars;
+using Avalonia.Markup.Xaml;
+using Client.ViewModel;
 
 namespace Client.View;
 
@@ -17,6 +17,8 @@ public partial class Navigation : UserControl {
 
 		PointerEnteredEvent.AddClassHandler<Button>(Button_OnHover);
 	}
+	
+	private NavigationViewModel ViewModel => (DataContext as NavigationViewModel)!;
 
 	private void Button_OnHover(Button sender, RoutedEventArgs args) {
 		if (sender.Classes.Contains("NavButton")) {
@@ -24,26 +26,23 @@ public partial class Navigation : UserControl {
 		}
 	}
 	
-	public void Button_OnChat(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked chat");
+	private void Button_OnChat(object sender, RoutedEventArgs e) {
+		ViewModel.OnChat();
 	}
 	
-	public void Button_OnExplore(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked explore (sidebar hidden)");
-		Dispatcher.SetSidebar(null);
+	private void Button_OnExplore(object sender, RoutedEventArgs e) {
+		ViewModel.OnExplore();
 	}
 	
-	public void Button_OnPeople(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked people (sidebar shown with friends list)");
-		Dispatcher.SetSidebar(new FriendList());
+	private void Button_OnPeople(object sender, RoutedEventArgs e) {
+		ViewModel.OnPeople();
 	}
 	
-	public void Button_OnServers(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked servers (sidebar shown with server list)");
-		Dispatcher.SetSidebar(new ServerList());
+	private void Button_OnServers(object sender, RoutedEventArgs e) {
+		ViewModel.OnServers();
 	}
 	
-	public void Button_OnSettings(object sender, RoutedEventArgs e) {
-		Console.WriteLine("clicked settings");
+	private void Button_OnSettings(object sender, RoutedEventArgs e) {
+		ViewModel.OnSettings();
 	}
 }

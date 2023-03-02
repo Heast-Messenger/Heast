@@ -8,8 +8,4 @@ public partial class FriendList : AbstractSidebar {
     public FriendList() {
         InitializeComponent();
     }
-
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

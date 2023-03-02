@@ -8,8 +8,4 @@ public partial class EmptySidebar : AbstractSidebar {
     public EmptySidebar() {
         InitializeComponent();
     }
-    
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

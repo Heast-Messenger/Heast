@@ -1,31 +1,37 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:view="using:Client.View"
-        xmlns:vm="using:Client.ViewModel"
-        x:DataType="vm:MainWindowViewModel"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:Client.View"
+        xmlns:vm="clr-namespace:Client.ViewModel"
+        mc:Ignorable="d"
         x:Class="Client.View.MainWindow"
         ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen">
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+	
 	<Panel>
 		<Border Background="{DynamicResource Mid}"
-		        IsHitTestVisible="False"/>
+				IsHitTestVisible="False"/>
 		
 		<view:Titlebar IsHitTestVisible="False"
-		               VerticalAlignment="Top"
-		               Padding="10 0 10 0"/>
+					   VerticalAlignment="Top"
+					   Padding="10 0 10 0"/>
 		
 		<DockPanel Margin="0 38 0 0">
 			<view:Sidebar DockPanel.Dock="Right"
-			              IsHitTestVisible="True"/>
+						  DataContext="{Binding SidebarViewModel}"/>
 
-            <view:Navigation DockPanel.Dock="Left"
-                             IsHitTestVisible="True"
-                             Padding="10.0"
-                             Margin="0.0 5.0 00.0 5.0"/>
+			<view:Navigation DockPanel.Dock="Left"
+							 DataContext="{Binding NavigationViewModel}"
+							 Padding="10.0"
+							 Margin="0.0 5.0 00.0 5.0"/>
 
-            <view:MainContent IsHitTestVisible="True"
-                          Margin="0.0 0.0 10.0 10.0"/>
+			<view:MainContent DataContext="{Binding ContentViewModel}"
+							  Margin="0.0 0.0 10.0 10.0"/>
 		</DockPanel>
-    </Panel>
+	</Panel>
 </Window>

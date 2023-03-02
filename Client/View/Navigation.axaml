@@ -1,61 +1,68 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:view="using:Client.View"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:Client.View"
+             xmlns:vm="clr-namespace:Client.ViewModel"
+             mc:Ignorable="d"
              x:Class="Client.View.Navigation">
-        
-        <UserControl.Resources>
-                <Image x:Key="Image.Chat" Source="{SvgImage /Assets/Navigation/Chat.svg}" Width="18" Height="18"/>
-                <Image x:Key="Image.Explore" Source="{SvgImage /Assets/Navigation/Explore.svg}" Width="18" Height="18"/>
-                <Image x:Key="Image.People" Source="{SvgImage /Assets/Navigation/People.svg}" Width="18" Height="18"/>
-                <Image x:Key="Image.Servers" Source="{SvgImage /Assets/Navigation/Servers.svg}" Width="18" Height="18"/>
-                <Image x:Key="Image.Settings" Source="{SvgImage /Assets/Navigation/Settings.svg}" Width="18" Height="18"/>
-        </UserControl.Resources>
-        
-        <UserControl.Styles>
-                <Style Selector="Button.NavButton">
-                        <Setter Property="DockPanel.Dock" Value="Top" />
-                        <Setter Property="Margin" Value="0 0 0 30" />
-                        <Setter Property="Transitions">
-                                <Setter.Value>
-                                        <Transitions>
-                                                <TransformOperationsTransition Property="RenderTransform"
-                                                                               Duration="0:0:1.0">
-                                                        <TransformOperationsTransition.Easing>
-                                                                <view:NavigationEasing />
-                                                        </TransformOperationsTransition.Easing>
-                                                </TransformOperationsTransition>
-                                        </Transitions>
-                                </Setter.Value>
-                        </Setter>
-                </Style>
-                <Style Selector="Button.NavButton:pointerover">
-                        <Setter Property="RenderTransform" Value="rotate(1turn)" />
-                </Style>
-        </UserControl.Styles>
+	<Design.DataContext>
+		<vm:NavigationViewModel/>
+	</Design.DataContext>
+	
+	<UserControl.Resources>
+		<Image x:Key="Image.Chat" Source="{SvgImage /Assets/Navigation/Chat.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Explore" Source="{SvgImage /Assets/Navigation/Explore.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.People" Source="{SvgImage /Assets/Navigation/People.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Servers" Source="{SvgImage /Assets/Navigation/Servers.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Settings" Source="{SvgImage /Assets/Navigation/Settings.svg}" Width="18" Height="18"/>
+	</UserControl.Resources>
+	
+	<UserControl.Styles>
+		<Style Selector="Button.NavButton">
+			<Setter Property="DockPanel.Dock" Value="Top" />
+			<Setter Property="Margin" Value="0 0 0 30" />
+			<Setter Property="Transitions">
+				<Setter.Value>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform"
+									       Duration="0:0:1.0">
+							<TransformOperationsTransition.Easing>
+								<view:NavigationEasing />
+							</TransformOperationsTransition.Easing>
+						</TransformOperationsTransition>
+					</Transitions>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style Selector="Button.NavButton:pointerover">
+			<Setter Property="RenderTransform" Value="rotate(1turn)" />
+		</Style>
+	</UserControl.Styles>
 
-        <DockPanel>
-                <Button Content="{StaticResource Image.Chat}"
-                        Classes="NavButton"
-                        Click="Button_OnChat"/>
-                
-                <Button Content="{StaticResource Image.Explore}"
-                        Classes="NavButton"
-                        Click="Button_OnExplore"/>
-                
-                <Button Content="{StaticResource Image.People}"
-                        Classes="NavButton"
-                        Click="Button_OnPeople"/>
-                
-                <Button Content="{StaticResource Image.Servers}"
-                        Classes="NavButton"
-                        Click="Button_OnServers"/>
-                
-                <Button Content="{StaticResource Image.Settings}"
-                        Classes="NavButton"
-                        DockPanel.Dock="Bottom"
-                        Margin="0"
-                        Click="Button_OnSettings"/>
-                
-                <Border Background="Transparent" />
-        </DockPanel>
+	<DockPanel>
+		<Button Content="{StaticResource Image.Chat}"
+			Classes="NavButton"
+			Click="Button_OnChat"/>
+		
+		<Button Content="{StaticResource Image.Explore}"
+			Classes="NavButton"
+			Click="Button_OnExplore"/>
+		
+		<Button Content="{StaticResource Image.People}"
+			Classes="NavButton"
+			Click="Button_OnPeople"/>
+		
+		<Button Content="{StaticResource Image.Servers}"
+			Classes="NavButton"
+			Click="Button_OnServers"/>
+		
+		<Button Content="{StaticResource Image.Settings}"
+			Classes="NavButton"
+			DockPanel.Dock="Bottom"
+			Margin="0"
+			Click="Button_OnSettings"/>
+		
+		<Border Background="Transparent" />
+	</DockPanel>
 </UserControl>

@@ -8,8 +8,4 @@ public partial class ServerList : AbstractSidebar {
     public ServerList() {
         InitializeComponent();
     }
-
-    private void InitializeComponent() {
-        AvaloniaXamlLoader.Load(this);
-    }
 }
