@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using ChatServer.events;
 using ChatServer.network;
 using ChatServer.permissionengine;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,9 @@ namespace ChatServer
         {
             Database.Init();
             PermissionsEngine.Init();
+
+            EventLogic logic = new EventLogic();
+            logic.OnConnect += PermissionsEngine.UserConnect;
         }
     }
 

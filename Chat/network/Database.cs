@@ -1,12 +1,8 @@
 
 
 using System.Collections;
-using System.Xml;
 using ChatServer.permissionengine;
 using ChatServer.util;
-using Newtonsoft.Json;
-using Formatting = Newtonsoft.Json.Formatting;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ChatServer.network;
 
@@ -17,51 +13,11 @@ public class Database
     
     public static void Init()
     {
-        //TODO no fix string
+        //TODO no fixed string
         ctx = new PermissionContext();
         LogUtil.SerializeAndFormat(BitArrayUtil.CascadeBitArrayList(GetPermissionListOfClient(1)));
     }
 
-    /*
-    public static PermissionClient TestReadClient()
-    {
-        return getClientById(1);
-    }
-
-    public static void TestAddClient()
-    {
-        ctx.Clients.AddAsync(new PermissionClient("Gustav", 4));
-        ctx.SaveChanges();
-    }
-
-    public static PermissionRole TestReadRole()
-    {
-        return ctx.Roles.ToList().First();
-    }
-
-    public static void TestAddRole()
-    {
-        ctx.Roles.AddAsync(new PermissionRole("Admin",
-            1, 1,
-            new BitArray(new bool[] { false, false, true })));
-        ctx.SaveChanges();
-    }
-
-    public static void TestGetRoles()
-    {
-        var a = from e in ctx.Clients
-            join f in ctx.ClientRoles on e.PermissionClientId equals f.PermissionClientId
-            where f.PermissionClientId == 1
-            select new { e.PermissionClientId, f.PermissionRole };
-        
-        
-        Console.WriteLine(JsonConvert.SerializeObject(a, new JsonSerializerSettings
-        {
-            Formatting = Formatting.Indented
-        }));
-    }*/
-
-    
     public static PermissionClient GetClientById(int id)
     {
         return ctx.Clients.First(x => x.PermissionClientId == id);
@@ -72,10 +28,42 @@ public class Database
         return ctx.Roles.First(x => x.PermissionRoleId == id);
     }
 
+    public static PermissionChannel GetChannelById(int id)
+    {
+        return ctx.Channels.First(x => x.PermissionChannelId == id);
+    }
+
+    public static BitArray GetRolePermissionsOfChannel(int cid, int rid)
+    {
+        return (from a in ctx.ChannelPermissions
+            where a.PermissionChannelId == cid && a.PermissionRoleId == rid
+            select a.Permissions).First();
+    }
+
     public static List<BitArray> GetPermissionListOfClient(int id)
     {
         var e = (from a in ctx.ClientRoles
             where a.PermissionClientId == id
+            orderby a.PermissionRole.Hierarchy descending
+            select a.PermissionRole.Permissions).ToList();
+        return e;
+    }
+
+    public static List<int> GetRoleListOfClient(int id)
+    {
+        return (from a in ctx.ClientRoles
+            where a.PermissionClientId == id
+            select a.PermissionRoleId).ToList();
+    }
+    
+    //TODO TEST IF IT WORKS
+    public static List<BitArray> GetUserRolePermissionListOfChannel(int uid, int cid)
+    {
+        var b = GetRoleListOfClient(uid);
+        
+        var e = (from a in ctx.ChannelPermissions
+            join u in b on a.PermissionRoleId equals u 
+            where a.PermissionChannelId == cid
             orderby a.PermissionRole.Hierarchy descending
             select a.PermissionRole.Permissions).ToList();
         return e;
