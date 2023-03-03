@@ -1,8 +1,7 @@
-using ChatServer.permissionengine;
-using ChatServer.permissionengine.permissions;
+using Chat.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChatServer.network;
+namespace Chat.Structure;
 
 public class PermissionContext : DbContext
 {
@@ -10,15 +9,7 @@ public class PermissionContext : DbContext
     public DbSet<PermissionRole> Roles => Set<PermissionRole>();
     public DbSet<PermissionChannel> Channels => Set<PermissionChannel>();
     public DbSet<PermissionChannelPermissions> ChannelPermissions => Set<PermissionChannelPermissions>();
-
     public DbSet<PermissionClientRoles> ClientRoles => Set<PermissionClientRoles>();
-
-
-    public PermissionContext()
-    {
-        
-    }
-
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -38,6 +29,5 @@ public class PermissionContext : DbContext
         modelBuilder.Entity<PermissionChannel>().ToTable("permissionchannels");
         modelBuilder.Entity<PermissionClientRoles>().HasKey(sc => new { sc.PermissionRoleId, sc.PermissionClientId });
         modelBuilder.Entity<PermissionChannelPermissions>().HasKey(sc => new { sc.PermissionRoleId, sc.PermissionChannelId });
-
     }
 }

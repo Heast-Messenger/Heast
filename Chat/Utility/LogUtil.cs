@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace ChatServer.util;
+namespace Chat.Utility;
 
 public class LogUtil
 {

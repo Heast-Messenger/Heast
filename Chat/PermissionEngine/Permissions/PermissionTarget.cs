@@ -1,4 +1,4 @@
-namespace ChatServer.permissionengine.permissions;
+namespace Chat.Permissionengine.Permissions;
 
 public enum PermissionTarget
 {

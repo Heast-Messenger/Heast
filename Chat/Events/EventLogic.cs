@@ -1,4 +1,4 @@
-namespace ChatServer.events;
+namespace Chat.events;
 
 public delegate void OnConnect(int id);
 

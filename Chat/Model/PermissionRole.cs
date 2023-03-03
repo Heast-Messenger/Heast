@@ -2,7 +2,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ChatServer.permissionengine;
+namespace Chat.Model;
 
 [Table("permissionroles")]
 public class PermissionRole
@@ -11,7 +11,6 @@ public class PermissionRole
     public int PermissionRoleId { get; set; }
     public string Name { get; set; }
     public int Hierarchy { get; set; }
-    
     public BitArray Permissions { get; set; }
 
     public PermissionRole(string name, int permissionRoleId, int hierarchy, BitArray permissions)
@@ -21,5 +20,4 @@ public class PermissionRole
         Hierarchy = hierarchy;
         Permissions = permissions;
     }
-
 }

@@ -1,27 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using ChatServer.events;
-using ChatServer.network;
-using ChatServer.permissionengine;
+﻿using Chat.events;
+using Chat.Modules;
+using Chat.Permissionengine;
+using Chat.Structure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ChatServer
+namespace Chat;
+
+public static class Program
 {
-    class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            Database.Init();
-            PermissionsEngine.Init();
+        Database.Init();
+        PermissionsEngine.Init();
 
-            EventLogic logic = new EventLogic();
-            logic.OnConnect += PermissionsEngine.UserConnect;
-        }
+        var logic = new EventLogic();
+        logic.OnConnect += PermissionsEngine.UserConnect;
     }
+}
 
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-            => services.AddDbContext<PermissionContext>();
-    }
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+        => services.AddDbContext<PermissionContext>();
 }
 

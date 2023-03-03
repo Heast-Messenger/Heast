@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ChatServer.permissionengine;
+namespace Chat.Model;
 
 [Table("permissionclientroles")]
 public class PermissionClientRoles

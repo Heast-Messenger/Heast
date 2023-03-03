@@ -2,7 +2,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ChatServer.permissionengine;
+namespace Chat.Model;
 
 [Table("permissionchannels")]
 public class PermissionChannel
@@ -16,5 +16,4 @@ public class PermissionChannel
         Name = name;
         PermissionChannelId = permissionChannelId;
     }
-
 }

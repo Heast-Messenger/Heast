@@ -1,20 +1,17 @@
 using System.Collections;
-using ChatServer.network;
-using ChatServer.permissionengine.permissions;
-using ChatServer.permissionengine.permissions.identifiers;
-using ChatServer.util;
+using Chat.Modules;
+using Chat.Permissionengine.Permissions;
+using Chat.Permissionengine.Permissions.Identifiers;
+using Chat.Utility;
 using Newtonsoft.Json;
 
-namespace ChatServer.permissionengine;
+namespace Chat.Permissionengine;
 
 public class PermissionsEngine
 {
-    
-    //TODO Permissionchannel and channel permissions (ChannelVisibleToClient(int cid, int uid))
-    
     private HashSet<Permission> _permissions = new();
     public IReadOnlySet<Permission> Permissions => _permissions;
-    private static Dictionary<int, BitArray> PriorityPermissions { get; } = new Dictionary<int, BitArray>();
+    private static Dictionary<int, BitArray> PriorityPermissions { get; } = new();
 
     public static void Init()
     {
