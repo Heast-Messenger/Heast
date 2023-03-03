@@ -1,28 +1,25 @@
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChatServer.permissionengine;
 
+[Table("permissionroles")]
 public class PermissionRole
 {
-    public string Name { get; }
-    public int Id { get; }
-    public int Hierarchy { get; }
+    [Key]
+    public int PermissionRoleId { get; set; }
+    public string Name { get; set; }
+    public int Hierarchy { get; set; }
     
-    //TODO: init permission with correct size, possibly with the use of the PermissionHandler getGlobalPermissionAmount() method
-    public BitArray Permissions { get; }
+    public BitArray Permissions { get; set; }
 
-    public PermissionRole(string name, int id, int hierarchy, BitArray permissions)
+    public PermissionRole(string name, int permissionRoleId, int hierarchy, BitArray permissions)
     {
         Name = name;
-        Id = id;
+        PermissionRoleId = permissionRoleId;
         Hierarchy = hierarchy;
         Permissions = permissions;
     }
 
-    public static PermissionRole GetRoleFromDb(int id)
-    {
-        //TODO: get role from database
-        return null;
-    }
-    
 }

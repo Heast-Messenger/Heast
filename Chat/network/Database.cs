@@ -1,143 +1,84 @@
-using System.Security.Cryptography;
-using System.Text.Json;
-using Microsoft.Extensions.Logging;
-using Npgsql;
-using NpgsqlTypes;
+
+
+using System.Collections;
+using System.Xml;
+using ChatServer.permissionengine;
+using ChatServer.util;
+using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ChatServer.network;
 
 public class Database
 {
-
-    //TODO better logs
-    //TODO add configuration
-    private static string connString = "Host=localhost;Port=5432;Username=admin;Password=;Database=heast";
-    private static NpgsqlConnection conn;
     
-    public static async void Init()
-    {
-        CreateConnection();
-        //Console.WriteLine(TestConnection().Result);
-        await CreateDatabase();
-        await CreateTables();
-    }
-
-    /// <summary>
-    ///  Creates a connection to the database
-    /// </summary>
-    private static async void CreateConnection()
-    {
-        await using var dataSource = NpgsqlDataSource.Create(connString); ;
-
-        conn = dataSource.OpenConnectionAsync().Result;
-        conn.Notice += (_, args) => Console.WriteLine(args.Notice.MessageText);
-            
-        Console.WriteLine(conn.State == System.Data.ConnectionState.Open
-            ? "Connection to database established"
-            : "Connection to database failed");
-    }
-
-    /// <summary>
-    /// Tests the connection to the database
-    /// </summary>
-    /// <returns></returns>
-    private static async Task<bool> TestConnection()
-    {
-        await using var command = new NpgsqlCommand("SELECT '1'", conn);
-        await using var reader = await command.ExecuteReaderAsync();
-        
-        while (await reader.ReadAsync())
-        {
-            return reader.GetString(0) == "1";
-        }
-
-        return false;
-    }
-
-    private static async Task<bool> DatabaseExists(string name)
-    {
-        await using var cmd = new NpgsqlCommand("SELECT 1 FROM pg_catalog.pg_database WHERE lower(datname) = lower(@name);", conn);
-        cmd.Parameters.AddWithValue("@name", name);
-        cmd.PrepareAsync();
-        
-        await using var reader = await cmd.ExecuteReaderAsync();
-        
-        while (await reader.ReadAsync())
-        {
-            return reader.GetInt32(0) == 1;
-        }
-
-        return false;
-    }
+    private static PermissionContext ctx { get; set; }
     
-    private static async Task<bool> CreateDatabase()
+    public static void Init()
     {
-        if (await DatabaseExists("heast"))
-        {
-            Console.WriteLine("Database already exists, skipping creation");
-            return false;
-        }
+        //TODO no fix string
+        ctx = new PermissionContext();
+        LogUtil.SerializeAndFormat(BitArrayUtil.CascadeBitArrayList(GetPermissionListOfClient(1)));
+    }
+
+    /*
+    public static PermissionClient TestReadClient()
+    {
+        return getClientById(1);
+    }
+
+    public static void TestAddClient()
+    {
+        ctx.Clients.AddAsync(new PermissionClient("Gustav", 4));
+        ctx.SaveChanges();
+    }
+
+    public static PermissionRole TestReadRole()
+    {
+        return ctx.Roles.ToList().First();
+    }
+
+    public static void TestAddRole()
+    {
+        ctx.Roles.AddAsync(new PermissionRole("Admin",
+            1, 1,
+            new BitArray(new bool[] { false, false, true })));
+        ctx.SaveChanges();
+    }
+
+    public static void TestGetRoles()
+    {
+        var a = from e in ctx.Clients
+            join f in ctx.ClientRoles on e.PermissionClientId equals f.PermissionClientId
+            where f.PermissionClientId == 1
+            select new { e.PermissionClientId, f.PermissionRole };
         
-        await using var command = new NpgsqlCommand("CREATE DATABASE heast", conn);
-        await command.ExecuteNonQueryAsync();
-
-        Console.WriteLine("Database created");
-
-        return await DatabaseExists("heast");
-    }
-    
-    
-    /**
-     * Creates a new database, if there is none
-     */
-    private static async Task<bool> CreateTables()
-    {
-        try
-        {
-            //Default Tables
-            await using var cmd = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS r_roles(" +
-                                                    "r_id int primary key," +
-                                                    "r_name varchar(255)," +
-                                                    "r_permissions bytea," +
-                                                    "r_hierarchy int)", conn);
-            await cmd.ExecuteNonQueryAsync();
-
-            await using var cmd2 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS u_users(" +
-                                                     "u_id int primary key," +
-                                                     "u_name varchar(255))", conn);
-            await cmd2.ExecuteNonQueryAsync();
-
-            await using var cmd3 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ch_channels(" +
-                                                     "ch_id int primary key," +
-                                                     "ch_name varchar(255))", conn);
-            await cmd3.ExecuteNonQueryAsync();
-
-            //N-M Tables
-
-            await using var cmd4 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS ur_hasroles(" +
-                                                     "ur_u_id INTEGER," +
-                                                     "ur_r_id INTEGER," +
-                                                     "primary key(ur_u_id, ur_r_id))", conn);
-            await cmd4.ExecuteNonQueryAsync();
-
-            await using var cmd5 = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS c_channelpermissions(" +
-                                                     "c_ch_id int," +
-                                                     "c_r_id int," +
-                                                     "c_permissions bytea," +
-                                                     "primary key(c_ch_id, c_r_id))", conn);
-            await cmd5.ExecuteNonQueryAsync();
-        }
-        catch (NpgsqlException e)
-        {
-            Console.WriteLine(e.StackTrace);
-            return false;
-        }
-
-        return true;
-    }
-
-    public static void ShutdownGracefully()
-    {
         
+        Console.WriteLine(JsonConvert.SerializeObject(a, new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented
+        }));
+    }*/
+
+    
+    public static PermissionClient GetClientById(int id)
+    {
+        return ctx.Clients.First(x => x.PermissionClientId == id);
     }
+
+    public static PermissionRole GetRoleById(int id)
+    {
+        return ctx.Roles.First(x => x.PermissionRoleId == id);
+    }
+
+    public static List<BitArray> GetPermissionListOfClient(int id)
+    {
+        var e = (from a in ctx.ClientRoles
+            where a.PermissionClientId == id
+            orderby a.PermissionRole.Hierarchy descending
+            select a.PermissionRole.Permissions).ToList();
+        return e;
+    }
+
 }

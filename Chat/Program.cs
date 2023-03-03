@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using ChatServer.network;
 using ChatServer.permissionengine;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatServer
 {
@@ -9,8 +10,14 @@ namespace ChatServer
         public static void Main(string[] args)
         {
             Database.Init();
-            //PermissionsEngine.init();
+            PermissionsEngine.Init();
         }
+    }
+
+    public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+            => services.AddDbContext<PermissionContext>();
     }
 }
 

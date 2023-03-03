@@ -1,23 +1,26 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ChatServer.permissionengine;
 
+[Table("permissionclients")]
 public class PermissionClient
 {
-    public string Name { get; }
-    public int Id { get; }
-
-    private List<PermissionRole> _roles = new();
-    public IReadOnlyList<PermissionRole> Roles => _roles;
-
-    public PermissionClient(string name, int id, List<PermissionRole> roles)
+    [Key]
+    public int PermissionClientId { get; set; }
+    public string Name { get; set; }
+    
+    
+    public PermissionClient(string name, int permissionClientId)
     {
         Name = name;
-        Id = id;
-        _roles = roles;
+        PermissionClientId = permissionClientId;
     }
-    
-    public static PermissionClient GetClientFromDB(int id)
+
+    public bool HasPermission(int pid)
     {
-        //TODO get client from the database with the DB system
-        return null;
+        return PermissionsEngine.HasPermission(PermissionClientId, pid);
     }
 }
+
+
