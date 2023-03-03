@@ -2,8 +2,8 @@ namespace ChatServer.permissionengine.permissions;
 
 public enum PermissionTarget
 {
-    NONE = 0,
-    SELF = 1,
-    OTHER = 2,
-    ALL = 3
+    None = 0,
+    Self = 1,
+    Other = 2,
+    All = 3
 }
