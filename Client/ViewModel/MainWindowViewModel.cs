@@ -4,7 +4,7 @@ public class MainWindowViewModel : ViewModelBase {
     public MainWindowViewModel() {
         SidebarViewModel = new SidebarViewModel();
         ContentViewModel = new ContentViewModel();
-        NavigationViewModel = new NavigationViewModel(SidebarViewModel);
+        NavigationViewModel = new NavigationViewModel(SidebarViewModel, ContentViewModel);
     }
     
     public SidebarViewModel SidebarViewModel { get; }

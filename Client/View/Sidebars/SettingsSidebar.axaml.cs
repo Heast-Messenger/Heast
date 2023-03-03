@@ -4,8 +4,8 @@ using Avalonia.Markup.Xaml;
 
 namespace Client.View.Sidebars; 
 
-public partial class ServerList : AbstractSidebar {
-    public ServerList() {
+public partial class SettingsSidebar : AbstractSidebar {
+    public SettingsSidebar() {
         InitializeComponent();
     }
 }

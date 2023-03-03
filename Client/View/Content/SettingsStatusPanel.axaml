@@ -1,0 +1,6 @@
+<view:AbstractContent xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:view="clr-namespace:Client.View.Content"
+                      x:Class="Client.View.Content.SettingsStatusPanel">
+	Test Panel
+</view:AbstractContent>

@@ -1,0 +1,51 @@
+<view:AbstractSidebar xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:view="clr-namespace:Client.View.Sidebars"
+                      xmlns:model="clr-namespace:Client.Model"
+                      xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
+                      x:Class="Client.View.Sidebars.SettingsSidebar"
+                      Width="250.0">
+	<Design.DataContext>
+		<vm:SettingsSidebarViewModel/>
+	</Design.DataContext>
+	
+	<view:AbstractSidebar.Resources>
+		<Image x:Key="Image.Account" Source="{SvgImage /Assets/Settings/Account.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Appearance" Source="{SvgImage /Assets/Settings/Account.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Status" Source="{SvgImage /Assets/Settings/Account.svg}" Width="18" Height="18"/>
+	</view:AbstractSidebar.Resources>
+	
+	<!-- Todo: Doesn't work, I am sad =( -->
+	<view:AbstractSidebar.ContentTemplate>
+		<DataTemplate DataType="{x:Type model:SettingsSidebarItem}">
+			<StackPanel Orientation="Horizontal"
+			            Spacing="4.0">
+				<Binding Path="Icon"/>
+				<TextBlock Text="{Binding Title}"/>
+			</StackPanel>
+		</DataTemplate>
+	</view:AbstractSidebar.ContentTemplate>
+	
+	<view:AbstractSidebar.Styles>
+		<Style Selector="Button.SidebarItem">
+			<Setter Property="Background" Value="{StaticResource Dark}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource Light}"/>
+			<Setter Property="Padding" Value="4.0"></Setter>
+		</Style>
+	</view:AbstractSidebar.Styles>
+	
+	<ScrollViewer>
+		<StackPanel Orientation="Vertical"
+		            Spacing="10.0">
+			<Button Classes="SidebarItem">
+				<model:SettingsSidebarItem Icon="{StaticResource Image.Account}" Title="Account"/>
+			</Button>
+			<Button Classes="SidebarItem">
+				<model:SettingsSidebarItem Icon="{StaticResource Image.Appearance}" Title="Appearance"/>
+			</Button>
+			<Button Classes="SidebarItem">
+				<model:SettingsSidebarItem Icon="{StaticResource Image.Status}" Title="Status"/>
+			</Button>
+		</StackPanel>
+	</ScrollViewer>
+</view:AbstractSidebar>

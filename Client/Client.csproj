@@ -56,5 +56,17 @@
     <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-Thin.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
+    <AvaloniaResource Include="Assets\Settings\Account.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModel\Content" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\Content\SettingsStatusPanel.axaml.cs">
+      <DependentUpon>SettingsStatusPanel.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
