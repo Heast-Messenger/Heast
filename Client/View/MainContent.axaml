@@ -15,5 +15,5 @@
 	</Design.DataContext>
 	
 	<TransitioningContentControl Name="ParentControl"
-	                             Content="{Binding CurrentContent}"/>
+	                             Content="{Binding Content}"/>
 </UserControl>

@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Client.View.Sidebars; 
 
-public partial class EmptySidebar : AbstractSidebar {
+public partial class EmptySidebar : SidebarBase {
     public EmptySidebar() {
         InitializeComponent();
     }

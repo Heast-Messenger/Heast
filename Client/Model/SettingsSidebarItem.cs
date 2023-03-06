@@ -1,18 +1,13 @@
-using Avalonia.Controls;
+using Client.View.Content;
 
 namespace Client.Model; 
 
-public class SettingsSidebarItem {
-	public SettingsSidebarItem(Image icon, string title) {
-		this.Icon = icon;
+public class SettingsSidebarItem : SidebarItemBase {
+	public SettingsSidebarItem(string iconPath, string title, ContentBase contentBase) : base(contentBase) {
+		this.IconPath = iconPath;
 		this.Title = title;
 	}
-
-	public SettingsSidebarItem() {
-		Icon = null!;
-		Title = null!;
-	}
 	
-	public Image Icon { get; set; }
+	public string IconPath { get; set; }
 	public string Title { get; set; }
 }

@@ -60,11 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\Content" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="View\Content\SettingsStatusPanel.axaml.cs">
+    <Compile Update="View\Content\Settings\SettingsStatusPanel.axaml.cs">
       <DependentUpon>SettingsStatusPanel.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

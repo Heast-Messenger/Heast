@@ -5,12 +5,12 @@ namespace Client.ViewModel;
 
 public class ContentViewModel : ViewModelBase {
     public ContentViewModel() {
-        _currentContent = new EmptyPanel();
+        _content = new EmptyPanel();
     }
     
-    private Layoutable _currentContent;
-    public Layoutable CurrentContent {
-        get => _currentContent;
-        set => RaiseAndSetIfChanged(ref _currentContent, value);
+    private Layoutable _content;
+    public Layoutable Content {
+        get => _content;
+        set => RaiseAndSetIfChanged(ref _content, value);
     }
 }

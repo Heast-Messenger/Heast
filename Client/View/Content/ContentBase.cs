@@ -2,6 +2,6 @@ using Avalonia.Controls;
 
 namespace Client.View.Content; 
 
-public abstract class AbstractContent : UserControl {
+public abstract class ContentBase : UserControl {
     
 }
