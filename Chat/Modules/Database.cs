@@ -16,7 +16,7 @@ public static class Database {
         Ctx = new PermissionContext();
     }
 
-    public static PermissionClient GetClientById(int id)
+    public static PermissionClient GetUserById(int id)
     {
         return Ctx.Clients.First(x => x.PermissionClientId == id);
     }
@@ -29,6 +29,21 @@ public static class Database {
     public static PermissionChannel GetChannelById(int id)
     {
         return Ctx.Channels.First(x => x.PermissionChannelId == id);
+    }
+
+    private static int GetHighestChannelId()
+    {
+        return Ctx.Channels.Max(x => x.PermissionChannelId);
+    }
+    
+    private static int GetHighestRoleId()
+    {
+        return Ctx.Roles.Max(x => x.PermissionRoleId);
+    }
+    
+    private static int GetHighestUserId()
+    {
+        return Ctx.Clients.Max(x => x.PermissionClientId);
     }
 
     public static BitArray GetRolePermissionsOfChannel(int cid, int rid)
@@ -65,4 +80,33 @@ public static class Database {
             orderby a.PermissionRole.Hierarchy descending
             select a.PermissionRole.Permissions).ToList();
     }
+
+    public static int CreateChannel(string name)
+    {
+        var id = GetHighestChannelId() + 1;
+        Ctx.Channels.Add(new PermissionChannel(name, id));
+        Ctx.SaveChanges();
+
+        return id;
+    }
+    
+    public static int CreateRole(string name, int hierarchy, BitArray permissions)
+    {
+        var id = GetHighestRoleId() + 1;
+        Ctx.Roles.Add(new PermissionRole(name, id, hierarchy, permissions));
+        Ctx.SaveChanges();
+
+        return id;
+    }
+
+    public static int CreateUser()
+    {
+        var id = GetHighestUserId() + 1;
+        Ctx.Clients.Add(new PermissionClient(id));
+        Ctx.SaveChanges();
+        
+        return id;
+    }
+
+
 }

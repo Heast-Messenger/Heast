@@ -9,11 +9,9 @@ public class PermissionClient
 {
     [Key]
     public int PermissionClientId { get; set; }
-    public string Name { get; set; }
 
-    public PermissionClient(string name, int permissionClientId)
+    public PermissionClient(int permissionClientId)
     {
-        Name = name;
         PermissionClientId = permissionClientId;
     }
 
@@ -21,6 +19,13 @@ public class PermissionClient
     {
         return PermissionsEngine.HasPermission(PermissionClientId, pid);
     }
+
+    public bool CanSeeChannel(int cid)
+    {
+        return PermissionsEngine.ChannelVisibleToClient(cid, PermissionClientId);
+    }
+    
+    
 }
 
 

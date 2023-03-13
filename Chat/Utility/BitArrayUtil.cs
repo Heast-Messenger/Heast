@@ -7,12 +7,8 @@ public static class BitArrayUtil
     public static BitArray CascadeBitArrayList(IList<BitArray> bits)
     {
         var e = new BitArray(bits[0].Length);
-        foreach (var b in bits)
-        {
-            e = CascadeBitArray(e, b);
-        }
 
-        return e;
+        return bits.Aggregate(e, CascadeBitArray);
     }
     
     public static BitArray CascadeBitArray(BitArray o1, BitArray o2)
