@@ -1,12 +1,17 @@
 <view:SidebarBase xmlns="https://github.com/avaloniaui"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:view="clr-namespace:Client.View.Sidebars"
-                      xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
-                      x:Class="Client.View.Sidebars.SettingsSidebar"
-                      Width="180.0">
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:view="clr-namespace:Client.View.Sidebars"
+                  xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
+                  xmlns:util="clr-namespace:Client.Utility"
+                  x:Class="Client.View.Sidebars.SettingsSidebar"
+                  Width="180.0">
 	<Design.DataContext>
 		<vm:SettingsSidebarViewModel/>
 	</Design.DataContext>
+	
+	<view:SidebarBase.Resources>
+		<util:SvgPathConverter x:Key="SvgPathConverter"/>
+	</view:SidebarBase.Resources>
 	
 	<view:SidebarBase.Styles>
 		<Style Selector="Button.SidebarItem">
@@ -27,14 +32,20 @@
 					        Margin="0.0 0.0 0.0 15.0"
 					        HorizontalContentAlignment="Left"
 					        Click="OnSidebarItemClick">
+						<!-- Todo: wrapper component with !binding support! -->
 						<StackPanel Orientation="Horizontal"
 						            Spacing="4.0">
-							<!-- Todo: Icons don't work yet -->
-							<!-- <Image Width="18.0" Height="18.0"> -->
-							<!-- 	<Image.Source> -->
-							<!-- 		<SvgImage Source="{Binding IconPath}"/> -->
-							<!-- 	</Image.Source> -->
-							<!-- </Image> -->
+							<Viewbox Width="18.0" Height="18.0">
+								<Path Fill="{StaticResource White}"
+								      Width="1024.0" Height="1024.0"
+								      Opacity="1.0">
+									<Path.Data>
+										<Binding Path="Icon"
+										         Converter="{StaticResource SvgPathConverter}"
+										         ConverterParameter="{util:UriContextGetter}"/>
+									</Path.Data>
+								</Path>
+							</Viewbox>
 							<TextBlock Text="{Binding Title}"
 							           FontSize="13.0"/>
 						</StackPanel>

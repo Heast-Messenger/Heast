@@ -1,5 +1,6 @@
 using Avalonia.Interactivity;
 using Client.Model;
+using SkiaSharp;
 
 namespace Client.View.Sidebars; 
 

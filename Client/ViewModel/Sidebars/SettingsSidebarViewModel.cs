@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Client.Model;
 using Client.View.Content;
 using Client.ViewModel.Content;
