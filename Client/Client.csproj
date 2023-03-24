@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -36,6 +36,11 @@
     <AvaloniaResource Include="Assets\Navigation\People.svg" />
     <AvaloniaResource Include="Assets\Navigation\Servers.svg" />
     <AvaloniaResource Include="Assets\Navigation\Settings.svg" />
+    <AvaloniaResource Include="Assets\Settings\Account.svg" />
+    <AvaloniaResource Include="Assets\Settings\Auth.svg" />
+    <AvaloniaResource Include="Assets\Settings\Authors\Mued.svg" />
+    <AvaloniaResource Include="Assets\Settings\Authors\LambdaSpg.svg" />
+    <AvaloniaResource Include="Assets\Settings\Authors\Fabii.svg" />
     
     <AvaloniaResource Include="Assets\Fonts\Inter-Medium.ttf" />
     
@@ -57,13 +62,5 @@
     <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-Thin.ttf" />
     <AvaloniaResource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
-    <AvaloniaResource Include="Assets\Settings\Account.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="View\Content\Settings\SettingsStatusPanel.axaml.cs">
-      <DependentUpon>SettingsStatusPanel.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

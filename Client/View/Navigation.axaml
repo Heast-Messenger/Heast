@@ -26,7 +26,7 @@
 				<Setter.Value>
 					<Transitions>
 						<TransformOperationsTransition Property="RenderTransform"
-									       Duration="0:0:1.0">
+						                               Duration="0:0:1.0">
 							<TransformOperationsTransition.Easing>
 								<view:NavigationEasing />
 							</TransformOperationsTransition.Easing>
@@ -40,28 +40,28 @@
 		</Style>
 	</UserControl.Styles>
 
-	<DockPanel>
+	<DockPanel LastChildFill="True">
 		<Button Content="{StaticResource Image.Chat}"
-			Classes="NavButton"
-			Click="Button_OnChat"/>
+				Classes="NavButton"
+				Click="Button_OnChat"/>
 		
 		<Button Content="{StaticResource Image.Explore}"
-			Classes="NavButton"
-			Click="Button_OnExplore"/>
+				Classes="NavButton"
+				Click="Button_OnExplore"/>
 		
 		<Button Content="{StaticResource Image.People}"
-			Classes="NavButton"
-			Click="Button_OnPeople"/>
+				Classes="NavButton"
+				Click="Button_OnPeople"/>
 		
 		<Button Content="{StaticResource Image.Servers}"
-			Classes="NavButton"
-			Click="Button_OnServers"/>
+				Classes="NavButton"
+				Click="Button_OnServers"/>
 		
 		<Button Content="{StaticResource Image.Settings}"
-			Classes="NavButton"
-			DockPanel.Dock="Bottom"
-			Margin="0"
-			Click="Button_OnSettings"/>
+				Classes="NavButton"
+				DockPanel.Dock="Bottom"
+				Margin="0"
+				Click="Button_OnSettings"/>
 		
 		<Border Background="Transparent" />
 	</DockPanel>

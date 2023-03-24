@@ -5,7 +5,7 @@ namespace Client.ViewModel;
 
 public class ContentViewModel : ViewModelBase {
     public ContentViewModel() {
-        _content = new EmptyPanel();
+        _content = new HomePanel();
     }
     
     private Layoutable _content;

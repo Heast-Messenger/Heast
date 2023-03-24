@@ -13,6 +13,8 @@ public class SidebarViewModel : ViewModelBase {
     public Layoutable CurrentSidebar {
         get => _currentSidebar;
         set {
+            if (value.GetType() == _currentSidebar.GetType())
+                return;
             RaiseAndSetIfChanged(ref _currentSidebar, value);
             CurrentSidebarWidth = value.Width;
         }

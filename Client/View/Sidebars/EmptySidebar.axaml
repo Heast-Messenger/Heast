@@ -1,6 +1,5 @@
 <view:SidebarBase xmlns="https://github.com/avaloniaui"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:view="clr-namespace:Client.View.Sidebars"
-                      x:Class="Client.View.Sidebars.EmptySidebar"
-                      Width="0.0">
-</view:SidebarBase>
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:view="clr-namespace:Client.View.Sidebars"
+                  x:Class="Client.View.Sidebars.EmptySidebar"
+                  Width="0.0"/>

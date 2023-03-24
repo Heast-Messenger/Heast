@@ -1,6 +1,77 @@
 <view:ContentBase xmlns="https://github.com/avaloniaui"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:view="clr-namespace:Client.View.Content"
-                      x:Class="Client.View.Content.SettingsStatusPanel">
-	Status
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:view="clr-namespace:Client.View.Content"
+                  x:Class="Client.View.Content.SettingsStatusPanel">
+	<view:ContentBase.Resources>
+		<SvgImage x:Key="Image.Auth" Source="/Assets/Settings/Auth.svg"/>
+		<SvgImage x:Key="Image.Authors.Mued" Source="/Assets/Settings/Authors/Mued.svg"/>
+		<SvgImage x:Key="Image.Authors.Fabii" Source="/Assets/Settings/Authors/Fabii.svg"/>
+		<SvgImage x:Key="Image.Authors.LambdaSpg" Source="/Assets/Settings/Authors/LambdaSpg.svg"/>
+	</view:ContentBase.Resources>
+	
+	<view:ContentBase.Styles>
+		<Style Selector="Image.StatusPicture">
+			<Setter Property="Width" Value="68.0"/>
+			<Setter Property="Height" Value="68.0"/>
+		</Style>
+		<Style Selector="Image.StatusSymbol">
+			<Setter Property="Width" Value="24.0"/>
+			<Setter Property="Height" Value="24.0"/>
+		</Style>
+		<Style Selector="Border.StretchingBorder">
+			<Setter Property="Height" Value="3.0"/>
+			<Setter Property="CornerRadius" Value="1.5"/>
+			<Setter Property="Background" Value="{DynamicResource White}"/>
+			<Setter Property="Margin" Value="5.0 0.0 5.0 0.0"/>
+		</Style>
+		<Style Selector="Image.AuthorImage">
+			<Setter Property="Width" Value="96.0"/>
+			<Setter Property="Height" Value="96.0"/>
+		</Style>
+	</view:ContentBase.Styles>
+	
+	<StackPanel MaxWidth="800.0"
+	            Margin="20.0 10.0 20.0 10.0"
+	            HorizontalAlignment="Stretch"
+	            Orientation="Vertical"
+	            Spacing="10.0">
+		<Grid ColumnDefinitions="96,*,24,*,96,*,24,*,96"
+		      RowDefinitions="96,Auto">
+			<Image Grid.Row="0" Grid.Column="0"
+			       Source="{StaticResource Image.Auth}"
+			       Classes="StatusPicture"/>
+			<Border Grid.Row="0" Grid.Column="1"
+			        Classes="StretchingBorder"/>
+			<Border Grid.Row="0" Grid.Column="3"
+			        Classes="StretchingBorder"/>
+			<Image Grid.Row="0" Grid.Column="4"
+			       Source="{StaticResource Image.Auth}"
+			       Classes="StatusPicture"/>
+			<Border Grid.Row="0" Grid.Column="5"
+			        Classes="StretchingBorder"/>
+			<Border Grid.Row="0" Grid.Column="7"
+			        Classes="StretchingBorder"/>
+			<Image Grid.Row="0" Grid.Column="8"
+			       Source="{StaticResource Image.Auth}"
+			       Classes="StatusPicture"/>
+		</Grid>
+		
+		<Border Background="{DynamicResource Mid}"
+		        HorizontalAlignment="Stretch"
+		        CornerRadius="1.5"
+		        Height="3"/>
+		
+		<Grid ColumnDefinitions="96,*,96,*,96"
+		      RowDefinitions="96,Auto">
+			<Image Grid.Row="0" Grid.Column="0"
+			       Source="{StaticResource Image.Authors.Mued}"
+			       Classes="AuthorImage"/>
+			<Image Grid.Row="0" Grid.Column="2"
+			       Source="{StaticResource Image.Authors.LambdaSpg}"
+			       Classes="AuthorImage"/>
+			<Image Grid.Row="0" Grid.Column="4"
+			       Source="{StaticResource Image.Authors.Fabii}"
+			       Classes="AuthorImage"/>
+		</Grid>
+	</StackPanel>
 </view:ContentBase>

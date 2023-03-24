@@ -4,29 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:view="clr-namespace:Client.View"
              xmlns:vm="clr-namespace:Client.ViewModel"
-             xmlns:util="clr-namespace:Client.Utility"
              mc:Ignorable="d"
              x:Class="Client.View.Sidebar">
 	<Design.DataContext>
 		<vm:SidebarViewModel/>
 	</Design.DataContext>
 	
-	<UserControl.Resources>
-		<util:SidebarTranslateConverter x:Key="XConverter"/>
-	</UserControl.Resources>
-	
 	<TransitioningContentControl Name="ParentControl"
-	                             Content="{Binding CurrentSidebar}"
 	                             Width="{Binding CurrentSidebarWidth}">
-		<TransitioningContentControl.RenderTransform>
-			<MultiBinding Converter="{StaticResource XConverter}">
-				<MultiBinding.Bindings>
-					<!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-					<Binding Path="$self.Bounds.Width"/>
-					<Binding Path="CurrentSidebarWidth"/>
-				</MultiBinding.Bindings>
-			</MultiBinding>
-		</TransitioningContentControl.RenderTransform>
+		<TransitioningContentControl.Content>
+			<Binding Path="CurrentSidebar"/>
+		</TransitioningContentControl.Content>
 		
 		<TransitioningContentControl.Transitions>
 			<Transitions>
