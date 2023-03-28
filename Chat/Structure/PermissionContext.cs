@@ -15,7 +15,7 @@ public class PermissionContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
         optionsBuilder
-            .UseNpgsql("Host=localhost;Port=5432;Username=admin;Password=;Database=heast")
+            .UseNpgsql("Host=localhost;Port=5432;Username=admin;Password=k0nradius;Database=heast")
             .EnableDetailedErrors()
             .EnableSensitiveDataLogging()
             .LogTo(Console.WriteLine);

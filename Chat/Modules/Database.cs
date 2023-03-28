@@ -81,6 +81,8 @@ public static class Database {
             select a.PermissionRole.Permissions).ToList();
     }
 
+    
+    //TODO Fallback when there is no highest channel id
     public static int CreateChannel(string name)
     {
         var id = GetHighestChannelId() + 1;
