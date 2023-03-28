@@ -29,4 +29,20 @@ public static class BitArrayUtil
 
         return o3;
     }
+
+    public static bool[] ConvertToBoolArray(BitArray b)
+    {
+        var o3 = new bool[b.Length];
+        
+        for (var i = 0; i < b.Count; i++)
+        {
+            if (b[i])
+            {
+                o3[i] = true;
+            }
+            else o3[i] = false;
+        }
+
+        return o3;
+    }
 }

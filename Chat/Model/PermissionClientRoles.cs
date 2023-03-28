@@ -13,4 +13,10 @@ public class PermissionClientRoles
     [Key]
     public int PermissionRoleId { get; set; }
     public PermissionRole PermissionRole { get; set; }
+
+    public PermissionClientRoles(int permissionClientId, int permissionRoleId)
+    {
+        PermissionClientId = permissionClientId;
+        PermissionRoleId = permissionRoleId;
+    }
 }

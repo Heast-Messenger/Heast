@@ -15,4 +15,11 @@ public class PermissionChannelPermissions
     public int PermissionRoleId { get; set; }
     public PermissionRole PermissionRole { get; set; }
     public BitArray Permissions { get; set; }
+
+    public PermissionChannelPermissions(int permissionChannelId, int permissionRoleId, BitArray permissions)
+    {
+        PermissionChannelId = permissionChannelId;
+        PermissionRoleId = permissionRoleId;
+        Permissions = permissions;
+    }
 }

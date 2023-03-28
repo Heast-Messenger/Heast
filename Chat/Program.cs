@@ -1,4 +1,5 @@
-﻿using Chat.events;
+﻿using System.Collections;
+using Chat.events;
 using Chat.Modules;
 using Chat.Permissionengine;
 using Chat.Structure;
@@ -12,6 +13,20 @@ public static class Program
     {
         Database.Init();
         PermissionsEngine.Init();
+
+        /* Testing 
+        bool[] bits = { true, true, true, false, false, true };
+        
+        PermissionsEngine.CreateRole("Admin", 1, new BitArray(bits));
+        int rid = Database.GetRoleByName("Admin").PermissionRoleId;
+        int uid = PermissionsEngine.CreateUser(rid);
+
+        Console.Error.WriteLine(PermissionsEngine.HasPermission(uid, 2));
+
+        Console.Error.WriteLine($"Sucessfully set Permissions? {PermissionsEngine.SetPermission(rid, 2, false)}");
+        
+        Console.Error.WriteLine(PermissionsEngine.HasPermission(uid, 2));
+        */
 
         var logic = new EventLogic();
         logic.OnConnect += PermissionsEngine.UserConnect;
