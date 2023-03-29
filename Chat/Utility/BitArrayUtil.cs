@@ -1,4 +1,5 @@
 using System.Collections;
+using Chat.Permissionengine;
 
 namespace Chat.Utility;
 
@@ -6,7 +7,7 @@ public static class BitArrayUtil
 {
     public static BitArray CascadeBitArrayList(IList<BitArray> bits)
     {
-        var e = new BitArray(bits[0].Length);
+        var e = new BitArray(PermissionsEngine.RolePermissionMaxSize);
 
         return bits.Aggregate(e, CascadeBitArray);
     }

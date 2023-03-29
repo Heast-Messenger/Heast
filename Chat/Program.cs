@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using Chat.events;
+using Chat.Model;
 using Chat.Modules;
 using Chat.Permissionengine;
+using Chat.Permissionengine.Permissions.Identifiers;
 using Chat.Structure;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,25 +14,36 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        Database.Init();
         PermissionsEngine.Init();
 
-        /* Testing 
-        bool[] bits = { true, true, true, false, false, true };
+/*
+        bool[] bits = new bool[PermissionsEngine.RolePermissionMaxSize];
         
-        PermissionsEngine.CreateRole("Admin", 1, new BitArray(bits));
-        int rid = Database.GetRoleByName("Admin").PermissionRoleId;
-        int uid = PermissionsEngine.CreateUser(rid);
+        int modId = PermissionsEngine.CreateRole("Mod", 2, new BitArray(bits));
+        bits[1] = true;
+        int adminId = PermissionsEngine.CreateRole("Admin", 1, new BitArray(bits));
+        int clientId = PermissionsEngine.CreateClient(adminId);
 
-        Console.Error.WriteLine(PermissionsEngine.HasPermission(uid, 2));
-
-        Console.Error.WriteLine($"Sucessfully set Permissions? {PermissionsEngine.SetPermission(rid, 2, false)}");
+        int adminclient = PermissionsEngine.CreateClient(adminId);
+        int modclient = PermissionsEngine.CreateClient(modId);
         
-        Console.Error.WriteLine(PermissionsEngine.HasPermission(uid, 2));
-        */
+        
+        Console.WriteLine($"(t) Has the user permission {(int) PermissionIdentifier.Ban}: {PermissionsEngine.HasPermission(clientId, (int) PermissionIdentifier.Ban)}");
 
+        PermissionsEngine.SetPermission(adminId, (int) PermissionIdentifier.Ban, false);
+        Console.WriteLine($"(f) Has the user permission {(int) PermissionIdentifier.Ban} after mod: {PermissionsEngine.HasPermission(clientId, (int) PermissionIdentifier.Ban)}");
+
+        PermissionsEngine.SetRole(clientId, modId, true);
+        Console.WriteLine($"(f) Has the user permission {(int) PermissionIdentifier.Ban} after rolechange: {PermissionsEngine.HasPermission(clientId, (int) PermissionIdentifier.Ban)}");
+
+        PermissionsEngine.SetPermission(modId, (int)PermissionIdentifier.Ban, true);
+        Console.WriteLine($"(t) Has the user permission {(int) PermissionIdentifier.Ban} after mod&rolechange: {PermissionsEngine.HasPermission(clientId, (int) PermissionIdentifier.Ban)}");
+
+        Console.WriteLine($"({adminclient}) Is the Admin Client {adminclient} higher in the hierarchy than {modclient}: {PermissionsEngine.GetHigherClient(adminclient, adminclient)}");
+    */    
+        
         var logic = new EventLogic();
-        logic.OnConnect += PermissionsEngine.UserConnect;
+        logic.OnConnect += PermissionsEngine.ClientConnect;
     }
 }
 

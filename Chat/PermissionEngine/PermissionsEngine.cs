@@ -1,4 +1,5 @@
 using System.Collections;
+using Chat.Model;
 using Chat.Modules;
 using Chat.Permissionengine.Permissions;
 using Chat.Permissionengine.Permissions.Identifiers;
@@ -10,6 +11,7 @@ namespace Chat.Permissionengine;
 
 public class PermissionsEngine
 {
+    private static IDatabase Database = new Database();
     private static HashSet<Permission> _permissions = new();
     public static IReadOnlySet<Permission> Permissions => _permissions;
     private static Dictionary<int, BitArray> PriorityPermissions { get; } = new();
@@ -21,6 +23,7 @@ public class PermissionsEngine
     {
         var text = File.ReadAllText("resources/permissions.json");
         _permissions = JsonConvert.DeserializeObject<HashSet<Permission>>(text)!;
+        //TODO Create default roles (config)
     }
     
     
@@ -43,7 +46,6 @@ public class PermissionsEngine
             PriorityPermissions[id] = DeterminePriorityPermissions(id);
             return true;
         }
-
         PriorityPermissions.Add(id, DeterminePriorityPermissions(id));
         return true;
     }
@@ -89,27 +91,27 @@ public class PermissionsEngine
 
     public static bool HasChannelPermissionForRole(int cid, int pid, int rid)
     {
-        return Database.GetRolePermissionsOfChannel(cid, rid)[pid];
+        return Database.GetRolePermissionInChannel(cid, rid)[pid];
     }
 
     public static bool ChannelVisibleToClient(int cid, int uid)
     {
-        var b = BitArrayUtil.CascadeBitArrayList(Database.GetUserRolePermissionListOfChannel(uid, cid));
+        var b = BitArrayUtil.CascadeBitArrayList(Database.GetClientPermissionsOfChannel(uid, cid));
         return b[(int) ChannelPermissionIdentifiers.See];
     }
 
-    /*Creation and User connection*/
-    public static void UserConnect(int id)
+    /*Creation and Client connection*/
+    public static void ClientConnect(int id)
     {
-        PriorityPermissions.Add(id, Database.GetUserById(id) == null
-                ? DeterminePriorityPermissions(Database.CreateUser())
+        PriorityPermissions.Add(id, Database.GetClientById(id) == null
+                ? DeterminePriorityPermissions(Database.CreateClient())
                 : DeterminePriorityPermissions(id));
-        //TODO: send all roles per user to client on connect
+        //TODO: send all roles per Client to client on connect
     }
 
-    public static int CreateChannel(string name)
+    public static int CreateChannel(string name, ChannelType type)
     {
-        return Database.CreateChannel(name);
+        return Database.CreateChannel(name, type);
     }
 
     public static int CreateRole(string name, int hierarchy, BitArray permissions)
@@ -117,18 +119,35 @@ public class PermissionsEngine
         return Database.CreateRole(name, hierarchy, permissions);
     }
 
-    
-    public static int CreateUser()
+
+    public static int CreateClientWithoutRole()
     {
-        int id = Database.CreateUser();
+        int id = Database.CreateClient();
+        PriorityPermissions.Add(id, new BitArray(new bool[RolePermissionMaxSize]));
+        return id;
+    }
+    
+    public static int CreateClient()
+    {
+        return CreateClient(0);
+        //TODO Default config
+    }
+
+    public static int CreateClient(int role)
+    {
+        int id = Database.CreateClient();
+        SetRole(id, role, true);
         UpdatePriorityPermissions(id);
         return id;
     }
 
-    public static int CreateUser(int role)
+    public static int GetHierarchy(int clientId)
     {
-        int id = Database.CreateUser(role);
-        UpdatePriorityPermissions(id);
-        return id;
+        return Database.GetHierarchy(clientId);
+    }
+
+    public static int GetHigherClient(int clientId1, int clientId2)
+    {
+        return GetHierarchy(clientId1) - GetHierarchy(clientId2) > 0 ? clientId2 : clientId1;
     }
 }

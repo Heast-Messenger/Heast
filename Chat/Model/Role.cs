@@ -4,19 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Chat.Model;
 
-[Table("permissionroles")]
-public class PermissionRole
+[Table("roles")]
+public class Role
 {
     [Key]
-    public int PermissionRoleId { get; set; }
+    public int RoleId { get; set; }
     public string Name { get; set; }
     public int Hierarchy { get; set; }
     public BitArray Permissions { get; set; }
 
-    public PermissionRole(string name, int permissionRoleId, int hierarchy, BitArray permissions)
+    public Role(string name, int hierarchy, BitArray permissions)
     {
         Name = name;
-        PermissionRoleId = permissionRoleId;
         Hierarchy = hierarchy;
         Permissions = permissions;
     }

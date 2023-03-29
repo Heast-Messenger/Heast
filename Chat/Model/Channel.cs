@@ -4,16 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Chat.Model;
 
-[Table("permissionchannels")]
-public class PermissionChannel
+[Table("channels")]
+public class Channel
 {
     [Key]
-    public int PermissionChannelId { get; set; }
+    public int ChannelId { get; set; }
     public string Name { get; set; }
+    
+    public ChannelType Type { get; set; }
 
-    public PermissionChannel(string name, int permissionChannelId)
+    public Channel(string name, ChannelType type)
     {
+        Type = type;
         Name = name;
-        PermissionChannelId = permissionChannelId;
     }
 }

@@ -1,6 +1,7 @@
 
 
 using System.Collections;
+using System.Text.Json;
 using Chat.Model;
 using Chat.Permissionengine;
 using Chat.Structure;
@@ -8,172 +9,167 @@ using Chat.Utility;
 
 namespace Chat.Modules;
 
-public static class Database {
+public class Database : IDatabase {
 
-    //TODO private
-    public static PermissionContext Ctx { get; set; } = null!;
+    private PermissionContext Ctx { get; set; } = null!;
     
-    public static void Init()
+    public Database()
     {
         //TODO no fixed string
         Ctx = new PermissionContext();
     }
 
     //Querying
-    public static PermissionClient GetUserById(int id)
+    public Client GetClientById(int id)
     {
-        return Ctx.Clients.First(x => x.PermissionClientId == id);
+        return Ctx.Clients.First(x => x.ClientId == id);
     }
 
-    public static PermissionRole GetRoleById(int id)
+    public Role GetRoleById(int id)
     {
-        return Ctx.Roles.First(x => x.PermissionRoleId == id);
+        return Ctx.Roles.First(x => x.RoleId == id);
     }
-    public static PermissionRole GetRoleByName(string name)
+    public Role GetRoleByName(string name)
     {
         return Ctx.Roles.First(x => x.Name.Equals(name));
     }
 
-    public static PermissionChannel GetChannelById(int id)
+    public Channel GetChannelById(int id)
     {
-        return Ctx.Channels.First(x => x.PermissionChannelId == id);
+        return Ctx.Channels.First(x => x.ChannelId == id);
     }
 
-    private static int GetHighestChannelId()
+    private int GetHighestChannelId()
     {
         if (!Ctx.Channels.Any()) return 0;
-        return Ctx.Channels.Max(x => x.PermissionChannelId);
+        return Ctx.Channels.Max(x => x.ChannelId);
     }
     
-    private static int GetHighestRoleId()
+    private int GetHighestRoleId()
     {
         if (!Ctx.Roles.Any()) return 0;
-        return Ctx.Roles.Max(x => x.PermissionRoleId);
+        return Ctx.Roles.Max(x => x.RoleId);
     }
     
-    private static int GetHighestUserId()
+    private int GetHighestClientId()
     {
         if (!Ctx.Clients.Any()) return 0;
-        return Ctx.Clients.Max(x => x.PermissionClientId);
+        return Ctx.Clients.Max(x => x.ClientId);
     }
     
-    public static BitArray GetRolePermissionsOfChannel(int cid, int rid)
+    public BitArray GetRolePermissionInChannel(int cid, int rid)
     {
         return (from a in Ctx.ChannelPermissions
-            where a.PermissionChannelId == cid && a.PermissionRoleId == rid
+            where a.ChannelId == cid && a.RoleId == rid
             select a.Permissions).First();
     }
 
-    public static List<BitArray> GetPermissionListOfClient(int id)
+    public List<BitArray> GetPermissionListOfClient(int id)
     {
         var e = (from a in Ctx.ClientRoles
-            join y in Ctx.Roles on a.PermissionRoleId equals y.PermissionRoleId
-            where a.PermissionClientId == id
-            orderby a.PermissionRole.Hierarchy descending
+            join y in Ctx.Roles on a.RoleId equals y.RoleId
+            where a.ClientId == id
+            orderby a.Role.Hierarchy descending
             select y.Permissions).ToList();
         return e;
     }
 
-    public static List<int> GetClientsWithRole(int rid)
+    public List<int> GetClientsWithRole(int rid)
     {
         return (from a in Ctx.ClientRoles
-            where a.PermissionRoleId == rid
-            select a.PermissionClientId).ToList();
+            where a.RoleId == rid
+            select a.ClientId).ToList();
     }
 
-    public static List<int> GetRoleIdListOfClient(int id)
+    public List<int> GetRoleIdListOfClient(int id)
     {
         return (from a in Ctx.ClientRoles
-            where a.PermissionClientId == id
-            select a.PermissionRoleId).ToList();
+            where a.ClientId == id
+            select a.RoleId).ToList();
     }
     
     
-    public static List<BitArray> GetUserRolePermissionListOfChannel(int uid, int cid)
+    public List<BitArray> GetClientPermissionsOfChannel(int uid, int cid)
     {
         var b = GetRoleIdListOfClient(uid);
         
         return (from a in Ctx.ChannelPermissions
-            join u in b on a.PermissionRoleId equals u 
-            where a.PermissionChannelId == cid
-            orderby a.PermissionRole.Hierarchy descending
-            select a.PermissionRole.Permissions).ToList();
+            join u in b on a.RoleId equals u 
+            where a.ChannelId == cid
+            orderby a.Role.Hierarchy descending
+            select a.Role.Permissions).ToList();
             
     }
 
+    public int GetHierarchy(int clientId)
+    {
+        return Ctx.ClientRoles.Where(x => x.ClientId == clientId).Min(x => x.Role.Hierarchy);
+    }
+
     // Map implementation
-    public static int CreateChannel(string name)
+    public int CreateChannel(string name, ChannelType type)
     {
-        var id = GetHighestChannelId() + 1;
-        Ctx.Channels.Add(new PermissionChannel(name, id));
+        Channel c = new Channel(name,type);
+        Ctx.Channels.Add(c);
         Ctx.SaveChanges();
 
-        return id;
+        return c.ChannelId;
     }
     
-    public static int CreateRole(string name, int hierarchy, BitArray permissions)
+    public int CreateRole(string name, int hierarchy, BitArray permissions)
     {
-        var id = GetHighestRoleId() + 1;
-        Ctx.Roles.Add(new PermissionRole(name, id, hierarchy, permissions));
+        Role r = new Role(name, hierarchy, permissions);
+        Ctx.Roles.Add(r);
         Ctx.SaveChanges();
 
-        return id;
+        return r.RoleId;
     }
 
-    public static int CreateUser()
+    public int CreateClient()
     {
-        var id = GetHighestUserId() + 1;
-        Ctx.Clients.Add(new PermissionClient(id));
-        Ctx.SaveChanges();
-        
-        return id;
-    }
-
-    //TODO config
-    public static int CreateUser(int role)
-    {
-        var id = GetHighestUserId() + 1;
-        Ctx.Clients.Add(new PermissionClient(id));
-        Ctx.ClientRoles.Add(new PermissionClientRoles(id, role));
+        Client c = new Client();
+        Ctx.Clients.Add(c);
         Ctx.SaveChanges();
         
-        return id;
+        return c.ClientId;
     }
-    
-    public static bool SetPermission(int rid, int pid, bool value)
-    {
-        if (!Ctx.Roles.Any(x => x.PermissionRoleId == rid)) return false;
 
-        BitArray e = Ctx.Roles.First(x => x.PermissionRoleId == rid).Permissions;
+    public bool SetPermission(int rid, int pid, bool value)
+    {
+        if (!Ctx.Roles.Any(x => x.RoleId == rid)) return false;
+
+        BitArray e = Ctx.Roles.First(x => x.RoleId == rid).Permissions;
         e[pid] = value;
-        Ctx.Roles.First(x => x.PermissionRoleId == rid).Permissions = new BitArray(BitArrayUtil.ConvertToBoolArray(e));
+        Ctx.Roles.First(x => x.RoleId == rid).Permissions = new BitArray(BitArrayUtil.ConvertToBoolArray(e));
         
         Ctx.SaveChanges();
         return true;
     }
     
-    public static bool SetRole(int uid, int rid, bool value)
+    public bool SetRole(int uid, int rid, bool value)
     {
-        if (!Ctx.Clients.Any(x => x.PermissionClientId == uid)) return false;
-        if (!Ctx.Roles.Any(x => x.PermissionRoleId == rid)) return false;
-        if (value && Ctx.ClientRoles.Any(x => x.PermissionRoleId == rid && x.PermissionClientId == uid)) return false;
+        if (!Ctx.Clients.Any(x => x.ClientId == uid)) return false;
+        if (!Ctx.Roles.Any(x => x.RoleId == rid)) return false;
+        if (value && Ctx.ClientRoles.Any(x => x.RoleId == rid && x.ClientId == uid)) return false;
 
-        if (value) Ctx.ClientRoles.Add(new PermissionClientRoles(uid, rid));
-        else Ctx.ClientRoles.Remove(new PermissionClientRoles(uid, rid));
+        if (value) Ctx.ClientRoles.Add(new ClientRoles(uid, rid));
+        else Ctx.ClientRoles.Remove(new ClientRoles(uid, rid));
         
         Ctx.SaveChanges();
 
         return true;
     }
     
-    public static bool SetChannelPermission(int cid, int rid, int pid, bool value)
+    public bool SetChannelPermission(int cid, int rid, int pid, bool value)
     {
-        if (!Ctx.Channels.Any(x => x.PermissionChannelId == cid)) return false;
-        if (!Ctx.Roles.Any(x => x.PermissionRoleId == rid)) return false;
-        if (Ctx.ChannelPermissions.Any(x => x.PermissionRoleId == rid && x.PermissionChannelId == cid))
+        if (!Ctx.Channels.Any(x => x.ChannelId == cid)) return false;
+        if (!Ctx.Roles.Any(x => x.RoleId == rid)) return false;
+        if (Ctx.ChannelPermissions.Any(x => x.RoleId == rid && x.ChannelId == cid))
         {
-            Ctx.ChannelPermissions.First(x => x.PermissionRoleId == rid && x.PermissionChannelId == cid)
-                .Permissions[pid] = value;
+            BitArray e = Ctx.ChannelPermissions.First(x => x.ChannelId == cid).Permissions;
+            e[pid] = value;
+            Ctx.ChannelPermissions.First(x => x.RoleId == rid && x.ChannelId == cid)
+                .Permissions = new BitArray(BitArrayUtil.ConvertToBoolArray(e));
             return true;
         }
 
@@ -181,7 +177,7 @@ public static class Database {
         bool[] perms = new bool[PermissionsEngine.ChannelPermissionMaxSize];
         perms[pid] = true;
 
-        Ctx.ChannelPermissions.Add(new PermissionChannelPermissions(cid, rid, new BitArray(perms)));
+        Ctx.ChannelPermissions.Add(new ChannelPermissions(cid, rid, new BitArray(perms)));
         return true;
     }
 
