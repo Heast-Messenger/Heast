@@ -15,8 +15,9 @@ public static class Program
     public static void Main(string[] args)
     {
         PermissionsEngine.Init();
+        PermissionsEngine.InitEventSystem(new EventLogic());
 
-/*
+
         bool[] bits = new bool[PermissionsEngine.RolePermissionMaxSize];
         
         int modId = PermissionsEngine.CreateRole("Mod", 2, new BitArray(bits));
@@ -40,10 +41,7 @@ public static class Program
         Console.WriteLine($"(t) Has the user permission {(int) PermissionIdentifier.Ban} after mod&rolechange: {PermissionsEngine.HasPermission(clientId, (int) PermissionIdentifier.Ban)}");
 
         Console.WriteLine($"({adminclient}) Is the Admin Client {adminclient} higher in the hierarchy than {modclient}: {PermissionsEngine.GetHigherClient(adminclient, adminclient)}");
-    */    
-        
-        var logic = new EventLogic();
-        logic.OnConnect += PermissionsEngine.ClientConnect;
+
     }
 }
 

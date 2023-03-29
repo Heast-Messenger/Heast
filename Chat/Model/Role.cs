@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Chat.Model;
 
-[Table("roles")]
 public class Role
 {
-    [Key]
     public int RoleId { get; set; }
     public string Name { get; set; }
     public int Hierarchy { get; set; }

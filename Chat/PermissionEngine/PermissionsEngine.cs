@@ -1,4 +1,5 @@
 using System.Collections;
+using Chat.events;
 using Chat.Model;
 using Chat.Modules;
 using Chat.Permissionengine.Permissions;
@@ -16,6 +17,8 @@ public class PermissionsEngine
     public static IReadOnlySet<Permission> Permissions => _permissions;
     private static Dictionary<int, BitArray> PriorityPermissions { get; } = new();
 
+    private static EventLogic Logic { get; set; }
+    
     public const int RolePermissionMaxSize = 255;
     public const int ChannelPermissionMaxSize = 512;
 
@@ -24,6 +27,14 @@ public class PermissionsEngine
         var text = File.ReadAllText("resources/permissions.json");
         _permissions = JsonConvert.DeserializeObject<HashSet<Permission>>(text)!;
         //TODO Create default roles (config)
+        //TODO A way to send the user all available permissions when he enters the permission settings 
+    }
+    
+    public static void InitEventSystem(EventLogic eventLogic)
+    {
+        Logic = eventLogic;
+        Logic.OnConnect += ClientConnect;
+        Logic.OnPermissionChanged += UpdatePriorityPermissions;
     }
     
     
@@ -69,7 +80,7 @@ public class PermissionsEngine
         if (!sol) return sol;
         foreach (var client in Database.GetClientsWithRole(rid))
         {
-            UpdatePriorityPermissions(client);
+            Logic.ClientUpdate(client);
         }
 
         return sol;
@@ -83,7 +94,7 @@ public class PermissionsEngine
         if (!sol) return sol;
         foreach (var client in Database.GetClientsWithRole(uid))
         {
-            UpdatePriorityPermissions(client);
+            Logic.ClientUpdate(client);
         }
 
         return sol;
@@ -137,7 +148,7 @@ public class PermissionsEngine
     {
         int id = Database.CreateClient();
         SetRole(id, role, true);
-        UpdatePriorityPermissions(id);
+        Logic.ClientUpdate(id);
         return id;
     }
 
@@ -150,4 +161,6 @@ public class PermissionsEngine
     {
         return GetHierarchy(clientId1) - GetHierarchy(clientId2) > 0 ? clientId2 : clientId1;
     }
+
+    
 }
