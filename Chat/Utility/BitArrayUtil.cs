@@ -7,6 +7,7 @@ public static class BitArrayUtil
 {
     public static BitArray CascadeBitArrayList(IList<BitArray> bits)
     {
+        if (bits.Count == 1) return bits[0];
         var e = new BitArray(PermissionsEngine.RolePermissionMaxSize);
 
         return bits.Aggregate(e, CascadeBitArray);

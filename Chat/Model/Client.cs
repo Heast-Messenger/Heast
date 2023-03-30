@@ -17,7 +17,7 @@ public class Client
 
     public bool CanSeeChannel(int cid)
     {
-        return PermissionsEngine.ChannelVisibleToClient(cid, ClientId);
+        return PermissionsEngine.CanSeeChannel(cid, ClientId);
     }
     
     

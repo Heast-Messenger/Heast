@@ -42,6 +42,17 @@ public static class Program
 
         Console.WriteLine($"({adminclient}) Is the Admin Client {adminclient} higher in the hierarchy than {modclient}: {PermissionsEngine.GetHigherClient(adminclient, adminclient)}");
 
+        int channelId = PermissionsEngine.CreateChannel("name", ChannelType.File);
+        PermissionsEngine.SetChannelPermission(channelId, adminId,
+            (int) ChannelPermissionIdentifiers.See, true);
+        
+        Console.WriteLine($"(t) Can the user {adminclient} see {channelId} : {PermissionsEngine.CanSeeChannel(channelId, adminclient)}");
+        
+        PermissionsEngine.SetChannelPermission(channelId, adminId,
+            (int) ChannelPermissionIdentifiers.See, false);
+        
+        Console.WriteLine($"(f) Can the user {adminclient} see {channelId} : {PermissionsEngine.CanSeeChannel(channelId, adminclient)}");
+
     }
 }
 

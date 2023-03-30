@@ -6,7 +6,6 @@ using Chat.Permissionengine.Permissions;
 using Chat.Permissionengine.Permissions.Identifiers;
 using Chat.Utility;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Chat.Permissionengine;
 
@@ -105,7 +104,7 @@ public class PermissionsEngine
         return Database.GetRolePermissionInChannel(cid, rid)[pid];
     }
 
-    public static bool ChannelVisibleToClient(int cid, int uid)
+    public static bool CanSeeChannel(int cid, int uid)
     {
         var b = BitArrayUtil.CascadeBitArrayList(Database.GetClientPermissionsOfChannel(uid, cid));
         return b[(int) ChannelPermissionIdentifiers.See];

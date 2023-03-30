@@ -92,12 +92,13 @@ public class Database : IDatabase {
     public List<BitArray> GetClientPermissionsOfChannel(int uid, int cid)
     {
         var b = GetRoleIdListOfClient(uid);
-        
-        return (from a in Ctx.ChannelPermissions
-            join u in b on a.RoleId equals u 
+
+        var e = (from a in Ctx.ChannelPermissions.ToList()
+            join u in b on a.RoleId equals u
             where a.ChannelId == cid
             orderby a.Role.Hierarchy descending
-            select a.Role.Permissions).ToList();
+            select a.Permissions).ToList();
+        return e;
             
     }
 
@@ -162,6 +163,7 @@ public class Database : IDatabase {
     
     public bool SetChannelPermission(int cid, int rid, int pid, bool value)
     {
+        
         if (!Ctx.Channels.Any(x => x.ChannelId == cid)) return false;
         if (!Ctx.Roles.Any(x => x.RoleId == rid)) return false;
         if (Ctx.ChannelPermissions.Any(x => x.RoleId == rid && x.ChannelId == cid))
@@ -170,14 +172,17 @@ public class Database : IDatabase {
             e[pid] = value;
             Ctx.ChannelPermissions.First(x => x.RoleId == rid && x.ChannelId == cid)
                 .Permissions = new BitArray(BitArrayUtil.ConvertToBoolArray(e));
+            Ctx.SaveChanges();
             return true;
         }
 
         if (!value) return false;
+        
         bool[] perms = new bool[PermissionsEngine.ChannelPermissionMaxSize];
         perms[pid] = true;
 
         Ctx.ChannelPermissions.Add(new ChannelPermissions(cid, rid, new BitArray(perms)));
+        Ctx.SaveChanges();
         return true;
     }
 
