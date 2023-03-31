@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:view="clr-namespace:Client.View"
+             xmlns:util="clr-namespace:Client.Utility"
              xmlns:vm="clr-namespace:Client.ViewModel"
              mc:Ignorable="d"
              x:Class="Client.View.MainContent"
@@ -14,6 +14,13 @@
 		<vm:ContentViewModel/>
 	</Design.DataContext>
 	
-	<TransitioningContentControl Name="ParentControl"
-	                             Content="{Binding Content}"/>
+	<TransitioningContentControl
+		Name="ParentControl"
+		Content="{Binding Content}">
+		<TransitioningContentControl.PageTransition>
+			<!-- The custom page transition is not yet working -->
+			<!-- <util:PanelTransition Duration="0:00:00.500"/> -->
+			<CrossFade Duration="0:00:00.500"/>
+		</TransitioningContentControl.PageTransition>
+	</TransitioningContentControl>
 </UserControl>

@@ -19,7 +19,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase {
 	}
 	
 	public ObservableCollection<SettingsSidebarItem> SidebarItems { get; } = new() {
-		new("/Assets/Settings/Account.svg", "Account", new SettingsAccountPanel{
+		new("/Assets/Settings/Account.svg", "Account", new SettingsAccountPanel {
 			DataContext = new SettingsAccountViewModel()
 		}),
 		new("/Assets/Settings/Security.svg", "Security", new SettingsSecurityPanel {

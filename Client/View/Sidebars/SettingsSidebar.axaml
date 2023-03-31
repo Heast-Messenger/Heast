@@ -1,55 +1,23 @@
 <view:SidebarBase xmlns="https://github.com/avaloniaui"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:view="clr-namespace:Client.View.Sidebars"
+                  xmlns:components="clr-namespace:Client.View.Components"
                   xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
-                  xmlns:util="clr-namespace:Client.Utility"
                   x:Class="Client.View.Sidebars.SettingsSidebar"
                   Width="180.0">
 	<Design.DataContext>
 		<vm:SettingsSidebarViewModel/>
 	</Design.DataContext>
 	
-	<view:SidebarBase.Resources>
-		<util:SvgPathConverter x:Key="SvgPathConverter"/>
-	</view:SidebarBase.Resources>
-	
-	<view:SidebarBase.Styles>
-		<Style Selector="Button.SidebarItem">
-			<Setter Property="Background" Value="{StaticResource Dark}"/>
-			<Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-			<Setter Property="Padding" Value="4.0"></Setter>
-		</Style>
-	</view:SidebarBase.Styles>
-	
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled"
 	              VerticalScrollBarVisibility="Auto">
 		<ItemsControl Items="{Binding SidebarItems}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Button Classes="SidebarItem"
-					        Padding="16.0"
-					        CornerRadius="10.0"
-					        Margin="0.0 0.0 0.0 15.0"
-					        HorizontalContentAlignment="Left"
-					        Click="OnSidebarItemClick">
-						<!-- Todo: wrapper component with !binding support! -->
-						<StackPanel Orientation="Horizontal"
-						            Spacing="4.0">
-							<Viewbox Width="18.0" Height="18.0">
-								<Path Fill="{StaticResource White}"
-								      Width="1024.0" Height="1024.0"
-								      Opacity="1.0">
-									<Path.Data>
-										<Binding Path="Icon"
-										         Converter="{StaticResource SvgPathConverter}"
-										         ConverterParameter="{util:UriContextGetter}"/>
-									</Path.Data>
-								</Path>
-							</Viewbox>
-							<TextBlock Text="{Binding Title}"
-							           FontSize="13.0"/>
-						</StackPanel>
-					</Button>
+					<components:SidebarButton
+						Text="{Binding Title}"
+						Icon="{Binding Icon}"
+						Click="OnSidebarItemClick"/>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>

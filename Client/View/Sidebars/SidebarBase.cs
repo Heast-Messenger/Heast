@@ -16,7 +16,7 @@ public abstract class SidebarBase : UserControl {
 	protected void OnSidebarItemClick<T>(object? sender, RoutedEventArgs e) where T : SidebarItemBase {
 		// This code is holy! DO NOT TOUCH IT!
 		var vm = DataContext as SidebarViewModelBase;
-		if (sender is Button { DataContext: T item }) {
+		if (sender is StyledElement { DataContext: T item }) {
 			vm!.NavigateTo(item);
 		}
 	}

@@ -1,6 +1,6 @@
 using Avalonia.Interactivity;
 using Client.Model;
-using SkiaSharp;
+using Client.View.Components;
 
 namespace Client.View.Sidebars; 
 
@@ -10,6 +10,11 @@ public partial class SettingsSidebar : SidebarBase {
     }
 
     private void OnSidebarItemClick(object? sender, RoutedEventArgs e) {
-        base.OnSidebarItemClick<SettingsSidebarItem>(sender, e);
+        // The sender is the SidebarButton in this case.
+        // Above the sender lies the ContentPresenter whose
+        //  datacontext is the SettingsSidebarItem to which we'll navigate.
+        // Why? Idk. I just know that it is the way it is. =)
+        base.OnSidebarItemClick<SettingsSidebarItem>(
+            (sender as SidebarButton)!.Parent!, e);
     }
 }
