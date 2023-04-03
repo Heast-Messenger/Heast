@@ -32,36 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\Navigation\Chat.svg" />
-    <AvaloniaResource Include="Assets\Navigation\Explore.svg" />
-    <AvaloniaResource Include="Assets\Navigation\People.svg" />
-    <AvaloniaResource Include="Assets\Navigation\Servers.svg" />
-    <AvaloniaResource Include="Assets\Navigation\Settings.svg" />
-    <AvaloniaResource Include="Assets\Settings\Account.svg" />
-    <AvaloniaResource Include="Assets\Settings\Auth.svg" />
-    <AvaloniaResource Include="Assets\Settings\Authors\Mued.svg" />
-    <AvaloniaResource Include="Assets\Settings\Authors\LambdaSpg.svg" />
-    <AvaloniaResource Include="Assets\Settings\Authors\Fabii.svg" />
-    
-    <AvaloniaResource Include="Assets\Fonts\Inter-Medium.ttf" />
-    
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Black.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-BlackItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Bold.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-BoldItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraBold.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraBoldItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraLight.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-ExtraLightItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Italic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Light.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-LightItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Medium.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-MediumItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Regular.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBold.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-SemiBoldItalic.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-Thin.ttf" />
-    <AvaloniaResource Include="Assets\Fonts\Poppins-ThinItalic.ttf" />
+    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\Fonts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model" />
   </ItemGroup>
 </Project>

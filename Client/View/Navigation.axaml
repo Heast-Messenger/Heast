@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:view="clr-namespace:Client.View"
+             xmlns:components="clr-namespace:Client.View.Components"
              xmlns:vm="clr-namespace:Client.ViewModel"
              mc:Ignorable="d"
              x:Class="Client.View.Navigation">
@@ -19,14 +20,15 @@
 	</UserControl.Resources>
 	
 	<UserControl.Styles>
-		<Style Selector="Button.NavButton">
+		<Style Selector=":is(Button).NavButton">
 			<Setter Property="DockPanel.Dock" Value="Top" />
 			<Setter Property="Margin" Value="0 0 0 30" />
 			<Setter Property="Transitions">
 				<Setter.Value>
 					<Transitions>
-						<TransformOperationsTransition Property="RenderTransform"
-						                               Duration="0:0:1.0">
+						<TransformOperationsTransition 
+							Property="RenderTransform"
+							Duration="0:0:1.0">
 							<TransformOperationsTransition.Easing>
 								<view:NavigationEasing />
 							</TransformOperationsTransition.Easing>
@@ -35,34 +37,45 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<Style Selector="Button.NavButton:pointerover">
+		<Style Selector=":is(Button):pointerover">
 			<Setter Property="RenderTransform" Value="rotate(1turn)" />
+		</Style>
+		<Style Selector=":is(Button):unchecked">
+			<Setter Property="Opacity" Value="0.5" />
+		</Style>
+		<Style Selector=":is(Button):checked">
+			<Setter Property="Opacity" Value="1.0" />
 		</Style>
 	</UserControl.Styles>
 
 	<DockPanel LastChildFill="True">
-		<Button Content="{StaticResource Image.Chat}"
-				Classes="NavButton"
-				Click="Button_OnChat"/>
-		
-		<Button Content="{StaticResource Image.Explore}"
-				Classes="NavButton"
-				Click="Button_OnExplore"/>
-		
-		<Button Content="{StaticResource Image.People}"
-				Classes="NavButton"
-				Click="Button_OnPeople"/>
-		
-		<Button Content="{StaticResource Image.Servers}"
-				Classes="NavButton"
-				Click="Button_OnServers"/>
-		
-		<Button Content="{StaticResource Image.Settings}"
-				Classes="NavButton"
-				DockPanel.Dock="Bottom"
-				Margin="0"
-				Click="Button_OnSettings"/>
-		
+		<components:RadioButton
+			Content="{StaticResource Image.Chat}"
+			Classes="NavButton"
+			GroupName="Navigation"
+			Click="Button_OnChat"/>
+		<components:RadioButton
+			Content="{StaticResource Image.Explore}"
+			Classes="NavButton"
+			GroupName="Navigation"
+			Click="Button_OnExplore"/>
+		<components:RadioButton
+			Content="{StaticResource Image.People}"
+			Classes="NavButton"
+			GroupName="Navigation"
+			Click="Button_OnPeople"/>
+		<components:RadioButton
+			Content="{StaticResource Image.Servers}"
+			Classes="NavButton"
+			GroupName="Navigation"
+			Click="Button_OnServers"/>
+		<components:RadioButton
+			Content="{StaticResource Image.Settings}"
+			Classes="NavButton"
+			GroupName="Navigation"
+			DockPanel.Dock="Bottom"
+			Margin="0"
+			Click="Button_OnSettings"/>
 		<Border Background="Transparent" />
 	</DockPanel>
 </UserControl>

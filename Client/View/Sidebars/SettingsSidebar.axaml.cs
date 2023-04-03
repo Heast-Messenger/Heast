@@ -1,6 +1,6 @@
 using Avalonia.Interactivity;
-using Client.Model;
-using Client.View.Components;
+using Client.View.Content;
+using Client.ViewModel.Sidebars;
 
 namespace Client.View.Sidebars; 
 
@@ -8,13 +8,27 @@ public partial class SettingsSidebar : SidebarBase {
     public SettingsSidebar() {
         InitializeComponent();
     }
+    
+    private SettingsSidebarViewModel ViewModel => 
+        (DataContext as SettingsSidebarViewModel)!;
 
-    private void OnSidebarItemClick(object? sender, RoutedEventArgs e) {
-        // The sender is the SidebarButton in this case.
-        // Above the sender lies the ContentPresenter whose
-        //  datacontext is the SettingsSidebarItem to which we'll navigate.
-        // Why? Idk. I just know that it is the way it is. =)
-        base.OnSidebarItemClick<SettingsSidebarItem>(
-            (sender as SidebarButton)!.Parent!, e);
+    private void Button_OnAccount(object? sender, RoutedEventArgs e) {
+        ViewModel.NavigateTo(new SettingsAccountPanel());
+    }
+
+    private void Button_OnSecurity(object? sender, RoutedEventArgs e) {
+        ViewModel.NavigateTo(new SettingsSecurityPanel());
+    }
+
+    private void Button_OnNotifications(object? sender, RoutedEventArgs e) {
+        ViewModel.NavigateTo(new SettingsNotificationsPanel());
+    }
+
+    private void Button_OnAppearance(object? sender, RoutedEventArgs e) {
+        ViewModel.NavigateTo(new SettingsAppearancePanel());
+    }
+
+    private void Button_OnStatus(object? sender, RoutedEventArgs e) {
+        ViewModel.NavigateTo(new SettingsStatusPanel());
     }
 }

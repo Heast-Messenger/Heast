@@ -1,5 +1,5 @@
 using System;
-using Client.Model;
+using Avalonia.Layout;
 
 namespace Client.ViewModel.Sidebars; 
 
@@ -14,7 +14,7 @@ public abstract class SidebarViewModelBase {
 	
     private readonly ContentViewModel _contentViewModel;
     
-    public void NavigateTo<T>(T item) where T : SidebarItemBase {
-        _contentViewModel.Content = item.ContentBase;
+    public void NavigateTo(Layoutable destination) {
+        _contentViewModel.Content = destination;
     }
 }

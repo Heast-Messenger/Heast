@@ -2,5 +2,37 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:view="clr-namespace:Client.View.Content"
                   x:Class="Client.View.Content.SettingsAccountPanel">
-	Account
+	<view:ContentBase.Styles>
+		<Style Selector="TextBlock.Title">
+			<Setter Property="Foreground" Value="{DynamicResource Light}"/>
+		</Style>
+	</view:ContentBase.Styles>
+	
+	<Grid ColumnDefinitions="*,50,150"
+	      RowDefinitions="*">
+		<Panel Grid.Column="0">
+			
+		</Panel>
+		
+		<Border
+			Grid.Column="1"
+			Background="{DynamicResource Light}"
+			VerticalAlignment="Stretch"
+			HorizontalAlignment="Center"
+			CornerRadius="1.5"
+			Width="3"/>
+		
+		<ScrollViewer 
+			Grid.Column="2"
+			HorizontalScrollBarVisibility="Disabled"
+			VerticalScrollBarVisibility="Auto">
+			<StackPanel Orientation="Vertical">
+				<TextBlock Text="Manage Account"
+				           Classes="Title Bold"/>
+				
+				<TextBlock Text="Dangerzone"
+				           Classes="Title Bold"/>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
 </view:ContentBase>

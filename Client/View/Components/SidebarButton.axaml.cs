@@ -3,6 +3,7 @@ using System.Net.Mime;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 
 namespace Client.View.Components; 
 
@@ -23,8 +24,8 @@ public partial class SidebarButton : UserControl {
         AvaloniaProperty.RegisterDirect<SidebarButton, string?>(nameof(MediaTypeNames.Text),
             o => o.Text, (o, v) => o.Text = v);
     
-    public static readonly StyledProperty<string> IconProperty =
-        AvaloniaProperty.Register<SidebarButton, string>(nameof(Icon));
+    public static readonly StyledProperty<IImage> IconProperty =
+        AvaloniaProperty.Register<SidebarButton, IImage>(nameof(Icon));
     
     public static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
         RoutedEvent.Register<SidebarButton, RoutedEventArgs>(nameof(Click),
@@ -37,7 +38,7 @@ public partial class SidebarButton : UserControl {
         set => SetAndRaise(TextProperty, ref _text, value);
     }
     
-    public string Icon {
+    public IImage Icon {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }

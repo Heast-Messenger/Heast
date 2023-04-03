@@ -27,6 +27,7 @@
 		<Style Selector="Image.AuthorImage">
 			<Setter Property="Width" Value="96.0"/>
 			<Setter Property="Height" Value="96.0"/>
+			<Setter Property="Margin" Value="0.0 0.0 0.0 5.0"/>
 		</Style>
 	</view:ContentBase.Styles>
 	
@@ -56,22 +57,45 @@
 			       Classes="StatusPicture"/>
 		</Grid>
 		
-		<Border Background="{DynamicResource Mid}"
+		<Border Background="{DynamicResource Light}"
 		        HorizontalAlignment="Stretch"
 		        CornerRadius="1.5"
 		        Height="3"/>
 		
-		<Grid ColumnDefinitions="96,*,96,*,96"
-		      RowDefinitions="96,Auto">
+		<Grid ColumnDefinitions="*,*,*"
+		      RowDefinitions="96,Auto,Auto">
 			<Image Grid.Row="0" Grid.Column="0"
+			       HorizontalAlignment="Left"
 			       Source="{StaticResource Image.Authors.Mued}"
 			       Classes="AuthorImage"/>
-			<Image Grid.Row="0" Grid.Column="2"
+			<TextBlock Grid.Row="1" Grid.Column="0"
+			           TextAlignment="Start"
+			           Text="Müd" Classes="Bold"/>
+			<TextBlock Grid.Row="2" Grid.Column="0"
+			           TextAlignment="Start"
+			           Text="~ Windows 10 fan" Classes="Subtitle"/>
+			
+			<Image Grid.Row="0" Grid.Column="1"
+			       HorizontalAlignment="Center"
 			       Source="{StaticResource Image.Authors.LambdaSpg}"
 			       Classes="AuthorImage"/>
-			<Image Grid.Row="0" Grid.Column="4"
+			<TextBlock Grid.Row="1" Grid.Column="1"
+			           TextAlignment="Center"
+			           Text="LambdaSpg" Classes="Bold"/>
+			<TextBlock Grid.Row="2" Grid.Column="1"
+			           TextAlignment="Center"
+			           Text="~ Linux enjoyer ~" Classes="Subtitle"/>
+			
+			<Image Grid.Row="0" Grid.Column="2"
+			       HorizontalAlignment="Right"
 			       Source="{StaticResource Image.Authors.Fabii}"
 			       Classes="AuthorImage"/>
+			<TextBlock Grid.Row="1" Grid.Column="2"
+			           TextAlignment="End"
+			           Text="Fabii" Classes="Bold"/>
+			<TextBlock Grid.Row="2" Grid.Column="2"
+			           TextAlignment="End"
+			           Text="Mac user ~" Classes="Subtitle"/>
 		</Grid>
 	</StackPanel>
 </view:ContentBase>

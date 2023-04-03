@@ -2,8 +2,9 @@ using System;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Client.View.Sidebars;
 using Client.ViewModel;
+using Client.ViewModel.Sidebars;
 
 namespace Client.View;
 
@@ -18,31 +19,35 @@ public partial class Navigation : UserControl {
 		PointerEnteredEvent.AddClassHandler<Button>(Button_OnHover);
 	}
 	
-	private NavigationViewModel ViewModel => (DataContext as NavigationViewModel)!;
+	private NavigationViewModel ViewModel => 
+		(DataContext as NavigationViewModel)!;
 
-	private void Button_OnHover(Button sender, RoutedEventArgs args) {
+	private static void Button_OnHover(Button sender, RoutedEventArgs args) {
 		if (sender.Classes.Contains("NavButton")) {
 			sender.Classes.Add("Hover");
 		}
 	}
 	
 	private void Button_OnChat(object sender, RoutedEventArgs e) {
-		ViewModel.OnChat();
+		ViewModel.NavigateTo(new EmptySidebar());
 	}
 	
 	private void Button_OnExplore(object sender, RoutedEventArgs e) {
-		ViewModel.OnExplore();
+		ViewModel.NavigateTo(new EmptySidebar());
 	}
 	
 	private void Button_OnPeople(object sender, RoutedEventArgs e) {
-		ViewModel.OnPeople();
+		ViewModel.NavigateTo(new EmptySidebar());
 	}
 	
 	private void Button_OnServers(object sender, RoutedEventArgs e) {
-		ViewModel.OnServers();
+		ViewModel.NavigateTo(new EmptySidebar());
 	}
 	
 	private void Button_OnSettings(object sender, RoutedEventArgs e) {
-		ViewModel.OnSettings();
+		ViewModel.NavigateTo(new SettingsSidebar
+		{
+			DataContext = new SettingsSidebarViewModel(ViewModel.ContentViewModel)
+		});
 	}
 }

@@ -6,7 +6,6 @@
          xmlns:components="clr-namespace:Client.View.Components"
          mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
          x:Class="Client.View.Components.SidebarButton">
-         <!--DataContext="{Binding RelativeSource={RelativeSource Self}}"-->
 	<UserControl.Styles>
 		<Style Selector="Button.SidebarItem">
 			<Setter Property="Background" Value="{StaticResource Dark}"/>
@@ -24,31 +23,18 @@
 	        CornerRadius="10.0"
 	        Margin="0.0 0.0 0.0 15.0"
 	        HorizontalContentAlignment="Left"
-	        Click="Button_OnClick">
+	        Click="Button_OnClick"
+	        BorderBrush="{DynamicResource Light}"
+	        BorderThickness="2.0">
 		<StackPanel Orientation="Horizontal"
-		            Spacing="4.0">
-			<!-- <Viewbox Width="18.0" Height="18.0"> -->
-			<!-- 	<Path Fill="{StaticResource White}" -->
-			<!-- 	      Width="1024.0" Height="1024.0" -->
-			<!-- 	      Opacity="1.0"> -->
-			<!-- 		<Path.Data> -->
-			<!-- 			<Binding Path="Icon" -->
-			<!-- 			         Converter="{StaticResource SvgPathConverter}" -->
-			<!-- 			         ConverterParameter="{util:UriContextGetter}"/> -->
-			<!-- 		</Path.Data> -->
-			<!-- 	</Path> -->
-			<!-- </Viewbox> -->
-			<!-- <Image -->
-			<!-- 	Width="18.0" Height="18.0" -->
-			<!-- 	Source="{SvgImage {Binding Icon, -->
-			<!-- 		RelativeSource={RelativeSource -->
-			<!-- 		AncestorType={x:Type components:SidebarButton}}}}"/> -->
-			<!-- <Svg Width="18.0" Height="18.0" -->
-			<!--      Path="{Binding Icon, -->
-			<!-- 		RelativeSource={RelativeSource -->
-			<!-- 		AncestorType={x:Type components:SidebarButton}}, -->
-			<!-- 		Converter={StaticResource SvgPathConverter}, -->
-			<!-- 		ConverterParameter={util:UriContextGetter}}"/> -->
+		            Spacing="10.0">
+			<!-- <Binding Path="Icon" RelativeSource="{RelativeSource -->
+			<!-- 	AncestorType={x:Type components:SidebarButton}}"/> -->
+			<Image 
+				Width="18" Height="18"
+				Source="{Binding Icon,
+					RelativeSource={RelativeSource
+					AncestorType={x:Type components:SidebarButton}}}"/>
 			<TextBlock
 				FontSize="13.0"
 				Text="{Binding Text,
