@@ -1,11 +1,15 @@
 using System;
 using Client.View.Content;
+using Client.ViewModel.Content;
 
 namespace Client.ViewModel.Sidebars; 
 
 public class SettingsSidebarViewModel : SidebarViewModelBase {
 	public SettingsSidebarViewModel(ContentViewModel contentViewModel) : base(contentViewModel) {
-		NavigateTo(new SettingsAccountPanel());
+		ContentViewModel.Content = new SettingsAccountPanel
+		{
+			DataContext = new SettingsAccountViewModel()
+		};
 	}
 
 	public SettingsSidebarViewModel() {

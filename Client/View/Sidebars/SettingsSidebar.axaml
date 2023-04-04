@@ -1,45 +1,46 @@
-<view:SidebarBase xmlns="https://github.com/avaloniaui"
-                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                  xmlns:view="clr-namespace:Client.View.Sidebars"
-                  xmlns:components="clr-namespace:Client.View.Components"
-                  xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
-                  x:Class="Client.View.Sidebars.SettingsSidebar"
-                  Width="180.0">
+<view:SidebarBase
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:view="clr-namespace:Client.View.Sidebars"
+	xmlns:components="clr-namespace:Client.View.Components"
+	xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
+	x:Class="Client.View.Sidebars.SettingsSidebar"
+	Width="180.0">
 	<Design.DataContext>
-		<vm:SettingsSidebarViewModel/>
+		<vm:SettingsSidebarViewModel />
 	</Design.DataContext>
-	
+
 	<view:SidebarBase.Resources>
-		<SvgImage x:Key="Image.Account" Source="/Assets/Settings/Account.svg"/>
-		<SvgImage x:Key="Image.Security" Source="/Assets/Settings/Security.svg"/>
-		<SvgImage x:Key="Image.Notifications" Source="/Assets/Settings/Notifications.svg"/>
-		<SvgImage x:Key="Image.Appearance" Source="/Assets/Settings/Appearance.svg"/>
-		<SvgImage x:Key="Image.Status" Source="/Assets/Settings/Status.svg"/>
+		<SvgImage x:Key="Image.Account" Source="/Assets/Settings/Account.svg" />
+		<SvgImage x:Key="Image.Security" Source="/Assets/Settings/Security.svg" />
+		<SvgImage x:Key="Image.Notifications" Source="/Assets/Settings/Notifications.svg" />
+		<SvgImage x:Key="Image.Appearance" Source="/Assets/Settings/Appearance.svg" />
+		<SvgImage x:Key="Image.Status" Source="/Assets/Settings/Status.svg" />
 	</view:SidebarBase.Resources>
-	
+
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled"
-	              VerticalScrollBarVisibility="Auto">
+		VerticalScrollBarVisibility="Auto">
 		<StackPanel Orientation="Vertical">
 			<components:SidebarButton
 				Text="Account"
 				Icon="{StaticResource Image.Account}"
-				Click="Button_OnAccount"/>
+				Click="Button_OnAccount" />
 			<components:SidebarButton
 				Text="Security"
 				Icon="{StaticResource Image.Security}"
-				Click="Button_OnSecurity"/>
+				Click="Button_OnSecurity" />
 			<components:SidebarButton
 				Text="Notifications"
 				Icon="{StaticResource Image.Notifications}"
-				Click="Button_OnNotifications"/>
+				Click="Button_OnNotifications" />
 			<components:SidebarButton
 				Text="Appearance"
 				Icon="{StaticResource Image.Appearance}"
-				Click="Button_OnAppearance"/>
+				Click="Button_OnAppearance" />
 			<components:SidebarButton
 				Text="Status"
 				Icon="{StaticResource Image.Status}"
-				Click="Button_OnStatus"/>
+				Click="Button_OnStatus" />
 		</StackPanel>
 	</ScrollViewer>
 </view:SidebarBase>

@@ -5,16 +5,12 @@ namespace Client.ViewModel.Sidebars;
 
 public abstract class SidebarViewModelBase {
     protected SidebarViewModelBase(ContentViewModel contentViewModel) {
-        _contentViewModel = contentViewModel;
+        ContentViewModel = contentViewModel;
     }
 
     protected SidebarViewModelBase() {
         throw new InvalidOperationException("This constructor is only for design-time purposes.");
     }
 	
-    private readonly ContentViewModel _contentViewModel;
-    
-    public void NavigateTo(Layoutable destination) {
-        _contentViewModel.Content = destination;
-    }
+    public readonly ContentViewModel ContentViewModel;
 }

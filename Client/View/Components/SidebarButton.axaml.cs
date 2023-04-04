@@ -1,5 +1,4 @@
 using System;
-using System.Net.Mime;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -13,15 +12,8 @@ public partial class SidebarButton : UserControl {
         InitializeComponent();
     }
     
-    // This is nearly identical to the TextBlock.TextProperty, but does not work here.
-    // What to try out: Copy the TextBlock code here and set a breakpoint at the setter
-    // of the Text property. The check if the value is being set, unlike now.
-    
-    // Edit: Tried replacing the code, but it stops working when I initialize the
-    // component in the constructor. Why? Idk.
-    // Edit 2: Now fixed. It's really 'geistig' (How I like to call it)
-    public static readonly DirectProperty<SidebarButton, string?> TextProperty =
-        AvaloniaProperty.RegisterDirect<SidebarButton, string?>(nameof(MediaTypeNames.Text),
+    public static readonly DirectProperty<SidebarButton, string> TextProperty =
+        AvaloniaProperty.RegisterDirect<SidebarButton, string>(nameof(Text),
             o => o.Text, (o, v) => o.Text = v);
     
     public static readonly StyledProperty<IImage> IconProperty =
@@ -31,9 +23,9 @@ public partial class SidebarButton : UserControl {
         RoutedEvent.Register<SidebarButton, RoutedEventArgs>(nameof(Click),
             RoutingStrategies.Bubble);
 
-    private string? _text;
+    private string _text = String.Empty;
     
-    public string? Text {
+    public string Text {
         get => _text;
         set => SetAndRaise(TextProperty, ref _text, value);
     }

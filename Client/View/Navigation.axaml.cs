@@ -29,25 +29,25 @@ public partial class Navigation : UserControl {
 	}
 	
 	private void Button_OnChat(object sender, RoutedEventArgs e) {
-		ViewModel.NavigateTo(new EmptySidebar());
+		ViewModel.SidebarViewModel.CurrentSidebar = new EmptySidebar();
 	}
 	
 	private void Button_OnExplore(object sender, RoutedEventArgs e) {
-		ViewModel.NavigateTo(new EmptySidebar());
+		ViewModel.SidebarViewModel.CurrentSidebar = new EmptySidebar();
 	}
 	
 	private void Button_OnPeople(object sender, RoutedEventArgs e) {
-		ViewModel.NavigateTo(new EmptySidebar());
+		ViewModel.SidebarViewModel.CurrentSidebar = new EmptySidebar();
 	}
 	
 	private void Button_OnServers(object sender, RoutedEventArgs e) {
-		ViewModel.NavigateTo(new EmptySidebar());
+		ViewModel.SidebarViewModel.CurrentSidebar = new EmptySidebar();
 	}
 	
 	private void Button_OnSettings(object sender, RoutedEventArgs e) {
-		ViewModel.NavigateTo(new SettingsSidebar
+		ViewModel.SidebarViewModel.CurrentSidebar = new SettingsSidebar
 		{
 			DataContext = new SettingsSidebarViewModel(ViewModel.ContentViewModel)
-		});
+		};
 	}
 }

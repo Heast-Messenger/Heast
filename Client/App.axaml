@@ -5,10 +5,13 @@
         <SimpleTheme/>
         
         <Style Selector="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="{DynamicResource Dark}"/>
+            <Setter Property="BorderThickness" Value="2.0"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Light}"/>
+            <Setter Property="Padding" Value="16.0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0.0 0.0 0.0 15.0"/>
+            <Setter Property="CornerRadius" Value="10.0"/>
             <Setter Property="ClickMode" Value="Release" />
         </Style>
         

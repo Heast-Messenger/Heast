@@ -17,8 +17,4 @@ public class NavigationViewModel : ViewModelBase {
     
     public readonly SidebarViewModel SidebarViewModel;
     public readonly ContentViewModel ContentViewModel;
-
-    public void NavigateTo(Layoutable destination) {
-        SidebarViewModel.CurrentSidebar = destination;
-    }
 }

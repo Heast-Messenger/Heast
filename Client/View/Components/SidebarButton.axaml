@@ -2,34 +2,12 @@
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:util="clr-namespace:Client.Utility"
          xmlns:components="clr-namespace:Client.View.Components"
          mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
          x:Class="Client.View.Components.SidebarButton">
-	<UserControl.Styles>
-		<Style Selector="Button.SidebarItem">
-			<Setter Property="Background" Value="{StaticResource Dark}"/>
-			<Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-			<Setter Property="Padding" Value="4.0"></Setter>
-		</Style>
-	</UserControl.Styles>
-	
-	<UserControl.Resources>
-		<util:SvgPathConverter x:Key="SvgPathConverter"/>
-	</UserControl.Resources>
-         
-	<Button Classes="SidebarItem"
-	        Padding="16.0"
-	        CornerRadius="10.0"
-	        Margin="0.0 0.0 0.0 15.0"
-	        HorizontalContentAlignment="Left"
-	        Click="Button_OnClick"
-	        BorderBrush="{DynamicResource Light}"
-	        BorderThickness="2.0">
+	<Button Click="Button_OnClick">
 		<StackPanel Orientation="Horizontal"
 		            Spacing="10.0">
-			<!-- <Binding Path="Icon" RelativeSource="{RelativeSource -->
-			<!-- 	AncestorType={x:Type components:SidebarButton}}"/> -->
 			<Image 
 				Width="18" Height="18"
 				Source="{Binding Icon,
