@@ -1,23 +1,23 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:components="clr-namespace:Client.View.Components"
-         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-         x:Class="Client.View.Components.SidebarButton">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:Client.View.Components"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.View.Components.SidebarButton">
 	<Button Click="Button_OnClick">
 		<StackPanel Orientation="Horizontal"
 		            Spacing="10.0">
-			<Image 
+			<Image
 				Width="18" Height="18"
 				Source="{Binding Icon,
 					RelativeSource={RelativeSource
-					AncestorType={x:Type components:SidebarButton}}}"/>
+					AncestorType={x:Type components:SidebarButton}}}" />
 			<TextBlock
 				FontSize="13.0"
 				Text="{Binding Text,
 					RelativeSource={RelativeSource
-					AncestorType={x:Type components:SidebarButton}}}"/>
+					AncestorType={x:Type components:SidebarButton}}}" />
 		</StackPanel>
 	</Button>
 </UserControl>

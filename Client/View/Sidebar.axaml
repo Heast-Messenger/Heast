@@ -7,15 +7,15 @@
              mc:Ignorable="d"
              x:Class="Client.View.Sidebar">
 	<Design.DataContext>
-		<vm:SidebarViewModel/>
+		<vm:SidebarViewModel />
 	</Design.DataContext>
-	
+
 	<TransitioningContentControl Name="ParentControl"
 	                             Width="{Binding CurrentSidebarWidth}">
 		<TransitioningContentControl.Content>
-			<Binding Path="CurrentSidebar"/>
+			<Binding Path="CurrentSidebar" />
 		</TransitioningContentControl.Content>
-		
+
 		<TransitioningContentControl.Transitions>
 			<Transitions>
 				<DoubleTransition Property="Width"

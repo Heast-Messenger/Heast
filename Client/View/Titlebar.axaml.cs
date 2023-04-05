@@ -2,13 +2,11 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Avalonia.Markup.Xaml;
 
 namespace Client.View;
 
 public partial class Titlebar : UserControl
 {
-
     private readonly bool _isOsx = OperatingSystem.IsMacOS();
     private readonly bool _isWin = OperatingSystem.IsWindows();
 

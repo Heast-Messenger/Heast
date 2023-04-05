@@ -1,7 +1,9 @@
-namespace Client.View.Content; 
+namespace Client.View.Content;
 
-public partial class SettingsAppearancePanel : ContentBase {
-    public SettingsAppearancePanel() {
+public partial class SettingsAppearancePanel : ContentBase
+{
+    public SettingsAppearancePanel()
+    {
         InitializeComponent();
     }
 }

@@ -19,7 +19,7 @@
 	</view:SidebarBase.Resources>
 
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled"
-		VerticalScrollBarVisibility="Auto">
+	              VerticalScrollBarVisibility="Auto">
 		<StackPanel Orientation="Vertical">
 			<components:SidebarButton
 				Text="Account"

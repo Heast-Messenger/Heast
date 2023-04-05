@@ -1,5 +1,3 @@
-namespace Client.ViewModel.Content; 
+namespace Client.ViewModel.Content;
 
-public class SettingsSecurityViewModel : ViewModelBase {
-    
-}
+public class SettingsSecurityViewModel : ViewModelBase { }

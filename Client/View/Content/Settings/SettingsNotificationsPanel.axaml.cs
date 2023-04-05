@@ -1,7 +1,9 @@
-namespace Client.View.Content; 
+namespace Client.View.Content;
 
-public partial class SettingsNotificationsPanel : ContentBase {
-    public SettingsNotificationsPanel() {
+public partial class SettingsNotificationsPanel : ContentBase
+{
+    public SettingsNotificationsPanel()
+    {
         InitializeComponent();
     }
 }

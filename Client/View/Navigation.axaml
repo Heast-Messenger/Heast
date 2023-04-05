@@ -8,29 +8,29 @@
              mc:Ignorable="d"
              x:Class="Client.View.Navigation">
 	<Design.DataContext>
-		<vm:NavigationViewModel/>
+		<vm:NavigationViewModel />
 	</Design.DataContext>
-	
+
 	<UserControl.Resources>
-		<Image x:Key="Image.Chat" Source="{SvgImage /Assets/Navigation/Chat.svg}" Width="18" Height="18"/>
-		<Image x:Key="Image.Explore" Source="{SvgImage /Assets/Navigation/Explore.svg}" Width="18" Height="18"/>
-		<Image x:Key="Image.People" Source="{SvgImage /Assets/Navigation/People.svg}" Width="18" Height="18"/>
-		<Image x:Key="Image.Servers" Source="{SvgImage /Assets/Navigation/Servers.svg}" Width="18" Height="18"/>
-		<Image x:Key="Image.Settings" Source="{SvgImage /Assets/Navigation/Settings.svg}" Width="18" Height="18"/>
+		<Image x:Key="Image.Chat" Source="{SvgImage /Assets/Navigation/Chat.svg}" Width="18" Height="18" />
+		<Image x:Key="Image.Explore" Source="{SvgImage /Assets/Navigation/Explore.svg}" Width="18" Height="18" />
+		<Image x:Key="Image.People" Source="{SvgImage /Assets/Navigation/People.svg}" Width="18" Height="18" />
+		<Image x:Key="Image.Servers" Source="{SvgImage /Assets/Navigation/Servers.svg}" Width="18" Height="18" />
+		<Image x:Key="Image.Settings" Source="{SvgImage /Assets/Navigation/Settings.svg}" Width="18" Height="18" />
 	</UserControl.Resources>
-	
+
 	<UserControl.Styles>
 		<Style Selector=":is(Button)">
 			<Setter Property="DockPanel.Dock" Value="Top" />
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderThickness" Value="0.0"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="BorderThickness" Value="0.0" />
+			<Setter Property="BorderBrush" Value="Transparent" />
 			<Setter Property="Margin" Value="0 0 0 30" />
 			<Setter Property="Padding" Value="8.0" />
 			<Setter Property="Transitions">
 				<Setter.Value>
 					<Transitions>
-						<TransformOperationsTransition 
+						<TransformOperationsTransition
 							Property="RenderTransform"
 							Duration="0:0:1.0">
 							<TransformOperationsTransition.Easing>
@@ -56,25 +56,25 @@
 		<components:RadioButton
 			Content="{StaticResource Image.Chat}"
 			GroupName="Navigation"
-			Click="Button_OnChat"/>
+			Click="Button_OnChat" />
 		<components:RadioButton
 			Content="{StaticResource Image.Explore}"
 			GroupName="Navigation"
-			Click="Button_OnExplore"/>
+			Click="Button_OnExplore" />
 		<components:RadioButton
 			Content="{StaticResource Image.People}"
 			GroupName="Navigation"
-			Click="Button_OnPeople"/>
+			Click="Button_OnPeople" />
 		<components:RadioButton
 			Content="{StaticResource Image.Servers}"
 			GroupName="Navigation"
-			Click="Button_OnServers"/>
+			Click="Button_OnServers" />
 		<components:RadioButton
 			Content="{StaticResource Image.Settings}"
 			GroupName="Navigation"
 			DockPanel.Dock="Bottom"
 			Margin="0"
-			Click="Button_OnSettings"/>
+			Click="Button_OnSettings" />
 		<Border Background="Transparent" />
 	</DockPanel>
 </UserControl>

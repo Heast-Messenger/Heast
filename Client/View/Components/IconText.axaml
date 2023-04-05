@@ -11,7 +11,7 @@
 			Width="18" Height="18"
 			Source="{Binding Icon,
 				RelativeSource={RelativeSource
-				AncestorType={x:Type components:IconText}}}"/>
+				AncestorType={x:Type components:IconText}}}" />
 		<TextBlock
 			FontSize="13.0"
 			Classes="Bold"
@@ -20,6 +20,6 @@
 				AncestorType={x:Type components:IconText}}}"
 			Text="{Binding Text,
 				RelativeSource={RelativeSource
-				AncestorType={x:Type components:IconText}}}"/>
+				AncestorType={x:Type components:IconText}}}" />
 	</StackPanel>
 </UserControl>

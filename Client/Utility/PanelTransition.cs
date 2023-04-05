@@ -12,8 +12,8 @@ namespace Client.Utility;
 
 public class PanelTransition : IPageTransition
 {
-    private readonly Animation _out;
     private readonly Animation _in;
+    private readonly Animation _out;
 
     public PanelTransition()
         : this(TimeSpan.Zero) { }
@@ -31,7 +31,7 @@ public class PanelTransition : IPageTransition
                     Cue = new(0d),
                     Setters =
                     {
-                        new Setter { Property = ScaleTransform.ScaleYProperty, Value = 0d }
+                        new Setter {Property = ScaleTransform.ScaleYProperty, Value = 0d}
                     }
                 },
                 new()
@@ -39,7 +39,7 @@ public class PanelTransition : IPageTransition
                     Cue = new(1d),
                     Setters =
                     {
-                        new Setter { Property = ScaleTransform.ScaleYProperty, Value = 1d }
+                        new Setter {Property = ScaleTransform.ScaleYProperty, Value = 1d}
                     }
                 }
             }
@@ -56,7 +56,7 @@ public class PanelTransition : IPageTransition
                     Cue = new(0d),
                     Setters =
                     {
-                        new Setter { Property = ScaleTransform.ScaleYProperty, Value = 1d }
+                        new Setter {Property = ScaleTransform.ScaleYProperty, Value = 1d}
                     }
                 },
                 new()
@@ -64,7 +64,7 @@ public class PanelTransition : IPageTransition
                     Cue = new(1d),
                     Setters =
                     {
-                        new Setter { Property = ScaleTransform.ScaleYProperty, Value = 0d }
+                        new Setter {Property = ScaleTransform.ScaleYProperty, Value = 0d}
                     }
                 }
             }
@@ -86,10 +86,7 @@ public class PanelTransition : IPageTransition
         CancellationToken cancellationToken
     )
     {
-        if (cancellationToken.IsCancellationRequested)
-        {
-            return;
-        }
+        if (cancellationToken.IsCancellationRequested) return;
 
         var tasks = new List<Task>();
 
@@ -108,9 +105,6 @@ public class PanelTransition : IPageTransition
 
         await Task.WhenAll(tasks);
 
-        if (from != null && !cancellationToken.IsCancellationRequested)
-        {
-            from.IsVisible = false;
-        }
+        if (from != null && !cancellationToken.IsCancellationRequested) from.IsVisible = false;
     }
 }

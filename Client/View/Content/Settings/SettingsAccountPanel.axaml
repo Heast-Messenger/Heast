@@ -2,60 +2,85 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:view="clr-namespace:Client.View.Content"
                   xmlns:components="clr-namespace:Client.View.Components"
+                  xmlns:vm="clr-namespace:Client.ViewModel.Content"
                   x:Class="Client.View.Content.SettingsAccountPanel">
+	<Design.DataContext>
+		<vm:SettingsAccountViewModel />
+	</Design.DataContext>
+
 	<view:ContentBase.Resources>
 		<components:IconText
 			x:Key="Content.Invite"
 			Text="Invite Friends"
 			Icon="{SvgImage /Assets/Settings/Invite.svg}"
-			Foreground="{DynamicResource Blue}"/>
+			Foreground="{DynamicResource Blue}" />
 		<components:IconText
 			x:Key="Content.Request"
 			Text="Request Data"
 			Icon="{SvgImage /Assets/Settings/Request.svg}"
-			Foreground="{DynamicResource White}"/>
+			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Switch"
 			Text="Switch Account"
 			Icon="{SvgImage /Assets/Settings/Switch.svg}"
-			Foreground="{DynamicResource White}"/>
+			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Logout"
 			Text="Log out"
 			Icon="{SvgImage /Assets/Settings/Logout.svg}"
-			Foreground="{DynamicResource Red}"/>
+			Foreground="{DynamicResource Red}" />
 		<components:IconText
 			x:Key="Content.Delete"
 			Text="Delete Account"
 			Icon="{SvgImage /Assets/Settings/Delete.svg}"
-			Foreground="{DynamicResource Red}"/>
+			Foreground="{DynamicResource Red}" />
 	</view:ContentBase.Resources>
 
 	<view:ContentBase.Styles>
 		<Style Selector="TextBlock.Title">
-			<Setter Property="Foreground" Value="{DynamicResource Light}"/>
-			<Setter Property="Margin" Value="0.0 0.0 0.0 5.0"/>
+			<Setter Property="Foreground" Value="{DynamicResource Light}" />
+			<Setter Property="Margin" Value="0.0 0.0 0.0 5.0" />
 		</Style>
 		<Style Selector="Button">
-			<Setter Property="Padding" Value="12.0"/>
+			<Setter Property="Padding" Value="12.0" />
 		</Style>
 	</view:ContentBase.Styles>
-	
+
 	<Grid ColumnDefinitions="*,23,200"
 	      RowDefinitions="*">
-		<Panel Grid.Column="0">
-			<TextBlock Text="Account"/>
-		</Panel>
-		
+		<StackPanel Grid.Column="0"
+		            Orientation="Vertical"
+		            Spacing="10.0"
+		            VerticalAlignment="Center"
+		            HorizontalAlignment="Center">
+			<Image Source="{SvgImage /Assets/Settings/Account.svg}"
+			       Width="128.0" Height="128.0" />
+			<TextBlock Text="Username"
+			           TextAlignment="Center"
+			           FontSize="32.0"
+			           Classes="Bold" />
+			<TextBox Width="200.0" Height="100.0"
+			         AcceptsReturn="True"
+			         AcceptsTab="False"
+			         BorderBrush="{DynamicResource Gray}"
+			         SelectionBrush="{DynamicResource Gray}"
+			         BorderThickness="3.0"
+			         Watermark="About you..."
+			         Foreground="{DynamicResource Gray}"
+			         Background="{DynamicResource Dark}"
+			         FontSize="24.0"
+			         CornerRadius="10.0" />
+		</StackPanel>
+
 		<Border
 			Grid.Column="1"
 			Background="{DynamicResource Light}"
 			VerticalAlignment="Stretch"
 			HorizontalAlignment="Center"
 			CornerRadius="1.5"
-			Width="3"/>
-		
-		<ScrollViewer 
+			Width="3" />
+
+		<ScrollViewer
 			Grid.Column="2"
 			Padding="10.0"
 			HorizontalScrollBarVisibility="Disabled"
@@ -63,25 +88,25 @@
 			<StackPanel Orientation="Vertical">
 				<TextBlock
 					Text="Manage Account"
-					Classes="Title Bold"/>
+					Classes="Title Bold" />
 				<Button
 					Content="{StaticResource Content.Invite}"
-					Click="Button_OnInvite"/>
+					Click="Button_OnInvite" />
 				<Button
 					Content="{StaticResource Content.Request}"
-					Click="Button_OnRequest"/>
+					Click="Button_OnRequest" />
 				<Button
 					Content="{StaticResource Content.Switch}"
-					Click="Button_OnSwitch"/>
+					Click="Button_OnSwitch" />
 				<TextBlock
 					Text="Red line"
-					Classes="Title Bold"/>
+					Classes="Title Bold" />
 				<Button
 					Content="{StaticResource Content.Logout}"
-					Click="Button_OnLogout"/>
+					Click="Button_OnLogout" />
 				<Button
 					Content="{StaticResource Content.Delete}"
-					Click="Button_OnDelete"/>
+					Click="Button_OnDelete" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

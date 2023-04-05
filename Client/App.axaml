@@ -1,47 +1,48 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Client.App">
-    <Application.Styles>
-        <SimpleTheme/>
-        
-        <Style Selector="Button">
-            <Setter Property="Background" Value="{DynamicResource Dark}"/>
-            <Setter Property="BorderThickness" Value="2.0"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource Light}"/>
-            <Setter Property="Padding" Value="16.0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="0.0 0.0 0.0 15.0"/>
-            <Setter Property="CornerRadius" Value="10.0"/>
-            <Setter Property="ClickMode" Value="Release" />
-        </Style>
-        
-        <Style Selector="TextBlock">
-            <Setter Property="FontFamily" Value="{DynamicResource Poppins}" />
-            <Setter Property="Foreground" Value="{DynamicResource White}" />
-            <Setter Property="FontSize" Value="16.0" />
-        </Style>
-        
-        <Style Selector="TextBlock.Bold">
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-        <Style Selector="TextBlock.Subtitle">
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="Foreground" Value="{DynamicResource Light}"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-        </Style>
-    </Application.Styles>
-    
-    <Application.Resources>
-        <Color x:Key="Dark">#FF1E1E24</Color>
-        <Color x:Key="Mid">#FF26262D</Color>
-        <Color x:Key="Light">#FF34343A</Color>
-        <Color x:Key="White">#FFEBF2FF</Color>
-        <Color x:Key="Accent">#FFFEBC2E</Color>
-        <Color x:Key="Red">#FFF45449</Color>
-        <Color x:Key="Green">#FF67FF76</Color>
-        <Color x:Key="Blue">#FF67B6FF</Color>
-        
-        <FontFamily x:Key="Poppins">avares://Client/Assets/Fonts#Poppins</FontFamily>
-        <FontFamily x:Key="Inter">avares://Client/Assets/Fonts#Inter</FontFamily>
-    </Application.Resources>
+	<Application.Styles>
+		<SimpleTheme />
+
+		<Style Selector="Button">
+			<Setter Property="Background" Value="{DynamicResource Dark}" />
+			<Setter Property="BorderThickness" Value="2.0" />
+			<Setter Property="BorderBrush" Value="{DynamicResource Light}" />
+			<Setter Property="Padding" Value="16.0" />
+			<Setter Property="HorizontalContentAlignment" Value="Left" />
+			<Setter Property="Margin" Value="0.0 0.0 0.0 15.0" />
+			<Setter Property="CornerRadius" Value="10.0" />
+			<Setter Property="ClickMode" Value="Release" />
+		</Style>
+
+		<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="{DynamicResource Poppins}" />
+			<Setter Property="Foreground" Value="{DynamicResource White}" />
+			<Setter Property="FontSize" Value="16.0" />
+		</Style>
+
+		<Style Selector="TextBlock.Bold">
+			<Setter Property="FontWeight" Value="SemiBold" />
+		</Style>
+		<Style Selector="TextBlock.Subtitle">
+			<Setter Property="FontWeight" Value="Normal" />
+			<Setter Property="Foreground" Value="{DynamicResource Light}" />
+			<Setter Property="FontStyle" Value="Italic" />
+		</Style>
+	</Application.Styles>
+
+	<Application.Resources>
+		<Color x:Key="Dark">#FF1E1E24</Color>
+		<Color x:Key="Mid">#FF26262D</Color>
+		<Color x:Key="Light">#FF34343A</Color>
+		<Color x:Key="Gray">#FF63686E</Color>
+		<Color x:Key="White">#FFEBF2FF</Color>
+		<Color x:Key="Accent">#FFFEBC2E</Color>
+		<Color x:Key="Red">#FFF45449</Color>
+		<Color x:Key="Green">#FF67FF76</Color>
+		<Color x:Key="Blue">#FF67B6FF</Color>
+
+		<FontFamily x:Key="Poppins">avares://Client/Assets/Fonts#Poppins</FontFamily>
+		<FontFamily x:Key="Inter">avares://Client/Assets/Fonts#Inter</FontFamily>
+	</Application.Resources>
 </Application>

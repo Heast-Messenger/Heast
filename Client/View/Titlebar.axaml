@@ -9,25 +9,25 @@
 		<!-- ReSharper Disable InconsistentNaming -->
 		<Rectangle Name="OSXControlSpacer"
 		           Width="70.0"
-		           DockPanel.Dock="Left"/>
-		
+		           DockPanel.Dock="Left" />
+
 		<TextBlock DockPanel.Dock="Left"
 		           VerticalAlignment="Center"
 		           Text="Welcome Back!"
-		           Classes="Bold"/>
-		
+		           Classes="Bold" />
+
 		<Rectangle Name="WinControlSpacer"
 		           Width="140.0"
-		           DockPanel.Dock="Right"/>
-		
+		           DockPanel.Dock="Right" />
+
 		<!-- Rounded user profile image -->
 		<Image DockPanel.Dock="Right" />
-		
+
 		<TextBlock DockPanel.Dock="Right"
 		           VerticalAlignment="Center"
 		           Text="Username"
-		           Classes="Bold"/>
-		
+		           Classes="Bold" />
+
 		<Border Background="Transparent" />
 	</DockPanel>
 </UserControl>
