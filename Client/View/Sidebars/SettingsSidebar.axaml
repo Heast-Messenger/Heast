@@ -11,35 +11,56 @@
 	</Design.DataContext>
 
 	<view:SidebarBase.Resources>
-		<SvgImage x:Key="Image.Account" Source="/Assets/Settings/Account.svg" />
-		<SvgImage x:Key="Image.Security" Source="/Assets/Settings/Security.svg" />
-		<SvgImage x:Key="Image.Notifications" Source="/Assets/Settings/Notifications.svg" />
-		<SvgImage x:Key="Image.Appearance" Source="/Assets/Settings/Appearance.svg" />
-		<SvgImage x:Key="Image.Status" Source="/Assets/Settings/Status.svg" />
+		<components:IconText 
+			x:Key="Content.Account"
+			Text="Account"
+			Icon="{SvgImage /Assets/Settings/Account.svg}"/>
+		<components:IconText 
+			x:Key="Content.Security"
+			Text="Security"
+			Icon="{SvgImage /Assets/Settings/Security.svg}"/>
+		<components:IconText 
+			x:Key="Content.Notifications"
+			Text="Notifications"
+			Icon="{SvgImage /Assets/Settings/Notifications.svg}"/>
+		<components:IconText 
+			x:Key="Content.Appearance"
+			Text="Appearance"
+			Icon="{SvgImage /Assets/Settings/Appearance.svg}"/>
+		<components:IconText 
+			x:Key="Content.Status"
+			Text="Status"
+			Icon="{SvgImage /Assets/Settings/Status.svg}"/>
 	</view:SidebarBase.Resources>
+	
+	<view:SidebarBase.Styles>
+		<Style Selector="Button">
+			<Setter Property="Padding" Value="16.0"/>
+		</Style>
+	</view:SidebarBase.Styles>
 
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled"
 	              VerticalScrollBarVisibility="Auto">
 		<StackPanel Orientation="Vertical">
-			<components:SidebarButton
-				Text="Account"
-				Icon="{StaticResource Image.Account}"
+			<components:RadioButton
+				Content="{StaticResource Content.Account}"
+				GroupName="Sidebar"
 				Click="Button_OnAccount" />
-			<components:SidebarButton
-				Text="Security"
-				Icon="{StaticResource Image.Security}"
+			<components:RadioButton
+				Content="{StaticResource Content.Security}"
+				GroupName="Sidebar"
 				Click="Button_OnSecurity" />
-			<components:SidebarButton
-				Text="Notifications"
-				Icon="{StaticResource Image.Notifications}"
+			<components:RadioButton
+				Content="{StaticResource Content.Notifications}"
+				GroupName="Sidebar"
 				Click="Button_OnNotifications" />
-			<components:SidebarButton
-				Text="Appearance"
-				Icon="{StaticResource Image.Appearance}"
+			<components:RadioButton
+				Content="{StaticResource Content.Appearance}"
+				GroupName="Sidebar"
 				Click="Button_OnAppearance" />
-			<components:SidebarButton
-				Text="Status"
-				Icon="{StaticResource Image.Status}"
+			<components:RadioButton
+				Content="{StaticResource Content.Status}"
+				GroupName="Sidebar"
 				Click="Button_OnStatus" />
 		</StackPanel>
 	</ScrollViewer>

@@ -8,35 +8,35 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove=".gitignore"/>
-        <None Remove="Assets\Navigation\Illustrator.ai"/>
-        <None Remove="Todo.md"/>
+        <None Remove=".gitignore" />
+        <None Remove="Assets\Navigation\Illustrator.ai" />
+        <None Remove="Todo.md" />
     </ItemGroup>
 
     <ItemGroup>
-        <TrimmerRootDescriptor Include="Roots.xml"/>
+        <TrimmerRootDescriptor Include="Roots.xml" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.0-preview5"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5"/>
+        <PackageReference Include="Avalonia" Version="11.0.0-preview5" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview5"/>
-        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0-preview5"/>
-        <PackageReference Include="Avalonia.Controls.Skia" Version="11.0.0-preview5"/>
-        <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview5" />
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0-preview5" />
+        <PackageReference Include="Avalonia.Controls.Skia" Version="11.0.0-preview5" />
+        <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\Core.csproj"/>
+        <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
-        <AvaloniaResource Include="Assets\Fonts\**"/>
+        <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Include="Assets\Fonts\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Model"/>
+        <Folder Include="Model" />
     </ItemGroup>
 </Project>

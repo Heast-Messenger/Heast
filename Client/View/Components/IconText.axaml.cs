@@ -6,12 +6,12 @@ namespace Client.View.Components;
 
 public partial class IconText : UserControl
 {
-    public static readonly DirectProperty<SidebarButton, string?> TextProperty =
-        AvaloniaProperty.RegisterDirect<SidebarButton, string?>(nameof(Text),
+    public static readonly DirectProperty<IconText, string?> TextProperty =
+        AvaloniaProperty.RegisterDirect<IconText, string?>(nameof(Text),
             o => o.Text, (o, v) => o.Text = v);
 
     public static readonly StyledProperty<IImage> IconProperty =
-        AvaloniaProperty.Register<SidebarButton, IImage>(nameof(Icon));
+        AvaloniaProperty.Register<IconText, IImage>(nameof(Icon));
 
     private string? _text;
 
