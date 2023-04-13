@@ -14,23 +14,28 @@
 		<components:IconText 
 			x:Key="Content.Account"
 			Text="Account"
-			Icon="{SvgImage /Assets/Settings/Account.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Account.svg}"
+			Foreground="{DynamicResource White}"/>
 		<components:IconText 
 			x:Key="Content.Security"
 			Text="Security"
-			Icon="{SvgImage /Assets/Settings/Security.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Security.svg}"
+			Foreground="{DynamicResource White}"/>
 		<components:IconText 
 			x:Key="Content.Notifications"
 			Text="Notifications"
-			Icon="{SvgImage /Assets/Settings/Notifications.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Notifications.svg}"
+			Foreground="{DynamicResource White}"/>
 		<components:IconText 
 			x:Key="Content.Appearance"
 			Text="Appearance"
-			Icon="{SvgImage /Assets/Settings/Appearance.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Appearance.svg}"
+			Foreground="{DynamicResource White}"/>
 		<components:IconText 
 			x:Key="Content.Status"
 			Text="Status"
-			Icon="{SvgImage /Assets/Settings/Status.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Status.svg}"
+			Foreground="{DynamicResource White}"/>
 	</view:SidebarBase.Resources>
 	
 	<view:SidebarBase.Styles>
