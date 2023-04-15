@@ -1,9 +1,19 @@
 using System;
+using Core.Network.Pipeline;
 
 namespace Client.ViewModel.Content;
 
 public class SettingsAccountViewModel : ContentViewModelBase
 {
+    private readonly MainWindowViewModel _mainWindowVm;
+
+    public SettingsAccountViewModel(MainWindowViewModel mainWindowVm)
+    {
+        _mainWindowVm = mainWindowVm;
+    }
+
+    private ClientConnection Ctx => _mainWindowVm.Ctx;
+
     public void Button_OnInvite()
     {
         Console.WriteLine("Invite");

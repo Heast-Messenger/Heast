@@ -6,14 +6,11 @@ namespace Client.ViewModel;
 
 public class NavigationViewModel : ViewModelBase
 {
-    public readonly ContentViewModel ContentViewModel;
+    private readonly MainWindowViewModel _mainWindowVm;
 
-    public readonly SidebarViewModel SidebarViewModel;
-
-    public NavigationViewModel(SidebarViewModel sidebarViewModel, ContentViewModel contentViewModel)
+    public NavigationViewModel(MainWindowViewModel mainWindowVm)
     {
-        SidebarViewModel = sidebarViewModel;
-        ContentViewModel = contentViewModel;
+        _mainWindowVm = mainWindowVm;
     }
 
     public NavigationViewModel()
@@ -23,29 +20,29 @@ public class NavigationViewModel : ViewModelBase
 
     public void Button_OnChat()
     {
-        SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnExplore()
     {
-        SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnPeople()
     {
-        SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnServers()
     {
-        SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnSettings()
     {
-        SidebarViewModel.CurrentSidebar = new SettingsSidebar
+        _mainWindowVm.SidebarViewModel.CurrentSidebar = new SettingsSidebar
         {
-            DataContext = new SettingsSidebarViewModel(ContentViewModel)
+            DataContext = new SettingsSidebarViewModel(_mainWindowVm)
         };
     }
 }

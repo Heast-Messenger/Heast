@@ -4,7 +4,7 @@ namespace Client.ViewModel.Sidebars;
 
 public abstract class SidebarViewModelBase
 {
-    public readonly ContentViewModel ContentViewModel;
+    protected readonly ContentViewModel ContentViewModel;
 
     protected SidebarViewModelBase(ContentViewModel contentViewModel)
     {

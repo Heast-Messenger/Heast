@@ -6,11 +6,14 @@ namespace Client.ViewModel.Sidebars;
 
 public class SettingsSidebarViewModel : SidebarViewModelBase
 {
-    public SettingsSidebarViewModel(ContentViewModel contentViewModel) : base(contentViewModel)
+    private readonly MainWindowViewModel _mainWindowVm;
+
+    public SettingsSidebarViewModel(MainWindowViewModel mainWindowVm) : base(mainWindowVm.ContentViewModel)
     {
+        _mainWindowVm = mainWindowVm;
         ContentViewModel.Content = new SettingsAccountPanel
         {
-            DataContext = new SettingsAccountViewModel()
+            DataContext = new SettingsAccountViewModel(_mainWindowVm)
         };
     }
 
@@ -23,7 +26,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsAccountPanel
         {
-            DataContext = new SettingsAccountViewModel()
+            DataContext = new SettingsAccountViewModel(_mainWindowVm)
         };
     }
 
@@ -31,7 +34,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsSecurityPanel
         {
-            DataContext = new SettingsSecurityViewModel()
+            DataContext = new SettingsSecurityViewModel(_mainWindowVm)
         };
     }
 
@@ -39,7 +42,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsNotificationsPanel
         {
-            DataContext = new SettingsNotificationsViewModel()
+            DataContext = new SettingsNotificationsViewModel(_mainWindowVm)
         };
     }
 
@@ -47,7 +50,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsAppearancePanel
         {
-            DataContext = new SettingsAppearanceViewModel()
+            DataContext = new SettingsAppearanceViewModel(_mainWindowVm)
         };
     }
 
@@ -55,7 +58,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsStatusPanel
         {
-            DataContext = new SettingsStatusViewModel()
+            DataContext = new SettingsStatusViewModel(_mainWindowVm)
         };
     }
 }
