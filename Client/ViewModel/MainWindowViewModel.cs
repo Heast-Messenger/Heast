@@ -11,5 +11,7 @@ public class MainWindowViewModel : ViewModelBase
 
     public SidebarViewModel SidebarViewModel { get; }
     public ContentViewModel ContentViewModel { get; }
+
     public NavigationViewModel NavigationViewModel { get; }
+    // public ClientConnection
 }

@@ -13,6 +13,10 @@
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
 
+	<NativeMenu.Menu>
+		<NativeMenu />
+	</NativeMenu.Menu>
+
 	<Panel>
 		<Border Background="{DynamicResource Mid}"
 		        IsHitTestVisible="False" />

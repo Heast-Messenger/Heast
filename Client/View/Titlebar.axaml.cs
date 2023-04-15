@@ -33,19 +33,18 @@ public partial class Titlebar : UserControl
 
     private void OnWindowPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property == Window.WindowStateProperty && e.NewValue is WindowState state)
+        if (e.Property != Window.WindowStateProperty || e.NewValue is not WindowState state) return;
+
+        Console.WriteLine($"Window state changed to {state}");
+        if (state == WindowState.FullScreen)
         {
-            Console.WriteLine($"Window state changed to {state}");
-            if (state == WindowState.FullScreen)
-            {
-                if (_isOsx) _osxControlSpacer.IsVisible = false;
-                if (_isWin) _winControlSpacer.IsVisible = false;
-            }
-            else
-            {
-                if (_isOsx) _osxControlSpacer.IsVisible = true;
-                if (_isWin) _winControlSpacer.IsVisible = true;
-            }
+            if (_isOsx) _osxControlSpacer.IsVisible = false;
+            if (_isWin) _winControlSpacer.IsVisible = false;
+        }
+        else
+        {
+            if (_isOsx) _osxControlSpacer.IsVisible = true;
+            if (_isWin) _winControlSpacer.IsVisible = true;
         }
     }
 }

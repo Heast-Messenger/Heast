@@ -88,22 +88,22 @@
 					Classes="Title Bold" />
 				<Button
 					Content="{StaticResource Content.Invite}"
-					Click="Button_OnInvite" />
+					Command="{Binding Button_OnInvite}" />
 				<Button
 					Content="{StaticResource Content.Request}"
-					Click="Button_OnRequest" />
+					Command="{Binding Button_OnRequest}" />
 				<Button
 					Content="{StaticResource Content.Switch}"
-					Click="Button_OnSwitch" />
+					Command="{Binding Button_OnSwitch}" />
 				<TextBlock
 					Text="Red line"
 					Classes="Title Bold" />
 				<Button
 					Content="{StaticResource Content.Logout}"
-					Click="Button_OnLogout" />
+					Command="{Binding Button_OnLogout}" />
 				<Button
 					Content="{StaticResource Content.Delete}"
-					Click="Button_OnDelete" />
+					Command="{Binding Button_OnDelete}" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

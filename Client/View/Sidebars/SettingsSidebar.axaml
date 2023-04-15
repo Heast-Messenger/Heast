@@ -11,31 +11,36 @@
 	</Design.DataContext>
 
 	<view:SidebarBase.Resources>
-		<components:IconText 
+		<components:IconText
 			x:Key="Content.Account"
 			Text="Account"
-			Icon="{SvgImage /Assets/Settings/Account.svg}"/>
-		<components:IconText 
+			Icon="{SvgImage /Assets/Settings/Account.svg}"
+			Foreground="{DynamicResource White}" />
+		<components:IconText
 			x:Key="Content.Security"
 			Text="Security"
-			Icon="{SvgImage /Assets/Settings/Security.svg}"/>
-		<components:IconText 
+			Icon="{SvgImage /Assets/Settings/Security.svg}"
+			Foreground="{DynamicResource White}" />
+		<components:IconText
 			x:Key="Content.Notifications"
 			Text="Notifications"
-			Icon="{SvgImage /Assets/Settings/Notifications.svg}"/>
-		<components:IconText 
+			Icon="{SvgImage /Assets/Settings/Notifications.svg}"
+			Foreground="{DynamicResource White}" />
+		<components:IconText
 			x:Key="Content.Appearance"
 			Text="Appearance"
-			Icon="{SvgImage /Assets/Settings/Appearance.svg}"/>
-		<components:IconText 
+			Icon="{SvgImage /Assets/Settings/Appearance.svg}"
+			Foreground="{DynamicResource White}" />
+		<components:IconText
 			x:Key="Content.Status"
 			Text="Status"
-			Icon="{SvgImage /Assets/Settings/Status.svg}"/>
+			Icon="{SvgImage /Assets/Settings/Status.svg}"
+			Foreground="{DynamicResource White}" />
 	</view:SidebarBase.Resources>
-	
+
 	<view:SidebarBase.Styles>
 		<Style Selector="Button">
-			<Setter Property="Padding" Value="16.0"/>
+			<Setter Property="Padding" Value="16.0" />
 		</Style>
 	</view:SidebarBase.Styles>
 
@@ -45,23 +50,23 @@
 			<components:RadioButton
 				Content="{StaticResource Content.Account}"
 				GroupName="Sidebar"
-				Click="Button_OnAccount" />
+				Command="{Binding Button_OnAccount}" />
 			<components:RadioButton
 				Content="{StaticResource Content.Security}"
 				GroupName="Sidebar"
-				Click="Button_OnSecurity" />
+				Command="{Binding Button_OnSecurity}" />
 			<components:RadioButton
 				Content="{StaticResource Content.Notifications}"
 				GroupName="Sidebar"
-				Click="Button_OnNotifications" />
+				Command="{Binding Button_OnNotifications}" />
 			<components:RadioButton
 				Content="{StaticResource Content.Appearance}"
 				GroupName="Sidebar"
-				Click="Button_OnAppearance" />
+				Command="{Binding Button_OnAppearance}" />
 			<components:RadioButton
 				Content="{StaticResource Content.Status}"
 				GroupName="Sidebar"
-				Click="Button_OnStatus" />
+				Command="{Binding Button_OnStatus}" />
 		</StackPanel>
 	</ScrollViewer>
 </view:SidebarBase>

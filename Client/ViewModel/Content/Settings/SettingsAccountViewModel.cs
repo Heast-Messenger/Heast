@@ -2,18 +2,30 @@ using System;
 
 namespace Client.ViewModel.Content;
 
-public class SettingsAccountViewModel : ViewModelBase
+public class SettingsAccountViewModel : ContentViewModelBase
 {
-    public void Invite()
+    public void Button_OnInvite()
     {
         Console.WriteLine("Invite");
     }
 
-    public void Request() { }
+    public void Button_OnRequest()
+    {
+        Console.WriteLine("Request");
+    }
 
-    public void Switch() { }
+    public void Button_OnSwitch()
+    {
+        Console.WriteLine("Switch");
+    }
 
-    public void Logout() { }
+    public void Button_OnLogout()
+    {
+        Console.WriteLine("Logout");
+    }
 
-    public void Delete() { }
+    public void Button_OnDelete()
+    {
+        Console.WriteLine("Delete");
+    }
 }

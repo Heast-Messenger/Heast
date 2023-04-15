@@ -56,25 +56,25 @@
 		<components:RadioButton
 			Content="{StaticResource Image.Chat}"
 			GroupName="Navigation"
-			Click="Button_OnChat" />
+			Command="{Binding Button_OnChat}" />
 		<components:RadioButton
 			Content="{StaticResource Image.Explore}"
 			GroupName="Navigation"
-			Click="Button_OnExplore" />
+			Command="{Binding Button_OnExplore}" />
 		<components:RadioButton
 			Content="{StaticResource Image.People}"
 			GroupName="Navigation"
-			Click="Button_OnPeople" />
+			Command="{Binding Button_OnPeople}" />
 		<components:RadioButton
 			Content="{StaticResource Image.Servers}"
 			GroupName="Navigation"
-			Click="Button_OnServers" />
+			Command="{Binding Button_OnServers}" />
 		<components:RadioButton
 			Content="{StaticResource Image.Settings}"
 			GroupName="Navigation"
 			DockPanel.Dock="Bottom"
 			Margin="0"
-			Click="Button_OnSettings" />
+			Command="{Binding Button_OnSettings}" />
 		<Border Background="Transparent" />
 	</DockPanel>
 </UserControl>

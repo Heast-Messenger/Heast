@@ -1,3 +1,3 @@
 namespace Client.ViewModel.Content;
 
-public class SettingsSecurityViewModel : ViewModelBase { }
+public class SettingsSecurityViewModel : ContentViewModelBase { }
