@@ -1,4 +1,3 @@
-using System;
 using Client.View.Sidebars;
 using Client.ViewModel.Sidebars;
 
@@ -11,11 +10,6 @@ public class NavigationViewModel : ViewModelBase
     public NavigationViewModel(MainWindowViewModel mainWindowVm)
     {
         _mainWindowVm = mainWindowVm;
-    }
-
-    public NavigationViewModel()
-    {
-        throw new InvalidOperationException("This constructor is only for design-time purposes.");
     }
 
     public void Button_OnChat()

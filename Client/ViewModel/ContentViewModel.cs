@@ -5,13 +5,11 @@ namespace Client.ViewModel;
 
 public class ContentViewModel : ViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowVm;
     private Layoutable _content;
 
-    public ContentViewModel(MainWindowViewModel mainWindowVm)
+    public ContentViewModel()
     {
         _content = new HomePanel();
-        _mainWindowVm = mainWindowVm;
     }
 
     public Layoutable Content

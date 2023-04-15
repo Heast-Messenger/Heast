@@ -5,14 +5,12 @@ namespace Client.ViewModel;
 
 public class SidebarViewModel : ViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowVm;
     private Layoutable _currentSidebar;
     private double _currentSidebarWidth;
 
-    public SidebarViewModel(MainWindowViewModel mainWindowVm)
+    public SidebarViewModel()
     {
         _currentSidebar = new EmptySidebar();
-        _mainWindowVm = mainWindowVm;
     }
 
     public Layoutable CurrentSidebar

@@ -6,14 +6,11 @@ namespace Client.ViewModel.Sidebars;
 
 public class SettingsSidebarViewModel : SidebarViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowVm;
-
     public SettingsSidebarViewModel(MainWindowViewModel mainWindowVm) : base(mainWindowVm.ContentViewModel)
     {
-        _mainWindowVm = mainWindowVm;
         ContentViewModel.Content = new SettingsAccountPanel
         {
-            DataContext = new SettingsAccountViewModel(_mainWindowVm)
+            DataContext = new SettingsAccountViewModel()
         };
     }
 
@@ -26,7 +23,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsAccountPanel
         {
-            DataContext = new SettingsAccountViewModel(_mainWindowVm)
+            DataContext = new SettingsAccountViewModel()
         };
     }
 
@@ -34,7 +31,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsSecurityPanel
         {
-            DataContext = new SettingsSecurityViewModel(_mainWindowVm)
+            DataContext = new SettingsSecurityViewModel()
         };
     }
 
@@ -42,7 +39,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsNotificationsPanel
         {
-            DataContext = new SettingsNotificationsViewModel(_mainWindowVm)
+            DataContext = new SettingsNotificationsViewModel()
         };
     }
 
@@ -50,7 +47,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsAppearancePanel
         {
-            DataContext = new SettingsAppearanceViewModel(_mainWindowVm)
+            DataContext = new SettingsAppearanceViewModel()
         };
     }
 
@@ -58,7 +55,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsStatusPanel
         {
-            DataContext = new SettingsStatusViewModel(_mainWindowVm)
+            DataContext = new SettingsStatusViewModel()
         };
     }
 }

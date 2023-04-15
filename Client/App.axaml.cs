@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Client.View;
 using Client.ViewModel;
 using Core.Network.Pipeline;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client;
 
@@ -23,7 +24,12 @@ public class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(Ctx)
+                DataContext = new MainWindowViewModel()
             };
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<ClientConnection>();
     }
 }

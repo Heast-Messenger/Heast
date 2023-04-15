@@ -1,18 +1,12 @@
 using System;
 using Core.Network.Pipeline;
+using static Client.Hooks;
 
 namespace Client.ViewModel.Content;
 
 public class SettingsAccountViewModel : ContentViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowVm;
-
-    public SettingsAccountViewModel(MainWindowViewModel mainWindowVm)
-    {
-        _mainWindowVm = mainWindowVm;
-    }
-
-    private ClientConnection Ctx => _mainWindowVm.Ctx;
+    private readonly (Func<ClientConnection> Get, Action<ClientConnection> Set) _ctx = UseClientConnection();
 
     public void Button_OnInvite()
     {
