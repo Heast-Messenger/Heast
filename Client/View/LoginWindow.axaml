@@ -1,0 +1,21 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Client.ViewModel"
+        x:Class="Client.View.LoginWindow"
+        ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
+        ExtendClientAreaToDecorationsHint="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Welcome to Heast!"
+        Width="450"
+        Height="700">
+
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
+
+    <Panel>
+        <Border
+            Background="{DynamicResource Mid}"
+            IsHitTestVisible="False" />
+    </Panel>
+</Window>

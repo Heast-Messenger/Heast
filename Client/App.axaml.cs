@@ -9,20 +9,25 @@ namespace Client;
 
 public class App : Application
 {
-    public override void Initialize()
-    {
-        Console.WriteLine("Initializing client gui...");
-        AvaloniaXamlLoader.Load(this);
-    }
+	public override void Initialize()
+	{
+		Console.WriteLine("Initializing client gui...");
+		AvaloniaXamlLoader.Load(this);
+	}
 
-    public override void OnFrameworkInitializationCompleted()
-    {
-        base.OnFrameworkInitializationCompleted();
+	public override void OnFrameworkInitializationCompleted()
+	{
+		base.OnFrameworkInitializationCompleted();
 
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel()
-            };
-    }
+		if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+			// desktop.MainWindow = new LoginWindow
+			// {
+			// 	DataContext = new LoginWindowViewModel()
+			// };
+		
+			desktop.MainWindow = new MainWindow
+			{
+				DataContext = new MainWindowViewModel()
+			};
+	}
 }
