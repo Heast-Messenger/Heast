@@ -1,19 +1,17 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Client.View;
 using Client.ViewModel;
-using Core.Network.Pipeline;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Client;
 
 public class App : Application
 {
-    public ClientConnection Ctx { get; set; } = null!;
-
     public override void Initialize()
     {
+        Console.WriteLine("Initializing client gui...");
         AvaloniaXamlLoader.Load(this);
     }
 
@@ -26,10 +24,5 @@ public class App : Application
             {
                 DataContext = new MainWindowViewModel()
             };
-    }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddSingleton<ClientConnection>();
     }
 }

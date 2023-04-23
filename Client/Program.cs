@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Client.Network;
 
 namespace Client;
 
@@ -11,6 +12,9 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        BuildClientConnection()
+            .StartInNewThread(args);
+
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
     }
@@ -21,5 +25,10 @@ internal static class Program
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .LogToTrace();
+    }
+
+    public static ConnectionBuilder BuildClientConnection()
+    {
+        return ConnectionBuilder.Configure();
     }
 }

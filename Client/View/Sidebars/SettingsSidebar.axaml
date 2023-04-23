@@ -6,6 +6,7 @@
 	xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
 	x:Class="Client.View.Sidebars.SettingsSidebar"
 	Width="180.0">
+
 	<Design.DataContext>
 		<vm:SettingsSidebarViewModel />
 	</Design.DataContext>

@@ -1,687 +1,853 @@
-using System;
-using System.IO;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using DotNetty.Buffers;
 using DotNetty.Common;
 using DotNetty.Common.Utilities;
 
 namespace Core.Network;
 
-public class ByteBufImpl : IByteBuffer {
+public class ByteBufImpl : IByteBuffer
+{
     private readonly IByteBuffer _parent;
 
-    public ByteBufImpl(IByteBuffer parent) {
-        this._parent = parent;
+    public ByteBufImpl(IByteBuffer parent)
+    {
+        _parent = parent;
     }
 
-    public IReferenceCounted Retain() {
+    public IReferenceCounted Retain()
+    {
         return _parent.Retain();
     }
 
-    public IReferenceCounted Retain(int increment) {
+    public IReferenceCounted Retain(int increment)
+    {
         return _parent.Retain(increment);
     }
 
-    public IReferenceCounted Touch() {
+    public IReferenceCounted Touch()
+    {
         return _parent.Touch();
     }
 
-    public IReferenceCounted Touch(object hint) {
+    public IReferenceCounted Touch(object hint)
+    {
         return _parent.Touch(hint);
     }
 
-    public bool Release() {
+    public bool Release()
+    {
         return _parent.Release();
     }
 
-    public bool Release(int decrement) {
+    public bool Release(int decrement)
+    {
         return _parent.Release(decrement);
     }
 
     public int ReferenceCount { get; }
-    public int CompareTo(IByteBuffer? other) {
+
+    public int CompareTo(IByteBuffer? other)
+    {
         return _parent.CompareTo(other);
     }
 
-    public bool Equals(IByteBuffer? other) {
+    public bool Equals(IByteBuffer? other)
+    {
         return _parent.Equals(other);
     }
 
-    public IByteBuffer AdjustCapacity(int newCapacity) {
+    public IByteBuffer AdjustCapacity(int newCapacity)
+    {
         return _parent.AdjustCapacity(newCapacity);
     }
 
-    public IByteBuffer SetWriterIndex(int writerIndex) {
+    public IByteBuffer SetWriterIndex(int writerIndex)
+    {
         return _parent.SetWriterIndex(writerIndex);
     }
 
-    public IByteBuffer SetReaderIndex(int readerIndex) {
+    public IByteBuffer SetReaderIndex(int readerIndex)
+    {
         return _parent.SetReaderIndex(readerIndex);
     }
 
-    public IByteBuffer SetIndex(int readerIndex, int writerIndex) {
+    public IByteBuffer SetIndex(int readerIndex, int writerIndex)
+    {
         return _parent.SetIndex(readerIndex, writerIndex);
     }
 
-    public bool IsReadable() {
+    public bool IsReadable()
+    {
         return _parent.IsReadable();
     }
 
-    public bool IsReadable(int size) {
+    public bool IsReadable(int size)
+    {
         return _parent.IsReadable(size);
     }
 
-    public bool IsWritable() {
+    public bool IsWritable()
+    {
         return _parent.IsWritable();
     }
 
-    public bool IsWritable(int size) {
+    public bool IsWritable(int size)
+    {
         return _parent.IsWritable(size);
     }
 
-    public IByteBuffer Clear() {
+    public IByteBuffer Clear()
+    {
         return _parent.Clear();
     }
 
-    public IByteBuffer MarkReaderIndex() {
+    public IByteBuffer MarkReaderIndex()
+    {
         return _parent.MarkReaderIndex();
     }
 
-    public IByteBuffer ResetReaderIndex() {
+    public IByteBuffer ResetReaderIndex()
+    {
         return _parent.ResetReaderIndex();
     }
 
-    public IByteBuffer MarkWriterIndex() {
+    public IByteBuffer MarkWriterIndex()
+    {
         return _parent.MarkWriterIndex();
     }
 
-    public IByteBuffer ResetWriterIndex() {
+    public IByteBuffer ResetWriterIndex()
+    {
         return _parent.ResetWriterIndex();
     }
 
-    public IByteBuffer DiscardReadBytes() {
+    public IByteBuffer DiscardReadBytes()
+    {
         return _parent.DiscardReadBytes();
     }
 
-    public IByteBuffer DiscardSomeReadBytes() {
+    public IByteBuffer DiscardSomeReadBytes()
+    {
         return _parent.DiscardSomeReadBytes();
     }
 
-    public IByteBuffer EnsureWritable(int minWritableBytes) {
+    public IByteBuffer EnsureWritable(int minWritableBytes)
+    {
         return _parent.EnsureWritable(minWritableBytes);
     }
 
-    public int EnsureWritable(int minWritableBytes, bool force) {
+    public int EnsureWritable(int minWritableBytes, bool force)
+    {
         return _parent.EnsureWritable(minWritableBytes, force);
     }
 
-    public bool GetBoolean(int index) {
+    public bool GetBoolean(int index)
+    {
         return _parent.GetBoolean(index);
     }
 
-    public byte GetByte(int index) {
+    public byte GetByte(int index)
+    {
         return _parent.GetByte(index);
     }
 
-    public short GetShort(int index) {
+    public short GetShort(int index)
+    {
         return _parent.GetShort(index);
     }
 
-    public short GetShortLE(int index) {
+    public short GetShortLE(int index)
+    {
         return _parent.GetShortLE(index);
     }
 
-    public ushort GetUnsignedShort(int index) {
+    public ushort GetUnsignedShort(int index)
+    {
         return _parent.GetUnsignedShort(index);
     }
 
-    public ushort GetUnsignedShortLE(int index) {
+    public ushort GetUnsignedShortLE(int index)
+    {
         return _parent.GetUnsignedShortLE(index);
     }
 
-    public int GetInt(int index) {
+    public int GetInt(int index)
+    {
         return _parent.GetInt(index);
     }
 
-    public int GetIntLE(int index) {
+    public int GetIntLE(int index)
+    {
         return _parent.GetIntLE(index);
     }
 
-    public uint GetUnsignedInt(int index) {
+    public uint GetUnsignedInt(int index)
+    {
         return _parent.GetUnsignedInt(index);
     }
 
-    public uint GetUnsignedIntLE(int index) {
+    public uint GetUnsignedIntLE(int index)
+    {
         return _parent.GetUnsignedIntLE(index);
     }
 
-    public long GetLong(int index) {
+    public long GetLong(int index)
+    {
         return _parent.GetLong(index);
     }
 
-    public long GetLongLE(int index) {
+    public long GetLongLE(int index)
+    {
         return _parent.GetLongLE(index);
     }
 
-    public int GetMedium(int index) {
+    public int GetMedium(int index)
+    {
         return _parent.GetMedium(index);
     }
 
-    public int GetMediumLE(int index) {
+    public int GetMediumLE(int index)
+    {
         return _parent.GetMediumLE(index);
     }
 
-    public int GetUnsignedMedium(int index) {
+    public int GetUnsignedMedium(int index)
+    {
         return _parent.GetUnsignedMedium(index);
     }
 
-    public int GetUnsignedMediumLE(int index) {
+    public int GetUnsignedMediumLE(int index)
+    {
         return _parent.GetUnsignedMediumLE(index);
     }
 
-    public char GetChar(int index) {
+    public char GetChar(int index)
+    {
         return _parent.GetChar(index);
     }
 
-    public float GetFloat(int index) {
+    public float GetFloat(int index)
+    {
         return _parent.GetFloat(index);
     }
 
-    public float GetFloatLE(int index) {
+    public float GetFloatLE(int index)
+    {
         return _parent.GetFloatLE(index);
     }
 
-    public double GetDouble(int index) {
+    public double GetDouble(int index)
+    {
         return _parent.GetDouble(index);
     }
 
-    public double GetDoubleLE(int index) {
+    public double GetDoubleLE(int index)
+    {
         return _parent.GetDoubleLE(index);
     }
 
-    public IByteBuffer GetBytes(int index, IByteBuffer destination) {
+    public IByteBuffer GetBytes(int index, IByteBuffer destination)
+    {
         return _parent.GetBytes(index, destination);
     }
 
-    public IByteBuffer GetBytes(int index, IByteBuffer destination, int length) {
-        return _parent.GetBytes(index, destination, length); 
-    }
-
-    public IByteBuffer GetBytes(int index, IByteBuffer destination, int dstIndex, int length) {
-        return _parent.GetBytes(index, destination, dstIndex, length);
-    }
-
-    public IByteBuffer GetBytes(int index, byte[] destination) {
-        return _parent.GetBytes(index, destination);
-    }
-
-    public IByteBuffer GetBytes(int index, byte[] destination, int dstIndex, int length) {
-        return _parent.GetBytes(index, destination, dstIndex, length);
-    }
-
-    public IByteBuffer GetBytes(int index, Stream destination, int length) {
+    public IByteBuffer GetBytes(int index, IByteBuffer destination, int length)
+    {
         return _parent.GetBytes(index, destination, length);
     }
 
-    public ICharSequence GetCharSequence(int index, int length, Encoding encoding) {
+    public IByteBuffer GetBytes(int index, IByteBuffer destination, int dstIndex, int length)
+    {
+        return _parent.GetBytes(index, destination, dstIndex, length);
+    }
+
+    public IByteBuffer GetBytes(int index, byte[] destination)
+    {
+        return _parent.GetBytes(index, destination);
+    }
+
+    public IByteBuffer GetBytes(int index, byte[] destination, int dstIndex, int length)
+    {
+        return _parent.GetBytes(index, destination, dstIndex, length);
+    }
+
+    public IByteBuffer GetBytes(int index, Stream destination, int length)
+    {
+        return _parent.GetBytes(index, destination, length);
+    }
+
+    public ICharSequence GetCharSequence(int index, int length, Encoding encoding)
+    {
         return _parent.GetCharSequence(index, length, encoding);
     }
 
-    public string GetString(int index, int length, Encoding encoding) {
+    public string GetString(int index, int length, Encoding encoding)
+    {
         return _parent.GetString(index, length, encoding);
     }
 
-    public IByteBuffer SetBoolean(int index, bool value) {
+    public IByteBuffer SetBoolean(int index, bool value)
+    {
         return _parent.SetBoolean(index, value);
     }
 
-    public IByteBuffer SetByte(int index, int value) {
+    public IByteBuffer SetByte(int index, int value)
+    {
         return _parent.SetByte(index, value);
     }
 
-    public IByteBuffer SetShort(int index, int value) {
+    public IByteBuffer SetShort(int index, int value)
+    {
         return _parent.SetShort(index, value);
     }
 
-    public IByteBuffer SetShortLE(int index, int value) {
+    public IByteBuffer SetShortLE(int index, int value)
+    {
         return _parent.SetShortLE(index, value);
     }
 
-    public IByteBuffer SetUnsignedShort(int index, ushort value) {
+    public IByteBuffer SetUnsignedShort(int index, ushort value)
+    {
         return _parent.SetUnsignedShort(index, value);
     }
 
-    public IByteBuffer SetUnsignedShortLE(int index, ushort value) {
+    public IByteBuffer SetUnsignedShortLE(int index, ushort value)
+    {
         return _parent.SetUnsignedShortLE(index, value);
     }
 
-    public IByteBuffer SetInt(int index, int value) {
+    public IByteBuffer SetInt(int index, int value)
+    {
         return _parent.SetInt(index, value);
     }
 
-    public IByteBuffer SetIntLE(int index, int value) {
+    public IByteBuffer SetIntLE(int index, int value)
+    {
         return _parent.SetIntLE(index, value);
     }
 
-    public IByteBuffer SetUnsignedInt(int index, uint value) {
+    public IByteBuffer SetUnsignedInt(int index, uint value)
+    {
         return _parent.SetUnsignedInt(index, value);
     }
 
-    public IByteBuffer SetUnsignedIntLE(int index, uint value) {
+    public IByteBuffer SetUnsignedIntLE(int index, uint value)
+    {
         return _parent.SetUnsignedIntLE(index, value);
     }
 
-    public IByteBuffer SetMedium(int index, int value) {
+    public IByteBuffer SetMedium(int index, int value)
+    {
         return _parent.SetMedium(index, value);
     }
 
-    public IByteBuffer SetMediumLE(int index, int value) {
+    public IByteBuffer SetMediumLE(int index, int value)
+    {
         return _parent.SetMediumLE(index, value);
     }
 
-    public IByteBuffer SetLong(int index, long value) {
+    public IByteBuffer SetLong(int index, long value)
+    {
         return _parent.SetLong(index, value);
     }
 
-    public IByteBuffer SetLongLE(int index, long value) {
+    public IByteBuffer SetLongLE(int index, long value)
+    {
         return _parent.SetLongLE(index, value);
     }
 
-    public IByteBuffer SetChar(int index, char value) {
+    public IByteBuffer SetChar(int index, char value)
+    {
         return _parent.SetChar(index, value);
     }
 
-    public IByteBuffer SetDouble(int index, double value) {
+    public IByteBuffer SetDouble(int index, double value)
+    {
         return _parent.SetDouble(index, value);
     }
 
-    public IByteBuffer SetFloat(int index, float value) {
+    public IByteBuffer SetFloat(int index, float value)
+    {
         return _parent.SetFloat(index, value);
     }
 
-    public IByteBuffer SetDoubleLE(int index, double value) {
+    public IByteBuffer SetDoubleLE(int index, double value)
+    {
         return _parent.SetDoubleLE(index, value);
     }
 
-    public IByteBuffer SetFloatLE(int index, float value) {
+    public IByteBuffer SetFloatLE(int index, float value)
+    {
         return _parent.SetFloatLE(index, value);
     }
 
-    public IByteBuffer SetBytes(int index, IByteBuffer src) {
+    public IByteBuffer SetBytes(int index, IByteBuffer src)
+    {
         return _parent.SetBytes(index, src);
     }
 
-    public IByteBuffer SetBytes(int index, IByteBuffer src, int length) {
+    public IByteBuffer SetBytes(int index, IByteBuffer src, int length)
+    {
         return _parent.SetBytes(index, src, length);
     }
 
-    public IByteBuffer SetBytes(int index, IByteBuffer src, int srcIndex, int length) {
+    public IByteBuffer SetBytes(int index, IByteBuffer src, int srcIndex, int length)
+    {
         return _parent.SetBytes(index, src, srcIndex, length);
     }
 
-    public IByteBuffer SetBytes(int index, byte[] src) {
+    public IByteBuffer SetBytes(int index, byte[] src)
+    {
         return _parent.SetBytes(index, src);
     }
 
-    public IByteBuffer SetBytes(int index, byte[] src, int srcIndex, int length) {
+    public IByteBuffer SetBytes(int index, byte[] src, int srcIndex, int length)
+    {
         return _parent.SetBytes(index, src, srcIndex, length);
     }
 
-    public Task<int> SetBytesAsync(int index, Stream src, int length, CancellationToken cancellationToken) {
+    public Task<int> SetBytesAsync(int index, Stream src, int length, CancellationToken cancellationToken)
+    {
         return _parent.SetBytesAsync(index, src, length, cancellationToken);
     }
 
-    public IByteBuffer SetZero(int index, int length) {
+    public IByteBuffer SetZero(int index, int length)
+    {
         return _parent.SetZero(index, length);
     }
 
-    public int SetCharSequence(int index, ICharSequence sequence, Encoding encoding) {
+    public int SetCharSequence(int index, ICharSequence sequence, Encoding encoding)
+    {
         return _parent.SetCharSequence(index, sequence, encoding);
     }
 
-    public int SetString(int index, string value, Encoding encoding) {
+    public int SetString(int index, string value, Encoding encoding)
+    {
         return _parent.SetString(index, value, encoding);
     }
 
-    public bool ReadBoolean() {
+    public bool ReadBoolean()
+    {
         return _parent.ReadBoolean();
     }
 
-    public byte ReadByte() {
+    public byte ReadByte()
+    {
         return _parent.ReadByte();
     }
 
-    public short ReadShort() {
+    public short ReadShort()
+    {
         return _parent.ReadShort();
     }
 
-    public short ReadShortLE() {
+    public short ReadShortLE()
+    {
         return _parent.ReadShortLE();
     }
 
-    public int ReadMedium() {
+    public int ReadMedium()
+    {
         return _parent.ReadMedium();
     }
 
-    public int ReadMediumLE() {
+    public int ReadMediumLE()
+    {
         return _parent.ReadMediumLE();
     }
 
-    public int ReadUnsignedMedium() {
+    public int ReadUnsignedMedium()
+    {
         return _parent.ReadUnsignedMedium();
     }
 
-    public int ReadUnsignedMediumLE() {
+    public int ReadUnsignedMediumLE()
+    {
         return _parent.ReadUnsignedMediumLE();
     }
 
-    public ushort ReadUnsignedShort() {
+    public ushort ReadUnsignedShort()
+    {
         return _parent.ReadUnsignedShort();
     }
 
-    public ushort ReadUnsignedShortLE() {
+    public ushort ReadUnsignedShortLE()
+    {
         return _parent.ReadUnsignedShortLE();
     }
 
-    public int ReadInt() {
+    public int ReadInt()
+    {
         return _parent.ReadInt();
     }
 
-    public int ReadIntLE() {
+    public int ReadIntLE()
+    {
         return _parent.ReadIntLE();
     }
 
-    public uint ReadUnsignedInt() {
+    public uint ReadUnsignedInt()
+    {
         return _parent.ReadUnsignedInt();
     }
 
-    public uint ReadUnsignedIntLE() {
+    public uint ReadUnsignedIntLE()
+    {
         return _parent.ReadUnsignedIntLE();
     }
 
-    public long ReadLong() {
+    public long ReadLong()
+    {
         return _parent.ReadLong();
     }
 
-    public long ReadLongLE() {
+    public long ReadLongLE()
+    {
         return _parent.ReadLongLE();
     }
 
-    public char ReadChar() {
+    public char ReadChar()
+    {
         return _parent.ReadChar();
     }
 
-    public double ReadDouble() {
+    public double ReadDouble()
+    {
         return _parent.ReadDouble();
     }
 
-    public double ReadDoubleLE() {
+    public double ReadDoubleLE()
+    {
         return _parent.ReadDoubleLE();
     }
 
-    public float ReadFloat() {
+    public float ReadFloat()
+    {
         return _parent.ReadFloat();
     }
 
-    public float ReadFloatLE() {
+    public float ReadFloatLE()
+    {
         return _parent.ReadFloatLE();
     }
 
-    public IByteBuffer ReadBytes(int length) {
+    public IByteBuffer ReadBytes(int length)
+    {
         return _parent.ReadBytes(length);
     }
 
-    public IByteBuffer ReadBytes(IByteBuffer destination) {
+    public IByteBuffer ReadBytes(IByteBuffer destination)
+    {
         return _parent.ReadBytes(destination);
     }
 
-    public IByteBuffer ReadBytes(IByteBuffer destination, int length) {
+    public IByteBuffer ReadBytes(IByteBuffer destination, int length)
+    {
         return _parent.ReadBytes(destination, length);
     }
 
-    public IByteBuffer ReadBytes(IByteBuffer destination, int dstIndex, int length) {
+    public IByteBuffer ReadBytes(IByteBuffer destination, int dstIndex, int length)
+    {
         return _parent.ReadBytes(destination, dstIndex, length);
     }
 
-    public IByteBuffer ReadBytes(byte[] destination) {
+    public IByteBuffer ReadBytes(byte[] destination)
+    {
         return _parent.ReadBytes(destination);
     }
 
-    public IByteBuffer ReadBytes(byte[] destination, int dstIndex, int length) {
+    public IByteBuffer ReadBytes(byte[] destination, int dstIndex, int length)
+    {
         return _parent.ReadBytes(destination, dstIndex, length);
     }
 
-    public IByteBuffer ReadBytes(Stream destination, int length) {
+    public IByteBuffer ReadBytes(Stream destination, int length)
+    {
         return _parent.ReadBytes(destination, length);
     }
 
-    public ICharSequence ReadCharSequence(int length, Encoding encoding) {
+    public ICharSequence ReadCharSequence(int length, Encoding encoding)
+    {
         return _parent.ReadCharSequence(length, encoding);
     }
 
-    public string ReadString(int length, Encoding encoding) {
+    public string ReadString(int length, Encoding encoding)
+    {
         return _parent.ReadString(length, encoding);
     }
 
-    public IByteBuffer SkipBytes(int length) {
+    public IByteBuffer SkipBytes(int length)
+    {
         return _parent.SkipBytes(length);
     }
 
-    public IByteBuffer WriteBoolean(bool value) {
+    public IByteBuffer WriteBoolean(bool value)
+    {
         return _parent.WriteBoolean(value);
     }
 
-    public IByteBuffer WriteByte(int value) {
+    public IByteBuffer WriteByte(int value)
+    {
         return _parent.WriteByte(value);
     }
 
-    public IByteBuffer WriteShort(int value) {
+    public IByteBuffer WriteShort(int value)
+    {
         return _parent.WriteShort(value);
     }
 
-    public IByteBuffer WriteShortLE(int value) {
+    public IByteBuffer WriteShortLE(int value)
+    {
         return _parent.WriteShortLE(value);
     }
 
-    public IByteBuffer WriteUnsignedShort(ushort value) {
+    public IByteBuffer WriteUnsignedShort(ushort value)
+    {
         return _parent.WriteUnsignedShort(value);
     }
 
-    public IByteBuffer WriteUnsignedShortLE(ushort value) {
+    public IByteBuffer WriteUnsignedShortLE(ushort value)
+    {
         return _parent.WriteUnsignedShortLE(value);
     }
 
-    public IByteBuffer WriteMedium(int value) {
+    public IByteBuffer WriteMedium(int value)
+    {
         return _parent.WriteMedium(value);
     }
 
-    public IByteBuffer WriteMediumLE(int value) {
+    public IByteBuffer WriteMediumLE(int value)
+    {
         return _parent.WriteMediumLE(value);
     }
 
-    public IByteBuffer WriteInt(int value) {
+    public IByteBuffer WriteInt(int value)
+    {
         return _parent.WriteInt(value);
     }
 
-    public IByteBuffer WriteIntLE(int value) {
+    public IByteBuffer WriteIntLE(int value)
+    {
         return _parent.WriteIntLE(value);
     }
 
-    public IByteBuffer WriteLong(long value) {
+    public IByteBuffer WriteLong(long value)
+    {
         return _parent.WriteLong(value);
     }
 
-    public IByteBuffer WriteLongLE(long value) {
+    public IByteBuffer WriteLongLE(long value)
+    {
         return _parent.WriteLongLE(value);
     }
 
-    public IByteBuffer WriteChar(char value) {
+    public IByteBuffer WriteChar(char value)
+    {
         return _parent.WriteChar(value);
     }
 
-    public IByteBuffer WriteDouble(double value) {
+    public IByteBuffer WriteDouble(double value)
+    {
         return _parent.WriteDouble(value);
     }
 
-    public IByteBuffer WriteDoubleLE(double value) {
+    public IByteBuffer WriteDoubleLE(double value)
+    {
         return _parent.WriteDoubleLE(value);
     }
 
-    public IByteBuffer WriteFloat(float value) {
+    public IByteBuffer WriteFloat(float value)
+    {
         return _parent.WriteFloat(value);
     }
 
-    public IByteBuffer WriteFloatLE(float value) {
+    public IByteBuffer WriteFloatLE(float value)
+    {
         return _parent.WriteFloatLE(value);
     }
 
-    public IByteBuffer WriteBytes(IByteBuffer src) {
+    public IByteBuffer WriteBytes(IByteBuffer src)
+    {
         return _parent.WriteBytes(src);
     }
 
-    public IByteBuffer WriteBytes(IByteBuffer src, int length) {
+    public IByteBuffer WriteBytes(IByteBuffer src, int length)
+    {
         return _parent.WriteBytes(src, length);
     }
 
-    public IByteBuffer WriteBytes(IByteBuffer src, int srcIndex, int length) {
+    public IByteBuffer WriteBytes(IByteBuffer src, int srcIndex, int length)
+    {
         return _parent.WriteBytes(src, srcIndex, length);
     }
 
-    public IByteBuffer WriteBytes(byte[] src) {
+    public IByteBuffer WriteBytes(byte[] src)
+    {
         return _parent.WriteBytes(src);
     }
 
-    public IByteBuffer WriteBytes(byte[] src, int srcIndex, int length) {
+    public IByteBuffer WriteBytes(byte[] src, int srcIndex, int length)
+    {
         return _parent.WriteBytes(src, srcIndex, length);
     }
 
-    public ArraySegment<byte> GetIoBuffer() {
+    public ArraySegment<byte> GetIoBuffer()
+    {
         return _parent.GetIoBuffer();
     }
 
-    public ArraySegment<byte> GetIoBuffer(int index, int length) {
+    public ArraySegment<byte> GetIoBuffer(int index, int length)
+    {
         return _parent.GetIoBuffer(index, length);
     }
 
-    public ArraySegment<byte>[] GetIoBuffers() {
+    public ArraySegment<byte>[] GetIoBuffers()
+    {
         return _parent.GetIoBuffers();
     }
 
-    public ArraySegment<byte>[] GetIoBuffers(int index, int length) {
+    public ArraySegment<byte>[] GetIoBuffers(int index, int length)
+    {
         return _parent.GetIoBuffers(index, length);
     }
 
-    public ref byte GetPinnableMemoryAddress() {
+    public ref byte GetPinnableMemoryAddress()
+    {
         return ref _parent.GetPinnableMemoryAddress();
     }
 
-    public IntPtr AddressOfPinnedMemory() {
+    public IntPtr AddressOfPinnedMemory()
+    {
         return _parent.AddressOfPinnedMemory();
     }
 
-    public IByteBuffer Duplicate() {
+    public IByteBuffer Duplicate()
+    {
         return _parent.Duplicate();
     }
 
-    public IByteBuffer RetainedDuplicate() {
+    public IByteBuffer RetainedDuplicate()
+    {
         return _parent.RetainedDuplicate();
     }
 
-    public IByteBuffer Unwrap() {
+    public IByteBuffer Unwrap()
+    {
         return _parent.Unwrap();
     }
 
-    public IByteBuffer Copy() {
+    public IByteBuffer Copy()
+    {
         return _parent.Copy();
     }
 
-    public IByteBuffer Copy(int index, int length) {
+    public IByteBuffer Copy(int index, int length)
+    {
         return _parent.Copy(index, length);
     }
 
-    public IByteBuffer Slice() {
-        return _parent.Slice();  
+    public IByteBuffer Slice()
+    {
+        return _parent.Slice();
     }
 
-    public IByteBuffer RetainedSlice() {
+    public IByteBuffer RetainedSlice()
+    {
         return _parent.RetainedSlice();
     }
 
-    public IByteBuffer Slice(int index, int length) {
+    public IByteBuffer Slice(int index, int length)
+    {
         return _parent.Slice(index, length);
     }
 
-    public IByteBuffer RetainedSlice(int index, int length) {
+    public IByteBuffer RetainedSlice(int index, int length)
+    {
         return _parent.RetainedSlice(index, length);
     }
 
-    public IByteBuffer ReadSlice(int length) {
+    public IByteBuffer ReadSlice(int length)
+    {
         return _parent.ReadSlice(length);
     }
 
-    public IByteBuffer ReadRetainedSlice(int length) {
+    public IByteBuffer ReadRetainedSlice(int length)
+    {
         return _parent.ReadRetainedSlice(length);
     }
 
-    public Task WriteBytesAsync(Stream stream, int length) {
+    public Task WriteBytesAsync(Stream stream, int length)
+    {
         return _parent.WriteBytesAsync(stream, length);
     }
 
-    public Task WriteBytesAsync(Stream stream, int length, CancellationToken cancellationToken) {
+    public Task WriteBytesAsync(Stream stream, int length, CancellationToken cancellationToken)
+    {
         return _parent.WriteBytesAsync(stream, length, cancellationToken);
     }
 
-    public IByteBuffer WriteZero(int length) {
+    public IByteBuffer WriteZero(int length)
+    {
         return _parent.WriteZero(length);
     }
 
-    public int WriteCharSequence(ICharSequence sequence, Encoding encoding) {
+    public int WriteCharSequence(ICharSequence sequence, Encoding encoding)
+    {
         return _parent.WriteCharSequence(sequence, encoding);
     }
 
-    public int WriteString(string value, Encoding encoding) {
+    public int WriteString(string value, Encoding encoding)
+    {
         return _parent.WriteString(value, encoding);
     }
 
-    public int IndexOf(int fromIndex, int toIndex, byte value) {
+    public int IndexOf(int fromIndex, int toIndex, byte value)
+    {
         return _parent.IndexOf(fromIndex, toIndex, value);
     }
 
-    public int BytesBefore(byte value) {
+    public int BytesBefore(byte value)
+    {
         return _parent.BytesBefore(value);
     }
 
-    public int BytesBefore(int length, byte value) {
-        return _parent.BytesBefore(length, value);   
+    public int BytesBefore(int length, byte value)
+    {
+        return _parent.BytesBefore(length, value);
     }
 
-    public int BytesBefore(int index, int length, byte value) {
+    public int BytesBefore(int index, int length, byte value)
+    {
         return _parent.BytesBefore(index, length, value);
     }
 
-    public string ToString(Encoding encoding) {
+    public string ToString(Encoding encoding)
+    {
         return _parent.ToString(encoding);
     }
 
-    public string ToString(int index, int length, Encoding encoding) {
+    public string ToString(int index, int length, Encoding encoding)
+    {
         return _parent.ToString(index, length, encoding);
     }
 
-    public int ForEachByte(IByteProcessor processor) {
+    public int ForEachByte(IByteProcessor processor)
+    {
         return _parent.ForEachByte(processor);
     }
 
-    public int ForEachByte(int index, int length, IByteProcessor processor) {
+    public int ForEachByte(int index, int length, IByteProcessor processor)
+    {
         return _parent.ForEachByte(index, length, processor);
     }
 
-    public int ForEachByteDesc(IByteProcessor processor) {
+    public int ForEachByteDesc(IByteProcessor processor)
+    {
         return _parent.ForEachByteDesc(processor);
     }
 
-    public int ForEachByteDesc(int index, int length, IByteProcessor processor) {
+    public int ForEachByteDesc(int index, int length, IByteProcessor processor)
+    {
         return _parent.ForEachByteDesc(index, length, processor);
     }
 

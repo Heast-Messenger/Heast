@@ -1,23 +1,25 @@
-using Core.exceptions;
 using Core.Network.codecs;
 using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
 
-namespace Core.Network.Pipeline; 
+namespace Core.Network.Pipeline;
 
-public class PacketDecoder : ReplayingDecoder<IPacket<IPacketListener>> {
-    
-    public NetworkSide Side { get; }
-
-    public PacketDecoder(NetworkSide side) {
+public class PacketDecoder : ReplayingDecoder<IPacket<IPacketListener>>
+{
+    public PacketDecoder(NetworkSide side)
+    {
         Side = side;
     }
 
-    protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object?> output) {
+    public NetworkSide Side { get; }
+
+    protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object?> output)
+    {
         var buffer = new PacketBuf(input);
         var id = buffer.ReadVarInt();
 
-        var packet = context.Channel.GetAttribute(ClientConnection.ProtocolKey).Get()
+        var packet = context.Channel
+            .GetAttribute(ClientConnection.ProtocolKey).Get()
             .GetPacketHandler(Side)
             .CreatePacket(id, buffer);
 
@@ -25,7 +27,8 @@ public class PacketDecoder : ReplayingDecoder<IPacket<IPacketListener>> {
         output.Add(packet);
     }
 
-    public override void ExceptionCaught(IChannelHandlerContext context, Exception exception) {
+    public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
+    {
         Console.WriteLine($"Exception whilst decoding: {exception.Message}");
     }
 }

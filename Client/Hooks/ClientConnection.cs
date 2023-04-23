@@ -1,21 +1,16 @@
 using System;
-using Avalonia;
+using Client.Network;
 using Core.Network.Pipeline;
 
 namespace Client;
 
 public static partial class Hooks
 {
-    public static (Func<ClientConnection> Get, Action<ClientConnection> Set) UseClientConnection()
+    public static (Func<ClientConnection> Get, Action<ClientConnection> Set) UseNetworking()
     {
-        App GetApp()
-        {
-            return (Application.Current as App)!;
-        }
-
         return (
-            () => GetApp().Ctx,
-            v => GetApp().Ctx = v
+            () => ClientNetwork.Ctx,
+            v => ClientNetwork.Ctx = v
         );
     }
 }

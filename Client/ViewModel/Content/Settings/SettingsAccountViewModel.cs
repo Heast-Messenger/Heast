@@ -6,7 +6,7 @@ namespace Client.ViewModel.Content;
 
 public class SettingsAccountViewModel : ContentViewModelBase
 {
-    private readonly (Func<ClientConnection> Get, Action<ClientConnection> Set) _ctx = UseClientConnection();
+    private readonly (Func<ClientConnection> Get, Action<ClientConnection> Set) _ctx = UseNetworking();
 
     public void Button_OnInvite()
     {

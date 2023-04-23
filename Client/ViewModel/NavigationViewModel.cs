@@ -1,42 +1,42 @@
+using System;
 using Client.View.Sidebars;
 using Client.ViewModel.Sidebars;
+using static Client.Hooks;
 
 namespace Client.ViewModel;
 
 public class NavigationViewModel : ViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowVm;
+    private readonly (Func<MainWindowViewModel> Get, Action<MainWindowViewModel> Set) _mainWindowVm =
+        UseMainWindowViewModel();
 
-    public NavigationViewModel(MainWindowViewModel mainWindowVm)
-    {
-        _mainWindowVm = mainWindowVm;
-    }
+    private MainWindowViewModel MainWindowVm => _mainWindowVm.Get();
 
     public void Button_OnChat()
     {
-        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnExplore()
     {
-        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnPeople()
     {
-        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnServers()
     {
-        _mainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindowVm.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnSettings()
     {
-        _mainWindowVm.SidebarViewModel.CurrentSidebar = new SettingsSidebar
+        MainWindowVm.SidebarViewModel.CurrentSidebar = new SettingsSidebar
         {
-            DataContext = new SettingsSidebarViewModel(_mainWindowVm)
+            DataContext = new SettingsSidebarViewModel(MainWindowVm)
         };
     }
 }
