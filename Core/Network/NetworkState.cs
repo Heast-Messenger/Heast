@@ -22,7 +22,7 @@ public class NetworkState
 
     private NetworkState Setup<TPl>(NetworkSide side, IPacketHandler<TPl> handler) where TPl : IPacketListener
     {
-        _handlers[side] = (IPacketHandler<IPacketListener>) handler;
+        _handlers[side] = (IPacketHandler<IPacketListener>)handler;
         return this;
     }
 

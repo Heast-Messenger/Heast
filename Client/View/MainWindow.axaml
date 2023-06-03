@@ -10,43 +10,44 @@
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
+	<Design.DataContext>
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
 
-    <NativeMenu.Menu>
-        <NativeMenu />
-    </NativeMenu.Menu>
+	<NativeMenu.Menu>
+		<NativeMenu />
+	</NativeMenu.Menu>
 
-    <Panel>
-        <Border
-            Background="{DynamicResource Mid}"
-            IsHitTestVisible="False" />
+	<Panel>
+		<Border
+			Background="{DynamicResource Mid}"
+			IsHitTestVisible="False" />
 
-        <view:Titlebar
-            IsHitTestVisible="False"
-            VerticalAlignment="Top"
-            Padding="10 0 10 0" />
+		<view:Titlebar
+			IsHitTestVisible="False"
+			VerticalAlignment="Top"
+			Padding="10 0 10 0" />
 
-        <DockPanel Margin="0 38 0 0">
-            <view:Sidebar
-                DockPanel.Dock="Right"
-                DataContext="{Binding SidebarViewModel}" />
+		<DockPanel Margin="0 38 0 0">
+			<view:Sidebar
+				DockPanel.Dock="Right"
+				DataContext="{Binding SidebarViewModel}" />
 
-            <view:Navigation
-                DockPanel.Dock="Left"
-                DataContext="{Binding NavigationViewModel}"
-                Padding="10.0"
-                Margin="0.0 5.0 00.0 5.0" />
+			<view:Navigation
+				DockPanel.Dock="Left"
+				DataContext="{Binding NavigationViewModel}"
+				Padding="10.0"
+				Margin="0.0 5.0 00.0 5.0" />
 
-            <view:MainContent
-                DataContext="{Binding ContentViewModel}"
-                Margin="0.0 0.0 10.0 10.0" />
-        </DockPanel>
+			<view:MainContent
+				DataContext="{Binding ContentViewModel}"
+				Margin="0.0 0.0 10.0 10.0" />
+		</DockPanel>
 
-        <view:Notifications
-            VerticalAlignment="Top"
-            Margin="0 38 0 0"
-            DataContext="{Binding NotificationsViewModel}" />
-    </Panel>
+		<view:Notifications
+			VerticalAlignment="Bottom"
+			HorizontalAlignment="Right"
+			Margin="20.0 20.0 20.0 20.0"
+			DataContext="{Binding NotificationsViewModel}" />
+	</Panel>
 </Window>

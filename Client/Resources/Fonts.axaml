@@ -1,0 +1,6 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<!-- Add Resources Here -->
+	<FontFamily x:Key="Poppins">avares://Client/Assets/Fonts#Poppins</FontFamily>
+	<FontFamily x:Key="Inter">avares://Client/Assets/Fonts#Inter</FontFamily>
+</ResourceDictionary>

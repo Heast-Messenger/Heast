@@ -1,0 +1,76 @@
+<view:LoginBase
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:view="clr-namespace:Client.View.Content"
+   xmlns:vm="clr-namespace:Client.ViewModel"
+   xmlns:utility="clr-namespace:Client.Utility"
+   xmlns:components="clr-namespace:Client.View.Components"
+   xmlns:ext="clr-namespace:Client.Extensions"
+   x:Class="Client.View.Content.ServerOptionsPanel">
+
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
+
+   <view:LoginBase.Resources>
+      <components:IconText
+         x:Key="Content.Official"
+         Text="{ext:SimpleText Heast Network}"
+         Icon="/Assets/Logos/Heast.png"
+         Foreground="{DynamicResource White}"
+         Orientation="Vertical" />
+      <components:IconText
+         x:Key="Content.Custom"
+         Text="{ext:SimpleText Custom Server}"
+         Icon="{SvgImage /Assets/Login/Cloud.svg}"
+         Foreground="{DynamicResource White}"
+         Orientation="Vertical" />
+   </view:LoginBase.Resources>
+
+   <view:LoginBase.Styles>
+      <StyleInclude Source="/Styles/Textblocks.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+   </view:LoginBase.Styles>
+
+   <Grid RowDefinitions="Auto, Auto, *">
+      <TextBlock Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Classes="Bold"
+                 FontSize="32">
+         <Run Text="Welcome to"
+              Foreground="{DynamicResource White}" />
+         <LineBreak />
+         <Run Text="Heast Messenger">
+            <Run.Foreground>
+               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                  <LinearGradientBrush.GradientStops>
+                     <GradientStop Offset="0" Color="#FFFDB242" />
+                     <GradientStop Offset="1" Color="#FFFFCF8A" />
+                  </LinearGradientBrush.GradientStops>
+               </LinearGradientBrush>
+            </Run.Foreground>
+         </Run>
+      </TextBlock>
+
+      <TextBlock Grid.Row="1"
+                 VerticalAlignment="Center"
+                 TextWrapping="Wrap"
+                 Classes="Title">
+         <Run Text="Choose whether to connect to an" />
+         <Run Text="official" FontWeight="Bold" />
+         <Run Text="or" />
+         <Run Text="custom server." FontWeight="Bold" />
+         <Run Text="For more info click" />
+         <utility:Hyperlink Text="here" Url="https://www.google.com" />
+      </TextBlock>
+
+      <Grid Grid.Row="2" ColumnDefinitions="*, 10.0, *">
+         <Button Grid.Column="0" Classes="Vertical"
+                 Content="{StaticResource Content.Official}"
+                 Click="Button_OnOfficial" />
+         <Button Grid.Column="2" Classes="Vertical"
+                 Content="{StaticResource Content.Custom}"
+                 Click="Button_OnCustom" />
+      </Grid>
+   </Grid>
+</view:LoginBase>

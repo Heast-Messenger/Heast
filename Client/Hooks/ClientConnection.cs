@@ -7,6 +7,6 @@ public static partial class Hooks
 {
 	public static ClientConnection UseNetworking()
 	{
-		return ClientNetwork.Ctx;
+		return ClientNetwork.Ctx!;
 	}
 }

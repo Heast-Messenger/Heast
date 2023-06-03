@@ -7,13 +7,13 @@ namespace Client;
 
 public static partial class Hooks
 {
-	public static MainWindowViewModel UseMainWindow()
-	{
-		Window GetWindow()
-		{
-			return (Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!;
-		}
+    public static MainWindowViewModel UseMainWindow()
+    {
+        Window GetWindow()
+        {
+            return (Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!;
+        }
 
-		return (MainWindowViewModel) GetWindow().DataContext!;
-	}
+        return (MainWindowViewModel)GetWindow().DataContext!;
+    }
 }

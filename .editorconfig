@@ -1,0 +1,11 @@
+root = true
+
+[*.cs]
+indent_style = tab
+tab_width = 4
+
+[{*.axaml, *.xaml, *.csproj, *.json}]
+indent_style = space
+indent_size = 3
+
+#https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options?view=vs-2019

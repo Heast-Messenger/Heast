@@ -1,0 +1,30 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+	<Style Selector="Button">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0.0" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Padding" Value="8.0" />
+	</Style>
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+	</Style>
+	<Style Selector="Button:unchecked /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Opacity" Value="0.5" />
+	</Style>
+	<Style Selector="Button:checked /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Opacity" Value="1.0" />
+	</Style>
+</Styles>

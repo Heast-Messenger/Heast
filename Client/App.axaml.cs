@@ -19,15 +19,18 @@ public class App : Application
 	{
 		base.OnFrameworkInitializationCompleted();
 
-		if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-			// desktop.MainWindow = new LoginWindow
-			// {
-			// 	DataContext = new LoginWindowViewModel()
-			// };
-		
-			desktop.MainWindow = new MainWindow
+		if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+			desktop.MainWindow = desktop.Args?[0] switch
 			{
-				DataContext = new MainWindowViewModel()
+				"--home" => new MainWindow
+				{
+					DataContext = new MainWindowViewModel()
+				},
+				"--login" => new LoginWindow
+				{
+					DataContext = new LoginWindowViewModel()
+				},
+				_ => throw new ArgumentOutOfRangeException()
 			};
 	}
 }

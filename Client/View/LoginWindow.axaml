@@ -1,21 +1,49 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:Client.ViewModel"
+        xmlns:components="clr-namespace:Client.View.Components"
+        xmlns:utility="clr-namespace:Client.Converter"
         x:Class="Client.View.LoginWindow"
         ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen"
         Title="Welcome to Heast!"
-        Width="450"
-        Height="700">
+        CanResize="False"
+        Width="400"
+        Height="600">
 
-    <Design.DataContext>
-        <vm:LoginWindowViewModel />
-    </Design.DataContext>
+	<Design.DataContext>
+		<vm:LoginWindowViewModel />
+	</Design.DataContext>
 
-    <Panel>
-        <Border
-            Background="{DynamicResource Mid}"
-            IsHitTestVisible="False" />
-    </Panel>
+	<Window.Resources>
+		<utility:InstanceExistsConverter x:Key="IsNotNull" />
+	</Window.Resources>
+
+	<Panel>
+		<Border
+			Background="{DynamicResource Mid}"
+			IsHitTestVisible="False" />
+
+		<Grid RowDefinitions="38, *">
+			<Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+				<components:BackButton
+					IsVisible="{Binding Content.Back,
+					Converter={StaticResource IsNotNull}}"
+					Grid.Column="1"
+					Click="BackButton_OnClick" />
+			</Grid>
+
+			<TransitioningContentControl
+				Grid.Row="1"
+				Padding="55.0 20.0 55.0 40.0"
+				Content="{Binding Content}">
+				<TransitioningContentControl.PageTransition>
+					<!-- The custom page transition is not yet working -->
+					<!-- <util:PanelTransition Duration="0:00:00.500"/> -->
+					<CrossFade Duration="0:00:00.200" />
+				</TransitioningContentControl.PageTransition>
+			</TransitioningContentControl>
+		</Grid>
+	</Panel>
 </Window>

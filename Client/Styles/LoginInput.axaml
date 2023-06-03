@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+	<Style Selector="TextBox">
+		<Setter Property="Foreground" Value="{DynamicResource White}" />
+		<Setter Property="Background" Value="{DynamicResource Dark}" />
+		<Setter Property="BorderThickness" Value="2.0" />
+		<Setter Property="BorderBrush" Value="{DynamicResource Gray}" />
+		<Setter Property="Padding" Value="16.0 22.0 16.0 22.0" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="Margin" Value="0.0 0.0 0.0 10.0" />
+		<Setter Property="CornerRadius" Value="15.0" />
+		<Setter Property="FontSize" Value="20.0" />
+		<Setter Property="FontFamily" Value="{DynamicResource Poppins}" />
+		<Setter Property="FontWeight" Value="Bold" />
+	</Style>
+
+	<Style Selector="TextBox.Password">
+		<Setter Property="PasswordChar" Value="●" />
+	</Style>
+
+	<Style Selector="TextBox /template/ TextBlock">
+		<Setter Property="FontSize" Value="20.0" />
+	</Style>
+
+	<Style Selector="TextBox:pointerover /template/ Border">
+		<Setter Property="BorderBrush" Value="{DynamicResource Light}" />
+	</Style>
+
+	<Style Selector="TextBox:focus /template/ Border">
+		<Setter Property="BorderBrush" Value="{DynamicResource Light}" />
+	</Style>
+</Styles>

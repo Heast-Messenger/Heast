@@ -1,5 +1,6 @@
-namespace Core.Network; 
+namespace Core.Network;
 
-public interface IPacketListener {
-    
+public interface IPacketListener
+{
+
 }

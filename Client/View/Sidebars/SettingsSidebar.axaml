@@ -4,6 +4,7 @@
 	xmlns:view="clr-namespace:Client.View.Sidebars"
 	xmlns:components="clr-namespace:Client.View.Components"
 	xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
+	xmlns:ext="clr-namespace:Client.Extensions"
 	x:Class="Client.View.Sidebars.SettingsSidebar"
 	Width="180.0">
 
@@ -14,35 +15,36 @@
 	<view:SidebarBase.Resources>
 		<components:IconText
 			x:Key="Content.Account"
-			Text="Account"
+			Text="{ext:SimpleText Account}"
 			Icon="{SvgImage /Assets/Settings/Account.svg}"
 			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Security"
-			Text="Security"
+			Text="{ext:SimpleText Security}"
 			Icon="{SvgImage /Assets/Settings/Security.svg}"
 			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Notifications"
-			Text="Notifications"
+			Text="{ext:SimpleText Notifications}"
 			Icon="{SvgImage /Assets/Settings/Notifications.svg}"
 			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Appearance"
-			Text="Appearance"
+			Text="{ext:SimpleText Appearance}"
 			Icon="{SvgImage /Assets/Settings/Appearance.svg}"
 			Foreground="{DynamicResource White}" />
 		<components:IconText
 			x:Key="Content.Status"
-			Text="Status"
+			Text="{ext:SimpleText Status}"
 			Icon="{SvgImage /Assets/Settings/Status.svg}"
 			Foreground="{DynamicResource White}" />
 	</view:SidebarBase.Resources>
 
 	<view:SidebarBase.Styles>
-		<Style Selector="Button">
-			<Setter Property="Padding" Value="16.0" />
-		</Style>
+		<StyleInclude Source="/Styles/BorderButtons.axaml" />
+		<!-- <Style Selector="Button"> -->
+		<!-- 	<Setter Property="Padding" Value="16.0" /> -->
+		<!-- </Style> -->
 	</view:SidebarBase.Styles>
 
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled"

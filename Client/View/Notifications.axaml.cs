@@ -9,14 +9,14 @@ public partial class Notifications : UserControl
 {
 	public Notifications()
 	{
-		this.InitializeComponent();
+		InitializeComponent();
 	}
 
-	private NotificationsViewModel NotificationsViewModel => (NotificationsViewModel) this.DataContext!;
+	private NotificationsViewModel NotificationsViewModel => (NotificationsViewModel) DataContext!;
 
 	public void CloseNotification(object? sender, RoutedEventArgs e)
 	{
-		if (sender is Button button && button.DataContext is INotification notification)
-			this.NotificationsViewModel.Close(notification);
+		if (sender is Button {DataContext: INotification notification})
+			NotificationsViewModel.Close(notification);
 	}
 }

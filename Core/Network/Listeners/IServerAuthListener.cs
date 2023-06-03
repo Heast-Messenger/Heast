@@ -1,6 +1,7 @@
-namespace Core.Network.Listeners; 
+namespace Core.Network.Listeners;
 
-public interface IServerAuthListener : IPacketListener {
+public interface IServerAuthListener : IPacketListener
+{
     // void OnSignup(SignupC2SPacket packet);
     // void OnLogin(LoginC2SPacket packet);
     // void OnReset(ResetC2SPacket packet);

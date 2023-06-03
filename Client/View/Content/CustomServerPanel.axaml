@@ -1,0 +1,78 @@
+<view:LoginBase
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:view="clr-namespace:Client.View.Content"
+   xmlns:vm="clr-namespace:Client.ViewModel"
+   x:Class="Client.View.Content.CustomServerPanel">
+
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
+
+   <view:LoginBase.Styles>
+      <StyleInclude Source="/Styles/Textblocks.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+      <StyleInclude Source="/Styles/LoginInput.axaml" />
+   </view:LoginBase.Styles>
+
+   <Grid RowDefinitions="Auto, Auto, *, Auto">
+      <TextBlock Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Classes="Bold"
+                 FontSize="32">
+         Custom Servers
+      </TextBlock>
+
+      <TextBlock
+         Grid.Row="1"
+         VerticalAlignment="Center"
+         TextWrapping="Wrap"
+         Classes="Title">
+         <Run Text="Connect" FontWeight="Bold" />
+         <Run Text="to a custom server that is" />
+         <Run Text="not managed by Heast." FontWeight="Bold" />
+      </TextBlock>
+
+      <ScrollViewer Grid.Row="2">
+         <ItemsControl Items="{Binding CustomServers}">
+            <ItemsControl.ItemTemplate>
+               <DataTemplate>
+                  <Grid ColumnDefinitions="50, *"
+                        RowDefinitions="Auto, Auto, Auto">
+                     <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                            VerticalAlignment="Top"
+                            Margin="5"
+                            Source="{Binding Image}" />
+                     <TextBlock Grid.Column="1" Grid.Row="0"
+                                Text="{Binding Name}"
+                                TextWrapping="Wrap"
+                                Classes="Bold" />
+                     <TextBlock Grid.Column="1" Grid.Row="1"
+                                Text="{Binding Address}"
+                                TextWrapping="Wrap"
+                                Classes="Bold" />
+                     <TextBlock Grid.Column="1" Grid.Row="2"
+                                Text="{Binding Description}"
+                                TextWrapping="Wrap" />
+                  </Grid>
+               </DataTemplate>
+            </ItemsControl.ItemTemplate>
+         </ItemsControl>
+      </ScrollViewer>
+
+      <Grid Grid.Row="3" ColumnDefinitions="*, Auto, Auto">
+         <TextBox Grid.Column="0"
+                  Watermark="Address"
+                  Text="{Binding CustomServerAddress}"
+                  Margin="0" />
+         <Button Grid.Column="1"
+                 Content="{SvgImage /Assets/Login/Add.svg}"
+                 Click="Button_OnAdd"
+                 Margin="10.0 0 0 0" />
+         <Button Grid.Column="2"
+                 Content="{SvgImage /Assets/Login/Next.svg}"
+                 Click="Button_OnConnect"
+                 Margin="10.0 0 0 0" />
+      </Grid>
+   </Grid>
+</view:LoginBase>

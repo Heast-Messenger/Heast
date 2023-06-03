@@ -5,21 +5,25 @@
              xmlns:components="clr-namespace:Client.View.Components"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.View.Components.IconText">
-	<StackPanel Orientation="Horizontal"
-	            Spacing="10.0">
+	<StackPanel
+		Orientation="{Binding Orientation,
+		RelativeSource={RelativeSource
+		AncestorType={x:Type components:IconText}}}"
+		Spacing="10.0">
+
 		<Image
-			Width="18" Height="18"
+			VerticalAlignment="Center"
+			HorizontalAlignment="Center"
 			Source="{Binding Icon,
-				RelativeSource={RelativeSource
-				AncestorType={x:Type components:IconText}}}" />
-		<TextBlock
-			FontSize="13.0"
-			Classes="Bold"
-			Foreground="{Binding Foreground,
-				RelativeSource={RelativeSource
-				AncestorType={x:Type components:IconText}}}"
-			Text="{Binding Text,
-				RelativeSource={RelativeSource
-				AncestorType={x:Type components:IconText}}}" />
+			RelativeSource={RelativeSource
+			AncestorType={x:Type components:IconText}}}" />
+
+		<ContentPresenter
+			VerticalAlignment="Center"
+			HorizontalAlignment="Center"
+			TextWrapping="Wrap"
+			Content="{Binding Text,
+			RelativeSource={RelativeSource
+			AncestorType={x:Type components:IconText}}}" />
 	</StackPanel>
 </UserControl>

@@ -1,6 +1,7 @@
-namespace Core.Network; 
+namespace Core.Network;
 
-public interface IPacket<in T> where T : IPacketListener {
+public interface IPacket<in T> where T : IPacketListener
+{
     void Write(PacketBuf buf);
     void Apply(T listener);
 }

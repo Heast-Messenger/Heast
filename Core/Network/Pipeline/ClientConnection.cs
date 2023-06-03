@@ -50,7 +50,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
     public override async void ChannelInactive(IChannelHandlerContext context)
     {
-        if (Channel is {Open: true}) await Channel.CloseAsync();
+        if (Channel is { Open: true }) await Channel.CloseAsync();
     }
 
     protected override void ChannelRead0(IChannelHandlerContext ctx, IPacket<IPacketListener> msg)
@@ -63,7 +63,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
     public Task Send<T>(IPacket<T> packet) where T : IPacketListener
     {
-        return Channel is {Open: true}
+        return Channel is { Open: true }
             ? Channel.WriteAndFlushAsync(packet)
             : throw new IllegalStateException("Channel was null whilst trying to send a packet");
     }

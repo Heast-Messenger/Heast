@@ -6,21 +6,21 @@ namespace Auth;
 
 public static class Program
 {
-	public static void Main(string[] args)
-	{
-		try
-		{
-			Dispatcher.Dispatch(args);
-		}
-		catch (Exception e)
-		{
-			Dispatcher.Crash(e);
-		}
-	}
+    public static void Main(string[] args)
+    {
+        try
+        {
+            Dispatcher.Dispatch(args);
+        }
+        catch (Exception e)
+        {
+            Dispatcher.Crash(e);
+        }
+    }
 }
 
 public class Startup
 {
-	public void ConfigureServices(IServiceCollection services)
-		=> services.AddDbContext<AuthContext>();
+    public void ConfigureServices(IServiceCollection services)
+        => services.AddDbContext<AuthContext>();
 }

@@ -1,5 +1,6 @@
-﻿namespace Core.Network; 
+﻿namespace Core.Network;
 
-public enum Error {
-	InvalidKey,
+public enum Error
+{
+    InvalidKey,
 }

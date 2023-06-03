@@ -4,10 +4,10 @@ namespace Client;
 
 public static partial class Hooks
 {
-	public static NotificationsViewModel UseNotifications()
-	{
-		var mw = UseMainWindow();
+    public static NotificationsViewModel UseNotifications()
+    {
+        var mw = UseMainWindow();
 
-		return mw.NotificationsViewModel;
-	}
+        return mw.NotificationsViewModel;
+    }
 }
