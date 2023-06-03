@@ -2,74 +2,73 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
-                xmlns:components="clr-namespace:Client.View.Components"
-                xmlns:ext="clr-namespace:Client.Extensions"
+                xmlns:controls="clr-namespace:Client.Controls"
                 x:Class="Client.View.Content.LoginPanel">
-	<Design.DataContext>
-		<vm:LoginWindowViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
 
-	<view:LoginBase.Resources>
-		<components:IconText
-			x:Key="Content.Login"
-			Text="{ext:SimpleText Log in}"
-			Icon="{SvgImage /Assets/Login/Login.svg}"
-			Foreground="{DynamicResource White}" />
-		<components:IconText
-			x:Key="Content.Reset"
-			Text="{ext:SimpleText Reset}"
-			Icon="{SvgImage /Assets/Login/Key.svg}"
-			Foreground="{DynamicResource White}" />
-	</view:LoginBase.Resources>
+   <view:LoginBase.Resources>
+      <controls:IconText
+         x:Key="Content.Login"
+         Text="Log in"
+         Icon="{SvgImage /Assets/Login/Login.svg}"
+         Foreground="{DynamicResource White}" />
+      <controls:IconText
+         x:Key="Content.Reset"
+         Text="Reset"
+         Icon="{SvgImage /Assets/Login/Key.svg}"
+         Foreground="{DynamicResource White}" />
+   </view:LoginBase.Resources>
 
-	<view:LoginBase.Styles>
-		<StyleInclude Source="/Styles/Textblocks.axaml" />
-		<StyleInclude Source="/Styles/LoginButtons.axaml" />
-		<StyleInclude Source="/Styles/LoginInput.axaml" />
-	</view:LoginBase.Styles>
+   <view:LoginBase.Styles>
+      <StyleInclude Source="/Styles/Textblocks.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+      <StyleInclude Source="/Styles/LoginInput.axaml" />
+   </view:LoginBase.Styles>
 
-	<Grid RowDefinitions="Auto, Auto, *, Auto">
-		<TextBlock
-			Grid.Row="0"
-			VerticalAlignment="Center"
-			Classes="Bold"
-			FontSize="32">
-			Welcome back!
-		</TextBlock>
+   <Grid RowDefinitions="Auto, Auto, *, Auto">
+      <TextBlock
+         Grid.Row="0"
+         VerticalAlignment="Center"
+         Classes="Bold"
+         FontSize="32">
+         Welcome back!
+      </TextBlock>
 
-		<TextBlock
-			Grid.Row="1"
-			VerticalAlignment="Center"
-			TextWrapping="Wrap"
-			Classes="Title">
-			<Run Text="Click on" />
-			<Run Text="Reset" FontWeight="Bold" />
-			<Run Text="to change your" />
-			<Run Text="password" FontWeight="Bold" />
-			<Run Text="in case you forgot it." />
-		</TextBlock>
+      <TextBlock
+         Grid.Row="1"
+         VerticalAlignment="Center"
+         TextWrapping="Wrap"
+         Classes="Title">
+         <Run Text="Click on" />
+         <Run Text="Reset" FontWeight="Bold" />
+         <Run Text="to change your" />
+         <Run Text="password" FontWeight="Bold" />
+         <Run Text="in case you forgot it." />
+      </TextBlock>
 
-		<Border Grid.Row="2" />
+      <Border Grid.Row="2" />
 
-		<StackPanel Grid.Row="3"
-		            Orientation="Vertical">
-			<TextBox
-				Watermark="Username / Email"
-				Text="{Binding LoginUsernameOrEmail}" />
-			<TextBox
-				Watermark="Password"
-				Classes="Password"
-				Text="{Binding LoginPassword}" />
-			<Button
-				Content="{StaticResource Content.Reset}"
-				Command="{Binding Reset}" />
-			<TextBlock
-				Text="Log in when you're ready!"
-				Classes="Watermark Bold"
-				FontSize="18.0" />
-			<Button
-				Content="{StaticResource Content.Login}"
-				Command="{Binding Guest}" />
-		</StackPanel>
-	</Grid>
+      <StackPanel Grid.Row="3"
+                  Orientation="Vertical">
+         <TextBox
+            Watermark="Username / Email"
+            Text="{Binding LoginUsernameOrEmail}" />
+         <TextBox
+            Watermark="Password"
+            Classes="Password"
+            Text="{Binding LoginPassword}" />
+         <Button
+            Content="{StaticResource Content.Reset}"
+            Command="{Binding Reset}" />
+         <TextBlock
+            Text="Log in when you're ready!"
+            Classes="Watermark Bold"
+            FontSize="18.0" />
+         <Button
+            Content="{StaticResource Content.Login}"
+            Command="{Binding Guest}" />
+      </StackPanel>
+   </Grid>
 </view:LoginBase>

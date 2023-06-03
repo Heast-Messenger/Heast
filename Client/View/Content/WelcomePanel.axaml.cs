@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Interactivity;
 using Client.ViewModel;
 
@@ -12,7 +13,7 @@ public partial class WelcomePanel : LoginBase
 
 	public override LoginBase? Back => null;
 
-	public override double? WindowHeight => null;
+	public override Size? WindowSize => null;
 
 	public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 

@@ -4,8 +4,7 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:utility="clr-namespace:Client.Utility"
-   xmlns:components="clr-namespace:Client.View.Components"
-   xmlns:ext="clr-namespace:Client.Extensions"
+   xmlns:controls="clr-namespace:Client.Controls"
    x:Class="Client.View.Content.ServerOptionsPanel">
 
    <Design.DataContext>
@@ -13,15 +12,15 @@
    </Design.DataContext>
 
    <view:LoginBase.Resources>
-      <components:IconText
+      <controls:IconText
          x:Key="Content.Official"
-         Text="{ext:SimpleText Heast Network}"
+         Text="Heast Network"
          Icon="/Assets/Logos/Heast.png"
          Foreground="{DynamicResource White}"
          Orientation="Vertical" />
-      <components:IconText
+      <controls:IconText
          x:Key="Content.Custom"
-         Text="{ext:SimpleText Custom Server}"
+         Text="Custom Server"
          Icon="{SvgImage /Assets/Login/Cloud.svg}"
          Foreground="{DynamicResource White}"
          Orientation="Vertical" />

@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Client.ViewModel;
 
@@ -16,5 +17,17 @@ public partial class LoginWindow : Window
 	private void BackButton_OnClick(object? sender, RoutedEventArgs e)
 	{
 		LoginWindowViewModel.Back();
+	}
+
+	private void BackButton_OnInitialized(object? sender, EventArgs e)
+	{
+		if (OperatingSystem.IsWindows())
+		{
+			SetValue(Grid.ColumnProperty, 0);
+		}
+		else if (OperatingSystem.IsMacOS())
+		{
+			SetValue(Grid.ColumnProperty, 2);
+		}
 	}
 }

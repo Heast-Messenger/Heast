@@ -1,14 +1,14 @@
-using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
 
-namespace Client.View.Components;
+namespace Client.Controls;
 
-public partial class IconText : UserControl
+public class IconText : TemplatedControl
 {
-	public static readonly DirectProperty<IconText, Control?> TextProperty =
-		AvaloniaProperty.RegisterDirect<IconText, Control?>(nameof(Text),
+	public static readonly DirectProperty<IconText, string?> TextProperty =
+		AvaloniaProperty.RegisterDirect<IconText, string?>(nameof(Text),
 			o => o.Text, (o, v) => o.Text = v);
 
 	public static readonly StyledProperty<IImage?> IconProperty =
@@ -17,14 +17,9 @@ public partial class IconText : UserControl
 	public static readonly StyledProperty<Orientation> OrientationProperty =
 		AvaloniaProperty.Register<IconText, Orientation>(nameof(Orientation));
 
-	private Control? _text;
+	private string? _text;
 
-	public IconText()
-	{
-		InitializeComponent();
-	}
-
-	public Control? Text
+	public string? Text
 	{
 		get => _text;
 		set => SetAndRaise(TextProperty, ref _text, value);

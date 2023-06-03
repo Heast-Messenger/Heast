@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using Client.Converter;
 using Client.Model;
@@ -11,18 +13,17 @@ namespace Client.ViewModel;
 
 public class LoginWindowViewModel : ViewModelBase
 {
-	private readonly DispatcherTimer _resizeTimer;
 	private LoginBase _content;
-	private double _velocity;
-	private double _windowHeight = 600.0;
+	private Size _velocity;
+	private Size _windowSize = new(400.0, 600.0);
 
 	public LoginWindowViewModel()
 	{
 		_content = new WelcomePanel();
-		_resizeTimer = new DispatcherTimer();
-		_resizeTimer.Interval = TimeSpan.FromTicks(1);
-		_resizeTimer.Tick += Resize;
-		_resizeTimer.Start();
+		DispatcherTimer resizeTimer = new();
+		resizeTimer.Interval = TimeSpan.FromMilliseconds(1);
+		resizeTimer.Tick += Resize;
+		resizeTimer.Start();
 	}
 
 	private static Window CurrentWindow => UseCurrentWindow();
@@ -32,7 +33,7 @@ public class LoginWindowViewModel : ViewModelBase
 		get => _content;
 		set
 		{
-			_windowHeight = value.WindowHeight ?? 600.0;
+			_windowSize = value.WindowSize ?? new(400.0, 600.0);
 			RaiseAndSetIfChanged(ref _content, value);
 		}
 	}
@@ -45,35 +46,25 @@ public class LoginWindowViewModel : ViewModelBase
 	public string GuestUsername { get; set; } = string.Empty;
 	public string CustomServerAddress { get; set; } = string.Empty;
 
-	public ObservableCollection<CustomServer> CustomServers { get; set; } = new()
-	{
-		new CustomServer
-		{
-			Id = 1,
-			Name = "Test Server",
-			Address = "localhost:1234",
-			Description = "This is a test server."
-		}
-	};
+	public ObservableCollection<CustomServer> CustomServers { get; set; } = new();
 
 	public void Resize(object? sender, EventArgs args)
 	{
-		var from = CurrentWindow.Height;
-		var to = _windowHeight;
+		if (CurrentWindow.PlatformImpl is null) return;
+
+		var from = CurrentWindow.PlatformImpl.FrameSize!.Value;
+		var to = _windowSize;
 		var diff = to - from;
-		if (Math.Abs(diff) > 1.0f)
+		if (Math.Abs(diff.Width) > 0.1 || Math.Abs(diff.Height) > 0.1)
 		{
-			var val = SmoothDamp.Read(from, to, ref _velocity, 5.0f, 0.1f);
-			CurrentWindow.Height = val;
+			var val = SmoothDamp.Read2d(from, to, ref _velocity, 1.0f, 0.1f);
+			CurrentWindow.PlatformImpl.Resize(val, PlatformResizeReason.Application);
 		}
 	}
 
 	public void Back()
 	{
-		if (Content.Back is not null)
-		{
-			Content = Content.Back;
-		}
+		if (Content.Back is not null) Content = Content.Back;
 	}
 
 	public void Signup()
@@ -96,11 +87,14 @@ public class LoginWindowViewModel : ViewModelBase
 		Console.WriteLine($"Login: {GuestUsername}");
 	}
 
-	public void Connect()
-	{
-	}
+	public void Connect() { }
 
 	public void AddServer()
 	{
+		var server = new CustomServer
+		{
+			Address = CustomServerAddress
+		};
+		CustomServers.Add(server);
 	}
 }

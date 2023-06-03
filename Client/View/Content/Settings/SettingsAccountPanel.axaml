@@ -1,109 +1,108 @@
 <view:ContentBase xmlns="https://github.com/avaloniaui"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:view="clr-namespace:Client.View.Content"
-                  xmlns:components="clr-namespace:Client.View.Components"
                   xmlns:vm="clr-namespace:Client.ViewModel.Content"
-                  xmlns:ext="clr-namespace:Client.Extensions"
+                  xmlns:controls="clr-namespace:Client.Controls"
                   x:Class="Client.View.Content.SettingsAccountPanel">
-	<Design.DataContext>
-		<vm:SettingsAccountViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:SettingsAccountViewModel />
+   </Design.DataContext>
 
-	<view:ContentBase.Resources>
-		<components:IconText
-			x:Key="Content.Invite"
-			Text="{ext:SimpleText Invite Friends}"
-			Icon="{SvgImage /Assets/Settings/Invite.svg}"
-			Foreground="{DynamicResource Blue}" />
-		<components:IconText
-			x:Key="Content.Request"
-			Text="{ext:SimpleText Request Data}"
-			Icon="{SvgImage /Assets/Settings/Request.svg}"
-			Foreground="{DynamicResource White}" />
-		<components:IconText
-			x:Key="Content.Switch"
-			Text="{ext:SimpleText Switch Account}"
-			Icon="{SvgImage /Assets/Settings/Switch.svg}"
-			Foreground="{DynamicResource White}" />
-		<components:IconText
-			x:Key="Content.Logout"
-			Text="{ext:SimpleText Log out}"
-			Icon="{SvgImage /Assets/Settings/Logout.svg}"
-			Foreground="{DynamicResource Red}" />
-		<components:IconText
-			x:Key="Content.Delete"
-			Text="{ext:SimpleText Delete Account}"
-			Icon="{SvgImage /Assets/Settings/Delete.svg}"
-			Foreground="{DynamicResource Red}" />
-	</view:ContentBase.Resources>
+   <view:ContentBase.Resources>
+      <controls:IconText
+         x:Key="Content.Invite"
+         Text="Invite Friends"
+         Icon="{SvgImage /Assets/Settings/Invite.svg}"
+         Foreground="{DynamicResource Blue}" />
+      <controls:IconText
+         x:Key="Content.Request"
+         Text="Request Data"
+         Icon="{SvgImage /Assets/Settings/Request.svg}"
+         Foreground="{DynamicResource White}" />
+      <controls:IconText
+         x:Key="Content.Switch"
+         Text="Switch Account"
+         Icon="{SvgImage /Assets/Settings/Switch.svg}"
+         Foreground="{DynamicResource White}" />
+      <controls:IconText
+         x:Key="Content.Logout"
+         Text="Log out"
+         Icon="{SvgImage /Assets/Settings/Logout.svg}"
+         Foreground="{DynamicResource Red}" />
+      <controls:IconText
+         x:Key="Content.Delete"
+         Text="Delete Account"
+         Icon="{SvgImage /Assets/Settings/Delete.svg}"
+         Foreground="{DynamicResource Red}" />
+   </view:ContentBase.Resources>
 
-	<view:ContentBase.Styles>
-		<StyleInclude Source="/Styles/BorderButtons.axaml" />
-		<StyleInclude Source="/Styles/Textblocks.axaml" />
-	</view:ContentBase.Styles>
+   <view:ContentBase.Styles>
+      <StyleInclude Source="/Styles/BorderButtons.axaml" />
+      <StyleInclude Source="/Styles/Textblocks.axaml" />
+   </view:ContentBase.Styles>
 
-	<Grid ColumnDefinitions="*,23,200"
-	      RowDefinitions="*">
-		<StackPanel Grid.Column="0"
-		            Orientation="Vertical"
-		            Spacing="10.0"
-		            VerticalAlignment="Center"
-		            HorizontalAlignment="Center">
-			<Image Source="{SvgImage /Assets/Settings/Account.svg}"
-			       Width="128.0" Height="128.0" />
-			<TextBlock Text="Username"
-			           TextAlignment="Center"
-			           FontSize="32.0"
-			           Classes="Bold" />
-			<TextBox Width="200.0" Height="100.0"
-			         AcceptsReturn="True"
-			         AcceptsTab="False"
-			         BorderBrush="{DynamicResource Gray}"
-			         SelectionBrush="{DynamicResource Gray}"
-			         BorderThickness="3.0"
-			         Watermark="About you..."
-			         Foreground="{DynamicResource Gray}"
-			         Background="{DynamicResource Dark}"
-			         FontSize="24.0"
-			         CornerRadius="10.0" />
-		</StackPanel>
+   <Grid ColumnDefinitions="*,23,220"
+         RowDefinitions="*">
+      <StackPanel Grid.Column="0"
+                  Orientation="Vertical"
+                  Spacing="10.0"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+         <Image Source="{SvgImage /Assets/Settings/Account.svg}"
+                Width="128.0" Height="128.0" />
+         <TextBlock Text="Username"
+                    TextAlignment="Center"
+                    FontSize="32.0"
+                    Classes="Bold" />
+         <TextBox Width="200.0" Height="100.0"
+                  AcceptsReturn="True"
+                  AcceptsTab="False"
+                  BorderBrush="{DynamicResource Gray}"
+                  SelectionBrush="{DynamicResource Gray}"
+                  BorderThickness="3.0"
+                  Watermark="About you..."
+                  Foreground="{DynamicResource Gray}"
+                  Background="{DynamicResource Dark}"
+                  FontSize="24.0"
+                  CornerRadius="10.0" />
+      </StackPanel>
 
-		<Border
-			Grid.Column="1"
-			Background="{DynamicResource Light}"
-			VerticalAlignment="Stretch"
-			HorizontalAlignment="Center"
-			CornerRadius="1.5"
-			Width="3" />
+      <Border
+         Grid.Column="1"
+         Background="{DynamicResource Light}"
+         VerticalAlignment="Stretch"
+         HorizontalAlignment="Center"
+         CornerRadius="1.5"
+         Width="3" />
 
-		<ScrollViewer
-			Grid.Column="2"
-			Padding="10.0"
-			HorizontalScrollBarVisibility="Disabled"
-			VerticalScrollBarVisibility="Auto">
-			<StackPanel Orientation="Vertical">
-				<TextBlock
-					Text="Manage Account"
-					Classes="Title Bold" />
-				<Button
-					Content="{StaticResource Content.Invite}"
-					Command="{Binding Button_OnInvite}" />
-				<Button
-					Content="{StaticResource Content.Request}"
-					Command="{Binding Button_OnRequest}" />
-				<Button
-					Content="{StaticResource Content.Switch}"
-					Command="{Binding Button_OnSwitch}" />
-				<TextBlock
-					Text="Red line"
-					Classes="Title Bold" />
-				<Button
-					Content="{StaticResource Content.Logout}"
-					Command="{Binding Button_OnLogout}" />
-				<Button
-					Content="{StaticResource Content.Delete}"
-					Command="{Binding Button_OnDelete}" />
-			</StackPanel>
-		</ScrollViewer>
-	</Grid>
+      <ScrollViewer
+         Grid.Column="2"
+         Padding="10.0"
+         HorizontalScrollBarVisibility="Disabled"
+         VerticalScrollBarVisibility="Auto">
+         <StackPanel Orientation="Vertical">
+            <TextBlock
+               Text="Manage Account"
+               Classes="Title Bold" />
+            <Button
+               Content="{StaticResource Content.Invite}"
+               Command="{Binding Button_OnInvite}" />
+            <Button
+               Content="{StaticResource Content.Request}"
+               Command="{Binding Button_OnRequest}" />
+            <Button
+               Content="{StaticResource Content.Switch}"
+               Command="{Binding Button_OnSwitch}" />
+            <TextBlock
+               Text="Red line"
+               Classes="Title Bold" />
+            <Button
+               Content="{StaticResource Content.Logout}"
+               Command="{Binding Button_OnLogout}" />
+            <Button
+               Content="{StaticResource Content.Delete}"
+               Command="{Binding Button_OnDelete}" />
+         </StackPanel>
+      </ScrollViewer>
+   </Grid>
 </view:ContentBase>

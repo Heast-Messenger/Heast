@@ -12,38 +12,38 @@
         Width="400"
         Height="600">
 
-	<Design.DataContext>
-		<vm:LoginWindowViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
 
-	<Window.Resources>
-		<utility:InstanceExistsConverter x:Key="IsNotNull" />
-	</Window.Resources>
+   <Window.Resources>
+      <utility:InstanceExistsConverter x:Key="IsNotNull" />
+   </Window.Resources>
 
-	<Panel>
-		<Border
-			Background="{DynamicResource Mid}"
-			IsHitTestVisible="False" />
+   <Panel>
+      <Border
+         Background="{DynamicResource Mid}"
+         IsHitTestVisible="False" />
 
-		<Grid RowDefinitions="38, *">
-			<Grid Grid.Row="0" ColumnDefinitions="*, Auto">
-				<components:BackButton
-					IsVisible="{Binding Content.Back,
+      <Grid RowDefinitions="38, *">
+         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
+            <components:BackButton
+               IsVisible="{Binding Content.Back,
 					Converter={StaticResource IsNotNull}}"
-					Grid.Column="1"
-					Click="BackButton_OnClick" />
-			</Grid>
+               Initialized="BackButton_OnInitialized"
+               Click="BackButton_OnClick" />
+         </Grid>
 
-			<TransitioningContentControl
-				Grid.Row="1"
-				Padding="55.0 20.0 55.0 40.0"
-				Content="{Binding Content}">
-				<TransitioningContentControl.PageTransition>
-					<!-- The custom page transition is not yet working -->
-					<!-- <util:PanelTransition Duration="0:00:00.500"/> -->
-					<CrossFade Duration="0:00:00.200" />
-				</TransitioningContentControl.PageTransition>
-			</TransitioningContentControl>
-		</Grid>
-	</Panel>
+         <TransitioningContentControl
+            Grid.Row="1"
+            Padding="55.0 20.0 55.0 40.0"
+            Content="{Binding Content}">
+            <TransitioningContentControl.PageTransition>
+               <!-- The custom page transition is not yet working -->
+               <!-- <util:PanelTransition Duration="0:00:00.500"/> -->
+               <CrossFade Duration="0:00:00.200" />
+            </TransitioningContentControl.PageTransition>
+         </TransitioningContentControl>
+      </Grid>
+   </Panel>
 </Window>

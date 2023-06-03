@@ -16,19 +16,17 @@ public class PanelTransition : IPageTransition
 	private readonly Animation _out;
 
 	public PanelTransition()
-		: this(TimeSpan.Zero)
-	{
-	}
+		: this(TimeSpan.Zero) { }
 
 	public PanelTransition(TimeSpan duration)
 	{
-		_out = new Animation
+		_out = new()
 		{
 			FillMode = FillMode.Forward,
 			Easing = new BounceEaseOut(),
 			Children =
 			{
-				new()
+				new KeyFrame
 				{
 					Cue = new(0d),
 					Setters =
@@ -36,7 +34,7 @@ public class PanelTransition : IPageTransition
 						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 0d}
 					}
 				},
-				new()
+				new KeyFrame
 				{
 					Cue = new(1d),
 					Setters =
@@ -47,13 +45,13 @@ public class PanelTransition : IPageTransition
 			}
 		};
 
-		_in = new Animation
+		_in = new()
 		{
 			FillMode = FillMode.Forward,
 			Easing = new BounceEaseOut(),
 			Children =
 			{
-				new()
+				new KeyFrame
 				{
 					Cue = new(0d),
 					Setters =
@@ -61,7 +59,7 @@ public class PanelTransition : IPageTransition
 						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 1d}
 					}
 				},
-				new()
+				new KeyFrame
 				{
 					Cue = new(1d),
 					Setters =

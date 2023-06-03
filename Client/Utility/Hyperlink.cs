@@ -22,7 +22,7 @@ public class Hyperlink : TextBlock
 	protected override void OnInitialized()
 	{
 		Foreground = Brushes.CornflowerBlue;
-		Cursor = new Cursor(StandardCursorType.Hand);
+		Cursor = new(StandardCursorType.Hand);
 		PointerPressed += (_, _) =>
 		{
 			Process.Start(new ProcessStartInfo(Url)

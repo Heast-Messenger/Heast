@@ -2,58 +2,57 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
-                xmlns:components="clr-namespace:Client.View.Components"
-                xmlns:ext="clr-namespace:Client.Extensions"
+                xmlns:controls="clr-namespace:Client.Controls"
                 x:Class="Client.View.Content.GuestPanel">
-	<Design.DataContext>
-		<vm:LoginWindowViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
 
-	<view:LoginBase.Resources>
-		<components:IconText
-			x:Key="Content.Login"
-			Text="{ext:SimpleText Log in}"
-			Icon="{SvgImage /Assets/Login/Login.svg}"
-			Foreground="{DynamicResource White}" />
-	</view:LoginBase.Resources>
+   <view:LoginBase.Resources>
+      <controls:IconText
+         x:Key="Content.Login"
+         Text="Log in"
+         Icon="{SvgImage /Assets/Login/Login.svg}"
+         Foreground="{DynamicResource White}" />
+   </view:LoginBase.Resources>
 
-	<view:LoginBase.Styles>
-		<StyleInclude Source="/Styles/Textblocks.axaml" />
-		<StyleInclude Source="/Styles/LoginButtons.axaml" />
-		<StyleInclude Source="/Styles/LoginInput.axaml" />
-	</view:LoginBase.Styles>
+   <view:LoginBase.Styles>
+      <StyleInclude Source="/Styles/Textblocks.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+      <StyleInclude Source="/Styles/LoginInput.axaml" />
+   </view:LoginBase.Styles>
 
-	<Grid RowDefinitions="Auto, Auto, *, Auto">
-		<TextBlock
-			Grid.Row="0"
-			VerticalAlignment="Center"
-			Classes="Bold"
-			FontSize="32">
-			Hello!
-		</TextBlock>
+   <Grid RowDefinitions="Auto, Auto, *, Auto">
+      <TextBlock
+         Grid.Row="0"
+         VerticalAlignment="Center"
+         Classes="Bold"
+         FontSize="32">
+         Hello!
+      </TextBlock>
 
-		<TextBlock
-			Grid.Row="1"
-			VerticalAlignment="Center"
-			TextWrapping="Wrap"
-			Classes="Title">
-			<Run Text="Create a" />
-			<Run Text="guest account" FontWeight="Bold" />
-			<Run Text="to quickly continue. Upgrade to a" />
-			<Run Text="permanent account" FontWeight="Bold" />
-			<Run Text="anytime for free!" />
-		</TextBlock>
+      <TextBlock
+         Grid.Row="1"
+         VerticalAlignment="Center"
+         TextWrapping="Wrap"
+         Classes="Title">
+         <Run Text="Create a" />
+         <Run Text="guest account" FontWeight="Bold" />
+         <Run Text="to quickly continue. Upgrade to a" />
+         <Run Text="permanent account" FontWeight="Bold" />
+         <Run Text="anytime for free!" />
+      </TextBlock>
 
-		<Border Grid.Row="2" />
+      <Border Grid.Row="2" />
 
-		<StackPanel Grid.Row="3"
-		            Orientation="Vertical">
-			<TextBox
-				Watermark="Username"
-				Text="{Binding GuestUsername}" />
-			<Button
-				Content="{StaticResource Content.Login}"
-				Command="{Binding Guest}" />
-		</StackPanel>
-	</Grid>
+      <StackPanel Grid.Row="3"
+                  Orientation="Vertical">
+         <TextBox
+            Watermark="Username"
+            Text="{Binding GuestUsername}" />
+         <Button
+            Content="{StaticResource Content.Login}"
+            Command="{Binding Guest}" />
+      </StackPanel>
+   </Grid>
 </view:LoginBase>
