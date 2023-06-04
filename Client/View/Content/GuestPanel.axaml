@@ -10,8 +10,8 @@
 
    <view:LoginBase.Resources>
       <controls:IconText
-         x:Key="Content.Login"
-         Text="Log in"
+         x:Key="Content.Continue"
+         Text="Continue"
          Icon="{SvgImage /Assets/Login/Login.svg}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
@@ -51,7 +51,7 @@
             Watermark="Username"
             Text="{Binding GuestUsername}" />
          <Button
-            Content="{StaticResource Content.Login}"
+            Content="{StaticResource Content.Continue}"
             Command="{Binding Guest}" />
       </StackPanel>
    </Grid>

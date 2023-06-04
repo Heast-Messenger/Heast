@@ -13,7 +13,7 @@ public partial class ServerOptionsPanel : LoginBase
 
 	public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 
-	public override LoginBase? Back => new WelcomePanel
+	public override LoginBase Back => new WelcomePanel
 	{
 		DataContext = DataContext
 	};
@@ -26,6 +26,7 @@ public partial class ServerOptionsPanel : LoginBase
 		{
 			DataContext = DataContext
 		};
+		LoginWindowViewModel.ConnectOfficial();
 	}
 
 	private void Button_OnCustom(object? sender, RoutedEventArgs e)

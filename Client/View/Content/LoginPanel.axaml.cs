@@ -14,5 +14,5 @@ public partial class LoginPanel : LoginBase
 		DataContext = DataContext
 	};
 
-	public override Size? WindowSize => new Size(400.0, 630.0);
+	public override Size? WindowSize => new Size(400.0, 690.0);
 }

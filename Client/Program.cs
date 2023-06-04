@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Client.Extensions;
 using Client.Network;
 
 namespace Client;
@@ -16,6 +17,7 @@ internal static class Program
 			.StartInNewThread(args);
 
 		BuildAvaloniaApp()
+			.WithVersion(0, 0, 1)
 			.StartWithClassicDesktopLifetime(args);
 	}
 

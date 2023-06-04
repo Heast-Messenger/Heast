@@ -17,14 +17,16 @@ public class ClientLoginHandler : IClientLoginListener
 
 	private ClientConnection Ctx { get; }
 
+	private Aes? KeyPair { get; set; }
+
 	public void OnHello(HelloS2CPacket packet)
 	{
 		var key = new byte[128];
 		var iv = new byte[128];
-		var keypair = Aes.Create();
+		KeyPair = Aes.Create();
 		{
-			keypair.Mode = CipherMode.CFB;
-			keypair.Padding = PaddingMode.PKCS7;
+			KeyPair.Mode = CipherMode.CFB;
+			KeyPair.Padding = PaddingMode.PKCS7;
 			RandomNumberGenerator.Fill(key);
 			RandomNumberGenerator.Fill(iv);
 		}
@@ -46,11 +48,14 @@ public class ClientLoginHandler : IClientLoginListener
 			}
 		}
 
-		Ctx.Send(new KeyC2SPacket(encryptedKey.ToArray(), encryptedIv.ToArray()));
+		Ctx.Send(new KeyC2SPacket(
+			encryptedKey.ToArray(),
+			encryptedIv.ToArray()));
 	}
 
 	public void OnSuccess()
 	{
+		Ctx.EnableEncryption(KeyPair!);
 		Ctx.State = NetworkState.Auth;
 		Ctx.Listener = new ClientAuthHandler(Ctx);
 	}

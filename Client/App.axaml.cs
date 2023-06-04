@@ -9,6 +9,8 @@ namespace Client;
 
 public class App : Application
 {
+	public static string Version { get; set; }
+
 	public override void Initialize()
 	{
 		Console.WriteLine("Initializing client gui...");

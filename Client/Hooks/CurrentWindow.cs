@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -6,8 +7,13 @@ namespace Client;
 
 public static partial class Hooks
 {
-	public static Window UseCurrentWindow()
+	public static Func<Window> UseCurrentWindow()
 	{
-		return (Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)!.MainWindow!;
+		return () =>
+		{
+			var application = Application.Current!;
+			var lifetime = application.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+			return lifetime!.MainWindow!;
+		};
 	}
 }

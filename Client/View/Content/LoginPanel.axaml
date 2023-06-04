@@ -68,7 +68,7 @@
             FontSize="18.0" />
          <Button
             Content="{StaticResource Content.Login}"
-            Command="{Binding Guest}" />
+            Command="{Binding Login}" />
       </StackPanel>
    </Grid>
 </view:LoginBase>

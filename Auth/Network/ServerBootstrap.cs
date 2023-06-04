@@ -3,8 +3,6 @@ using DotNetty.Transport.Channels.Sockets;
 using NettyBootstrap = DotNetty.Transport.Bootstrapping;
 using Core.Network.Pipeline;
 using Core.Network;
-using System.Net;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Auth.Network;
 

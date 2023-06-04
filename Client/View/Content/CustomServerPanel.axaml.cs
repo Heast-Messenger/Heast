@@ -1,5 +1,8 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Client.Model;
 using Client.ViewModel;
 
 namespace Client.View.Content;
@@ -18,7 +21,7 @@ public partial class CustomServerPanel : LoginBase
 		DataContext = DataContext
 	};
 
-	public override Size? WindowSize => new Size(500.0, 800.0);
+	public override Size? WindowSize => new Size(500.0, 860.0);
 
 	private void Button_OnConnect(object? sender, RoutedEventArgs e)
 	{
@@ -28,5 +31,19 @@ public partial class CustomServerPanel : LoginBase
 	private void Button_OnAdd(object? sender, RoutedEventArgs e)
 	{
 		LoginWindowViewModel.AddServer();
+	}
+
+	private void CustomServer_OnClick(object? sender, PointerPressedEventArgs e)
+	{
+		if (e.ClickCount == 1)
+		{
+			var server = ((sender as Control)!.DataContext as CustomServer)!;
+			LoginWindowViewModel.CustomServerAddress = server.Address;
+		}
+
+		if (e.ClickCount == 2)
+		{
+			LoginWindowViewModel.Connect();
+		}
 	}
 }

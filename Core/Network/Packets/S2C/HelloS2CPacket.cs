@@ -4,8 +4,7 @@ namespace Core.Network.Packets.S2C;
 
 public class HelloS2CPacket : IPacket<IClientLoginListener>
 {
-
-    public byte[] Key { get; }
+	public byte[] Key { get; }
 
     public HelloS2CPacket(byte[] key)
     {

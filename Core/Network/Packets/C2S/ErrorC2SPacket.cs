@@ -4,29 +4,30 @@ namespace Core.Network.Packets.C2S;
 
 public class ErrorC2SPacket : IPacket<IServerLoginListener>
 {
-    public ErrorC2SPacket(Error error, string message)
-    {
-        Error = error;
-        Message = message;
-    }
 
-    public ErrorC2SPacket(PacketBuf buf)
-    {
-        Error = buf.ReadEnum<Error>();
-        Message = buf.ReadString();
-    }
+	public ErrorC2SPacket(Error error, string message)
+	{
+		Error = error;
+		Message = message;
+	}
 
-    public Error Error { get; }
-    public string Message { get; }
+	public ErrorC2SPacket(PacketBuf buf)
+	{
+		Error = buf.ReadEnum<Error>();
+		Message = buf.ReadString();
+	}
 
-    public void Write(PacketBuf buf)
-    {
-        buf.WriteEnum(Error);
-        buf.WriteString(Message);
-    }
+	public Error Error { get; }
+	public string Message { get; }
 
-    public void Apply(IServerLoginListener listener)
-    {
-        listener.OnError(this);
-    }
+	public void Write(PacketBuf buf)
+	{
+		buf.WriteEnum(Error);
+		buf.WriteString(Message);
+	}
+
+	public void Apply(IServerLoginListener listener)
+	{
+		listener.OnError(this);
+	}
 }

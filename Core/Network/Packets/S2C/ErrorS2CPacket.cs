@@ -4,8 +4,7 @@ namespace Core.Network.Packets.S2C;
 
 public class ErrorS2CPacket : IPacket<IClientLoginListener>
 {
-
-    public Error Error { get; }
+	public Error Error { get; }
 
     public ErrorS2CPacket(Error error)
     {

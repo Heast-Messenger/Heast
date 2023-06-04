@@ -45,13 +45,13 @@
                  Click="Button_OnAdd"
                  Margin="10.0 0 0 0" />
          <Button Grid.Column="2"
-                 Content="{SvgImage /Assets/Login/Next.svg}"
+                 Content="{SvgImage /Assets/Login/Connect.svg}"
                  Click="Button_OnConnect"
                  Margin="10.0 0 0 0" />
       </Grid>
 
       <TextBlock Grid.Row="3"
-                 Text="List of added servers:"
+                 Text="Added servers:"
                  Classes="Watermark Bold"
                  FontSize="18.0" />
 
@@ -63,7 +63,9 @@
          <ListBox.ItemTemplate>
             <DataTemplate>
                <Grid ColumnDefinitions="80, *"
-                     RowDefinitions="Auto, Auto, Auto">
+                     RowDefinitions="Auto, Auto, Auto"
+                     PointerPressed="CustomServer_OnClick"
+                     Background="{DynamicResource Transparent}">
                   <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                          VerticalAlignment="Top"
                          Margin="5"
