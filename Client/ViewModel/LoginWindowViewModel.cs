@@ -98,9 +98,8 @@ public class LoginWindowViewModel : ViewModelBase
 		try
 		{
 			Error = string.Empty;
-			const string domain = "heast.ddns.net";
+			const string host = "heast.ddns.net";
 			const int port = 23010;
-			var host = await ClientNetwork.Resolve(domain);
 			ClientNetwork.Connect(host, port);
 		}
 		catch (Exception e)
@@ -165,28 +164,22 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 	}
 
-	public async void Connect()
+	public void Connect()
 	{
 		try
 		{
 			Error = string.Empty;
 			var isIpv4 = Validation.IsIpv4(CustomServerAddress);
 			var isDomain = Validation.IsDomain(CustomServerAddress);
-			if (isIpv4 && CustomServerAddress.Split(":").Length == 2)
+			if (isIpv4 || isDomain)
 			{
 				var host = CustomServerAddress.Split(":")[0];
-				var port = int.Parse(CustomServerAddress.Split(":")[1]);
-				ClientNetwork.Connect(host, port);
-			}
-			else if (isDomain)
-			{
-				var domain = CustomServerAddress.Split(":")[0];
-				var host = await ClientNetwork.Resolve(domain);
 				var port = 23010;
 				if (CustomServerAddress.Split(":").Length == 2)
 				{
 					port = int.Parse(CustomServerAddress.Split(":")[1]);
 				}
+
 				ClientNetwork.Connect(host, port);
 			}
 			else

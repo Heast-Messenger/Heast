@@ -1,6 +1,7 @@
 using System;
-using System.Net;
-using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Core.Network.Packets.C2S;
 using Core.Network.Pipeline;
 
@@ -9,38 +10,46 @@ namespace Client.Network;
 public static class ClientNetwork
 {
 	public static ClientConnection? Ctx { get; set; }
+	public static ConcurrentQueue<Action> ActionQueue { get; } = new();
 
-	public static void Initialize()
+	[SuppressMessage("ReSharper", "FunctionNeverReturns")]
+	public static void Initialize(string[] args)
 	{
 		Console.WriteLine("Initializing client network...");
-	}
 
-	public static async Task<string> Resolve(string domain)
-	{
-		Console.WriteLine($"Resolving {domain}...");
-		var dns = await Dns.GetHostEntryAsync(domain);
-		if (dns.AddressList.Length > 0)
+		while (true)
 		{
-			var ip = dns.AddressList[0];
-			return ip.ToString();
+			if (ActionQueue.TryDequeue(out var action))
+			{
+				try
+				{
+					action();
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine($"Error while executing network action: {ex.Message}");
+				}
+			}
+
+			// We don't wanna cook eggs with our CPU
+			Thread.Sleep(0);
 		}
-
-		throw new("Invalid server address");
 	}
 
-	public static async void Connect(string host, int port)
+	public static void RunOnNetworkThread(Action action)
 	{
-		Console.WriteLine($"Connecting to {host}:{port}...");
-		Ctx = await ClientConnection.GetServerConnection(host, port);
-		Ctx.Listener = new ClientLoginHandler(Ctx);
-		Handshake();
+		ActionQueue.Enqueue(action);
 	}
 
-	public static async void Handshake()
+	public static void Connect(string host, int port)
 	{
-		if (Ctx?.Channel is {Open: true})
+		// ReSharper disable once AsyncVoidLambda
+		RunOnNetworkThread(async () =>
 		{
+			Console.WriteLine($"Connecting to {host}:{port}...");
+			Ctx = await ClientConnection.GetServerConnection(host, port);
+			Ctx.Listener = new ClientLoginHandler(Ctx);
 			await Ctx.Send(new HelloC2SPacket("Heast Client"));
-		}
+		});
 	}
 }

@@ -26,10 +26,11 @@
 
       <Grid RowDefinitions="38, *, Auto">
          <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
-            <Button Click="BackButton_OnClick"
-                    Initialized="BackButton_OnInitialized"
+            <Button Name="BackButton"
+                    Click="BackButton_OnClick"
+                    Loaded="BackButton_OnLoaded"
                     IsVisible="{Binding Content.Back,
-					     Converter={StaticResource IsNotNull}}"
+                    Converter={StaticResource IsNotNull}}"
                     Width="38.0" Height="38.0"
                     Padding="10.0"
                     Content="{SvgImage /Assets/Login/Back.svg}">

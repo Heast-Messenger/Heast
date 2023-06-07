@@ -19,15 +19,15 @@ public partial class LoginWindow : Window
 		LoginWindowViewModel.Back();
 	}
 
-	private void BackButton_OnInitialized(object? sender, EventArgs e)
+	private void BackButton_OnLoaded(object? sender, RoutedEventArgs e)
 	{
 		if (OperatingSystem.IsWindows())
 		{
-			SetValue(Grid.ColumnProperty, 0);
+			BackButton.SetValue(Grid.ColumnProperty, 0);
 		}
 		else if (OperatingSystem.IsMacOS())
 		{
-			SetValue(Grid.ColumnProperty, 2);
+			BackButton.SetValue(Grid.ColumnProperty, 2);
 		}
 	}
 }
