@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using System.Threading.Tasks;
 using Core.Network.Packets.C2S;
 using Core.Network.Pipeline;
 
@@ -10,7 +11,7 @@ namespace Client.Network;
 public static class ClientNetwork
 {
 	public static ClientConnection? Ctx { get; set; }
-	public static ConcurrentQueue<Action> ActionQueue { get; } = new();
+	public static ConcurrentQueue<IJob> ActionQueue { get; } = new();
 
 	[SuppressMessage("ReSharper", "FunctionNeverReturns")]
 	public static void Initialize(string[] args)
@@ -23,7 +24,7 @@ public static class ClientNetwork
 			{
 				try
 				{
-					action();
+					action.Run();
 				}
 				catch (Exception ex)
 				{
@@ -36,15 +37,22 @@ public static class ClientNetwork
 		}
 	}
 
-	public static void RunOnNetworkThread(Action action)
+	public static Task<TResult> RunAsync<TResult>(Func<TResult> function)
 	{
-		ActionQueue.Enqueue(action);
+		var job = new JobWithResult<TResult>(function);
+		ActionQueue.Enqueue(job);
+		return job.Task;
 	}
 
-	public static void Connect(string host, int port)
+	public static void Post(Action action)
 	{
-		// ReSharper disable once AsyncVoidLambda
-		RunOnNetworkThread(async () =>
+		var job = new Job(action);
+		ActionQueue.Enqueue(job);
+	}
+
+	public static Task Connect(string host, int port)
+	{
+		return RunAsync(async () =>
 		{
 			Console.WriteLine($"Connecting to {host}:{port}...");
 			Ctx = await ClientConnection.GetServerConnection(host, port);

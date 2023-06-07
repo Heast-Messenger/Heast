@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 
 namespace Client.Network;
@@ -7,7 +6,7 @@ public class ConnectionBuilder
 {
 	public static ConnectionBuilder Configure()
 	{
-		return new ConnectionBuilder();
+		return new();
 	}
 
 	public void Start(string[] args)
@@ -15,9 +14,9 @@ public class ConnectionBuilder
 		ClientNetwork.Initialize(args);
 	}
 
-	public void StartInNewThread(string[]? args = null)
+	public void StartInNewThread(string[] args)
 	{
-		var thread = new Thread(() => Start(args ?? Array.Empty<string>()))
+		var thread = new Thread(() => Start(args))
 		{
 			Name = "Client Network"
 		};
