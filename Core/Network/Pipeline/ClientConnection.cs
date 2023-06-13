@@ -1,3 +1,4 @@
+using System.Net;
 using System.Security.Cryptography;
 using Core.exceptions;
 using DotNetty.Common.Utilities;
@@ -39,7 +40,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 			.Option(ChannelOption.TcpNodelay, true)
 			.Option(ChannelOption.SoKeepalive, true)
 			.Channel<TcpSocketChannel>()
-			.ConnectAsync(host, port);
+			.ConnectAsync(IPAddress.Parse(host), port);
 
 		return connection;
 	}
@@ -52,7 +53,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
 	public override async void ChannelInactive(IChannelHandlerContext context)
 	{
-		if (Channel is {Open: true})
+		if (Channel is {IsOpen: true})
 		{
 			await Channel.CloseAsync();
 		}
@@ -70,7 +71,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
 	public Task Send<T>(IPacket<T> packet) where T : IPacketListener
 	{
-		return Channel is {Open: true}
+		return Channel is {IsOpen: true}
 			? Channel.WriteAndFlushAsync(packet)
 			: throw new IllegalStateException("Channel was null whilst trying to send a packet");
 	}
@@ -94,7 +95,6 @@ public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel>
 	protected override void InitChannel(ISocketChannel channel)
 	{
 		channel.Configuration.SetOption(ChannelOption.TcpNodelay, true);
-		channel.Configuration.SetOption(ChannelOption.SoKeepalive, true);
 		channel.Pipeline
 			// Here will be the packet decryptor
 			.AddLast("decoder", new PacketDecoder(NetworkSide.Server))

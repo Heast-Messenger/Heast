@@ -1,1 +1,1 @@
-server={host};database={db};port={port};uid=admin;password=Test1234;
+server={host};database={db};port={port};uid=admin;password=admin;

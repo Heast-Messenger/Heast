@@ -4,7 +4,6 @@ namespace Core.Network.Packets.C2S;
 
 public class HelloC2SPacket : IPacket<IServerLoginListener>
 {
-
 	public HelloC2SPacket(string clientInfo)
 	{
 		ClientInfo = clientInfo;

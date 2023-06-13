@@ -2,13 +2,12 @@
 using Auth.Modules;
 using Auth.Structure;
 using Core.Network.Pipeline;
+using static System.Console;
 
 namespace Auth.Network;
 
 public static class ServerNetwork
 {
-
-	public static string Host { get; set; } = "heast.ddns.net";
 	public static int Port { get; set; } = 23010;
 	public static CancellationToken CancellationToken { get; } = new();
 	private static List<ClientConnection> Clients { get; } = new();
@@ -20,7 +19,7 @@ public static class ServerNetwork
 
 	public static void Initialize()
 	{
-		Console.WriteLine("Initializing server network...");
+		WriteLine("Initializing server network...");
 	}
 
 	public static Task Disconnect(ClientConnection connection)

@@ -1,8 +1,7 @@
 {
-   "args.help.description": "Commands you can use",
+   "args.help.description": "Start the server with",
    "args.help.help": "Show this help message and exit.",
    "args.help.version": "Show the version and exit.",
-   "args.help.stop": "Stop running server instances.",
    "args.help.start": "Start a server instance.",
    "args.help.start.ip": "The IP address to bind to (defaults to localhost).",
    "args.help.start.port": "The port to bind to (defaults to 23010).",

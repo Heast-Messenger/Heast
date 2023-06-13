@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using static System.Console;
 
 namespace Auth.Structure;
 
@@ -8,9 +9,7 @@ public class Translation
 	public string ArgsHelpDescription { get; set; } = string.Empty;
 	public string ArgsHelpHelp { get; set; } = string.Empty;
 	public string ArgsHelpVersion { get; set; } = string.Empty;
-	public string ArgsHelpStop { get; set; } = string.Empty;
 	public string ArgsHelpStart { get; set; } = string.Empty;
-	public string ArgsHelpStartIp { get; set; } = string.Empty;
 	public string ArgsHelpStartPort { get; set; } = string.Empty;
 	public string ArgsHelpStartDbhost { get; set; } = string.Empty;
 	public string ArgsHelpStartDbport { get; set; } = string.Empty;
@@ -45,7 +44,7 @@ public class Translation
 		}
 		catch (Exception e)
 		{
-			Console.WriteLine(e.Message);
+			WriteLine(e.Message);
 			throw new($"No suitable language '{name}' could be found/loaded: {e.Message}");
 		}
 	}
