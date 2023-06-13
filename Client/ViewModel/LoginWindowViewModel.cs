@@ -100,7 +100,7 @@ public class LoginWindowViewModel : ViewModelBase
 			Error = string.Empty;
 			const string host = "heast.ddns.net";
 			const int port = 23010;
-			ClientNetwork.Connect(host, port);
+			await ClientNetwork.Connect(host, port);
 		}
 		catch (Exception e)
 		{
@@ -164,7 +164,7 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 	}
 
-	public void Connect()
+	public async void Connect()
 	{
 		try
 		{
@@ -180,7 +180,7 @@ public class LoginWindowViewModel : ViewModelBase
 					port = int.Parse(CustomServerAddress.Split(":")[1]);
 				}
 
-				ClientNetwork.Connect(host, port);
+				await ClientNetwork.Connect(host, port);
 			}
 			else
 			{
