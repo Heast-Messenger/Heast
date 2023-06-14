@@ -11,13 +11,18 @@ public static class Database
 	public static string Host { get; set; } = "localhost";
 	public static int Port { get; set; } = 3306;
 
+	private static string ConnectionString => File.ReadAllText("Assets/Database/Connection.txt")
+		.Replace("{host}", Host)
+		.Replace("{port}", Port.ToString())
+		.Replace("{db}", "heast_auth");
+
 	public static void Initialize()
 	{
-		WriteLine("Initializing authentication database...");
+		WriteLine($"Initializing authentication database on {Host}:{Port}...");
 
 		try
 		{
-			Db = new AuthContext();
+			Db = new AuthContext(ConnectionString);
 			WriteLine($"Database connected on {Host}:{Port}");
 		}
 		catch (Exception e)

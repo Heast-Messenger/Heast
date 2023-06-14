@@ -3,6 +3,7 @@ using System.Text;
 using Auth.Console;
 using Auth.Modules;
 using Auth.Network;
+using Core.Extensions;
 using static System.Console;
 
 namespace Auth;
@@ -22,18 +23,40 @@ public static class Dispatcher
 
 	public static void Dispatch(string[] args, Command[] commands)
 	{
-		foreach (var command in commands)
-		{
-			if (args[0] == command.Short || args[0] == command.Long)
-			{
-				if (command.SubCommands != null)
-				{
-					Dispatch(args[1..], command.SubCommands!);
-				}
+		// var i = 0;
+		// foreach (var command in commands)
+		// {
+		// 	if (args[i] == command.Short || args[i] == command.Long)
+		// 	{
+		// 		i++;
+		// 		if (command.SubCommands != null && args.Length > 1)
+		// 		{
+		// 			Dispatch(args[i..], command.SubCommands!);
+		// 		}
+		//
+		// 		var argv = args[i..(i + command.Argc)];
+		// 		command.Action(argv);
+		// 		i += command.Argc;
+		// 	}
+		// }
 
-				var argv = args[1..(1 + command.Argc)];
-				command.Action(argv);
-				return;
+		for (var i = 0; i < args.Length || i > 100000;)
+		{
+			foreach (var command in commands)
+			{
+				if (args[i] == command.Short || args[i] == command.Long)
+				{
+					i++;
+					if (command.SubCommands != null && args.Length > 1)
+					{
+						Dispatch(args[i..], command.SubCommands!);
+					}
+
+					var argv = args[i..(i + command.Argc)];
+					command.Action(argv);
+					i += command.Argc;
+					break;
+				}
 			}
 		}
 	}
@@ -88,14 +111,25 @@ public static class Dispatcher
 			}));
 		}
 
-		foreach (var command in Commands.List)
+		PrintHelp(Commands.List);
+	}
+
+	private static void PrintHelp(Command[] commands, int indent = 0)
+	{
+		foreach (var command in commands)
 		{
 			var content = File.ReadAllText("Assets/Console/Command.txt");
 			WriteLine(Parser.ParseRichText(content, new()
 			{
-				{"Name", $"{command.Short}, {command.Long}"},
+				{"Indent", " ".Repeat(indent * 2)},
+				{"Name", $"{command.Short}, {command.Long}".PadRight(20)},
 				{"Description", command.Description}
 			}));
+
+			if (command.SubCommands != null)
+			{
+				PrintHelp(command.SubCommands, ++indent);
+			}
 		}
 	}
 

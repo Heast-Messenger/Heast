@@ -6,24 +6,17 @@ namespace Auth.Structure;
 
 public class AuthContext : DbContext
 {
+	public AuthContext(string con) : base(new DbContextOptionsBuilder()
+		.UseMySql(con, ServerVersion.AutoDetect(con))
+		.LogTo(WriteToFile)
+		.EnableDetailedErrors()
+		.Options)
+	{
+	}
+
 	public DbSet<User> Accounts => Set<User>();
 	public DbSet<Server> Servers => Set<Server>();
 	public DbSet<Session> Sessions => Set<Session>();
-
-	private static string ConnectionString => File.ReadAllText("Assets/Database/Connection.txt")
-		.Replace("{host}", Host)
-		.Replace("{port}", Port.ToString())
-		.Replace("{db}", "heast_auth");
-
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		base.OnConfiguring(optionsBuilder);
-		var con = ConnectionString;
-		optionsBuilder
-			.UseMySql(con, ServerVersion.AutoDetect(con))
-			.LogTo(WriteToFile)
-			.EnableDetailedErrors();
-	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
