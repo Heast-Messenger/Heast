@@ -1,10 +1,10 @@
 using System;
 using System.Security.Cryptography;
 using Core.Network;
+using Core.Network.Codecs;
 using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
-using Core.Network.Pipeline;
 
 namespace Client.Network;
 

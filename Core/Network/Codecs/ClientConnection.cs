@@ -6,7 +6,7 @@ using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 
-namespace Core.Network.Pipeline;
+namespace Core.Network.Codecs;
 
 public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListener>>
 {
@@ -36,10 +36,9 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
 		await new Bootstrap()
 			.Group(workerGroup)
-			.Handler(new ClientConnectionInitializer(connection))
-			.Option(ChannelOption.TcpNodelay, true)
-			.Option(ChannelOption.SoKeepalive, true)
 			.Channel<TcpSocketChannel>()
+			.Option(ChannelOption.TcpNodelay, true)
+			.Handler(new ClientConnectionInitializer(connection))
 			.ConnectAsync(IPAddress.Parse(host), port);
 
 		return connection;
@@ -100,12 +99,16 @@ public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel>
 
 	protected override void InitChannel(ISocketChannel channel)
 	{
-		channel.Configuration.SetOption(ChannelOption.TcpNodelay, true);
 		channel.Pipeline
 			// Here will be the packet decryptor
 			.AddLast("decoder", new PacketDecoder(NetworkSide.Server))
 			// Here will be the packet encryptor
 			.AddLast("encoder", new PacketEncoder(NetworkSide.Client))
 			.AddLast("handler", Connection);
+
+		// Would technically work
+		// channel.Pipeline
+		// 	.AddLast("encoder", new ClientStringEncoder())
+		// 	.AddLast("handler", Connection);
 	}
 }

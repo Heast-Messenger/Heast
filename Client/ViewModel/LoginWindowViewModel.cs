@@ -10,7 +10,7 @@ using Client.Network;
 using Client.View.Content;
 using Core.Network;
 using Core.Network.Packets.C2S;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 using Core.Utility;
 using static Client.Hooks;
 

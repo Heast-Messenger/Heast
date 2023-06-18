@@ -1,5 +1,5 @@
 using Core.Network.Listeners;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 
 namespace Client.Network;
 

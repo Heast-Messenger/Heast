@@ -1,3 +1,20 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\zzzdr\AppData\Local\JetBrains\Rider2022.3\resharper-host\temp\Rider\vAny\CoverageData\_Heast.48237395\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7f7f1724_002De27c_002D4aa1_002D8712_002D7d9c7edefda7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ConnectToAuthServer" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::52E939A9-E738-4065-96BE-D37A9A4D5B3B::net6.0::Core.Tests.TestClientConnection.ConnectToAuthServer&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::52E939A9-E738-4065-96BE-D37A9A4D5B3B::net6.0::Core.Tests.TestClientConnection.TestGenerics&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::52E939A9-E738-4065-96BE-D37A9A4D5B3B::net6.0::Core.Tests.TestClientConnection.Casting&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d17cfce2_002D2df3_002D42b1_002Db264_002D7dafb5a4819f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Casting" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::52E939A9-E738-4065-96BE-D37A9A4D5B3B::net6.0::Core.Tests.TestClientConnection.ConnectToAuthServer&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::52E939A9-E738-4065-96BE-D37A9A4D5B3B::net6.0::Core.Tests.TestClientConnection.Generics&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Fabii/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Mued/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

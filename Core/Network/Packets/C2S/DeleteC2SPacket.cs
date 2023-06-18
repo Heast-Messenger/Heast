@@ -1,4 +1,4 @@
-﻿﻿using Core.Network.Listeners;
+﻿using Core.Network.Listeners;
 
 namespace Core.Network.Packets.C2S;
 

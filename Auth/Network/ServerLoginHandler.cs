@@ -1,9 +1,11 @@
 ﻿using System.Security.Cryptography;
 using Core.Network;
+using Core.Network.Codecs;
 using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
-using Core.Network.Pipeline;
+
+// using Core.Network.Packets.S2C;
 
 namespace Auth.Network;
 
@@ -23,7 +25,7 @@ public class ServerLoginHandler : IServerLoginListener
 	public void OnHello(HelloC2SPacket packet)
 	{
 		// TODO: Send server capabilities
-		Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
+		// Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
 	}
 
 	/// <summary>

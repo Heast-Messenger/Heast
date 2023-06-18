@@ -6,7 +6,6 @@ namespace Core.Network;
 
 public class NetworkState
 {
-	private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 
 	public static NetworkState Login = new NetworkState()
 		.Setup(NetworkSide.Client, new PacketHandler<IServerLoginListener>()
@@ -27,9 +26,11 @@ public class NetworkState
 			.Register(typeof(GuestC2SPacket), buf => new GuestC2SPacket(buf)))
 		.Setup(NetworkSide.Server, new PacketHandler<IClientAuthListener>());
 
+	private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
+
 	private NetworkState Setup<TPl>(NetworkSide side, IPacketHandler<TPl> handler) where TPl : IPacketListener
 	{
-		_handlers[side] = (IPacketHandler<IPacketListener>) handler;
+		_handlers[side] = (IPacketHandler<IPacketListener>)handler;
 		return this;
 	}
 
@@ -71,7 +72,7 @@ public class NetworkState
 		public IPacket<IPacketListener>? CreatePacket(int id, PacketBuf buf)
 		{
 			return PacketFactories.Count > id
-				? (IPacket<IPacketListener>) PacketFactories[id](buf)
+				? (IPacket<IPacketListener>)PacketFactories[id](buf)
 				: null;
 		}
 	}

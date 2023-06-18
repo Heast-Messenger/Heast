@@ -4,25 +4,27 @@ namespace Core.Network.Packets.S2C;
 
 public class ErrorS2CPacket : IPacket<IClientLoginListener>
 {
+
+	public ErrorS2CPacket(Error error)
+	{
+		Error = error;
+	}
+
+	public ErrorS2CPacket(PacketBuf buf)
+	{
+		Error = buf.ReadEnum<Error>();
+	}
+
 	public Error Error { get; }
 
-    public ErrorS2CPacket(Error error)
-    {
-        Error = error;
-    }
+	public void Write(PacketBuf buf)
+	{
+		buf.WriteEnum(Error);
+	}
 
-    public ErrorS2CPacket(PacketBuf buf)
-    {
-        Error = buf.ReadEnum<Error>();
-    }
-
-    public void Write(PacketBuf buf)
-    {
-        buf.WriteEnum(Error);
-    }
-
-    public void Apply(IClientLoginListener listener)
-    {
-        listener.OnError(this);
-    }
+	public void Apply(IClientLoginListener listener)
+	{
+		listener.OnError(this);
+	}
 }
+

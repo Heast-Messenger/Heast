@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using Auth.Modules;
 using Auth.Structure;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 using static System.Console;
 
 namespace Auth.Network;

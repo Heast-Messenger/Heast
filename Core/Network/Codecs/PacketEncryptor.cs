@@ -4,7 +4,7 @@ using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
 
-namespace Core.Network.Pipeline;
+namespace Core.Network.Codecs;
 
 public class PacketEncryptor : MessageToByteEncoder<IByteBuffer>
 {

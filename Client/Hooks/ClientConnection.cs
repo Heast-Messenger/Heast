@@ -1,6 +1,6 @@
 using System;
 using Client.Network;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 
 namespace Client;
 

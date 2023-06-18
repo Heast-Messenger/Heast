@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Network.Packets.C2S;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 
 namespace Client.Network;
 

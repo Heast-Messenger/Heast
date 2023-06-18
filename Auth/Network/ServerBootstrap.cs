@@ -1,5 +1,5 @@
 using Core.Network;
-using Core.Network.Pipeline;
+using Core.Network.Codecs;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using NettyBootstrap = DotNetty.Transport.Bootstrapping;
