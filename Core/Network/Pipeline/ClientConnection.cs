@@ -29,7 +29,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 		set => Channel.GetAttribute(ProtocolKey).Set(value);
 	}
 
-	public static async Task<ClientConnection> GetServerConnection(string host, int port)
+	public static async Task<ClientConnection> ServerConnect(string host, int port)
 	{
 		var connection = new ClientConnection(NetworkSide.Client);
 		var workerGroup = new MultithreadEventLoopGroup();
@@ -67,6 +67,12 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 		}
 
 		msg.Apply(Listener);
+	}
+
+	public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
+	{
+		Console.WriteLine($"Exception: {exception.Message}");
+		base.ExceptionCaught(context, exception);
 	}
 
 	public Task Send<T>(IPacket<T> packet) where T : IPacketListener

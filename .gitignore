@@ -52,4 +52,5 @@ $RECYCLE.BIN/
 *.msp
 
 /.idea/
+/.fleet/
 /Auth/Migrations/

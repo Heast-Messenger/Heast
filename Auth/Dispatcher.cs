@@ -138,7 +138,7 @@ public static class Dispatcher
 	{
 		WriteLine($"> {Global.Translation.ServerStarting}");
 
-		Database.Initialize();
+//		Database.Initialize();
 		ServerBootstrap.Initialize();
 		ServerNetwork.Initialize();
 

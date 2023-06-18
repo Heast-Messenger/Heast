@@ -55,7 +55,7 @@ public static class ClientNetwork
 		return RunAsync(async () =>
 		{
 			Console.WriteLine($"Connecting to {host}:{port}...");
-			Ctx = await ClientConnection.GetServerConnection(host, port);
+			Ctx = await ClientConnection.ServerConnect(host, port);
 			Ctx.Listener = new ClientLoginHandler(Ctx);
 			await Ctx.Send(new HelloC2SPacket("Heast Client"));
 		});

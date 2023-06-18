@@ -8,7 +8,7 @@ public class NetworkState
 {
 	private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 
-	public static NetworkState Login { get; } = new NetworkState()
+	public static NetworkState Login = new NetworkState()
 		.Setup(NetworkSide.Client, new PacketHandler<IServerLoginListener>()
 			.Register(typeof(HelloC2SPacket), buf => new HelloC2SPacket(buf))
 			.Register(typeof(KeyC2SPacket), buf => new KeyC2SPacket(buf)))
@@ -16,7 +16,7 @@ public class NetworkState
 			.Register(typeof(HelloS2CPacket), buf => new HelloS2CPacket(buf))
 			.Register(typeof(SuccessS2CPacket), buf => new SuccessS2CPacket(buf)));
 
-	public static NetworkState Auth { get; } = new NetworkState()
+	public static NetworkState Auth = new NetworkState()
 		.Setup(NetworkSide.Client, new PacketHandler<IServerAuthListener>()
 			.Register(typeof(SignupC2SPacket), buf => new SignupC2SPacket(buf))
 			.Register(typeof(LoginC2SPacket), buf => new LoginC2SPacket(buf))
@@ -29,7 +29,7 @@ public class NetworkState
 
 	private NetworkState Setup<TPl>(NetworkSide side, IPacketHandler<TPl> handler) where TPl : IPacketListener
 	{
-		_handlers[side] = (IPacketHandler<IPacketListener>)handler;
+		_handlers[side] = (IPacketHandler<IPacketListener>) handler;
 		return this;
 	}
 
@@ -43,11 +43,11 @@ public class NetworkState
 		return GetPacketHandler(side).GetId(packet.GetType());
 	}
 
-	public interface IPacketHandler<TPl> where TPl : IPacketListener
+	public interface IPacketHandler<out TPl> where TPl : IPacketListener
 	{
 		IPacketHandler<TPl> Register(Type type, Func<PacketBuf, IPacket<TPl>> packetFactory);
 		int GetId(Type packet);
-		IPacket<TPl>? CreatePacket(int id, PacketBuf buf);
+		IPacket<IPacketListener>? CreatePacket(int id, PacketBuf buf);
 	}
 
 	private class PacketHandler<TPl> : IPacketHandler<TPl> where TPl : IPacketListener
@@ -68,9 +68,11 @@ public class NetworkState
 			return id < 0 ? -1 : id;
 		}
 
-		public IPacket<TPl>? CreatePacket(int id, PacketBuf buf)
+		public IPacket<IPacketListener>? CreatePacket(int id, PacketBuf buf)
 		{
-			return PacketFactories.Count > id ? PacketFactories[id](buf) : null;
+			return PacketFactories.Count > id
+				? (IPacket<IPacketListener>) PacketFactories[id](buf)
+				: null;
 		}
 	}
 }
