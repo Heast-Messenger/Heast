@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 using static Crayon.Output;
 
@@ -5,7 +6,7 @@ namespace Core.Server;
 
 public static class Parser
 {
-	private static readonly Dictionary<string, Func<string, string>> ColorCodes = new()
+	private static readonly Dictionary<string, Func<string, string>> Codes = new()
 	{
 		{"§0", Black},
 		{"§1", Blue},
@@ -17,27 +18,45 @@ public static class Parser
 		{"§f", White},
 		{"§b", Bold},
 		{"§u", Underline},
-		{"§r", null!}
+		{"§d", Dim}
 	};
 
-	private static readonly Regex UntilColorCode = new("^[^§]*");
+	private static readonly Regex UntilCode = new("^[^§]*");
 
 	public static string ParseRichText(string text, Dictionary<string, string>? replacements = null)
 	{
 		text = replacements?.Aggregate(text, (current, replacement) =>
-			current.Replace($"{{{replacement.Key}}}", replacement.Value)) ?? text;
+				   current.Replace($"{{{replacement.Key}}}", replacement.Value)) ??
+			   text;
 
+		var final = new StringBuilder();
+		var segments = text.Split("§r");
+		foreach (var segment in segments)
+		{
+			var parsed = ParseRichTextInternal(segment);
+			final.Append(parsed);
+		}
+
+		return final.ToString();
+	}
+
+	private static string ParseRichTextInternal(string text)
+	{
 		if (text.Length <= 1)
 			return text;
 
-		var colorCode = text[..2];
-		ColorCodes.TryGetValue(colorCode, out var func);
+		var code = text[..2];
+		Codes.TryGetValue(code, out var func);
 		if (func != null)
 		{
-			return func(ParseRichText(text[2..]));
+			var result = text[2..];
+			return func(ParseRichTextInternal(result));
 		}
-
-		var match = UntilColorCode.Match(text);
-		return match.Value + ParseRichText(text[match.Length..]);
+		{
+			var match = UntilCode.Match(text);
+			var result = match.Value;
+			var rest = text[match.Length..];
+			return result + ParseRichTextInternal(rest);
+		}
 	}
 }

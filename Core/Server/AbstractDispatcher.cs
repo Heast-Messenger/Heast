@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Core.Extensions;
 using static System.Console;
@@ -7,8 +6,8 @@ namespace Core.Server;
 
 public abstract class AbstractDispatcher
 {
-	public abstract ICommandsProvider CommandsProvider { get; }
-	
+	protected abstract ICommandsProvider CommandsProvider { get; }
+
 	public void Dispatch(string[] args)
 	{
 		if (args.Length <= 0)
@@ -42,7 +41,7 @@ public abstract class AbstractDispatcher
 			}
 		}
 	}
-	
+
 	public abstract void Start();
 
 	public virtual void Crash(Exception e)
@@ -66,7 +65,7 @@ public abstract class AbstractDispatcher
 
 	public abstract void PrintHelp();
 
-	public virtual void PrintHelp(Command[] commands, int indent = 0)
+	protected static void PrintHelp(Command[] commands, int indent = 0)
 	{
 		foreach (var command in commands)
 		{
@@ -84,5 +83,4 @@ public abstract class AbstractDispatcher
 			}
 		}
 	}
-
 }

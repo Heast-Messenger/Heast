@@ -1,9 +1,9 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Auth.Console;
 using Auth.Modules;
 using Auth.Network;
-using Core.Extensions;
 using Core.Server;
 using static System.Console;
 
@@ -11,7 +11,7 @@ namespace Auth;
 
 public class Dispatcher : AbstractDispatcher
 {
-	public override ICommandsProvider CommandsProvider { get; } = new Commands();
+	protected override ICommandsProvider CommandsProvider { get; } = new Commands();
 
 	public override void PrintVersion()
 	{
@@ -54,16 +54,32 @@ public class Dispatcher : AbstractDispatcher
 	{
 		WriteLine($"> {Global.Translation.ServerStarting}");
 
-//		Database.Initialize();
+		var stopWatch = new Stopwatch();
+		stopWatch.Start();
+
+		//		Database.Initialize();
 		ServerBootstrap.Initialize();
 		ServerNetwork.Initialize();
 
+		stopWatch.Stop();
+		var time = stopWatch.ElapsedMilliseconds;
+
 		WriteLine($"> {Global.Translation.ServerStarted}");
+
+		OutputEncoding = Encoding.Default;
+		var content = File.ReadAllText("Assets/Console/Start.txt");
+		WriteLine(Parser.ParseRichText(content, new()
+		{
+			{"Version", Global.Version},
+			{"Time", time.ToString()},
+			{"Port", ServerNetwork.Port.ToString()},
+			// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+			{"Db", Database.Db == null ? "§4No database connected" : $"{Database.Db.Database.ProviderName}@{Database.Host}:{Database.Port}"}
+		}));
 
 		while (true)
 		{
 			var command = ReadLine();
 		}
 	}
-
 }
