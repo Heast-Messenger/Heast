@@ -1,6 +1,6 @@
 
   §b§f$h!t, §b§4the server crashed!
   
-  §fError: §b§4{error}
-  §fStacktrace: 
-§b§4{stacktrace}
+  §b§fError: §r§4{error}
+  §b§fStacktrace: 
+§r§4{stacktrace}

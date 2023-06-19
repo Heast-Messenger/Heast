@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.S2C;
 
-public class HelloS2CPacket : IPacket<IClientLoginListener>
+public class HelloS2CPacket : IPacket
 {
 
 	public HelloS2CPacket(byte[] key)
@@ -20,11 +20,6 @@ public class HelloS2CPacket : IPacket<IClientLoginListener>
 	public void Write(PacketBuf buf)
 	{
 		buf.WriteByteArray(Key);
-	}
-
-	public void Apply(IClientLoginListener listener)
-	{
-		listener.OnHello(this);
 	}
 }
 

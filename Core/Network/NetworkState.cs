@@ -1,3 +1,4 @@
+using System.Reflection;
 using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
@@ -9,21 +10,21 @@ public class NetworkState
 
 	public static NetworkState Login = new NetworkState()
 		.Setup(NetworkSide.Client, new PacketHandler<IServerLoginListener>()
-			.Register(typeof(HelloC2SPacket), buf => new HelloC2SPacket(buf))
-			.Register(typeof(KeyC2SPacket), buf => new KeyC2SPacket(buf)))
+			.Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf), (listener, packet) => listener.OnHello(packet))
+			.Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf), (listener, packet) => listener.OnKey(packet)))
 		.Setup(NetworkSide.Server, new PacketHandler<IClientLoginListener>()
-			.Register(typeof(HelloS2CPacket), buf => new HelloS2CPacket(buf))
-			.Register(typeof(SuccessS2CPacket), buf => new SuccessS2CPacket(buf)));
+			.Register<HelloS2CPacket>(buf => new HelloS2CPacket(buf), (listener, packet) => listener.OnHello(packet))
+			.Register<SuccessS2CPacket>(buf => new SuccessS2CPacket(buf), (listener, packet) => listener.OnSuccess()));
 
 	public static NetworkState Auth = new NetworkState()
-		.Setup(NetworkSide.Client, new PacketHandler<IServerAuthListener>()
-			.Register(typeof(SignupC2SPacket), buf => new SignupC2SPacket(buf))
-			.Register(typeof(LoginC2SPacket), buf => new LoginC2SPacket(buf))
-			.Register(typeof(ResetC2SPacket), buf => new ResetC2SPacket(buf))
-			.Register(typeof(DeleteC2SPacket), buf => new DeleteC2SPacket(buf))
-			.Register(typeof(LogoutC2SPacket), buf => new LogoutC2SPacket(buf))
-			.Register(typeof(VerifyC2SPacket), buf => new VerifyC2SPacket(buf))
-			.Register(typeof(GuestC2SPacket), buf => new GuestC2SPacket(buf)))
+//		.Setup(NetworkSide.Client, new PacketHandler<IServerAuthListener>()
+//			.Register(typeof(SignupC2SPacket), buf => new SignupC2SPacket(buf))
+//			.Register(typeof(LoginC2SPacket), buf => new LoginC2SPacket(buf))
+//			.Register(typeof(ResetC2SPacket), buf => new ResetC2SPacket(buf))
+//			.Register(typeof(DeleteC2SPacket), buf => new DeleteC2SPacket(buf))
+//			.Register(typeof(LogoutC2SPacket), buf => new LogoutC2SPacket(buf))
+//			.Register(typeof(VerifyC2SPacket), buf => new VerifyC2SPacket(buf))
+//			.Register(typeof(GuestC2SPacket), buf => new GuestC2SPacket(buf)))
 		.Setup(NetworkSide.Server, new PacketHandler<IClientAuthListener>());
 
 	private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
@@ -39,27 +40,30 @@ public class NetworkState
 		return _handlers[side];
 	}
 
-	public int GetPacketId<TPl>(NetworkSide side, IPacket<TPl> packet) where TPl : IPacketListener
+	public int GetPacketId(NetworkSide side, IPacket packet)
 	{
 		return GetPacketHandler(side).GetId(packet.GetType());
 	}
 
 	public interface IPacketHandler<out TPl> where TPl : IPacketListener
 	{
-		IPacketHandler<TPl> Register(Type type, Func<PacketBuf, IPacket<TPl>> packetFactory);
+		IPacketHandler<TPl> Register<TP>(Func<PacketBuf, IPacket> packetFactory, Action<TPl, TP> packetApply) where TP : IPacket;
 		int GetId(Type packet);
-		IPacket<IPacketListener>? CreatePacket(int id, PacketBuf buf);
+		IPacket? CreatePacket(int id, PacketBuf buf);
+		void ApplyPacket(IPacket packet, IPacketListener listener);
 	}
 
 	private class PacketHandler<TPl> : IPacketHandler<TPl> where TPl : IPacketListener
 	{
 		private Dictionary<Type, int> PacketIds { get; } = new();
-		private List<Func<PacketBuf, IPacket<TPl>>> PacketFactories { get; } = new();
+		private List<Func<PacketBuf, IPacket>> PacketFactories { get; } = new();
+		private List<MethodInfo> PacketApplies { get; } = new();
 
-		public IPacketHandler<TPl> Register(Type type, Func<PacketBuf, IPacket<TPl>> packetFactory)
+		public IPacketHandler<TPl> Register<TP>(Func<PacketBuf, IPacket> packetFactory, Action<TPl, TP> packetApply) where TP : IPacket
 		{
-			PacketIds[type] = PacketFactories.Count;
+			PacketIds[typeof(TP)] = PacketFactories.Count;
 			PacketFactories.Add(packetFactory);
+			PacketApplies.Add(packetApply.Method);
 			return this;
 		}
 
@@ -69,11 +73,20 @@ public class NetworkState
 			return id < 0 ? -1 : id;
 		}
 
-		public IPacket<IPacketListener>? CreatePacket(int id, PacketBuf buf)
+		public IPacket? CreatePacket(int id, PacketBuf buf)
 		{
 			return PacketFactories.Count > id
-				? (IPacket<IPacketListener>)PacketFactories[id](buf)
+				? PacketFactories[id](buf)
 				: null;
+		}
+
+		public void ApplyPacket(IPacket packet, IPacketListener listener)
+		{
+			var id = GetId(packet.GetType());
+			if (PacketApplies.Count > id)
+			{
+				PacketApplies[id].Invoke(listener, parameters: new []{ packet });
+			}
 		}
 	}
 }

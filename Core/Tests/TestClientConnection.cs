@@ -15,7 +15,7 @@ internal class TestClientConnection
 
 	// FIX: Un-generify IPacket (javascript-like, no type safety)
 	// Actually results in cleaner code in NetworkState.cs,
-	// but requires type casting in ALL IPacket.Apply() methods
+	//  but requires type casting in ALL IPacket.Apply() methods
 	// public interface IPacket
 	// {
 	// 	void Write(PacketBuf buf);
@@ -23,7 +23,7 @@ internal class TestClientConnection
 	// }
 
 	// FIX: Remove the state machine altogether (in fact merge all states into one)
-	// includes un-generifying IPacketListener
+	// Includes un-generifying IPacketListener
 	// void Apply --> Redundant because packets have only one location to be applied to
 
 	[Test]
@@ -36,7 +36,7 @@ internal class TestClientConnection
 	[Test]
 	public void Generics()
 	{
-		var correct = new HelloC2SPacket("Hello World!") is IPacket<IPacketListener>;
+		var correct = new HelloC2SPacket("Hello World!") is IPacket;
 		Assert.AreEqual(true, correct);
 	}
 }

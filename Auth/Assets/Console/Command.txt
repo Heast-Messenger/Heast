@@ -1,1 +1,1 @@
-  {Indent}§2➜ §b§f{Name} §f{Description}
+  {Indent}§b§2➜  §f{Name} §r§f{Description}

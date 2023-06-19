@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class LogoutC2SPacket : IPacket<IServerAuthListener>
+public class LogoutC2SPacket : IPacket
 {
 	public enum LogoutReason
 	{
@@ -24,10 +24,5 @@ public class LogoutC2SPacket : IPacket<IServerAuthListener>
 	public void Write(PacketBuf buf)
 	{
 		buf.WriteEnum(Reason);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnLogout();
 	}
 }

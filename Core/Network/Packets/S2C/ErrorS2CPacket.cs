@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.S2C;
 
-public class ErrorS2CPacket : IPacket<IClientLoginListener>
+public class ErrorS2CPacket : IPacket
 {
 
 	public ErrorS2CPacket(Error error)
@@ -20,11 +20,6 @@ public class ErrorS2CPacket : IPacket<IClientLoginListener>
 	public void Write(PacketBuf buf)
 	{
 		buf.WriteEnum(Error);
-	}
-
-	public void Apply(IClientLoginListener listener)
-	{
-		listener.OnError(this);
 	}
 }
 

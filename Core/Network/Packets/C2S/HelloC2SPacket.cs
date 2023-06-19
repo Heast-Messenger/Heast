@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.C2S;
 
-public class HelloC2SPacket : IPacket<IServerLoginListener>
+public class HelloC2SPacket : IPacket
 {
 	public HelloC2SPacket(string clientInfo)
 	{
@@ -21,8 +21,8 @@ public class HelloC2SPacket : IPacket<IServerLoginListener>
 		buf.WriteString(ClientInfo);
 	}
 
-	public void Apply(IServerLoginListener listener)
-	{
-		listener.OnHello(this);
-	}
+//	public void Apply(IServerLoginListener listener)
+//	{
+//		listener.OnHello(this);
+//	}
 }

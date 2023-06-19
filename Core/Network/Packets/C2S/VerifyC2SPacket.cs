@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class VerifyC2SPacket : IPacket<IServerAuthListener>
+public class VerifyC2SPacket : IPacket
 {
 
 	public VerifyC2SPacket(string code)
@@ -20,10 +20,5 @@ public class VerifyC2SPacket : IPacket<IServerAuthListener>
 	public void Write(PacketBuf buf)
 	{
 		buf.WriteString(Code);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnVerify(this);
 	}
 }

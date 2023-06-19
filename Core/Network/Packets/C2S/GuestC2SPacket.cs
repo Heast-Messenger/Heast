@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class GuestC2SPacket : IPacket<IServerAuthListener>
+public class GuestC2SPacket : IPacket
 {
 
 	public GuestC2SPacket(string username)
@@ -20,10 +20,5 @@ public class GuestC2SPacket : IPacket<IServerAuthListener>
 	public void Write(PacketBuf buf)
 	{
 		buf.WriteString(Username);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnGuest(this);
 	}
 }

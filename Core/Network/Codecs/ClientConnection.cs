@@ -8,7 +8,7 @@ using DotNetty.Transport.Channels.Sockets;
 
 namespace Core.Network.Codecs;
 
-public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListener>>
+public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 {
 	public ClientConnection(NetworkSide side)
 	{
@@ -31,7 +31,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 
 	public static async Task<ClientConnection> ServerConnect(string host, int port)
 	{
-		var connection = new ClientConnection(NetworkSide.Client);
+		var connection = new ClientConnection(NetworkSide.Server);
 		var workerGroup = new MultithreadEventLoopGroup();
 
 		await new Bootstrap()
@@ -58,14 +58,15 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 		}
 	}
 
-	protected override void ChannelRead0(IChannelHandlerContext ctx, IPacket<IPacketListener> msg)
+	protected override void ChannelRead0(IChannelHandlerContext ctx, IPacket msg)
 	{
 		if (Listener == null)
 		{
 			throw new IllegalStateException("Listener was null whilst a message was received");
 		}
 
-		msg.Apply(Listener);
+		var handler = State.GetPacketHandler(Side);
+		handler.ApplyPacket(msg, Listener);
 	}
 
 	public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
@@ -74,7 +75,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket<IPacketListe
 		base.ExceptionCaught(context, exception);
 	}
 
-	public Task Send<T>(IPacket<T> packet) where T : IPacketListener
+	public Task Send(IPacket packet)
 	{
 		return Channel is {IsOpen: true}
 			? Channel.WriteAndFlushAsync(packet)

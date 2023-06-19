@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class DeleteC2SPacket : IPacket<IServerAuthListener>
+public class DeleteC2SPacket : IPacket
 {
 
 	public DeleteC2SPacket(string usernameOrEmail, string password)
@@ -24,10 +24,5 @@ public class DeleteC2SPacket : IPacket<IServerAuthListener>
 	{
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnDelete(this);
 	}
 }

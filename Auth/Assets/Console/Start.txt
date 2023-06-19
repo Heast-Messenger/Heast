@@ -1,7 +1,7 @@
 ﻿
-  §3§bAuthentication Server §2v{Version} §r§f§dready in §b{Time}ms
+  §3§bAuthentication Server §2v{Version} §r§f§dready in §b{Time}ms§r
   
-  §b§2➜§r §b§fPort: §3{Port}
-  §b§2➜§r §b§fDatabase: §3{Db}
-  §b§2➜§r §ftype §bhelp§r §ffor a list of commands
+  §b§2➜  §r§b§fPort: §3{Port}
+  §b§2➜  §r§b§fDatabase: §3{Db}
+  §b§2➜  §r§ftype §bhelp§r §ffor a list of commands
   

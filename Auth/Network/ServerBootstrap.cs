@@ -40,7 +40,7 @@ public class ClientHandler : ChannelInitializer<ISocketChannel>
 {
 	protected override void InitChannel(ISocketChannel channel)
 	{
-		var connection = new ClientConnection(NetworkSide.Server);
+		var connection = new ClientConnection(NetworkSide.Client);
 		connection.Listener = new ServerLoginHandler(connection);
 		channel.Pipeline
 			// Here will be the packet decryptor

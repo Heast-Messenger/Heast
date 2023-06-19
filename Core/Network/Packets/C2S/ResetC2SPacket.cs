@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class ResetC2SPacket : IPacket<IServerAuthListener>
+public class ResetC2SPacket : IPacket
 {
 
 	public ResetC2SPacket(string usernameOrEmail, string password)
@@ -24,10 +24,5 @@ public class ResetC2SPacket : IPacket<IServerAuthListener>
 	{
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnReset(this);
 	}
 }

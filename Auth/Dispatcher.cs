@@ -15,6 +15,7 @@ public class Dispatcher : AbstractDispatcher
 
 	public override void PrintVersion()
 	{
+		Clear();
 		OutputEncoding = Encoding.Default;
 		var content = File.ReadAllText("Assets/Console/Version.txt");
 		WriteLine(Parser.ParseRichText(content, new()
@@ -37,6 +38,7 @@ public class Dispatcher : AbstractDispatcher
 
 	public override void PrintHelp()
 	{
+		Clear();
 		OutputEncoding = Encoding.Default;
 		{
 			var content = File.ReadAllText("Assets/Console/Help.txt");
@@ -47,6 +49,7 @@ public class Dispatcher : AbstractDispatcher
 		}
 
 		PrintHelp(CommandsProvider.List);
+		WriteLine("");
 	}
 
 	[SuppressMessage("ReSharper", "FunctionNeverReturns")]
@@ -66,6 +69,7 @@ public class Dispatcher : AbstractDispatcher
 
 		WriteLine($"> {Global.Translation.ServerStarted}");
 
+		Clear();
 		OutputEncoding = Encoding.Default;
 		var content = File.ReadAllText("Assets/Console/Start.txt");
 		WriteLine(Parser.ParseRichText(content, new()

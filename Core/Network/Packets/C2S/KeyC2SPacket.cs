@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.C2S;
 
-public class KeyC2SPacket : IPacket<IServerLoginListener>
+public class KeyC2SPacket : IPacket
 {
 
 	public KeyC2SPacket(byte[] key, byte[] iv)
@@ -24,10 +24,5 @@ public class KeyC2SPacket : IPacket<IServerLoginListener>
 	{
 		buf.WriteByteArray(Key);
 		buf.WriteByteArray(Iv);
-	}
-
-	public void Apply(IServerLoginListener listener)
-	{
-		listener.OnKey(this);
 	}
 }

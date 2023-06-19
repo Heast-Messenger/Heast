@@ -24,6 +24,7 @@ public class ServerLoginHandler : IServerLoginListener
 	/// <param name="packet">The received packet containing client information.</param>
 	public void OnHello(HelloC2SPacket packet)
 	{
+		System.Console.WriteLine($"Got packet: {packet.ClientInfo}");
 		// TODO: Send server capabilities
 		// Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
 	}

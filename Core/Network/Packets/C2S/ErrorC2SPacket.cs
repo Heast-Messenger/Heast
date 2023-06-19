@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class ErrorC2SPacket : IPacket<IServerLoginListener>
+public class ErrorC2SPacket : IPacket
 {
 
 	public ErrorC2SPacket(Error error, string message)
@@ -24,10 +24,5 @@ public class ErrorC2SPacket : IPacket<IServerLoginListener>
 	{
 		buf.WriteEnum(Error);
 		buf.WriteString(Message);
-	}
-
-	public void Apply(IServerLoginListener listener)
-	{
-		listener.OnError(this);
 	}
 }

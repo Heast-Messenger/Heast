@@ -1,9 +1,10 @@
 
   §b§3Authentication Server §fby §b§fHeast
 
-  §2➜ §b§f{ArgsHelpVersionVersion}: {Version}
-  §2➜ §b§f{ArgsHelpVersionBuild}: {Build}
-  §2➜ §b§f{ArgsHelpVersionWebsite}: {Website}
-  §2➜ §b§f{ArgsHelpVersionGithub}: {Github}
-  §2➜ §b§f{ArgsHelpVersionDotnet}: {Dotnet}
-  §2➜ §b§f{ArgsHelpVersionOs}: {Os}
+  §b§2➜  §f{ArgsHelpVersionVersion}: §r§3{Version}
+  §b§2➜  §f{ArgsHelpVersionBuild}: §r§3{Build}
+  §b§2➜  §f{ArgsHelpVersionWebsite}: §r§3{Website}
+  §b§2➜  §f{ArgsHelpVersionGithub}: §r§3{Github}
+  §b§2➜  §f{ArgsHelpVersionDotnet}: §r§3{Dotnet}
+  §b§2➜  §f{ArgsHelpVersionOs}: §r§3{Os}
+  

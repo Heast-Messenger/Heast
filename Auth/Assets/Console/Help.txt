@@ -1,3 +1,3 @@
 
-  §f{ArgsHelpDescription}: §b"./server [args]"
+  §f{ArgsHelpDescription}: §b"./server start [args]"
   

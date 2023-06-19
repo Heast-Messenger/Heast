@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class SignupC2SPacket : IPacket<IServerAuthListener>
+public class SignupC2SPacket : IPacket
 {
 
 	public SignupC2SPacket(string username, string email, string password)
@@ -28,10 +28,5 @@ public class SignupC2SPacket : IPacket<IServerAuthListener>
 		buf.WriteString(Username);
 		buf.WriteString(Email);
 		buf.WriteString(Password);
-	}
-
-	public void Apply(IServerAuthListener listener)
-	{
-		listener.OnSignup(this);
 	}
 }
