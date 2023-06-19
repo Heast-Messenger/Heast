@@ -1,15 +1,16 @@
 using Auth.Modules;
 using Auth.Network;
 using Auth.Structure;
+using Core.Server;
 
 namespace Auth.Console;
 
-public static class Commands
+public class Commands : ICommandsProvider
 {
-	public static string Prefix => Command.Prefix;
-	public static Translation Translation => Global.Translation;
+	private static string Prefix => Command.Prefix;
+	private static Translation Translation => Global.Translation;
 
-	public static Command[] List { get; } =
+	public Command[] List { get; } =
 	{
 		new()
 		{
@@ -17,7 +18,7 @@ public static class Commands
 			Short = $"{Prefix}h",
 			Long = $"{Prefix}{Prefix}help",
 			Argc = 0,
-			Action = _ => Dispatcher.PrintHelp()
+			Action = _ => Program.Dispatcher.PrintHelp()
 		},
 		new()
 		{
@@ -25,7 +26,7 @@ public static class Commands
 			Short = $"{Prefix}v",
 			Long = $"{Prefix}{Prefix}version",
 			Argc = 0,
-			Action = _ => Dispatcher.PrintVersion()
+			Action = _ => Program.Dispatcher.PrintVersion()
 		},
 		new()
 		{
@@ -33,7 +34,7 @@ public static class Commands
 			Short = "start",
 			Long = "start",
 			Argc = 0,
-			Action = _ => Dispatcher.Start(),
+			Action = _ => Program.Dispatcher.Start(),
 			SubCommands = new Command[]
 			{
 				new()

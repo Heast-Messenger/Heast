@@ -6,9 +6,10 @@ namespace Auth;
 
 public static class Program
 {
+	public static Dispatcher Dispatcher { get; } = new Dispatcher();
     public static void Main(string[] args)
     {
-        try
+	    try
         {
             Dispatcher.Dispatch(args);
         }

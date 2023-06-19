@@ -1,4 +1,4 @@
-namespace Auth.Console;
+namespace Core.Server;
 
 public class Command
 {

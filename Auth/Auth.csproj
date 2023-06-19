@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj">
+      <IncludeAssets />
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Crayon" Version="2.0.69" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
   </ItemGroup>

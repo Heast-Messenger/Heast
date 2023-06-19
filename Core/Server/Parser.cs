@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using static Crayon.Output;
 
-namespace Auth.Console;
+namespace Core.Server;
 
 public static class Parser
 {
