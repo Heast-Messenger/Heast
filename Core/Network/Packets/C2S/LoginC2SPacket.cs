@@ -25,4 +25,9 @@ public class LoginC2SPacket : IPacket
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnLogin(this);
+	}
 }

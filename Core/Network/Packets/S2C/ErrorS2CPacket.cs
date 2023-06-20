@@ -21,5 +21,10 @@ public class ErrorS2CPacket : IPacket
 	{
 		buf.WriteEnum(Error);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IClientHandshakeListener)listener).OnError(this);
+	}
 }
 

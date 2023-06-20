@@ -21,4 +21,9 @@ public class GuestC2SPacket : IPacket
 	{
 		buf.WriteString(Username);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnGuest(this);
+	}
 }

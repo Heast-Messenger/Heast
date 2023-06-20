@@ -21,8 +21,8 @@ public class HelloC2SPacket : IPacket
 		buf.WriteString(ClientInfo);
 	}
 
-//	public void Apply(IServerLoginListener listener)
-//	{
-//		listener.OnHello(this);
-//	}
+	public void Apply(IPacketListener listener)
+	{
+		((IServerHandshakeListener)listener).OnHello(this);
+	}
 }

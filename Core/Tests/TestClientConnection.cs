@@ -8,34 +8,18 @@ namespace Core.Tests;
 [TestFixture]
 internal class TestClientConnection
 {
-	// PROBLEM: The PacketEncoder expects an object of type
-	// IPacket<IPacketListener> but the HelloC2SPacket is of type
-	// IPacket<IServerLoginListener> which is not compatible with the given type
-	// The encoder is not being called because of this and crashes the application
-
-	// FIX: Un-generify IPacket (javascript-like, no type safety)
-	// Actually results in cleaner code in NetworkState.cs,
-	//  but requires type casting in ALL IPacket.Apply() methods
-	// public interface IPacket
-	// {
-	// 	void Write(PacketBuf buf);
-	// 	void Apply(IPacketListener listener); <-- Unsafe (requires casting) =(
-	// }
-
-	// FIX: Remove the state machine altogether (in fact merge all states into one)
-	// Includes un-generifying IPacketListener
-	// void Apply --> Redundant because packets have only one location to be applied to
-
 	[Test]
 	public async Task ConnectToAuthServer()
 	{
-		var con = await ClientConnection.ServerConnect("127.0.0.1", 23010);
+		var con = await ClientConnection.ServerConnect("127.0.0.1", 8080);
 		await con.Channel.WriteAndFlushAsync(new HelloC2SPacket("Hello World!"));
+		await Task.Delay(-1);
 	}
 
 	[Test]
 	public void Generics()
 	{
+		// ReSharper disable once ConvertTypeCheckToNullCheck
 		var correct = new HelloC2SPacket("Hello World!") is IPacket;
 		Assert.AreEqual(true, correct);
 	}

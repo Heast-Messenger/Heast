@@ -25,4 +25,9 @@ public class LogoutC2SPacket : IPacket
 	{
 		buf.WriteEnum(Reason);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnLogout(this);
+	}
 }

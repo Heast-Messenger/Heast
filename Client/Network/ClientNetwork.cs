@@ -56,7 +56,7 @@ public static class ClientNetwork
 		{
 			Console.WriteLine($"Connecting to {host}:{port}...");
 			Ctx = await ClientConnection.ServerConnect(host, port);
-			Ctx.Listener = new ClientLoginHandler(Ctx);
+			Ctx.Listener = new ClientHandshakeHandler(Ctx);
 			await Ctx.Send(new HelloC2SPacket("Heast Client"));
 		});
 	}

@@ -25,4 +25,9 @@ public class DeleteC2SPacket : IPacket
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnDelete(this);
+	}
 }

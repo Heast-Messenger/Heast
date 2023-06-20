@@ -29,4 +29,9 @@ public class SignupC2SPacket : IPacket
 		buf.WriteString(Email);
 		buf.WriteString(Password);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnSignup(this);
+	}
 }

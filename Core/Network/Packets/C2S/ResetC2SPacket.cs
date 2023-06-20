@@ -25,4 +25,9 @@ public class ResetC2SPacket : IPacket
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnReset(this);
+	}
 }

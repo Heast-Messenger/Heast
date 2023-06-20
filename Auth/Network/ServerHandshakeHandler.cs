@@ -5,13 +5,11 @@ using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
 
-// using Core.Network.Packets.S2C;
-
 namespace Auth.Network;
 
-public class ServerLoginHandler : IServerLoginListener
+public class ServerHandshakeHandler : IServerHandshakeListener
 {
-	public ServerLoginHandler(ClientConnection ctx)
+	public ServerHandshakeHandler(ClientConnection ctx)
 	{
 		Ctx = ctx;
 	}
@@ -24,9 +22,8 @@ public class ServerLoginHandler : IServerLoginListener
 	/// <param name="packet">The received packet containing client information.</param>
 	public void OnHello(HelloC2SPacket packet)
 	{
-		System.Console.WriteLine($"Got packet: {packet.ClientInfo}");
 		// TODO: Send server capabilities
-		// Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
+		 Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
 	}
 
 	/// <summary>
@@ -37,15 +34,15 @@ public class ServerLoginHandler : IServerLoginListener
 	{
 		var key = new Span<byte>();
 		var iv = new Span<byte>();
-		var success = ServerNetwork.KeyPair.TryDecrypt(
-			packet.Key, key, RSAEncryptionPadding.OaepSHA256, out _);
-		success &= ServerNetwork.KeyPair.TryDecrypt(
-			packet.Iv, iv, RSAEncryptionPadding.OaepSHA256, out _);
-		if (!success)
+		try
+		{
+			ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.Pkcs1, out _);
+			ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.Pkcs1, out _);
+		}
+		catch (CryptographicException _)
 		{
 			Ctx.Send(new ErrorS2CPacket(Error.InvalidKey));
 			ServerNetwork.Disconnect(Ctx);
-			return;
 		}
 
 		var keypair = Aes.Create();
@@ -61,10 +58,4 @@ public class ServerLoginHandler : IServerLoginListener
 		Ctx.State = NetworkState.Auth;
 		Ctx.Listener = new ServerAuthHandler(Ctx);
 	}
-
-	/// <summary>
-	///     Called when the client has experienced some kind of error.
-	/// </summary>
-	/// <param name="packet">The received packet containing the error type.</param>
-	public void OnError(ErrorC2SPacket packet) { }
 }

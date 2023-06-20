@@ -21,5 +21,10 @@ public class HelloS2CPacket : IPacket
 	{
 		buf.WriteByteArray(Key);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IClientHandshakeListener)listener).OnHello(this);
+	}
 }
 

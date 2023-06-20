@@ -33,11 +33,11 @@ public class ServerAuthHandler : IServerAuthListener
 		throw new NotImplementedException();
 	}
 
-	public void OnLogout()
+	public void OnLogout(LogoutC2SPacket packet)
 	{
 		throw new NotImplementedException();
 	}
-
+	
 	public void OnVerify(VerifyC2SPacket packet)
 	{
 		throw new NotImplementedException();

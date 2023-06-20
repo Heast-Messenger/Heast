@@ -65,8 +65,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 			throw new IllegalStateException("Listener was null whilst a message was received");
 		}
 
-		var handler = State.GetPacketHandler(Side);
-		handler.ApplyPacket(msg, Listener);
+		msg.Apply(Listener);
 	}
 
 	public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
@@ -106,10 +105,5 @@ public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel>
 			// Here will be the packet encryptor
 			.AddLast("encoder", new PacketEncoder(NetworkSide.Client))
 			.AddLast("handler", Connection);
-
-		// Would technically work
-		// channel.Pipeline
-		// 	.AddLast("encoder", new ClientStringEncoder())
-		// 	.AddLast("handler", Connection);
 	}
 }

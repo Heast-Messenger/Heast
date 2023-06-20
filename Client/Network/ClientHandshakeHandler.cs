@@ -8,9 +8,9 @@ using Core.Network.Packets.S2C;
 
 namespace Client.Network;
 
-public class ClientLoginHandler : IClientLoginListener
+public class ClientHandshakeHandler : IClientHandshakeListener
 {
-	public ClientLoginHandler(ClientConnection ctx)
+	public ClientHandshakeHandler(ClientConnection ctx)
 	{
 		Ctx = ctx;
 	}
@@ -36,16 +36,10 @@ public class ClientLoginHandler : IClientLoginListener
 		RSACryptoServiceProvider rsa = new(4096);
 		{
 			rsa.ImportRSAPublicKey(packet.Key, out _);
-			var success = rsa.TryEncrypt(
-				key, encryptedKey, RSAEncryptionPadding.OaepSHA256, out _);
-			success &= rsa.TryEncrypt(
-				iv, encryptedIv, RSAEncryptionPadding.OaepSHA256, out _);
-			if (!success)
-			{
-				const string error = "Failed to encrypt key";
-				Ctx.Send(new ErrorC2SPacket(Error.InvalidKey, error));
-				throw new(error);
-			}
+			var success = rsa.TryEncrypt(key, encryptedKey, RSAEncryptionPadding.Pkcs1, out _);
+			success &= rsa.TryEncrypt(iv, encryptedIv, RSAEncryptionPadding.Pkcs1, out _);
+
+			if (!success) throw new CryptographicException("Message not encrypted.");
 		}
 
 		Ctx.Send(new KeyC2SPacket(
@@ -53,7 +47,7 @@ public class ClientLoginHandler : IClientLoginListener
 			encryptedIv.ToArray()));
 	}
 
-	public void OnSuccess()
+	public void OnSuccess(SuccessS2CPacket packet)
 	{
 		Ctx.EnableEncryption(KeyPair!);
 		Ctx.State = NetworkState.Auth;

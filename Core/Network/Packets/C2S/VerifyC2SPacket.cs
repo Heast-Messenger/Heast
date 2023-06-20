@@ -21,4 +21,9 @@ public class VerifyC2SPacket : IPacket
 	{
 		buf.WriteString(Code);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerAuthListener)listener).OnVerify(this);
+	}
 }

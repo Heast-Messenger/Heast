@@ -25,4 +25,9 @@ public class KeyC2SPacket : IPacket
 		buf.WriteByteArray(Key);
 		buf.WriteByteArray(Iv);
 	}
+
+	public void Apply(IPacketListener listener)
+	{
+		((IServerHandshakeListener)listener).OnKey(this);
+	}
 }
