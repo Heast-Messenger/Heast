@@ -28,6 +28,9 @@ public class DeleteC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnDelete(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnDelete(this);
+		}
 	}
 }

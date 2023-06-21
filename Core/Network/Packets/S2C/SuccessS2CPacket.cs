@@ -4,7 +4,6 @@ namespace Core.Network.Packets.S2C;
 
 public class SuccessS2CPacket : IPacket
 {
-
 	public SuccessS2CPacket() { }
 
 	public SuccessS2CPacket(PacketBuf buf) { }
@@ -13,7 +12,10 @@ public class SuccessS2CPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IClientHandshakeListener)listener).OnSuccess(this);
+		if (listener is IClientHandshakeListener handshakeListener)
+		{
+			handshakeListener.OnSuccess(this);
+		}
 	}
 }
 

@@ -28,6 +28,9 @@ public class LoginC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnLogin(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnLogin(this);
+		}
 	}
 }

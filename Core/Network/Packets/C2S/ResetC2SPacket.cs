@@ -28,6 +28,9 @@ public class ResetC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnReset(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnReset(this);
+		}
 	}
 }

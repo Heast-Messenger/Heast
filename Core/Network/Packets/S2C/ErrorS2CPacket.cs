@@ -24,7 +24,14 @@ public class ErrorS2CPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IClientHandshakeListener)listener).OnError(this);
+		if (listener is IClientHandshakeListener handshakeListener)
+		{
+			handshakeListener.OnError(this);
+		}
+		if (listener is IClientAuthListener authListener)
+		{
+			authListener.OnError(this);
+		}
 	}
 }
 

@@ -32,6 +32,9 @@ public class SignupC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnSignup(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnSignup(this);
+		}
 	}
 }

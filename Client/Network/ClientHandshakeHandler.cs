@@ -21,24 +21,21 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 
 	public void OnHello(HelloS2CPacket packet)
 	{
-		var key = new byte[128];
-		var iv = new byte[128];
-		KeyPair = Aes.Create();
+		using (KeyPair = Aes.Create())
 		{
 			KeyPair.Mode = CipherMode.CFB;
 			KeyPair.Padding = PaddingMode.PKCS7;
-			RandomNumberGenerator.Fill(key);
-			RandomNumberGenerator.Fill(iv);
+			KeyPair.KeySize = 256;
+			KeyPair.GenerateKey();
 		}
 
 		var encryptedKey = new Span<byte>();
 		var encryptedIv = new Span<byte>();
-		RSACryptoServiceProvider rsa = new(4096);
+		using (var rsa = new RSACryptoServiceProvider())
 		{
 			rsa.ImportRSAPublicKey(packet.Key, out _);
-			var success = rsa.TryEncrypt(key, encryptedKey, RSAEncryptionPadding.Pkcs1, out _);
-			success &= rsa.TryEncrypt(iv, encryptedIv, RSAEncryptionPadding.Pkcs1, out _);
-
+			var success = rsa.TryEncrypt(KeyPair.Key, encryptedKey, RSAEncryptionPadding.Pkcs1, out _);
+			success &= rsa.TryEncrypt(KeyPair.IV, encryptedIv, RSAEncryptionPadding.Pkcs1, out _);
 			if (!success) throw new CryptographicException("Message not encrypted.");
 		}
 

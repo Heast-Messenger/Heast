@@ -24,6 +24,9 @@ public class VerifyC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnVerify(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnVerify(this);
+		}
 	}
 }

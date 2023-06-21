@@ -24,7 +24,10 @@ public class HelloS2CPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IClientHandshakeListener)listener).OnHello(this);
+		if (listener is IClientHandshakeListener handshakeListener)
+		{
+			handshakeListener.OnHello(this);
+		}
 	}
 }
 

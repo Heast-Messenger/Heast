@@ -24,6 +24,9 @@ public class GuestC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnGuest(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnGuest(this);
+		}
 	}
 }

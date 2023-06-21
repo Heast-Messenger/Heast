@@ -28,6 +28,9 @@ public class KeyC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerHandshakeListener)listener).OnKey(this);
+		if (listener is IServerHandshakeListener handshakeListener)
+		{
+			handshakeListener.OnKey(this);
+		}
 	}
 }

@@ -23,7 +23,8 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 	public void OnHello(HelloC2SPacket packet)
 	{
 		// TODO: Send server capabilities
-		 Ctx.Send(new HelloS2CPacket(ServerNetwork.PublicKey));
+		var publicKey = ServerNetwork.KeyPair.ExportRSAPublicKey();
+		Ctx.Send(new HelloS2CPacket(publicKey));
 	}
 
 	/// <summary>
@@ -36,8 +37,9 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 		var iv = new Span<byte>();
 		try
 		{
-			ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.Pkcs1, out _);
-			ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.Pkcs1, out _);
+			var success = ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.Pkcs1, out _);
+			success &= ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.Pkcs1, out _);
+			if (!success) throw new CryptographicException("Message not decrypted.");
 		}
 		catch (CryptographicException _)
 		{

@@ -23,6 +23,9 @@ public class HelloC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerHandshakeListener)listener).OnHello(this);
+		if (listener is IServerHandshakeListener handshakeListener)
+		{
+			handshakeListener.OnHello(this);
+		}
 	}
 }

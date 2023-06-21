@@ -28,6 +28,9 @@ public class LogoutC2SPacket : IPacket
 
 	public void Apply(IPacketListener listener)
 	{
-		((IServerAuthListener)listener).OnLogout(this);
+		if (listener is IServerAuthListener authListener)
+		{
+			authListener.OnLogout(this);
+		}
 	}
 }
