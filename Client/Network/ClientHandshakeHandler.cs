@@ -29,19 +29,22 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 			KeyPair.GenerateKey();
 		}
 
-		var encryptedKey = new Span<byte>();
-		var encryptedIv = new Span<byte>();
-		using (var rsa = new RSACryptoServiceProvider())
+		byte[] encryptedKey;
+		byte[] encryptedIv;
+		try
 		{
+			using var rsa = new RSACryptoServiceProvider();
 			rsa.ImportRSAPublicKey(packet.Key, out _);
-			var success = rsa.TryEncrypt(KeyPair.Key, encryptedKey, RSAEncryptionPadding.Pkcs1, out _);
-			success &= rsa.TryEncrypt(KeyPair.IV, encryptedIv, RSAEncryptionPadding.Pkcs1, out _);
-			if (!success) throw new CryptographicException("Message not encrypted.");
+			encryptedKey = rsa.Encrypt(KeyPair.Key, RSAEncryptionPadding.Pkcs1);
+			encryptedIv = rsa.Encrypt(KeyPair.IV, RSAEncryptionPadding.Pkcs1);
+		}
+		catch (CryptographicException e)
+		{
+			Console.WriteLine($"Error encrypting key: {e.Message}");
+			return;
 		}
 
-		Ctx.Send(new KeyC2SPacket(
-			encryptedKey.ToArray(),
-			encryptedIv.ToArray()));
+		Ctx.Send(new KeyC2SPacket(encryptedKey, encryptedIv));
 	}
 
 	public void OnSuccess(SuccessS2CPacket packet)

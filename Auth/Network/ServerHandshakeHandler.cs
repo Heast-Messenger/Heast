@@ -33,26 +33,25 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 	/// <param name="packet">The received packet containing the client's AES key.</param>
 	public void OnKey(KeyC2SPacket packet)
 	{
-		var key = new Span<byte>();
-		var iv = new Span<byte>();
+		byte[] key = null!;
+		byte[] iv = null!;
 		try
 		{
-			var success = ServerNetwork.KeyPair.TryDecrypt(packet.Key, key, RSAEncryptionPadding.Pkcs1, out _);
-			success &= ServerNetwork.KeyPair.TryDecrypt(packet.Iv, iv, RSAEncryptionPadding.Pkcs1, out _);
-			if (!success) throw new CryptographicException("Message not decrypted.");
+			key = ServerNetwork.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
+			iv = ServerNetwork.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
 		}
-		catch (CryptographicException _)
+		catch (CryptographicException)
 		{
 			Ctx.Send(new ErrorS2CPacket(Error.InvalidKey));
 			ServerNetwork.Disconnect(Ctx);
 		}
 
-		var keypair = Aes.Create();
+		using var keypair = Aes.Create();
 		{
 			keypair.Mode = CipherMode.CFB;
 			keypair.Padding = PaddingMode.PKCS7;
-			keypair.Key = key.ToArray();
-			keypair.IV = iv.ToArray();
+			keypair.Key = key;
+			keypair.IV = iv;
 		}
 
 		Ctx.EnableEncryption(keypair);
