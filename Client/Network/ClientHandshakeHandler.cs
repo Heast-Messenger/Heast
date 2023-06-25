@@ -19,7 +19,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 
 	private Aes? KeyPair { get; set; }
 
-	public void OnHello(HelloS2CPacket packet)
+	public async void OnHello(HelloS2CPacket packet)
 	{
 		using (KeyPair = Aes.Create())
 		{
@@ -44,7 +44,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 			return;
 		}
 
-		Ctx.Send(new KeyC2SPacket(encryptedKey, encryptedIv));
+		await Ctx.Send(new KeyC2SPacket(encryptedKey, encryptedIv));
 	}
 
 	public void OnSuccess(SuccessS2CPacket packet)

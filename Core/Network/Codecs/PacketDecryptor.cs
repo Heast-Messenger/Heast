@@ -25,7 +25,7 @@ public class PacketDecryptor : MessageToMessageDecoder<IByteBuffer>
 		{
 			var buf = context.Allocator.HeapBuffer();
 			var decrypted = KeyPair.DecryptCfb(bytes, KeyPair.IV, PaddingMode.PKCS7);
-			buf.WriteBytes(decrypted.ToArray());
+			buf.WriteBytes(decrypted);
 			output.Add(buf);
 		}
 		catch (CryptographicException e)
