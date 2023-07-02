@@ -1,0 +1,3 @@
+# Run with "cloc --config .clocconfig ."
+not-match-d=([^/]*/)(obj|bin)
+fullpath
