@@ -6,19 +6,19 @@ namespace Core.Network;
 
 public class NetworkState
 {
-
-	public static NetworkState Login = new NetworkState()
-		.Setup(NetworkSide.Client, new PacketHandler<IServerHandshakeListener>()
+	public static readonly NetworkState Login = new NetworkState()
+		.Setup(NetworkSide.Server, new PacketHandler<IServerHandshakeListener>()
 			.Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf))
+			.Register<ConnectC2SPacket>(buf => new ConnectC2SPacket(buf))
 			.Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf)))
-
-		.Setup(NetworkSide.Server, new PacketHandler<IClientHandshakeListener>()
+		.Setup(NetworkSide.Client, new PacketHandler<IClientHandshakeListener>()
 			.Register<HelloS2CPacket>(buf => new HelloS2CPacket(buf))
+			.Register<ConnectS2CPacket>(buf => new ConnectS2CPacket(buf))
 			.Register<SuccessS2CPacket>(buf => new SuccessS2CPacket(buf))
 			.Register<ErrorS2CPacket>(buf => new ErrorS2CPacket(buf)));
 
-	public static NetworkState Auth = new NetworkState()
-		.Setup(NetworkSide.Client, new PacketHandler<IServerAuthListener>()
+	public static readonly NetworkState Auth = new NetworkState()
+		.Setup(NetworkSide.Server, new PacketHandler<IServerAuthListener>()
 			.Register<SignupC2SPacket>(buf => new SignupC2SPacket(buf))
 			.Register<LoginC2SPacket>(buf => new LoginC2SPacket(buf))
 			.Register<ResetC2SPacket>(buf => new ResetC2SPacket(buf))
@@ -26,8 +26,7 @@ public class NetworkState
 			.Register<LogoutC2SPacket>(buf => new LogoutC2SPacket(buf))
 			.Register<VerifyC2SPacket>(buf => new VerifyC2SPacket(buf))
 			.Register<GuestC2SPacket>(buf => new GuestC2SPacket(buf)))
-
-		.Setup(NetworkSide.Server, new PacketHandler<IClientAuthListener>());
+		.Setup(NetworkSide.Client, new PacketHandler<IClientAuthListener>());
 
 	private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 

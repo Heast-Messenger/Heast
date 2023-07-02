@@ -18,13 +18,29 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 
 	/// <summary>
 	///     Called when the client wants to connect to the server.
+	///     Processes capabilities and changes pipeline settings accordingly.
 	/// </summary>
-	/// <param name="packet">The received packet containing client information.</param>
+	/// <param name="packet">The received packet.</param>
 	public async void OnHello(HelloC2SPacket packet)
 	{
-		// TODO: Send server capabilities
+		var capabilities = ServerNetwork.Capabilities;
+		await Ctx.Send(new HelloS2CPacket(capabilities));
+		if (capabilities.HasFlag(Capabilities.Ssl))
+		{
+			var certificate = ServerNetwork.Certificate;
+			await Ctx.EnableSecureSocketLayer(certificate);
+		}
+	}
+
+	/// <summary>
+	///     Called when the client is ready to connect to the server
+	///     and initiates the handshake.
+	/// </summary>
+	/// <param name="packet">The received packet containing client information.</param>
+	public async void OnConnect(ConnectC2SPacket packet)
+	{
 		var publicKey = ServerNetwork.KeyPair.ExportRSAPublicKey();
-		await Ctx.Send(new HelloS2CPacket(publicKey));
+		await Ctx.Send(new ConnectS2CPacket(publicKey));
 	}
 
 	/// <summary>

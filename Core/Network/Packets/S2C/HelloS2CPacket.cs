@@ -4,22 +4,21 @@ namespace Core.Network.Packets.S2C;
 
 public class HelloS2CPacket : IPacket
 {
-
-	public HelloS2CPacket(byte[] key)
+	public HelloS2CPacket(Capabilities capabilities)
 	{
-		Key = key;
+		Capabilities = capabilities;
 	}
 
 	public HelloS2CPacket(PacketBuf buf)
 	{
-		Key = buf.ReadByteArray();
+		Capabilities = buf.ReadEnum<Capabilities>();
 	}
 
-	public byte[] Key { get; }
+	public Capabilities Capabilities { get; }
 
 	public void Write(PacketBuf buf)
 	{
-		buf.WriteByteArray(Key);
+		buf.WriteEnum(Capabilities);
 	}
 
 	public void Apply(IPacketListener listener)
@@ -30,4 +29,3 @@ public class HelloS2CPacket : IPacket
 		}
 	}
 }
-

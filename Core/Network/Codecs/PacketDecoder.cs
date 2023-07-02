@@ -23,7 +23,11 @@ public class PacketDecoder : ReplayingDecoder
 			.GetPacketHandler(Side)
 			.CreatePacket(id, buffer);
 
-		if (packet == null) throw new InvalidDataException($"Bad packet id ({id})");
+		if (packet == null)
+		{
+			throw new InvalidDataException($"Bad packet id ({id})");
+		}
+
 		output.Add(packet);
 	}
 

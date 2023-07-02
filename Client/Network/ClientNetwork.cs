@@ -10,6 +10,7 @@ namespace Client.Network;
 
 public static class ClientNetwork
 {
+	public static string ClientInfo => "Some Client";
 	public static ClientConnection? Ctx { get; set; }
 	public static ConcurrentQueue<IJob> ActionQueue { get; } = new();
 
@@ -57,7 +58,7 @@ public static class ClientNetwork
 			Console.WriteLine($"Connecting to {host}:{port}...");
 			Ctx = await ClientConnection.ServerConnect(host, port);
 			Ctx.Listener = new ClientHandshakeHandler(Ctx);
-			await Ctx.Send(new HelloC2SPacket("Heast Client"));
+			await Ctx.Send(new HelloC2SPacket());
 		});
 	}
 }

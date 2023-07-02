@@ -15,7 +15,7 @@ internal class ConnectionTests
 	{
 		var con = await ClientConnection.ServerConnect("127.0.0.1", 23010);
 		con.Listener = new ClientHandshakeHandler(con);
-		await con.Channel.WriteAndFlushAsync(new HelloC2SPacket("Hello World!"));
+		await con.Channel.WriteAndFlushAsync(new HelloC2SPacket());
 		await Task.Delay(-1);
 	}
 
