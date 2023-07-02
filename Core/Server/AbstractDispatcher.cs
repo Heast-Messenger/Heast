@@ -1,6 +1,7 @@
 using System.Text;
 using Core.Extensions;
 using static System.Console;
+using static Crayon.Output;
 
 namespace Core.Server;
 
@@ -54,10 +55,10 @@ public abstract class AbstractDispatcher
 	{
 		OutputEncoding = Encoding.Default;
 		var content = File.ReadAllText("Assets/Console/Crash.txt");
-		WriteLine(Parser.ParseRichText(content, new()
+		WriteLine(Parser.ParseRichText(content, new Dictionary<string, object>
 		{
-			{"error", e.Message},
-			{"stacktrace", e.StackTrace!}
+			{ "error", e.Message },
+			{ "stacktrace", e.StackTrace! }
 		}));
 	}
 
@@ -70,11 +71,13 @@ public abstract class AbstractDispatcher
 		foreach (var command in commands)
 		{
 			var content = File.ReadAllText("Assets/Console/Command.txt");
-			WriteLine(Parser.ParseRichText(content, new()
+			var description = command.Description
+				.Replace("%d", Bright.White(command.Default!));
+			WriteLine(Parser.ParseRichText(content, new Dictionary<string, object>
 			{
-				{"Indent", " ".Repeat(indent * 2)},
-				{"Name", $"{command.Short}, {command.Long}".PadRight(20)},
-				{"Description", command.Description}
+				{ "Indent", " ".Repeat(indent * 2) },
+				{ "Name", $"{command.Short}, {command.Long}".PadRight(20) },
+				{ "Description", description }
 			}));
 
 			if (command.SubCommands != null)

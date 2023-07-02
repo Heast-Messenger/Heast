@@ -1,7 +1,9 @@
 ﻿using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using Auth.Modules;
 using Auth.Structure;
 using Core.Network.Codecs;
+using Core.Utility;
 using static System.Console;
 
 namespace Auth.Network;
@@ -12,7 +14,8 @@ public static class ServerNetwork
 	public static CancellationToken CancellationToken { get; } = new();
 	private static List<ClientConnection> Clients { get; } = new();
 	public static RSACryptoServiceProvider KeyPair { get; } = new(4096);
-	public static AuthContext Db => Database.Db;
+	public static X509Certificate2? Certificate { get; private set; }
+	public static AuthContext? Db => Database.Db;
 
 	public static void Initialize()
 	{
@@ -23,5 +26,18 @@ public static class ServerNetwork
 	{
 		Clients.Remove(connection);
 		return Task.CompletedTask;
+	}
+
+	public static void SetCertificate(string filepath)
+	{
+		try
+		{
+			// Doesnt have private key?!??!
+			Certificate = new X509Certificate2(filepath, Shared.Config["ssh-password"]);
+		}
+		catch (CryptographicException e)
+		{
+			WriteLine($"Error creating SSL certificate: {e.Message}");
+		}
 	}
 }

@@ -1,5 +1,6 @@
 using Core.Network;
 using Core.Network.Codecs;
+using DotNetty.Handlers.Tls;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using NettyBootstrap = DotNetty.Transport.Bootstrapping;
@@ -40,13 +41,22 @@ public class ClientHandler : ChannelInitializer<ISocketChannel>
 {
 	protected override void InitChannel(ISocketChannel channel)
 	{
+		var certificate = ServerNetwork.Certificate;
 		var connection = new ClientConnection(NetworkSide.Client);
 		connection.Listener = new ServerHandshakeHandler(connection);
-		channel.Pipeline
-			// Here will be the packet decryptor
-			.AddLast("decoder", new PacketDecoder(NetworkSide.Client))
-			// Here will be the packet encryptor
-			.AddLast("encoder", new PacketEncoder(NetworkSide.Server))
-			.AddLast("handler", connection);
+		if (certificate is not null)
+		{
+			channel.Pipeline
+				.AddLast("tls", TlsHandler.Server(certificate));
+		}
+
+		{
+			channel.Pipeline
+				// Here will be the packet decryptor
+				.AddLast("decoder", new PacketDecoder(NetworkSide.Client))
+				// Here will be the packet encryptor
+				.AddLast("encoder", new PacketEncoder(NetworkSide.Server))
+				.AddLast("handler", connection);
+		}
 	}
 }

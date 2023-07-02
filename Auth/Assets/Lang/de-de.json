@@ -1,0 +1,32 @@
+{
+  "Args": {
+    "Unknown": "Unbekannte Aktion: '%1'.",
+    "Language": "Die zu verwendende Sprache, z.B. 'de-de'.",
+    "Help": {
+      "Description": "Starte den Server mit",
+      "Help": "Zeige diese Hilfemeldung an und beende das Programm.",
+      "Version": "Zeige die Version an und beende das Programm.",
+      "Start": "Starte eine Serverinstanz."
+    },
+    "Start": {
+      "Ip": "Die IP-Adresse, an die gebunden werden soll (Standardwert: %d).",
+      "Port": "Der Port, an den gebunden werden soll (Standardwert: %d).",
+      "DBHost": "Die Host-Adresse für die Datenbank (Standardwert: %d).",
+      "DBPort": "Der Port für die Datenbank (Standardwert: %d).",
+      "SSHPfx": "Pfad zu einer gültigen SSH .pfx-Datei (Standardwert: %d)."
+    },
+    "Version": {
+      "Version": "Version",
+      "Build": "Build",
+      "Website": "Website",
+      "Github": "GitHub",
+      "Dotnet": "DotNet",
+      "Os": "Betriebssystem"
+    }
+  },
+  "Server": {
+    "Starting": "Server wird gestartet...",
+    "Started": "Server gestartet!",
+    "Exiting": "Beende..."
+  }
+}

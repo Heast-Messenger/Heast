@@ -1,22 +1,32 @@
 {
-   "args.help.description": "Start the server with",
-   "args.help.help": "Show this help message and exit.",
-   "args.help.version": "Show the version and exit.",
-   "args.help.start": "Start a server instance.",
-   "args.help.start.ip": "The IP address to bind to (defaults to localhost).",
-   "args.help.start.port": "The port to bind to (defaults to 23010).",
-   "args.help.start.dbhost": "The host address for the database (defaults to localhost).",
-   "args.help.start.dbport": "The port for the database (defaults to 3306).",
-   "args.unknown": "Unknown action: '%1'",
-   "args.help.version.version": "Version",
-   "args.help.version.build": "Build",
-   "args.help.version.website": "Website",
-   "args.help.version.github": "GitHub",
-   "args.help.version.dotnet": "DotNet",
-   "args.help.version.os": "OS",
-   "server.starting": "Starting server...",
-   "server.started": "Server started!",
-   "server.noinstances": "No running instances found",
-   "server.exiting": "Exiting...",
-   "server.chooseprocess": "Which process do you want to kill? (0 to exit)"
+  "Args": {
+    "Unknown": "Unknown action: '%1'.",
+    "Language": "The language to use: e.g. 'en-us'.",
+    "Help": {
+      "Description": "Start the server with",
+      "Help": "Show this help message and exit.",
+      "Version": "Show the version and exit.",
+      "Start": "Start a server instance."
+    },
+    "Start": {
+      "Ip": "The IP address to bind to (defaults to %d).",
+      "Port": "The port to bind to (defaults to %d).",
+      "DBHost": "The host address for the database (defaults to %d).",
+      "DBPort": "The port for the database (defaults to %d).",
+      "SSHPfx": "Path to a valid SSH .pfx file (defaults to %d)."
+    },
+    "Version": {
+      "Version": "Version",
+      "Build": "Build",
+      "Website": "Website",
+      "Github": "GitHub",
+      "Dotnet": "DotNet",
+      "Os": "OS"
+    }
+  },
+  "Server": {
+    "Starting": "Starting server...",
+    "Started": "Server started!",
+    "Exiting": "Exiting..."
+  }
 }

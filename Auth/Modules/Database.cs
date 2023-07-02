@@ -6,7 +6,7 @@ namespace Auth.Modules;
 
 public static class Database
 {
-	public static AuthContext Db { get; private set; } = null!;
+	public static AuthContext? Db { get; private set; }
 
 	public static string Host { get; set; } = "localhost";
 	public static int Port { get; set; } = 3306;
@@ -27,11 +27,11 @@ public static class Database
 		}
 		catch (Exception e)
 		{
-			// ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-			if (Db == null)
+			if (Db is null)
 			{
-				throw new Exception(
-					"The database connection returned null. Are you sure you have a running MySQL instance with the correct connection properties?",
+				throw new NullReferenceException(
+					"The database connection returned null. " +
+					"Are you sure you have a running MySQL instance with the correct connection properties?",
 					e);
 			}
 
@@ -46,6 +46,11 @@ public static class Database
 
 	public static IEnumerable<User> GetUsers()
 	{
-		return Db.Accounts.ToList();
+		if (Db is not null)
+		{
+			return Db.Accounts.ToList();
+		}
+
+		throw new NullReferenceException("Database connection is not available");
 	}
 }

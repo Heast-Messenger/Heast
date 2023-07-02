@@ -3,8 +3,8 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Network.Packets.C2S;
 using Core.Network.Codecs;
+using Core.Network.Packets.C2S;
 
 namespace Client.Network;
 

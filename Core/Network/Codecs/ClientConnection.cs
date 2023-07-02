@@ -1,7 +1,9 @@
 using System.Net;
+using System.Net.Security;
 using System.Security.Cryptography;
 using Core.exceptions;
 using DotNetty.Common.Utilities;
+using DotNetty.Handlers.Tls;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
@@ -38,7 +40,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 			.Group(workerGroup)
 			.Channel<TcpSocketChannel>()
 			.Option(ChannelOption.TcpNodelay, true)
-			.Handler(new ClientConnectionInitializer(connection))
+			.Handler(new ClientConnectionInitializer(connection, host))
 			.ConnectAsync(IPAddress.Parse(host), port);
 
 		return connection;
@@ -52,7 +54,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 
 	public override async void ChannelInactive(IChannelHandlerContext context)
 	{
-		if (Channel is {IsOpen: true})
+		if (Channel is { IsOpen: true })
 		{
 			await Channel.CloseAsync();
 		}
@@ -76,34 +78,47 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 
 	public Task Send(IPacket packet)
 	{
-		return Channel is {IsOpen: true}
+		return Channel is { IsOpen: true }
 			? Channel.WriteAndFlushAsync(packet)
 			: throw new IllegalStateException("Channel was null whilst trying to send a packet");
 	}
 
 	public void EnableEncryption(Aes key)
 	{
-		Channel.Pipeline.AddBefore("encoder", "encryptor", new PacketEncryptor(key));
-		Channel.Pipeline.AddBefore("decoder", "decryptor", new PacketDecryptor(key));
+		Channel.Pipeline
+			.AddBefore("encoder", "encryptor", new PacketEncryptor(key))
+			.AddBefore("decoder", "decryptor", new PacketDecryptor(key));
 	}
 }
 
 public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel>
 {
-	public ClientConnectionInitializer(ClientConnection connection)
+	public ClientConnectionInitializer(ClientConnection connection, string host)
 	{
 		Connection = connection;
+		Host = host;
 	}
 
 	private ClientConnection Connection { get; }
+	private string Host { get; }
 
 	protected override void InitChannel(ISocketChannel channel)
 	{
-		channel.Pipeline
-			// Here will be the packet decryptor
-			.AddLast("decoder", new PacketDecoder(NetworkSide.Server))
-			// Here will be the packet encryptor
-			.AddLast("encoder", new PacketEncoder(NetworkSide.Client))
-			.AddLast("handler", Connection);
+		{
+			channel.Pipeline.AddLast("tls", new TlsHandler(stream => new SslStream(stream, true,
+				(_, _, _, _) =>
+				{
+					Console.WriteLine("SSL Success");
+					return true;
+				}), new ClientTlsSettings(Host)));
+		}
+		{
+			channel.Pipeline
+				// Here will be the packet decryptor
+				.AddLast("decoder", new PacketDecoder(NetworkSide.Server))
+				// Here will be the packet encryptor
+				.AddLast("encoder", new PacketEncoder(NetworkSide.Client))
+				.AddLast("handler", Connection);
+		}
 	}
 }

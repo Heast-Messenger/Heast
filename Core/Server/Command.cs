@@ -2,7 +2,6 @@ namespace Core.Server;
 
 public class Command
 {
-	public const string Prefix = "-";
 	public string Short { get; init; } = string.Empty;
 	public string Long { get; init; } = string.Empty;
 	public int Argc { get; init; }

@@ -3,5 +3,6 @@
   
   §b§2➜  §r§b§fPort: §3{Port}
   §b§2➜  §r§b§fDatabase: §3{Db}
+  §b§2➜  §r§b§fCertificate: §3{Certificate}
   §b§2➜  §r§ftype §bhelp§r §ffor a list of commands
   
