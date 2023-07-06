@@ -2,7 +2,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
-                xmlns:controls="clr-namespace:Client.Controls"
+                xmlns:controls="clr-namespace:Client.View.Controls"
                 x:Class="Client.View.Content.SignupPanel">
    <Design.DataContext>
       <vm:LoginWindowViewModel />
@@ -12,34 +12,25 @@
       <controls:IconText
          x:Key="Content.Signup"
          Text="Sign up"
-         Icon="{SvgImage /Assets/Login/Add.svg}"
+         Icon="{StaticResource Icon.Add}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
 
-   <view:LoginBase.Styles>
-      <StyleInclude Source="/Styles/Textblocks.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-      <StyleInclude Source="/Styles/LoginInput.axaml" />
-   </view:LoginBase.Styles>
-
    <Grid RowDefinitions="Auto, Auto, *, Auto">
-      <TextBlock
-         Grid.Row="0"
-         VerticalAlignment="Center"
-         Classes="Bold"
-         FontSize="32">
+      <TextBlock Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Classes="Bold Title">
          Welcome!
       </TextBlock>
 
-      <TextBlock
-         Grid.Row="1"
-         VerticalAlignment="Center"
-         TextWrapping="Wrap"
-         Classes="Title">
-         <Run Text="Tell us your" />
-         <Run Text="name, email" FontWeight="Bold" />
-         <Run Text="address and choose a" />
-         <Run Text="strong password." FontWeight="Bold" />
+      <TextBlock Grid.Row="1"
+                 VerticalAlignment="Center"
+                 TextWrapping="Wrap"
+                 Classes="Subtitle">
+         <!-- <Run Text="Tell us your" /> -->
+         <!-- <Run Text="name, email" Classes="Bold" /> -->
+         <!-- <Run Text="address and choose a" /> -->
+         <!-- <Run Text="strong password." Classes="Bold" /> -->
       </TextBlock>
 
       <Border Grid.Row="2" />
@@ -58,8 +49,7 @@
             Text="{Binding SignupPassword}" />
          <TextBlock
             Text="Sign up when you're ready!"
-            Classes="Watermark Bold"
-            FontSize="18.0" />
+            Classes="Watermark Bold" />
          <Button
             Content="{StaticResource Content.Signup}"
             Command="{Binding Signup}" />

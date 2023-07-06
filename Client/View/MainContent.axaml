@@ -1,26 +1,24 @@
 <UserControl
-	xmlns="https://github.com/avaloniaui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:vm="clr-namespace:Client.ViewModel"
-	mc:Ignorable="d"
-	x:Class="Client.View.MainContent"
-	CornerRadius="20.0"
-	BorderThickness="0.0"
-	Background="{DynamicResource Dark}"
-	Padding="10.0">
-	<Design.DataContext>
-		<vm:ContentViewModel />
-	</Design.DataContext>
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:vm="clr-namespace:Client.ViewModel"
+   mc:Ignorable="d"
+   x:Class="Client.View.MainContent"
+   Background="{DynamicResource Dark}"
+   Padding="10.0">
+   <Design.DataContext>
+      <vm:ContentViewModel />
+   </Design.DataContext>
 
-	<TransitioningContentControl
-		Name="ParentControl"
-		Content="{Binding Content}">
-		<TransitioningContentControl.PageTransition>
-			<!-- The custom page transition is not yet working -->
-			<!-- <util:PanelTransition Duration="0:00:00.500"/> -->
-			<CrossFade Duration="0:00:00.200" />
-		</TransitioningContentControl.PageTransition>
-	</TransitioningContentControl>
+   <TransitioningContentControl
+      Name="ParentControl"
+      Content="{Binding Content}">
+      <TransitioningContentControl.PageTransition>
+         <!-- The custom page transition is not yet working -->
+         <!-- <util:PanelTransition Duration="0:00:00.500"/> -->
+         <CrossFade Duration="0:00:00.200" />
+      </TransitioningContentControl.PageTransition>
+   </TransitioningContentControl>
 </UserControl>

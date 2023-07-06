@@ -1,45 +1,48 @@
 <view:LoginBase
-	xmlns="https://github.com/avaloniaui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:view="clr-namespace:Client.View.Content"
-	xmlns:vm="clr-namespace:Client.ViewModel"
-	x:Class="Client.View.Content.WelcomePanel">
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:view="clr-namespace:Client.View.Content"
+   xmlns:vm="clr-namespace:Client.ViewModel"
+   xmlns:controls1="clr-namespace:Client.View.Controls"
+   x:Class="Client.View.Content.WelcomePanel">
 
-	<Design.DataContext>
-		<vm:LoginWindowViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
 
-	<view:LoginBase.Styles>
-		<StyleInclude Source="/Styles/Textblocks.axaml" />
-		<StyleInclude Source="/Styles/HollowButtons.axaml" />
-	</view:LoginBase.Styles>
+   <view:LoginBase.Resources>
+      <controls1:Icon
+         x:Key="Image.Next"
+         Source="{StaticResource Icon.Arrow-Right}"
+         Foreground="{DynamicResource White}"
+         FontSize="32.0" />
+   </view:LoginBase.Resources>
 
-	<Grid RowDefinitions="Auto, *, 50.0">
-		<TextBlock Grid.Row="0" VerticalAlignment="Center"
-		           Classes="Bold"
-		           FontSize="32">
-			<Run Text="Welcome to"
-			     Foreground="{DynamicResource White}" />
-			<LineBreak />
-			<Run Text="Heast Messenger">
-				<Run.Foreground>
-					<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-						<LinearGradientBrush.GradientStops>
-							<GradientStop Offset="0" Color="#FFFDB242" />
-							<GradientStop Offset="1" Color="#FFFFCF8A" />
-						</LinearGradientBrush.GradientStops>
-					</LinearGradientBrush>
-				</Run.Foreground>
-			</Run>
-		</TextBlock>
+   <Grid RowDefinitions="Auto, *, 50.0">
+      <TextBlock Grid.Row="0" VerticalAlignment="Center"
+                 Classes="Bold Title">
+         <!-- <Run Text="Welcome to" -->
+         <!--      Foreground="{DynamicResource White}" /> -->
+         <!-- <LineBreak /> -->
+         <!-- <Run Text="Heast Messenger"> -->
+         <!--    <Run.Foreground> -->
+         <!--       <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%"> -->
+         <!--          <LinearGradientBrush.GradientStops> -->
+         <!--             <GradientStop Offset="0" Color="#FFFDB242" /> -->
+         <!--             <GradientStop Offset="1" Color="#FFFFCF8A" /> -->
+         <!--          </LinearGradientBrush.GradientStops> -->
+         <!--       </LinearGradientBrush> -->
+         <!--    </Run.Foreground> -->
+         <!-- </Run> -->
+      </TextBlock>
 
-		<Image Grid.Row="1"
-		       Source="/Assets/Logos/Heast.png" />
+      <Image Grid.Row="1"
+             Source="/Assets/Logos/Heast.png" />
 
-		<Button Grid.Row="2"
-		        Width="38.0" Height="38.0"
-		        Padding="10.0"
-		        Content="{SvgImage /Assets/Login/Next.svg}"
-		        Click="Button_OnClick" />
-	</Grid>
+      <Button Grid.Row="2"
+              Padding="10.0"
+              Classes="Hollowed Centered"
+              Content="{StaticResource Image.Next}"
+              Click="Button_OnClick" />
+   </Grid>
 </view:LoginBase>

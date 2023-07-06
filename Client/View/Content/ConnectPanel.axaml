@@ -1,0 +1,46 @@
+<view:LoginBase
+   xmlns="https://github.com/avaloniaui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:vm="clr-namespace:Client.ViewModel"
+   xmlns:view="clr-namespace:Client.View.Content"
+   xmlns:controls="clr-namespace:Client.View.Controls"
+   xmlns:utility="clr-namespace:Client.Utility"
+   x:Class="Client.View.Content.ConnectPanel">
+
+   <Design.DataContext>
+      <vm:LoginWindowViewModel />
+   </Design.DataContext>
+
+   <Grid RowDefinitions="Auto, Auto, *">
+      <TextBlock Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Classes="Bold Title">
+         <Run Text="Connecting" />
+         <utility:Typewriter
+            Text="..."
+            Interval="0:00:00.500" />
+      </TextBlock>
+
+      <TextBlock Grid.Row="1"
+                 VerticalAlignment="Center"
+                 TextWrapping="Wrap"
+                 Classes="Subtitle">
+         <Run Text="Connection handshake"
+              Classes="Bold" />
+         <Run Text="is in progress." />
+      </TextBlock>
+
+      <ItemsControl Grid.Row="2" ItemsSource="{Binding ConnectionSteps}">
+         <ItemsControl.ItemTemplate>
+            <DataTemplate>
+               <Grid ColumnDefinitions="Auto, Auto, *"
+                     RowDefinitions="Auto, Auto">
+                  <Button Grid.Row="0" Grid.Column="0">
+                     <controls:Icon Source="{StaticResource Icon.Arrow-Down-S}" />
+                  </Button>
+               </Grid>
+            </DataTemplate>
+         </ItemsControl.ItemTemplate>
+      </ItemsControl>
+   </Grid>
+</view:LoginBase>

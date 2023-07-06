@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Client.View.Controls">
+   <Style Selector="controls|Icon">
+      <!-- Set Defaults -->
+      <Setter Property="Foreground" Value="{DynamicResource White}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="CornerRadius" Value="3.0" />
+      <Setter Property="Template">
+         <ControlTemplate>
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+               <TextBlock Text="{TemplateBinding Source}"
+                          FontFamily="{StaticResource Icons}"
+                          FontSize="{TemplateBinding FontSize}"
+                          TextAlignment="Center"
+                          Padding="{TemplateBinding Padding}"
+                          LineHeight="{TemplateBinding FontSize}" />
+            </Border>
+         </ControlTemplate>
+      </Setter>
+   </Style>
+</Styles>

@@ -2,70 +2,93 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:components="clr-namespace:Client.View.Components"
              xmlns:vm="clr-namespace:Client.ViewModel"
-             xmlns:view="clr-namespace:Client.View"
+             xmlns:controls="clr-namespace:Client.View.Controls"
+             xmlns:extensions="clr-namespace:Client.Extensions"
              mc:Ignorable="d"
              x:Class="Client.View.Navigation">
-	<Design.DataContext>
-		<vm:NavigationViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:NavigationViewModel />
+   </Design.DataContext>
 
-	<UserControl.Resources>
-		<Image x:Key="Image.Chat" Source="{SvgImage /Assets/Navigation/Chat.svg}" Width="18" Height="18" />
-		<Image x:Key="Image.Explore" Source="{SvgImage /Assets/Navigation/Explore.svg}" Width="18" Height="18" />
-		<Image x:Key="Image.People" Source="{SvgImage /Assets/Navigation/People.svg}" Width="18" Height="18" />
-		<Image x:Key="Image.Servers" Source="{SvgImage /Assets/Navigation/Servers.svg}" Width="18" Height="18" />
-		<Image x:Key="Image.Settings" Source="{SvgImage /Assets/Navigation/Settings.svg}" Width="18" Height="18" />
-	</UserControl.Resources>
+   <UserControl.Styles>
+      <StyleInclude Source="/Styles/NavigationButtons.axaml" />
+   </UserControl.Styles>
 
-	<UserControl.Styles>
-		<StyleInclude Source="/Styles/HollowButtons.axaml" />
-		<Style Selector="Button">
-			<Setter Property="DockPanel.Dock" Value="Top" />
-			<Setter Property="Margin" Value="0 0 0 30" />
-			<Setter Property="Transitions">
-				<Setter.Value>
-					<Transitions>
-						<TransformOperationsTransition
-							Property="RenderTransform"
-							Duration="0:0:1.0">
-							<TransformOperationsTransition.Easing>
-								<view:NavigationEasing />
-							</TransformOperationsTransition.Easing>
-						</TransformOperationsTransition>
-					</Transitions>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style Selector="Button:pointerover">
-			<Setter Property="RenderTransform" Value="rotate(1turn)" />
-		</Style>
-	</UserControl.Styles>
+   <DockPanel>
+      <Button
+         Command="{Binding Button_OnNav}">
+         <Button.Content>
+            <controls:Icon Source="{StaticResource Icon.Menu-Fill}" />
+         </Button.Content>
+      </Button>
 
-	<DockPanel LastChildFill="True">
-		<components:RadioButton
-			Content="{StaticResource Image.Chat}"
-			GroupName="Navigation"
-			Command="{Binding Button_OnChat}" />
-		<components:RadioButton
-			Content="{StaticResource Image.Explore}"
-			GroupName="Navigation"
-			Command="{Binding Button_OnExplore}" />
-		<components:RadioButton
-			Content="{StaticResource Image.People}"
-			GroupName="Navigation"
-			Command="{Binding Button_OnPeople}" />
-		<components:RadioButton
-			Content="{StaticResource Image.Servers}"
-			GroupName="Navigation"
-			Command="{Binding Button_OnServers}" />
-		<components:RadioButton
-			Content="{StaticResource Image.Settings}"
-			GroupName="Navigation"
-			DockPanel.Dock="Bottom"
-			Margin="0"
-			Command="{Binding Button_OnSettings}" />
-		<Border Background="Transparent" />
-	</DockPanel>
+      <controls:RadioButton
+         Command="{Binding Button_OnHome}">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding 
+               Path=$parent[controls:RadioButton].IsChecked}, 
+               True={StaticResource Icon.Home-Fill},
+               False={StaticResource Icon.Home-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+
+      <controls:RadioButton
+         Command="{Binding Button_OnChat}">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding 
+               Path=$parent[controls:RadioButton].IsChecked}, 
+               True={StaticResource Icon.Chat-Fill},
+               False={StaticResource Icon.Chat-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+
+      <controls:RadioButton
+         Command="{Binding Button_OnExplore}">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding 
+               Path=$parent[controls:RadioButton].IsChecked}, 
+               True={StaticResource Icon.Compass-Fill},
+               False={StaticResource Icon.Compass-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+
+      <controls:RadioButton
+         Command="{Binding Button_OnPeople}">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding
+               Path=$parent[controls:RadioButton].IsChecked},
+               True={StaticResource Icon.Group-Fill},
+               False={StaticResource Icon.Group-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+
+      <controls:RadioButton
+         Command="{Binding Button_OnServers}">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding 
+               Path=$parent[controls:RadioButton].IsChecked}, 
+               True={StaticResource Icon.Cloud-Fill},
+               False={StaticResource Icon.Cloud-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+
+      <controls:RadioButton
+         Command="{Binding Button_OnSettings}"
+         DockPanel.Dock="Bottom">
+         <controls:RadioButton.Content>
+            <controls:Icon
+               Source="{extensions:Conditional {CompiledBinding 
+               Path=$parent[controls:RadioButton].IsChecked}, 
+               True={StaticResource Icon.Settings-Fill},
+               False={StaticResource Icon.Settings-Line}}" />
+         </controls:RadioButton.Content>
+      </controls:RadioButton>
+      <Border Background="Transparent" />
+   </DockPanel>
 </UserControl>

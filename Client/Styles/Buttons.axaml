@@ -1,0 +1,56 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <Design.PreviewWith>
+      <StackPanel>
+         <!-- Add Controls for Previewer Here -->
+         <WrapPanel Background="{DynamicResource Dark}">
+            <Button>
+               <TextBlock FontFamily="{StaticResource Icons}"
+                          Text="{DynamicResource Icon.Apple-Fill}"
+                          Foreground="{DynamicResource White}" />
+            </Button>
+            <Button>
+               <TextBlock FontFamily="{StaticResource Inter}"
+                          FontWeight="Light"
+                          Foreground="{DynamicResource White}"
+                          Text="Hello World" />
+            </Button>
+         </WrapPanel>
+         <WrapPanel Background="{DynamicResource Middle}">
+            <Button>
+               <TextBlock FontFamily="{StaticResource Icons}"
+                          Text="{DynamicResource Icon.Apple-Fill}"
+                          Foreground="{DynamicResource White}" />
+            </Button>
+            <Button>
+               <TextBlock FontFamily="{StaticResource Inter}"
+                          FontWeight="Light"
+                          Foreground="{DynamicResource White}"
+                          Text="Hello World" />
+            </Button>
+         </WrapPanel>
+      </StackPanel>
+   </Design.PreviewWith>
+
+   <!-- Add Styles Here -->
+   <Style Selector="Button">
+      <Setter Property="CornerRadius" Value="6.0" />
+      <Setter Property="Padding" Value="8.0" />
+      <Setter Property="Margin" Value="4.0" />
+      <Setter Property="Background" Value="{DynamicResource Selection}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Cursor" Value="Hand" />
+   </Style>
+
+   <Style Selector="Button:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+   </Style>
+
+   <Style Selector="Button TextBlock">
+      <Setter Property="FontSize" Value="16.0" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="LineHeight" Value="16.0" />
+   </Style>
+</Styles>

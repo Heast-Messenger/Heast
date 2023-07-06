@@ -3,35 +3,38 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
+   xmlns:controls1="clr-namespace:Client.View.Controls"
    x:Class="Client.View.Content.CustomServerPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Styles>
-      <StyleInclude Source="/Styles/Textblocks.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-      <StyleInclude Source="/Styles/LoginInput.axaml" />
-      <StyleInclude Source="/Styles/LoginListbox.axaml" />
-   </view:LoginBase.Styles>
+   <view:LoginBase.Resources>
+      <controls1:Icon
+         x:Key="Image.Add"
+         Source="{StaticResource Icon.Add}"
+         Foreground="{DynamicResource White}" />
+      <controls1:Icon
+         x:Key="Image.Connect"
+         Source="{StaticResource Icon.Arrow-Left-Right}"
+         Foreground="{DynamicResource White}" />
+   </view:LoginBase.Resources>
 
    <Grid RowDefinitions="Auto, Auto, Auto, Auto, *">
       <TextBlock Grid.Row="0"
                  VerticalAlignment="Center"
-                 Classes="Bold"
-                 FontSize="32">
+                 Classes="Bold Title">
          Custom Servers
       </TextBlock>
 
-      <TextBlock
-         Grid.Row="1"
-         VerticalAlignment="Center"
-         TextWrapping="Wrap"
-         Classes="Title">
-         <Run Text="Connect" FontWeight="Bold" />
-         <Run Text="to a custom server that is" />
-         <Run Text="not managed by Heast." FontWeight="Bold" />
+      <TextBlock Grid.Row="1"
+                 VerticalAlignment="Center"
+                 TextWrapping="Wrap"
+                 Classes="Subtitle">
+         <!-- <Run Text="Connect" Classes="Bold" /> -->
+         <!-- <Run Text="to a custom server that is" /> -->
+         <!-- <Run Text="not managed by Heast." Classes="Bold" /> -->
       </TextBlock>
 
       <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto"
@@ -41,21 +44,22 @@
                   Text="{Binding CustomServerAddress}"
                   Margin="0" />
          <Button Grid.Column="1"
-                 Content="{SvgImage /Assets/Login/Add.svg}"
+                 Classes="Bordered"
+                 Content="{StaticResource Image.Add}"
                  Click="Button_OnAdd"
                  Margin="10.0 0 0 0" />
          <Button Grid.Column="2"
-                 Content="{SvgImage /Assets/Login/Connect.svg}"
+                 Classes="Bordered"
+                 Content="{StaticResource Image.Connect}"
                  Click="Button_OnConnect"
                  Margin="10.0 0 0 0" />
       </Grid>
 
       <TextBlock Grid.Row="3"
                  Text="Added servers:"
-                 Classes="Watermark Bold"
-                 FontSize="18.0" />
+                 Classes="Watermark Bold" />
 
-      <ListBox Grid.Row="4" Items="{Binding CustomServers}"
+      <ListBox Grid.Row="4" ItemsSource="{Binding CustomServers}"
                Background="{DynamicResource Mid}"
                CornerRadius="10.0"
                BorderBrush="Transparent"

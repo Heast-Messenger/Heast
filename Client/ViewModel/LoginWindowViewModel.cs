@@ -2,15 +2,14 @@
 using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Platform;
 using Avalonia.Threading;
 using Client.Converter;
 using Client.Model;
 using Client.Network;
 using Client.View.Content;
 using Core.Network;
-using Core.Network.Packets.C2S;
 using Core.Network.Codecs;
+using Core.Network.Packets.C2S;
 using Core.Utility;
 using static Client.Hooks;
 
@@ -42,8 +41,8 @@ public class LoginWindowViewModel : ViewModelBase
 		get => _content;
 		set
 		{
-			_windowSize = value.WindowSize ?? new(400.0, 660.0);
-			RaiseAndSetIfChanged(ref _content, value, nameof(Content));
+			_windowSize = value.WindowSize ?? new Size(400.0, 660.0);
+			RaiseAndSetIfChanged(ref _content, value);
 		}
 	}
 
@@ -52,7 +51,7 @@ public class LoginWindowViewModel : ViewModelBase
 	public string Error
 	{
 		get => _error;
-		set => RaiseAndSetIfChanged(ref _error, value, nameof(Error));
+		set => RaiseAndSetIfChanged(ref _error, value);
 	}
 
 	public string SignupUsername { get; set; } = string.Empty;
@@ -65,23 +64,27 @@ public class LoginWindowViewModel : ViewModelBase
 	public string CustomServerAddress
 	{
 		get => _customServerAddress;
-		set => RaiseAndSetIfChanged(ref _customServerAddress, value, nameof(CustomServerAddress));
+		set => RaiseAndSetIfChanged(ref _customServerAddress, value);
 	}
 
 	public ObservableCollection<CustomServer> CustomServers { get; set; } = new();
+	public ObservableCollection<ConnectionStep> ConnectionSteps { get; set; } = new();
 
 	public void Resize(object? sender, EventArgs args)
 	{
 		var window = Window();
-		if (window.PlatformImpl is null) return;
+		if (window.PlatformImpl is null)
+		{
+			return;
+		}
 
-		var from = window.PlatformImpl.FrameSize!.Value;
+		var from = window.FrameSize!.Value;
 		var to = _windowSize;
 		var diff = to - from;
 		if (Math.Abs(diff.Width) > 0.1 || Math.Abs(diff.Height) > 0.1)
 		{
 			var val = SmoothDamp.Read2d(from, to, ref _velocity, 1.0f, 0.1f);
-			window.PlatformImpl.Resize(val, PlatformResizeReason.Application);
+			// window.Size = val;
 		}
 	}
 
@@ -180,11 +183,15 @@ public class LoginWindowViewModel : ViewModelBase
 					port = int.Parse(CustomServerAddress.Split(":")[1]);
 				}
 
+				Content = new ConnectPanel
+				{
+					DataContext = this
+				};
 				await ClientNetwork.Connect(host, port);
 			}
 			else
 			{
-				throw new("Invalid server address");
+				throw new Exception("Invalid server address");
 			}
 		}
 		catch (Exception e)

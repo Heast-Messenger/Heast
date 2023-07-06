@@ -2,9 +2,8 @@
    xmlns="https://github.com/avaloniaui"
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    xmlns:view="clr-namespace:Client.View.Sidebars"
-   xmlns:components="clr-namespace:Client.View.Components"
    xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
-   xmlns:controls="clr-namespace:Client.Controls"
+   xmlns:controls="clr-namespace:Client.View.Controls"
    x:Class="Client.View.Sidebars.SettingsSidebar"
    Width="220.0">
 
@@ -16,54 +15,55 @@
       <controls:IconText
          x:Key="Content.Account"
          Text="Account"
-         Icon="{SvgImage /Assets/Settings/Account.svg}"
+         Icon="{StaticResource Icon.User}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Security"
          Text="Security"
-         Icon="{SvgImage /Assets/Settings/Security.svg}"
+         Icon="{StaticResource Icon.Shield}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Notifications"
          Text="Notifications"
-         Icon="{SvgImage /Assets/Settings/Notifications.svg}"
+         Icon="{StaticResource Icon.Notification}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Appearance"
          Text="Appearance"
-         Icon="{SvgImage /Assets/Settings/Appearance.svg}"
+         Icon="{StaticResource Icon.Brush}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Status"
          Text="Status"
-         Icon="{SvgImage /Assets/Settings/Status.svg}"
+         Icon="{StaticResource Icon.Cloud}"
          Foreground="{DynamicResource White}" />
    </view:SidebarBase.Resources>
-
-   <view:SidebarBase.Styles>
-      <StyleInclude Source="/Styles/BorderButtons.axaml" />
-   </view:SidebarBase.Styles>
 
    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                  VerticalScrollBarVisibility="Auto">
       <StackPanel Orientation="Vertical">
-         <components:RadioButton
+         <controls:RadioButton
+            Classes="Bordered"
             Content="{StaticResource Content.Account}"
             GroupName="Sidebar"
             Command="{Binding Button_OnAccount}" />
-         <components:RadioButton
+         <controls:RadioButton
+            Classes="Bordered"
             Content="{StaticResource Content.Security}"
             GroupName="Sidebar"
             Command="{Binding Button_OnSecurity}" />
-         <components:RadioButton
+         <controls:RadioButton
+            Classes="Bordered"
             Content="{StaticResource Content.Notifications}"
             GroupName="Sidebar"
             Command="{Binding Button_OnNotifications}" />
-         <components:RadioButton
+         <controls:RadioButton
+            Classes="Bordered"
             Content="{StaticResource Content.Appearance}"
             GroupName="Sidebar"
             Command="{Binding Button_OnAppearance}" />
-         <components:RadioButton
+         <controls:RadioButton
+            Classes="Bordered"
             Content="{StaticResource Content.Status}"
             GroupName="Sidebar"
             Command="{Binding Button_OnStatus}" />

@@ -2,52 +2,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="clr-namespace:Client.View"
         xmlns:vm="clr-namespace:Client.ViewModel"
+        xmlns:view="clr-namespace:Client.View"
         mc:Ignorable="d"
         x:Class="Client.View.MainWindow"
         ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen">
 
-	<Design.DataContext>
-		<vm:MainWindowViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:MainWindowViewModel />
+   </Design.DataContext>
 
-	<NativeMenu.Menu>
-		<NativeMenu />
-	</NativeMenu.Menu>
+   <NativeMenu.Menu>
+      <NativeMenu />
+   </NativeMenu.Menu>
 
-	<Panel>
-		<Border
-			Background="{DynamicResource Mid}"
-			IsHitTestVisible="False" />
+   <Panel>
+      <Border
+         Background="Transparent"
+         IsHitTestVisible="False" />
 
-		<view:Titlebar
-			IsHitTestVisible="False"
-			VerticalAlignment="Top"
-			Padding="10 0 10 0" />
+      <view:Titlebar
+         IsHitTestVisible="False"
+         Background="{DynamicResource Middle}"
+         VerticalAlignment="Top" />
 
-		<DockPanel Margin="0 38 0 0">
-			<view:Sidebar
-				DockPanel.Dock="Right"
-				DataContext="{Binding SidebarViewModel}" />
+      <DockPanel Margin="0 38 0 0">
+         <view:Navigation
+            DockPanel.Dock="Left"
+            DataContext="{Binding NavigationViewModel}"
+            Background="{DynamicResource Middle}" />
 
-			<view:Navigation
-				DockPanel.Dock="Left"
-				DataContext="{Binding NavigationViewModel}"
-				Padding="10.0"
-				Margin="0.0 5.0 00.0 5.0" />
+         <view:Sidebar
+            DockPanel.Dock="Left"
+            DataContext="{Binding SidebarViewModel}"
+            Background="{DynamicResource Middle}" />
 
-			<view:MainContent
-				DataContext="{Binding ContentViewModel}"
-				Margin="0.0 0.0 10.0 10.0" />
-		</DockPanel>
-
-		<view:Notifications
-			VerticalAlignment="Bottom"
-			HorizontalAlignment="Right"
-			Margin="20.0 20.0 20.0 20.0"
-			DataContext="{Binding NotificationsViewModel}" />
-	</Panel>
+         <view:MainContent
+            DataContext="{Binding ContentViewModel}"
+            Background="{DynamicResource Dark}" />
+      </DockPanel>
+   </Panel>
 </Window>

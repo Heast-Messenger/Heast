@@ -2,7 +2,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:view="clr-namespace:Client.View.Content"
                   xmlns:vm="clr-namespace:Client.ViewModel.Content"
-                  xmlns:controls="clr-namespace:Client.Controls"
+                  xmlns:controls="clr-namespace:Client.View.Controls"
                   x:Class="Client.View.Content.SettingsAccountPanel">
    <Design.DataContext>
       <vm:SettingsAccountViewModel />
@@ -12,59 +12,59 @@
       <controls:IconText
          x:Key="Content.Invite"
          Text="Invite Friends"
-         Icon="{SvgImage /Assets/Settings/Invite.svg}"
+         Icon="{StaticResource Icon.Send-Plane}"
          Foreground="{DynamicResource Blue}" />
       <controls:IconText
          x:Key="Content.Request"
          Text="Request Data"
-         Icon="{SvgImage /Assets/Settings/Request.svg}"
+         Icon="{StaticResource Icon.Database}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Switch"
          Text="Switch Account"
-         Icon="{SvgImage /Assets/Settings/Switch.svg}"
+         Icon="{StaticResource Icon.Arrow-Left-Right}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Logout"
          Text="Log out"
-         Icon="{SvgImage /Assets/Settings/Logout.svg}"
+         Icon="{StaticResource Icon.Logout-Box}"
          Foreground="{DynamicResource Red}" />
       <controls:IconText
          x:Key="Content.Delete"
          Text="Delete Account"
-         Icon="{SvgImage /Assets/Settings/Delete.svg}"
+         Icon="{StaticResource Icon.Delete-Bin}"
          Foreground="{DynamicResource Red}" />
    </view:ContentBase.Resources>
 
-   <view:ContentBase.Styles>
-      <StyleInclude Source="/Styles/BorderButtons.axaml" />
-      <StyleInclude Source="/Styles/Textblocks.axaml" />
-   </view:ContentBase.Styles>
-
    <Grid ColumnDefinitions="*,23,220"
          RowDefinitions="*">
-      <StackPanel Grid.Column="0"
-                  Orientation="Vertical"
-                  Spacing="10.0"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center">
-         <Image Source="{SvgImage /Assets/Settings/Account.svg}"
-                Width="128.0" Height="128.0" />
-         <TextBlock Text="Username"
-                    TextAlignment="Center"
-                    FontSize="32.0"
-                    Classes="Bold" />
-         <TextBox Width="200.0" Height="100.0"
-                  AcceptsReturn="True"
-                  AcceptsTab="False"
-                  BorderBrush="{DynamicResource Gray}"
-                  SelectionBrush="{DynamicResource Gray}"
-                  BorderThickness="3.0"
-                  Watermark="About you..."
-                  Foreground="{DynamicResource Gray}"
-                  Background="{DynamicResource Dark}"
-                  FontSize="24.0"
-                  CornerRadius="10.0" />
+      <StackPanel
+         Grid.Column="0"
+         Orientation="Vertical"
+         Spacing="10.0"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center">
+
+         <!-- <Image -->
+         <!--    Source="{SvgImage /Assets/Settings/Account.svg}" -->
+         <!--    Width="128.0" Height="128.0" /> -->
+         <TextBlock
+            Text="Username"
+            TextAlignment="Center"
+            FontSize="32.0"
+            Classes="Bold" />
+         <TextBox
+            Width="200.0" Height="100.0"
+            AcceptsReturn="True"
+            AcceptsTab="False"
+            BorderBrush="{DynamicResource Gray}"
+            SelectionBrush="{DynamicResource Gray}"
+            BorderThickness="3.0"
+            Watermark="About you..."
+            Foreground="{DynamicResource Gray}"
+            Background="{DynamicResource Dark}"
+            FontSize="24.0"
+            CornerRadius="10.0" />
       </StackPanel>
 
       <Border
@@ -85,21 +85,26 @@
                Text="Manage Account"
                Classes="Title Bold" />
             <Button
+               Classes="Bordered"
                Content="{StaticResource Content.Invite}"
                Command="{Binding Button_OnInvite}" />
             <Button
+               Classes="Bordered"
                Content="{StaticResource Content.Request}"
                Command="{Binding Button_OnRequest}" />
             <Button
+               Classes="Bordered"
                Content="{StaticResource Content.Switch}"
                Command="{Binding Button_OnSwitch}" />
             <TextBlock
                Text="Red line"
                Classes="Title Bold" />
             <Button
+               Classes="Bordered"
                Content="{StaticResource Content.Logout}"
                Command="{Binding Button_OnLogout}" />
             <Button
+               Classes="Bordered"
                Content="{StaticResource Content.Delete}"
                Command="{Binding Button_OnDelete}" />
          </StackPanel>

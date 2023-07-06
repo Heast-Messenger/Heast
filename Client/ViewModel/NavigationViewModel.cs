@@ -9,6 +9,17 @@ public class NavigationViewModel : ViewModelBase
 {
 	private Func<MainWindowViewModel> MainWindow => UseMainViewModel();
 
+	public void Button_OnNav()
+	{
+		MainWindow().SidebarViewModel.ToggleVisibility();
+	}
+
+	public void Button_OnHome()
+	{
+		MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+	}
+
+
 	public void Button_OnChat()
 	{
 		MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();

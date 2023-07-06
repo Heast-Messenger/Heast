@@ -2,16 +2,8 @@ namespace Client.ViewModel;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public MainWindowViewModel()
-    {
-        SidebarViewModel = new SidebarViewModel();
-        ContentViewModel = new ContentViewModel();
-        NavigationViewModel = new NavigationViewModel();
-        NotificationsViewModel = new NotificationsViewModel();
-    }
-
-    public SidebarViewModel SidebarViewModel { get; }
-    public ContentViewModel ContentViewModel { get; }
-    public NavigationViewModel NavigationViewModel { get; }
-    public NotificationsViewModel NotificationsViewModel { get; }
+	public SidebarViewModel SidebarViewModel { get; } = new();
+	public ContentViewModel ContentViewModel { get; } = new();
+	public NavigationViewModel NavigationViewModel { get; } = new();
+	public NotificationsViewModel NotificationsViewModel { get; } = new();
 }

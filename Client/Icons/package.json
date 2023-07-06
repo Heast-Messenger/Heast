@@ -1,0 +1,11 @@
+{
+  "name": "iconfonts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate.js",
+  "scripts": {
+    "compile": "node generate.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

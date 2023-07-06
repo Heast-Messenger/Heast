@@ -5,29 +5,21 @@
              mc:Ignorable="d"
              x:Class="Client.View.Titlebar"
              Height="38">
-	<DockPanel>
-		<!-- ReSharper Disable InconsistentNaming -->
-		<Rectangle Name="OSXControlSpacer"
-		           Width="70.0"
-		           DockPanel.Dock="Left" />
+   <DockPanel>
+      <!-- ReSharper Disable InconsistentNaming -->
+      <Rectangle Name="OSXControlSpacer"
+                 Width="70.0"
+                 DockPanel.Dock="Left" />
 
-		<TextBlock DockPanel.Dock="Left"
-		           VerticalAlignment="Center"
-		           Text="Welcome Back!"
-		           Classes="Bold" />
+      <!-- <TextBlock DockPanel.Dock="Left" -->
+      <!--            VerticalAlignment="Center" -->
+      <!--            Text="Welcome Back!" -->
+      <!--            Classes="Bold" /> -->
 
-		<Rectangle Name="WinControlSpacer"
-		           Width="140.0"
-		           DockPanel.Dock="Right" />
+      <Rectangle Name="WinControlSpacer"
+                 Width="140.0"
+                 DockPanel.Dock="Right" />
 
-		<!-- Rounded user profile image -->
-		<Image DockPanel.Dock="Right" />
-
-		<TextBlock DockPanel.Dock="Right"
-		           VerticalAlignment="Center"
-		           Text="Username"
-		           Classes="Bold" />
-
-		<Border Background="Transparent" />
-	</DockPanel>
+      <Border Background="Transparent" />
+   </DockPanel>
 </UserControl>

@@ -8,7 +8,7 @@ using Avalonia.Animation.Easings;
 using Avalonia.Media;
 using Avalonia.Styling;
 
-namespace Client.Converter;
+namespace Client.Utility;
 
 public class PanelTransition : IPageTransition
 {
@@ -16,11 +16,13 @@ public class PanelTransition : IPageTransition
 	private readonly Animation _out;
 
 	public PanelTransition()
-		: this(TimeSpan.Zero) { }
+		: this(TimeSpan.Zero)
+	{
+	}
 
 	public PanelTransition(TimeSpan duration)
 	{
-		_out = new()
+		_out = new Animation
 		{
 			FillMode = FillMode.Forward,
 			Easing = new BounceEaseOut(),
@@ -28,24 +30,24 @@ public class PanelTransition : IPageTransition
 			{
 				new KeyFrame
 				{
-					Cue = new(0d),
+					Cue = new Cue(0d),
 					Setters =
 					{
-						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 0d}
+						new Setter { Property = ScaleTransform.ScaleYProperty, Value = 0d }
 					}
 				},
 				new KeyFrame
 				{
-					Cue = new(1d),
+					Cue = new Cue(1d),
 					Setters =
 					{
-						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 1d}
+						new Setter { Property = ScaleTransform.ScaleYProperty, Value = 1d }
 					}
 				}
 			}
 		};
 
-		_in = new()
+		_in = new Animation
 		{
 			FillMode = FillMode.Forward,
 			Easing = new BounceEaseOut(),
@@ -53,18 +55,18 @@ public class PanelTransition : IPageTransition
 			{
 				new KeyFrame
 				{
-					Cue = new(0d),
+					Cue = new Cue(0d),
 					Setters =
 					{
-						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 1d}
+						new Setter { Property = ScaleTransform.ScaleYProperty, Value = 1d }
 					}
 				},
 				new KeyFrame
 				{
-					Cue = new(1d),
+					Cue = new Cue(1d),
 					Setters =
 					{
-						new Setter {Property = ScaleTransform.ScaleYProperty, Value = 0d}
+						new Setter { Property = ScaleTransform.ScaleYProperty, Value = 0d }
 					}
 				}
 			}
@@ -86,25 +88,31 @@ public class PanelTransition : IPageTransition
 		CancellationToken cancellationToken
 	)
 	{
-		if (cancellationToken.IsCancellationRequested) return;
+		if (cancellationToken.IsCancellationRequested)
+		{
+			return;
+		}
 
 		var tasks = new List<Task>();
 
 		if (from != null)
 		{
-			tasks.Add(_out.RunAsync(from, null, cancellationToken));
+			tasks.Add(_out.RunAsync(from, cancellationToken));
 			Console.WriteLine($"From: {from.GetType()}");
 		}
 
 		if (to != null)
 		{
 			to.IsVisible = true;
-			tasks.Add(_in.RunAsync(to, null, cancellationToken));
+			tasks.Add(_in.RunAsync(to, cancellationToken));
 			Console.WriteLine($"To: {to.GetType()}");
 		}
 
 		await Task.WhenAll(tasks);
 
-		if (from != null && !cancellationToken.IsCancellationRequested) from.IsVisible = false;
+		if (from != null && !cancellationToken.IsCancellationRequested)
+		{
+			from.IsVisible = false;
+		}
 	}
 }

@@ -1,14 +1,15 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-   <!-- Add Resources Here -->
-   <Color x:Key="Dark">#FF1E1E24</Color>
-   <Color x:Key="Mid">#FF26262D</Color>
-   <Color x:Key="Light">#FF4F545E</Color>
-   <Color x:Key="Gray">#FF34343A</Color>
-   <Color x:Key="White">#FFEBF2FF</Color>
-   <Color x:Key="Accent">#FFFEBC2E</Color>
-   <Color x:Key="Red">#FFF45449</Color>
-   <Color x:Key="Green">#FF67FF76</Color>
-   <Color x:Key="Blue">#FF67B6FF</Color>
-   <Color x:Key="Transparent">#00000000</Color>
+   <SolidColorBrush x:Key="Dark" Color="#FF19191C" />
+   <SolidColorBrush x:Key="Middle" Color="#FF1C1C20" />
+   <SolidColorBrush x:Key="Border" Color="#FF232529" />
+   <SolidColorBrush x:Key="Selection" Color="#FF292A30" />
+   <SolidColorBrush x:Key="Selection-Hover" Color="#FF303138" />
+   <SolidColorBrush x:Key="Light" Color="#FF868B9D" />
+   <SolidColorBrush x:Key="White" Color="#FFF2F4FF" />
+   <SolidColorBrush x:Key="Accent" Color="#FF5363F0" />
+
+   <SolidColorBrush x:Key="Red" Color="#FFF45449" />
+   <SolidColorBrush x:Key="Green" Color="#FF67FF76" />
+   <SolidColorBrush x:Key="Blue" Color="#FF67B6FF" />
 </ResourceDictionary>

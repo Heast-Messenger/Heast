@@ -1,0 +1,210 @@
+
+/*
+* https://remixicon.com
+* https://github.com/Remix-Design/RemixIcon
+* Copyright RemixIcon.com
+* Released under the Apache License Version 2.0
+*/
+
+@font-face {
+    font-family: "remixicon";
+    src: url('remixicon.eot?t=1688541763005'); /* IE9*/
+    src: url('remixicon.eot?t=1688541763005#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url("remixicon.woff2?t=1688541763005") format("woff2"),
+    url("remixicon.woff?t=1688541763005") format("woff"),
+    url('remixicon.ttf?t=1688541763005') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('remixicon.svg?t=1688541763005#remixicon') format('svg'); /* iOS 4.1- */
+    font-display: swap;
+}
+
+[class^="ri-"], [class*="ri-"] {
+    font-family: 'remixicon' !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ri-lg { font-size: 1.3333em; line-height: 0.75em; vertical-align: -.0667em; }
+.ri-xl { font-size: 1.5em; line-height: 0.6666em; vertical-align: -.075em; }
+.ri-xxs { font-size: .5em; }
+.ri-xs { font-size: .75em; }
+.ri-sm { font-size: .875em }
+.ri-1x { font-size: 1em; }
+.ri-2x { font-size: 2em; }
+.ri-3x { font-size: 3em; }
+.ri-4x { font-size: 4em; }
+.ri-5x { font-size: 5em; }
+.ri-6x { font-size: 6em; }
+.ri-7x { font-size: 7em; }
+.ri-8x { font-size: 8em; }
+.ri-9x { font-size: 9em; }
+.ri-10x { font-size: 10em; }
+.ri-fw { text-align: center; width: 1.25em; }
+
+.ri-arrow-up-fill:before { content: "\ea75"; }
+.ri-arrow-right-fill:before { content: "\ea6b"; }
+.ri-arrow-down-fill:before { content: "\ea4b"; }
+.ri-arrow-left-fill:before { content: "\ea5f"; }
+.ri-corner-down-right-fill:before { content: "\f308"; }
+.ri-corner-down-left-fill:before { content: "\f306"; }
+.ri-arrow-up-s-fill:before { content: "\ea77"; }
+.ri-arrow-right-s-fill:before { content: "\ea6d"; }
+.ri-arrow-down-s-fill:before { content: "\ea4d"; }
+.ri-arrow-left-s-fill:before { content: "\ea63"; }
+.ri-arrow-left-right-line:before { content: "\ea62"; }
+.ri-arrow-drop-up-fill:before { content: "\ea55"; }
+.ri-arrow-drop-right-fill:before { content: "\ea53"; }
+.ri-arrow-drop-down-fill:before { content: "\ea4f"; }
+.ri-arrow-drop-left-fill:before { content: "\ea51"; }
+.ri-home-7-fill:before { content: "\ee22"; }
+.ri-mail-lock-fill:before { content: "\eef7"; }
+.ri-mail-fill:before { content: "\eef3"; }
+.ri-mail-unread-fill:before { content: "\ef01"; }
+.ri-inbox-fill:before { content: "\ee4e"; }
+.ri-cloud-fill:before { content: "\eb9c"; }
+.ri-cloud-off-fill:before { content: "\eb9e"; }
+.ri-bar-chart-2-fill:before { content: "\ea95"; }
+.ri-pie-chart-2-fill:before { content: "\eff5"; }
+.ri-bookmark-fill:before { content: "\eae4"; }
+.ri-flag-fill:before { content: "\ed3a"; }
+.ri-send-plane-fill:before { content: "\f0d9"; }
+.ri-printer-fill:before { content: "\f028"; }
+.ri-stack-fill:before { content: "\f180"; }
+.ri-advertisement-fill:before { content: "\ea16"; }
+.ri-chat-3-fill:before { content: "\eb50"; }
+.ri-pencil-fill:before { content: "\efdf"; }
+.ri-brush-fill:before { content: "\eb00"; }
+.ri-crosshair-2-line:before { content: "\f3b3"; }
+.ri-braces-fill:before { content: "\eae8"; }
+.ri-database-2-fill:before { content: "\ec15"; }
+.ri-server-fill:before { content: "\f0df"; }
+.ri-instance-fill:before { content: "\f382"; }
+.ri-save-2-fill:before { content: "\f0ae"; }
+.ri-fingerprint-fill:before { content: "\ed30"; }
+.ri-qr-code-fill:before { content: "\f03c"; }
+.ri-wifi-line:before { content: "\f2c0"; }
+.ri-wifi-off-line:before { content: "\f2c2"; }
+.ri-file-2-fill:before { content: "\ecc2"; }
+.ri-clipboard-fill:before { content: "\eb90"; }
+.ri-folder-3-fill:before { content: "\ed53"; }
+.ri-markdown-fill:before { content: "\ef1d"; }
+.ri-bold:before { content: "\ead1"; }
+.ri-italic:before { content: "\ee6b"; }
+.ri-heading:before { content: "\ee03"; }
+.ri-text:before { content: "\f201"; }
+.ri-underline:before { content: "\f244"; }
+.ri-code-view:before { content: "\ebae"; }
+.ri-price-tag-3-fill:before { content: "\f022"; }
+.ri-vip-diamond-fill:before { content: "\f28f"; }
+.ri-heart-3-fill:before { content: "\ee0a"; }
+.ri-apple-fill:before { content: "\ea3f"; }
+.ri-discord-fill:before { content: "\ec37"; }
+.ri-google-fill:before { content: "\edd4"; }
+.ri-github-fill:before { content: "\edca"; }
+.ri-reddit-fill:before { content: "\f061"; }
+.ri-windows-fill:before { content: "\f2c7"; }
+.ri-centos-fill:before { content: "\eb44"; }
+.ri-map-pin-2-fill:before { content: "\ef09"; }
+.ri-compass-fill:before { content: "\ebc3"; }
+.ri-volume-down-fill:before { content: "\f29b"; }
+.ri-volume-mute-fill:before { content: "\f29d"; }
+.ri-volume-up-fill:before { content: "\f2a1"; }
+.ri-voiceprint-fill:before { content: "\f299"; }
+.ri-menu-fill:before { content: "\ef3b"; }
+.ri-more-fill:before { content: "\ef78"; }
+.ri-star-fill:before { content: "\f186"; }
+.ri-settings-fill:before { content: "\f0ed"; }
+.ri-information-fill:before { content: "\ee58"; }
+.ri-error-warning-fill:before { content: "\eca0"; }
+.ri-question-fill:before { content: "\f044"; }
+.ri-checkbox-circle-fill:before { content: "\eb80"; }
+.ri-close-circle-fill:before { content: "\eb96"; }
+.ri-radio-button-fill:before { content: "\f04f"; }
+.ri-check-fill:before { content: "\eb7a"; }
+.ri-check-double-fill:before { content: "\eb78"; }
+.ri-shield-fill:before { content: "\f103"; }
+.ri-delete-bin-7-fill:before { content: "\ec27"; }
+.ri-lock-2-fill:before { content: "\eecb"; }
+.ri-eye-fill:before { content: "\ecb4"; }
+.ri-eye-off-fill:before { content: "\ecb6"; }
+.ri-search-2-fill:before { content: "\f0cc"; }
+.ri-user-fill:before { content: "\f25f"; }
+.ri-user-add-fill:before { content: "\f25d"; }
+.ri-user-unfollow-fill:before { content: "\f277"; }
+.ri-user-heart-fill:before { content: "\f262"; }
+.ri-group-fill:before { content: "\ede2"; }
+.ri-emotion-fill:before { content: "\ec8b"; }
+.ri-sun-fill:before { content: "\f1bc"; }
+.ri-moon-fill:before { content: "\ef72"; }
+.ri-flashlight-fill:before { content: "\ed3c"; }
+.ri-fire-fill:before { content: "\ed32"; }
+.ri-key-fill:before { content: "\ee70"; }
+.ri-infinity-fill:before { content: "\f3b8"; }
+.ri-notification-3-fill:before { content: "\ef93"; }
+.ri-add-fill:before { content: "\ea12"; }
+.ri-login-box-fill:before { content: "\eed3"; }
+.ri-logout-box-fill:before { content: "\eed7"; }
+.ri-home-7-line:before { content: "\ee23"; }
+.ri-mail-line:before { content: "\eef6"; }
+.ri-mail-unread-line:before { content: "\ef02"; }
+.ri-mail-lock-line:before { content: "\eef8"; }
+.ri-cloud-off-line:before { content: "\eb9f"; }
+.ri-cloud-line:before { content: "\eb9d"; }
+.ri-inbox-line:before { content: "\ee4f"; }
+.ri-bar-chart-2-line:before { content: "\ea96"; }
+.ri-pie-chart-2-line:before { content: "\eff6"; }
+.ri-bookmark-line:before { content: "\eae5"; }
+.ri-flag-line:before { content: "\ed3b"; }
+.ri-printer-line:before { content: "\f029"; }
+.ri-stack-line:before { content: "\f181"; }
+.ri-advertisement-line:before { content: "\ea17"; }
+.ri-chat-3-line:before { content: "\eb51"; }
+.ri-pencil-line:before { content: "\efe0"; }
+.ri-brush-line:before { content: "\eb01"; }
+.ri-crosshair-2-fill:before { content: "\f3b2"; }
+.ri-braces-line:before { content: "\eae9"; }
+.ri-server-line:before { content: "\f0e0"; }
+.ri-database-2-line:before { content: "\ec16"; }
+.ri-instance-line:before { content: "\f383"; }
+.ri-save-2-line:before { content: "\f0af"; }
+.ri-fingerprint-line:before { content: "\ed31"; }
+.ri-qr-code-line:before { content: "\f03d"; }
+.ri-file-2-line:before { content: "\ecc3"; }
+.ri-clipboard-line:before { content: "\eb91"; }
+.ri-folder-3-line:before { content: "\ed54"; }
+.ri-markdown-line:before { content: "\ef1e"; }
+.ri-price-tag-3-line:before { content: "\f023"; }
+.ri-vip-diamond-line:before { content: "\f290"; }
+.ri-heart-3-line:before { content: "\ee0b"; }
+.ri-centos-line:before { content: "\eb45"; }
+.ri-apple-line:before { content: "\ea40"; }
+.ri-map-pin-2-line:before { content: "\ef0a"; }
+.ri-compass-line:before { content: "\ebc4"; }
+.ri-notification-3-line:before { content: "\ef94"; }
+.ri-notification-off-fill:before { content: "\ef9b"; }
+.ri-notification-off-line:before { content: "\ef9c"; }
+.ri-star-line:before { content: "\f18b"; }
+.ri-settings-line:before { content: "\f0ee"; }
+.ri-information-line:before { content: "\ee59"; }
+.ri-error-warning-line:before { content: "\eca1"; }
+.ri-question-line:before { content: "\f045"; }
+.ri-checkbox-circle-line:before { content: "\eb81"; }
+.ri-close-circle-line:before { content: "\eb97"; }
+.ri-shield-line:before { content: "\f108"; }
+.ri-logout-box-line:before { content: "\eed8"; }
+.ri-login-box-line:before { content: "\eed4"; }
+.ri-delete-bin-7-line:before { content: "\ec28"; }
+.ri-lock-2-line:before { content: "\eecc"; }
+.ri-eye-line:before { content: "\ecb5"; }
+.ri-search-2-line:before { content: "\f0cd"; }
+.ri-eye-off-line:before { content: "\ecb7"; }
+.ri-user-line:before { content: "\f264"; }
+.ri-user-add-line:before { content: "\f25e"; }
+.ri-user-unfollow-line:before { content: "\f278"; }
+.ri-user-heart-line:before { content: "\f263"; }
+.ri-group-line:before { content: "\ede3"; }
+.ri-emotion-line:before { content: "\ec90"; }
+.ri-sun-line:before { content: "\f1bf"; }
+.ri-moon-line:before { content: "\ef75"; }
+.ri-flashlight-line:before { content: "\ed3d"; }
+.ri-fire-line:before { content: "\ed33"; }

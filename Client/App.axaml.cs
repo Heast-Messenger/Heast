@@ -22,6 +22,7 @@ public class App : Application
 		base.OnFrameworkInitializationCompleted();
 
 		if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+		{
 			desktop.MainWindow = desktop.Args?[0] switch
 			{
 				"--home" => new MainWindow
@@ -34,5 +35,6 @@ public class App : Application
 				},
 				_ => throw new ArgumentOutOfRangeException()
 			};
+		}
 	}
 }
