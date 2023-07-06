@@ -3,24 +3,18 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls1="clr-namespace:Client.View.Controls"
-   x:Class="Client.View.Content.WelcomePanel">
+   xmlns:controls="clr-namespace:Client.View.Controls"
+   x:Class="Client.View.Content.Login.WelcomePanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Resources>
-      <controls1:Icon
-         x:Key="Image.Next"
-         Source="{StaticResource Icon.Arrow-Right}"
-         Foreground="{DynamicResource White}"
-         FontSize="32.0" />
-   </view:LoginBase.Resources>
-
    <Grid RowDefinitions="Auto, *, 50.0">
-      <TextBlock Grid.Row="0" VerticalAlignment="Center"
-                 Classes="Bold Title">
+      <TextBlock Grid.Row="0"
+                 VerticalAlignment="Center"
+                 FontSize="32.0"
+                 FontFamily="{StaticResource Poppins}">
          <Run Text="Welcome to"
               Foreground="{DynamicResource White}" />
          <LineBreak />
@@ -36,13 +30,15 @@
          </Run>
       </TextBlock>
 
-      <Image Grid.Row="1"
-             Source="/Assets/Logos/Heast.png" />
+      <Image Grid.Row="1" Source="/Assets/Logos/Heast.png" />
 
       <Button Grid.Row="2"
               Padding="10.0"
-              Classes="Hollowed Centered"
-              Content="{StaticResource Image.Next}"
-              Click="Button_OnClick" />
+              Click="Button_OnClick"
+              Classes="Unstyled">
+         <controls:Icon
+            Source="{StaticResource Icon.Arrow-Right-Fill}"
+            Foreground="{DynamicResource White}" />
+      </Button>
    </Grid>
 </view:LoginBase>

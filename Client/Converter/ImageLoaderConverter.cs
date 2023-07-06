@@ -2,21 +2,32 @@ using System;
 using System.Globalization;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Layout;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace Client.Converter;
 
-public class OrientationConverter : IValueConverter
+public class ImageLoaderConverter : IValueConverter
 {
 	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
-		if (value is bool val && targetType == typeof(Orientation))
+		if (value is string path && targetType == typeof(IImage))
 		{
-			return val ? Orientation.Horizontal : Orientation.Vertical;
+			try
+			{
+				var uri = new Uri(path);
+				var asset = AssetLoader.Open(uri);
+				return new Bitmap(asset);
+			}
+			catch (Exception)
+			{
+				// ignored
+			}
 		}
 
 		return new BindingNotification(
-			new ArgumentException("value must be of type 'bool' and targetType of type 'Orientation'"),
+			new ArgumentException("value must be of type 'string' and targetType of type 'IImage'"),
 			BindingErrorType.Error);
 	}
 

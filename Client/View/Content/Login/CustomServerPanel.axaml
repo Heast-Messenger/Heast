@@ -3,91 +3,80 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls1="clr-namespace:Client.View.Controls"
-   x:Class="Client.View.Content.CustomServerPanel">
+   xmlns:controls="clr-namespace:Client.View.Controls"
+   xmlns:templates="clr-namespace:Client.View.Content.Templates"
+   x:Class="Client.View.Content.Login.CustomServerPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Resources>
-      <controls1:Icon
-         x:Key="Image.Add"
-         Source="{StaticResource Icon.Add}"
-         Foreground="{DynamicResource White}" />
-      <controls1:Icon
-         x:Key="Image.Connect"
-         Source="{StaticResource Icon.Arrow-Left-Right}"
-         Foreground="{DynamicResource White}" />
-   </view:LoginBase.Resources>
+   <UserControl.Styles>
+      <StyleInclude Source="Templates/TitleTemplate.axaml" />
+   </UserControl.Styles>
 
-   <Grid RowDefinitions="Auto, Auto, Auto, Auto, *">
-      <TextBlock Grid.Row="0"
-                 VerticalAlignment="Center"
-                 Classes="Bold Title">
-         Custom Servers
-      </TextBlock>
+   <templates:TitleTemplate Title="Custom Servers">
+      <templates:TitleTemplate.Subtitle>
+         <Run Text="Connect" FontWeight="Bold" />
+         <Run Text="to a custom server that is" />
+         <Run Text="not managed by Heast." FontWeight="Bold" />
+      </templates:TitleTemplate.Subtitle>
 
-      <TextBlock Grid.Row="1"
-                 VerticalAlignment="Center"
-                 TextWrapping="Wrap"
-                 Classes="Subtitle">
-         <!-- <Run Text="Connect" Classes="Bold" /> -->
-         <!-- <Run Text="to a custom server that is" /> -->
-         <!-- <Run Text="not managed by Heast." Classes="Bold" /> -->
-      </TextBlock>
+      <Grid RowDefinitions="Auto Auto *">
+         <Grid Grid.Row="0" ColumnDefinitions="*, Auto, Auto"
+               Margin="0 20.0 0 0">
+            <TextBox Grid.Column="0"
+                     Watermark="Address"
+                     Text="{Binding CustomServerAddress}"
+                     Margin="0" />
+            <Button Grid.Column="1"
+                    Click="Button_OnAdd"
+                    Margin="10.0 0 0 0">
+               <controls:Icon
+                  Source="{StaticResource Icon.Add-Fill}" />
+            </Button>
+            <Button Grid.Column="2"
+                    Click="Button_OnConnect"
+                    Margin="10.0 0 0 0">
+               <controls:Icon
+                  Source="{StaticResource Icon.Flashlight-Fill}" />
+            </Button>
+         </Grid>
 
-      <Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto"
-            Margin="0 20.0 0 0">
-         <TextBox Grid.Column="0"
-                  Watermark="Address"
-                  Text="{Binding CustomServerAddress}"
-                  Margin="0" />
-         <Button Grid.Column="1"
-                 Classes="Bordered"
-                 Content="{StaticResource Image.Add}"
-                 Click="Button_OnAdd"
-                 Margin="10.0 0 0 0" />
-         <Button Grid.Column="2"
-                 Classes="Bordered"
-                 Content="{StaticResource Image.Connect}"
-                 Click="Button_OnConnect"
-                 Margin="10.0 0 0 0" />
+         <TextBlock Grid.Row="1"
+                    Text="Added servers:"
+                    Classes="Subtitle" />
+
+         <ListBox Grid.Row="2"
+                  ItemsSource="{Binding CustomServers}"
+                  Background="{DynamicResource Mid}"
+                  CornerRadius="10.0"
+                  BorderBrush="Transparent"
+                  Margin="0 10.0">
+            <ListBox.ItemTemplate>
+               <DataTemplate>
+                  <Grid ColumnDefinitions="80, *"
+                        RowDefinitions="Auto, Auto, Auto"
+                        PointerPressed="CustomServer_OnClick"
+                        Background="{DynamicResource Transparent}">
+                     <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                            VerticalAlignment="Top"
+                            Margin="5"
+                            Source="{Binding Image^}" />
+                     <TextBlock Grid.Column="1" Grid.Row="0"
+                                Text="{Binding Name}"
+                                TextWrapping="Wrap" />
+                     <TextBlock Grid.Column="1" Grid.Row="1"
+                                Text="{Binding Address}"
+                                TextWrapping="Wrap" />
+                     <TextBlock Grid.Column="1" Grid.Row="2"
+                                Text="{Binding Description}"
+                                Foreground="{DynamicResource Light}"
+                                TextWrapping="Wrap" />
+                  </Grid>
+               </DataTemplate>
+            </ListBox.ItemTemplate>
+         </ListBox>
       </Grid>
-
-      <TextBlock Grid.Row="3"
-                 Text="Added servers:"
-                 Classes="Watermark Bold" />
-
-      <ListBox Grid.Row="4" ItemsSource="{Binding CustomServers}"
-               Background="{DynamicResource Mid}"
-               CornerRadius="10.0"
-               BorderBrush="Transparent"
-               Margin="0 10.0">
-         <ListBox.ItemTemplate>
-            <DataTemplate>
-               <Grid ColumnDefinitions="80, *"
-                     RowDefinitions="Auto, Auto, Auto"
-                     PointerPressed="CustomServer_OnClick"
-                     Background="{DynamicResource Transparent}">
-                  <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                         VerticalAlignment="Top"
-                         Margin="5"
-                         Source="{Binding Image}" />
-                  <TextBlock Grid.Column="1" Grid.Row="0"
-                             Text="{Binding Name}"
-                             TextWrapping="Wrap"
-                             Classes="Bold" />
-                  <TextBlock Grid.Column="1" Grid.Row="1"
-                             Text="{Binding Address}"
-                             TextWrapping="Wrap" />
-                  <TextBlock Grid.Column="1" Grid.Row="2"
-                             Text="{Binding Description}"
-                             Foreground="{DynamicResource Light}"
-                             TextWrapping="Wrap" />
-               </Grid>
-            </DataTemplate>
-         </ListBox.ItemTemplate>
-      </ListBox>
-   </Grid>
+   </templates:TitleTemplate>
 </view:LoginBase>

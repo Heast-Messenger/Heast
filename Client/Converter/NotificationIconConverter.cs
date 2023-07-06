@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Avalonia.Controls.Notifications;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
@@ -11,7 +12,11 @@ public class NotificationIconConverter : IValueConverter
 	public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
 		if (value is not NotificationType type || targetType != typeof(IImage))
-			throw new ArgumentException();
+		{
+			return new BindingNotification(
+				new ArgumentException("value must be of type 'NotificationType' and targetType of type 'IImage'"),
+				BindingErrorType.Error);
+		}
 
 		return type switch
 		{

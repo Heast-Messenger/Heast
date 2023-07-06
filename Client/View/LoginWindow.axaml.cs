@@ -10,7 +10,6 @@ public partial class LoginWindow : Window
 	public LoginWindow()
 	{
 		InitializeComponent();
-		BackButton_OnLoaded();
 	}
 
 	public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
@@ -20,7 +19,7 @@ public partial class LoginWindow : Window
 		LoginWindowViewModel.Back();
 	}
 
-	private void BackButton_OnLoaded()
+	private void BackButton_OnLoaded(object? sender, RoutedEventArgs e)
 	{
 		if (OperatingSystem.IsWindows())
 		{

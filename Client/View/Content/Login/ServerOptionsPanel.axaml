@@ -4,67 +4,69 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:controls="clr-namespace:Client.View.Controls"
-   x:Class="Client.View.Content.ServerOptionsPanel">
+   xmlns:utility="clr-namespace:Client.Utility"
+   x:Class="Client.View.Content.Login.ServerOptionsPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Resources>
-      <controls:IconText
-         x:Key="Content.Official"
-         Text="Heast Network"
-         Source="/Assets/Logos/Heast.png"
-         Classes="Centered"
-         Foreground="{DynamicResource White}"
-         Orientation="Vertical" />
-      <controls:IconText
-         x:Key="Content.Custom"
-         Text="Custom Server"
-         Source="{StaticResource Icon.Cloud}"
-         Classes="Centered"
-         Foreground="{DynamicResource White}"
-         Orientation="Vertical" />
-   </view:LoginBase.Resources>
-
    <Grid RowDefinitions="Auto, Auto, *">
       <TextBlock Grid.Row="0"
                  VerticalAlignment="Center"
-                 Classes="Bold Title">
-         <!-- <Run Text="Welcome to" -->
-         <!--      Foreground="{DynamicResource White}" /> -->
-         <!-- <LineBreak /> -->
-         <!-- <Run Text="Heast Messenger"> -->
-         <!--    <Run.Foreground> -->
-         <!--       <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%"> -->
-         <!--          <LinearGradientBrush.GradientStops> -->
-         <!--             <GradientStop Offset="0" Color="#FFFDB242" /> -->
-         <!--             <GradientStop Offset="1" Color="#FFFFCF8A" /> -->
-         <!--          </LinearGradientBrush.GradientStops> -->
-         <!--       </LinearGradientBrush> -->
-         <!--    </Run.Foreground> -->
-         <!-- </Run> -->
+                 FontSize="32.0"
+                 FontFamily="{StaticResource Poppins}"
+                 Margin="0 0 0 12.0">
+         <Run Text="Welcome to"
+              Foreground="{DynamicResource White}" />
+         <LineBreak />
+         <Run Text="Heast Messenger">
+            <Run.Foreground>
+               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                  <LinearGradientBrush.GradientStops>
+                     <GradientStop Offset="0" Color="#FFFDB242" />
+                     <GradientStop Offset="1" Color="#FFFFCF8A" />
+                  </LinearGradientBrush.GradientStops>
+               </LinearGradientBrush>
+            </Run.Foreground>
+         </Run>
       </TextBlock>
 
-      <TextBlock Grid.Row="1"
-                 VerticalAlignment="Center"
-                 TextWrapping="Wrap"
-                 Classes="Subtitle">
-         <!-- <Run Text="Choose whether to connect to an" /> -->
-         <!-- <Run Text="official" FontWeight="Bold" /> -->
-         <!-- <Run Text="or" /> -->
-         <!-- <Run Text="custom server." FontWeight="Bold" /> -->
-         <!-- <Run Text="For more info click" /> -->
-         <!-- <utility:Hyperlink Text="here" Url="https://www.google.com" /> -->
+      <TextBlock Grid.Row="1" Classes="Subtitle">
+         <Run Text="Choose whether to connect to an" />
+         <Run Text="official" FontWeight="Bold" />
+         <Run Text="or" />
+         <Run Text="custom server." FontWeight="Bold" />
+         <Run Text="For more info click" />
+         <utility:Hyperlink Text="here" Url="https://www.google.com" />
       </TextBlock>
 
-      <Grid Grid.Row="2" ColumnDefinitions="*, 10.0, *">
-         <Button Grid.Column="0" Classes="Login Vertical Centered"
-                 Content="{StaticResource Content.Official}"
-                 Click="Button_OnOfficial" />
-         <Button Grid.Column="2" Classes="Login Vertical Centered"
-                 Content="{StaticResource Content.Custom}"
-                 Click="Button_OnCustom" />
+      <Grid Grid.Row="2">
+         <Image Source="/Assets/Images/ServerOptions.png" />
       </Grid>
+
+      <Canvas Grid.Row="2">
+         <Button Click="Button_OnOfficial"
+                 Padding="16.0"
+                 Canvas.Top="70.0"
+                 Canvas.Left="80.0">
+            <controls:IconText
+               Text="Heast Network"
+               Source="avares://Client/Assets/Logos/Heast.png"
+               FontSize="18.0"
+               FontFamily="{StaticResource Outfit}" />
+         </Button>
+
+         <Button Click="Button_OnCustom"
+                 Padding="16.0"
+                 Canvas.Top="250.0"
+                 Canvas.Left="20.0">
+            <controls:IconText
+               Text="Custom Server"
+               Source="{StaticResource Icon.Cloud-Fill}"
+               FontSize="18.0"
+               FontFamily="{StaticResource Outfit}" />
+         </Button>
+      </Canvas>
    </Grid>
 </view:LoginBase>

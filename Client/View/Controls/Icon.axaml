@@ -1,6 +1,30 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:Client.View.Controls">
+        xmlns:controls="clr-namespace:Client.View.Controls"
+        xmlns:converter="clr-namespace:Client.Converter">
+   <Design.PreviewWith>
+      <Border Padding="20.0" Background="{DynamicResource Dark}">
+         <StackPanel>
+            <Button Foreground="{DynamicResource White}">
+               <controls:Icon
+                  FontFamily="{StaticResource Inter}"
+                  Source="{StaticResource Icon.Compass-Fill}" />
+            </Button>
+            <Button Foreground="{DynamicResource White}">
+               <controls:Icon
+                  FontFamily="{StaticResource Inter}"
+                  Source="avares://Client/Assets/Logos/Google.png" />
+            </Button>
+         </StackPanel>
+      </Border>
+   </Design.PreviewWith>
+
+   <Styles.Resources>
+      <converter:ImageIsIconConverter x:Key="IsIconConverter" />
+      <converter:ImageIsBitmapConverter x:Key="IsImageConverter" />
+      <converter:ImageLoaderConverter x:Key="ImageLoader" />
+   </Styles.Resources>
+
    <Style Selector="controls|Icon">
       <!-- Set Defaults -->
       <Setter Property="Foreground" Value="{DynamicResource White}" />
@@ -12,13 +36,24 @@
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{TemplateBinding CornerRadius}">
-               <TextBlock Text="{TemplateBinding Source}"
-                          FontFamily="{StaticResource Icons}"
-                          FontSize="18.0"
-                          TextAlignment="Center"
-                          Padding="{TemplateBinding Padding}"
-                          LineHeight="{TemplateBinding FontSize}"
-                          Foreground="{TemplateBinding Foreground}" />
+               <Panel>
+                  <TextBlock
+                     IsVisible="{TemplateBinding Source,
+                     Converter={StaticResource IsIconConverter}}"
+                     Text="{TemplateBinding Source}"
+                     FontFamily="{StaticResource Icons}"
+                     FontSize="18.0"
+                     TextAlignment="Center"
+                     Padding="{TemplateBinding Padding}"
+                     LineHeight="{TemplateBinding FontSize}"
+                     Foreground="{TemplateBinding Foreground}" />
+                  <Image
+                     IsVisible="{TemplateBinding Source,
+                     Converter={StaticResource IsImageConverter}}"
+                     Source="{TemplateBinding Source,
+                     Converter={StaticResource ImageLoader}}"
+                     Width="18.0" Height="18.0" />
+               </Panel>
             </Border>
          </ControlTemplate>
       </Setter>

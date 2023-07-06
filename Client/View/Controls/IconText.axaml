@@ -2,13 +2,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Client.View.Controls">
    <Design.PreviewWith>
-      <Border Padding="0.0">
-         <controls:IconText
-            Foreground="Black"
-            FontFamily="{StaticResource Inter}"
-            Text="Hello"
-            Source="{StaticResource Icon.Compass-Fill}"
-            Orientation="Horizontal" />
+      <Border Padding="20.0" Background="{DynamicResource Dark}">
+         <StackPanel>
+            <Button Foreground="{DynamicResource White}">
+               <controls:IconText
+                  FontFamily="{StaticResource Inter}"
+                  Text="Hello"
+                  Source="{StaticResource Icon.Compass-Fill}"
+                  Orientation="Horizontal" />
+            </Button>
+            <Button Foreground="{DynamicResource White}">
+               <controls:IconText
+                  FontFamily="{StaticResource Inter}"
+                  Text="Vertical"
+                  Source="{StaticResource Icon.Compass-Fill}"
+                  Orientation="Vertical" />
+            </Button>
+         </StackPanel>
       </Border>
    </Design.PreviewWith>
 
@@ -16,6 +26,8 @@
       <!-- Set Defaults -->
       <Setter Property="Padding" Value="6.0" />
       <Setter Property="CornerRadius" Value="6.0" />
+      <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+      <Setter Property="FontWeight" Value="Medium" />
       <Setter Property="Template">
          <ControlTemplate>
             <StackPanel Orientation="{TemplateBinding Orientation}"
@@ -33,11 +45,12 @@
                   Foreground="{TemplateBinding Foreground}"
                   TextWrapping="Wrap"
                   FontSize="{TemplateBinding FontSize}"
-                  FontFamily="{StaticResource Inter}"
-                  FontWeight="Medium"
+                  FontFamily="{TemplateBinding FontFamily}"
+                  FontWeight="{TemplateBinding FontWeight}"
                   Text="{TemplateBinding Text}"
                   VerticalAlignment="Center"
-                  LineHeight="{TemplateBinding FontSize}" />
+                  LineHeight="{TemplateBinding FontSize}"
+                  TextAlignment="Center" />
             </StackPanel>
          </ControlTemplate>
       </Setter>

@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Client.View.Content.Templates">
+   <Design.PreviewWith>
+      <controls:TitleTemplate />
+   </Design.PreviewWith>
+
+   <Style Selector="controls|TitleTemplate">
+      <!-- Set Defaults -->
+      <Setter Property="Template">
+         <ControlTemplate>
+            <Grid RowDefinitions="Auto, Auto, *">
+               <TextBlock Grid.Row="0"
+                          Text="{TemplateBinding Title}"
+                          Classes="H1" />
+               <TextBlock Grid.Row="1"
+                          Classes="Subtitle"
+                          Inlines="{TemplateBinding Subtitle}" />
+               <ContentPresenter Grid.Row="2"
+                                 Content="{TemplateBinding Content}" />
+            </Grid>
+         </ControlTemplate>
+      </Setter>
+   </Style>
+</Styles>

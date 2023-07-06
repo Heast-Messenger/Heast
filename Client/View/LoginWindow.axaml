@@ -18,29 +18,25 @@
 
    <Window.Resources>
       <utility:InstanceExistsConverter x:Key="IsNotNull" />
-      <controls:Icon
-         x:Key="Image.Back"
-         Source="{StaticResource Icon.Arrow-Left-S-Fill}"
-         Foreground="{DynamicResource White}"
-         FontSize="32.0" />
    </Window.Resources>
 
    <Panel>
       <Border
-         Background="{DynamicResource Mid}"
+         Background="{DynamicResource Middle}"
          IsHitTestVisible="False" />
 
       <Grid RowDefinitions="38, *, Auto">
          <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
-            <!-- AttachedToVisualTree="BackButton_OnLoaded" -->
             <Button Name="BackButton"
-                    Classes="Hollowed"
                     Click="BackButton_OnClick"
+                    Loaded="BackButton_OnLoaded"
                     IsVisible="{Binding Content.Back,
                     Converter={StaticResource IsNotNull}}"
                     Width="38.0" Height="38.0"
                     Padding="10.0"
-                    Content="{StaticResource Image.Back}" />
+                    Classes="Unstyled">
+               <controls:Icon Source="{StaticResource Icon.Arrow-Left-S-Fill}" />
+            </Button>
          </Grid>
 
          <TransitioningContentControl
@@ -56,21 +52,21 @@
 
          <Border Grid.Row="2"
                  BorderThickness="0 1.0 0 0"
-                 BorderBrush="{DynamicResource Gray}"
+                 BorderBrush="{DynamicResource Border}"
                  Padding="5.0">
             <StackPanel Orientation="Horizontal" Spacing="5.0">
-               <!-- <TextBlock Foreground="{DynamicResource Light}" -->
-               <!--            TextWrapping="Wrap"> -->
-               <!--    <Run Text="Heast Messenger" /> -->
-               <!--    <Run Text="Version" /> -->
-               <!--    <Run Text="{Binding Version}" -->
-               <!--         FontWeight="Bold" /> -->
-               <!--    <LineBreak /> -->
-               <!--    <Run Text="Error:" /> -->
-               <!--    <Run Text="{Binding Error}" -->
-               <!--         Foreground="{DynamicResource Red}" -->
-               <!--         FontWeight="Bold" /> -->
-               <!-- </TextBlock> -->
+               <TextBlock Foreground="{DynamicResource Border}"
+                          TextWrapping="Wrap">
+                  <Run Text="Heast Messenger" />
+                  <Run Text="Version" />
+                  <Run Text="{Binding Version}"
+                       FontWeight="Bold" />
+                  <LineBreak />
+                  <Run Text="Error:" />
+                  <Run Text="{Binding Error}"
+                       Foreground="{DynamicResource Red}"
+                       FontWeight="Bold" />
+               </TextBlock>
             </StackPanel>
          </Border>
       </Grid>

@@ -5,7 +5,7 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:controls="clr-namespace:Client.View.Controls"
    xmlns:utility="clr-namespace:Client.Utility"
-   x:Class="Client.View.Content.ConnectPanel">
+   x:Class="Client.View.Content.Login.ConnectPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />

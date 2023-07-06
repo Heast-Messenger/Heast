@@ -31,6 +31,7 @@
 
     <ItemGroup>
         <UpToDateCheckInput Remove="Controls\IconText.axaml"/>
+        <UpToDateCheckInput Remove="View\Content\Templates\TitleTemplate.axaml"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -66,5 +67,9 @@
             <DependentUpon>WelcomePanel.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="View\Content\Login\Templates\TitleTemplate.axaml"/>
     </ItemGroup>
 </Project>

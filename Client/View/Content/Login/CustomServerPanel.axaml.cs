@@ -5,7 +5,7 @@ using Avalonia.Interactivity;
 using Client.Model;
 using Client.ViewModel;
 
-namespace Client.View.Content;
+namespace Client.View.Content.Login;
 
 public partial class CustomServerPanel : LoginBase
 {

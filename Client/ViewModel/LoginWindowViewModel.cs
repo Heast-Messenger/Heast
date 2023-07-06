@@ -7,11 +7,13 @@ using Client.Converter;
 using Client.Model;
 using Client.Network;
 using Client.View.Content;
+using Client.View.Content.Login;
 using Core.Network;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Utility;
 using static Client.Hooks;
+using ConnectPanel = Client.View.Content.Login.ConnectPanel;
 
 namespace Client.ViewModel;
 
@@ -33,7 +35,6 @@ public class LoginWindowViewModel : ViewModelBase
 	}
 
 	private static Func<ClientConnection?> Connection => UseNetworking();
-
 	private static Func<Window> Window => UseCurrentWindow();
 
 	public LoginBase Content
@@ -53,6 +54,7 @@ public class LoginWindowViewModel : ViewModelBase
 		get => _error;
 		set => RaiseAndSetIfChanged(ref _error, value);
 	}
+
 
 	public string SignupUsername { get; set; } = string.Empty;
 	public string SignupEmail { get; set; } = string.Empty;

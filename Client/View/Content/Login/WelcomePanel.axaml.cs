@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Interactivity;
 using Client.ViewModel;
 
-namespace Client.View.Content;
+namespace Client.View.Content.Login;
 
 public partial class WelcomePanel : LoginBase
 {

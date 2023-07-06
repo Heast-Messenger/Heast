@@ -3,7 +3,7 @@
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
                 xmlns:controls="clr-namespace:Client.View.Controls"
-                x:Class="Client.View.Content.SignupPanel">
+                x:Class="Client.View.Content.Login.SignupPanel">
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
