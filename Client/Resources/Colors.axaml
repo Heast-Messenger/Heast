@@ -6,7 +6,7 @@
    <SolidColorBrush x:Key="Selection" Color="#FF292A30" />
    <SolidColorBrush x:Key="Selection-Hover" Color="#FF303138" />
    <SolidColorBrush x:Key="Light" Color="#FF868B9D" />
-   <SolidColorBrush x:Key="White" Color="#FFF2F4FF" />
+   <SolidColorBrush x:Key="White" Color="#FFE4E7F3" />
    <SolidColorBrush x:Key="Accent" Color="#FF5363F0" />
 
    <SolidColorBrush x:Key="Red" Color="#FFF45449" />

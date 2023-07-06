@@ -14,14 +14,14 @@
       <controls:IconText
          x:Key="Content.Official"
          Text="Heast Network"
-         Icon="/Assets/Logos/Heast.png"
+         Source="/Assets/Logos/Heast.png"
          Classes="Centered"
          Foreground="{DynamicResource White}"
          Orientation="Vertical" />
       <controls:IconText
          x:Key="Content.Custom"
          Text="Custom Server"
-         Icon="{StaticResource Icon.Cloud}"
+         Source="{StaticResource Icon.Cloud}"
          Classes="Centered"
          Foreground="{DynamicResource White}"
          Orientation="Vertical" />

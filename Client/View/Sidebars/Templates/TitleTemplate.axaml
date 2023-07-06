@@ -1,0 +1,29 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Client.View.Sidebars.Templates">
+   <Design.PreviewWith>
+      <controls:TitleTemplate />
+   </Design.PreviewWith>
+
+   <Style Selector="controls|TitleTemplate">
+      <!-- Set Defaults -->
+      <Setter Property="Template">
+         <ControlTemplate>
+            <Border Padding="16.0 8.0">
+               <Grid RowDefinitions="Auto, Auto, *">
+                  <TextBlock Grid.Row="0"
+                             Text="{TemplateBinding Title}"
+                             Classes="H1" />
+                  <TextBlock Grid.Row="1"
+                             Classes="Subtitle"
+                             Inlines="{TemplateBinding Subtitle}" />
+                  <ScrollViewer Grid.Row="2"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Auto"
+                                Content="{TemplateBinding Content}" />
+               </Grid>
+            </Border>
+         </ControlTemplate>
+      </Setter>
+   </Style>
+</Styles>

@@ -10,8 +10,8 @@ public class IconText : TemplatedControl
 		AvaloniaProperty.RegisterDirect<IconText, string?>(nameof(Text),
 			o => o.Text, (o, v) => o.Text = v);
 
-	public static readonly StyledProperty<string?> IconProperty =
-		AvaloniaProperty.Register<IconText, string?>(nameof(Icon));
+	public static readonly StyledProperty<string?> SourceProperty =
+		AvaloniaProperty.Register<IconText, string?>(nameof(Source));
 
 	public static readonly StyledProperty<Orientation> OrientationProperty =
 		AvaloniaProperty.Register<IconText, Orientation>(nameof(Orientation));
@@ -24,10 +24,10 @@ public class IconText : TemplatedControl
 		set => SetAndRaise(TextProperty, ref _text, value);
 	}
 
-	public string? Icon
+	public string? Source
 	{
-		get => GetValue(IconProperty);
-		set => SetValue(IconProperty, value);
+		get => GetValue(SourceProperty);
+		set => SetValue(SourceProperty, value);
 	}
 
 	public Orientation Orientation

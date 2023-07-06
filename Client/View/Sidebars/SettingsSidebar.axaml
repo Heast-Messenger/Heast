@@ -1,72 +1,85 @@
-<view:SidebarBase
-   xmlns="https://github.com/avaloniaui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:view="clr-namespace:Client.View.Sidebars"
-   xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
-   xmlns:controls="clr-namespace:Client.View.Controls"
-   x:Class="Client.View.Sidebars.SettingsSidebar"
-   Width="220.0">
-
+<view:SidebarBase xmlns="https://github.com/avaloniaui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:view="clr-namespace:Client.View.Sidebars"
+                  xmlns:vm="clr-namespace:Client.ViewModel.Sidebars"
+                  xmlns:controls="clr-namespace:Client.View.Controls"
+                  xmlns:extensions="clr-namespace:Client.Extensions"
+                  xmlns:templates="clr-namespace:Client.View.Sidebars.Templates"
+                  x:Class="Client.View.Sidebars.SettingsSidebar"
+                  Width="220.0">
    <Design.DataContext>
       <vm:SettingsSidebarViewModel />
    </Design.DataContext>
 
-   <view:SidebarBase.Resources>
-      <controls:IconText
-         x:Key="Content.Account"
-         Text="Account"
-         Icon="{StaticResource Icon.User}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Security"
-         Text="Security"
-         Icon="{StaticResource Icon.Shield}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Notifications"
-         Text="Notifications"
-         Icon="{StaticResource Icon.Notification}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Appearance"
-         Text="Appearance"
-         Icon="{StaticResource Icon.Brush}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Status"
-         Text="Status"
-         Icon="{StaticResource Icon.Cloud}"
-         Foreground="{DynamicResource White}" />
-   </view:SidebarBase.Resources>
+   <UserControl.Styles>
+      <StyleInclude Source="/Styles/SidebarButtons.axaml" />
+      <StyleInclude Source="Templates/TitleTemplate.axaml" />
+   </UserControl.Styles>
 
-   <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                 VerticalScrollBarVisibility="Auto">
+   <templates:TitleTemplate Title="Preferences">
+      <templates:TitleTemplate.Subtitle>
+         <Run Text="Manage" FontWeight="Bold" />
+         <Run Text="your account and" />
+         <Run Text="configure" FontWeight="Bold" />
+         <Run Text="the app." />
+      </templates:TitleTemplate.Subtitle>
+
       <StackPanel Orientation="Vertical">
          <controls:RadioButton
-            Classes="Bordered"
-            Content="{StaticResource Content.Account}"
-            GroupName="Sidebar"
-            Command="{Binding Button_OnAccount}" />
+            Command="{Binding Button_OnAccount}">
+            <controls:RadioButton.Content>
+               <controls:IconText
+                  Text="Account"
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.User-Fill},
+                  False={StaticResource Icon.User-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
          <controls:RadioButton
-            Classes="Bordered"
-            Content="{StaticResource Content.Security}"
-            GroupName="Sidebar"
-            Command="{Binding Button_OnSecurity}" />
+            Command="{Binding Button_OnSecurity}">
+            <controls:RadioButton.Content>
+               <controls:IconText
+                  Text="Security"
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Shield-Fill},
+                  False={StaticResource Icon.Shield-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
          <controls:RadioButton
-            Classes="Bordered"
-            Content="{StaticResource Content.Notifications}"
-            GroupName="Sidebar"
-            Command="{Binding Button_OnNotifications}" />
+            Command="{Binding Button_OnNotifications}">
+            <controls:RadioButton.Content>
+               <controls:IconText
+                  Text="Notifications"
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Notification-Fill},
+                  False={StaticResource Icon.Notification-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
          <controls:RadioButton
-            Classes="Bordered"
-            Content="{StaticResource Content.Appearance}"
-            GroupName="Sidebar"
-            Command="{Binding Button_OnAppearance}" />
+            Command="{Binding Button_OnAppearance}">
+            <controls:RadioButton.Content>
+               <controls:IconText
+                  Text="Appearance"
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Brush-Fill},
+                  False={StaticResource Icon.Brush-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
          <controls:RadioButton
-            Classes="Bordered"
-            Content="{StaticResource Content.Status}"
-            GroupName="Sidebar"
-            Command="{Binding Button_OnStatus}" />
+            Command="{Binding Button_OnStatus}">
+            <controls:RadioButton.Content>
+               <controls:IconText
+                  Text="Status"
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Cloud-Fill},
+                  False={StaticResource Icon.Cloud-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
       </StackPanel>
-   </ScrollViewer>
+   </templates:TitleTemplate>
 </view:SidebarBase>

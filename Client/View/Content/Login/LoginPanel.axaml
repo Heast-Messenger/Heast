@@ -12,12 +12,12 @@
       <controls:IconText
          x:Key="Content.Login"
          Text="Log in"
-         Icon="{StaticResource Icon.Login-Box}"
+         Source="{StaticResource Icon.Login-Box}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Reset"
          Text="Reset"
-         Icon="{StaticResource Icon.Key}"
+         Source="{StaticResource Icon.Key}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
 

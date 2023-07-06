@@ -12,7 +12,7 @@
       <controls:IconText
          x:Key="Content.Continue"
          Text="Continue"
-         Icon="{StaticResource Icon.Login-Box}"
+         Source="{StaticResource Icon.Login-Box}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
 

@@ -15,80 +15,83 @@
       <StyleInclude Source="/Styles/NavigationButtons.axaml" />
    </UserControl.Styles>
 
-   <DockPanel>
-      <Button
-         Command="{Binding Button_OnNav}">
-         <Button.Content>
-            <controls:Icon Source="{StaticResource Icon.Menu-Fill}" />
-         </Button.Content>
-      </Button>
+   <Border BorderThickness="0 0 1 0"
+           BorderBrush="{DynamicResource Border}">
+      <DockPanel>
+         <Button
+            Command="{Binding Button_OnNav}">
+            <Button.Content>
+               <controls:Icon Source="{StaticResource Icon.Menu-Fill}" />
+            </Button.Content>
+         </Button>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnHome}">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding 
-               Path=$parent[controls:RadioButton].IsChecked}, 
-               True={StaticResource Icon.Home-Fill},
-               False={StaticResource Icon.Home-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
+         <controls:RadioButton
+            Command="{Binding Button_OnHome}">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Home-Fill},
+                  False={StaticResource Icon.Home-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnChat}">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding 
-               Path=$parent[controls:RadioButton].IsChecked}, 
-               True={StaticResource Icon.Chat-Fill},
-               False={StaticResource Icon.Chat-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
+         <controls:RadioButton
+            Command="{Binding Button_OnChat}">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Chat-Fill},
+                  False={StaticResource Icon.Chat-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnExplore}">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding 
-               Path=$parent[controls:RadioButton].IsChecked}, 
-               True={StaticResource Icon.Compass-Fill},
-               False={StaticResource Icon.Compass-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
+         <controls:RadioButton
+            Command="{Binding Button_OnExplore}">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Compass-Fill},
+                  False={StaticResource Icon.Compass-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnPeople}">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding
-               Path=$parent[controls:RadioButton].IsChecked},
-               True={StaticResource Icon.Group-Fill},
-               False={StaticResource Icon.Group-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
+         <controls:RadioButton
+            Command="{Binding Button_OnPeople}">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding
+                  Path=$parent[controls:RadioButton].IsChecked},
+                  True={StaticResource Icon.Group-Fill},
+                  False={StaticResource Icon.Group-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnServers}">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding 
-               Path=$parent[controls:RadioButton].IsChecked}, 
-               True={StaticResource Icon.Cloud-Fill},
-               False={StaticResource Icon.Cloud-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
+         <controls:RadioButton
+            Command="{Binding Button_OnServers}">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Cloud-Fill},
+                  False={StaticResource Icon.Cloud-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
 
-      <controls:RadioButton
-         Command="{Binding Button_OnSettings}"
-         DockPanel.Dock="Bottom">
-         <controls:RadioButton.Content>
-            <controls:Icon
-               Source="{extensions:Conditional {CompiledBinding 
-               Path=$parent[controls:RadioButton].IsChecked}, 
-               True={StaticResource Icon.Settings-Fill},
-               False={StaticResource Icon.Settings-Line}}" />
-         </controls:RadioButton.Content>
-      </controls:RadioButton>
-      <Border Background="Transparent" />
-   </DockPanel>
+         <controls:RadioButton
+            Command="{Binding Button_OnSettings}"
+            DockPanel.Dock="Bottom">
+            <controls:RadioButton.Content>
+               <controls:Icon
+                  Source="{extensions:Conditional {CompiledBinding 
+                  Path=$parent[controls:RadioButton].IsChecked}, 
+                  True={StaticResource Icon.Settings-Fill},
+                  False={StaticResource Icon.Settings-Line}}" />
+            </controls:RadioButton.Content>
+         </controls:RadioButton>
+         <Border Background="Transparent" />
+      </DockPanel>
+   </Border>
 </UserControl>

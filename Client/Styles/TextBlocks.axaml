@@ -1,0 +1,67 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <Design.PreviewWith>
+      <Border Padding="20"
+              Width="200.0"
+              Background="{DynamicResource Dark}">
+         <!-- Add Controls for Previewer Here -->
+         <StackPanel>
+            <TextBlock Classes="H1" Text="This is an H1" />
+            <TextBlock Classes="Subtitle" Text="This is a subtitle" />
+            <TextBlock Classes="H2" Text="This is an H2" />
+            <TextBlock Classes="Subtitle">
+               <Run Text="Subtitle with" />
+               <Run Text="cool effects" FontStyle="Italic" FontWeight="Bold" />
+            </TextBlock>
+            <TextBlock Classes="H3" Text="This is an H3" />
+            <TextBlock Classes="Paragraph" Text="This is a paragraph with multiple lines" />
+            <TextBlock Classes="Paragraph" Text="Another paragraph! =)" />
+         </StackPanel>
+      </Border>
+   </Design.PreviewWith>
+
+   <!-- Add Styles Here -->
+   <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource White}" />
+      <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+   </Style>
+
+   <Style Selector="TextBlock.H1">
+      <Setter Property="FontFamily" Value="{StaticResource Outfit}" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="FontSize" Value="24.0" />
+      <Setter Property="Margin" Value="0 10 0 8" />
+   </Style>
+
+   <Style Selector="TextBlock.H2">
+      <Setter Property="FontFamily" Value="{StaticResource Outfit}" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="FontSize" Value="18.0" />
+      <Setter Property="Margin" Value="0 8 0 4" />
+   </Style>
+
+   <Style Selector="TextBlock.H3">
+      <Setter Property="FontFamily" Value="{StaticResource Outfit}" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="Margin" Value="0 4 0 8" />
+   </Style>
+
+   <Style Selector="TextBlock.Paragraph">
+      <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="Margin" Value="0 0 0 8" />
+   </Style>
+
+   <Style Selector="TextBlock.Subtitle">
+      <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+      <Setter Property="Foreground" Value="{DynamicResource Light}" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="Margin" Value="0 0 0 8" />
+   </Style>
+</Styles>

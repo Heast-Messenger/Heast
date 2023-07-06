@@ -32,4 +32,39 @@
     <ItemGroup>
         <UpToDateCheckInput Remove="Controls\IconText.axaml"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="View\Content\Login\ConnectPanel.axaml.cs">
+            <DependentUpon>ConnectPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\CustomServerPanel.axaml.cs">
+            <DependentUpon>CustomServerPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\GuestPanel.axaml.cs">
+            <DependentUpon>GuestPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\LoginOptionsPanel.axaml.cs">
+            <DependentUpon>LoginOptionsPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\ServerOptionsPanel.axaml.cs">
+            <DependentUpon>ServerOptionsPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\LoginPanel.axaml.cs">
+            <DependentUpon>LoginPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\SignupPanel.axaml.cs">
+            <DependentUpon>SignupPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Login\WelcomePanel.axaml.cs">
+            <DependentUpon>WelcomePanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@
       <controls:IconText
          x:Key="Content.Signup"
          Text="Sign up"
-         Icon="{StaticResource Icon.Add}"
+         Source="{StaticResource Icon.Add}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
 

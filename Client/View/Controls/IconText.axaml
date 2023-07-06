@@ -1,22 +1,43 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Client.View.Controls">
+   <Design.PreviewWith>
+      <Border Padding="0.0">
+         <controls:IconText
+            Foreground="Black"
+            FontFamily="{StaticResource Inter}"
+            Text="Hello"
+            Source="{StaticResource Icon.Compass-Fill}"
+            Orientation="Horizontal" />
+      </Border>
+   </Design.PreviewWith>
+
    <Style Selector="controls|IconText">
       <!-- Set Defaults -->
+      <Setter Property="Padding" Value="6.0" />
+      <Setter Property="CornerRadius" Value="6.0" />
       <Setter Property="Template">
          <ControlTemplate>
-            <StackPanel
-               Orientation="{TemplateBinding Orientation}"
-               Spacing="10.0">
+            <StackPanel Orientation="{TemplateBinding Orientation}"
+                        Spacing="10.0">
+               <StackPanel.Styles>
+                  <StyleInclude Source="Icon.axaml" />
+               </StackPanel.Styles>
 
                <controls:Icon
-                  Source="{TemplateBinding Icon}" />
-
-               <TextBlock
-                  TextWrapping="Wrap"
+                  Source="{TemplateBinding Source}"
                   Foreground="{TemplateBinding Foreground}"
+                  FontSize="{TemplateBinding FontSize}"
+                  VerticalAlignment="Center" />
+               <TextBlock
+                  Foreground="{TemplateBinding Foreground}"
+                  TextWrapping="Wrap"
+                  FontSize="{TemplateBinding FontSize}"
+                  FontFamily="{StaticResource Inter}"
+                  FontWeight="Medium"
                   Text="{TemplateBinding Text}"
-                  Classes="Bold Centered" />
+                  VerticalAlignment="Center"
+                  LineHeight="{TemplateBinding FontSize}" />
             </StackPanel>
          </ControlTemplate>
       </Setter>

@@ -21,19 +21,19 @@
    <Grid RowDefinitions="Auto, *, 50.0">
       <TextBlock Grid.Row="0" VerticalAlignment="Center"
                  Classes="Bold Title">
-         <!-- <Run Text="Welcome to" -->
-         <!--      Foreground="{DynamicResource White}" /> -->
-         <!-- <LineBreak /> -->
-         <!-- <Run Text="Heast Messenger"> -->
-         <!--    <Run.Foreground> -->
-         <!--       <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%"> -->
-         <!--          <LinearGradientBrush.GradientStops> -->
-         <!--             <GradientStop Offset="0" Color="#FFFDB242" /> -->
-         <!--             <GradientStop Offset="1" Color="#FFFFCF8A" /> -->
-         <!--          </LinearGradientBrush.GradientStops> -->
-         <!--       </LinearGradientBrush> -->
-         <!--    </Run.Foreground> -->
-         <!-- </Run> -->
+         <Run Text="Welcome to"
+              Foreground="{DynamicResource White}" />
+         <LineBreak />
+         <Run Text="Heast Messenger">
+            <Run.Foreground>
+               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                  <LinearGradientBrush.GradientStops>
+                     <GradientStop Offset="0" Color="#FFFDB242" />
+                     <GradientStop Offset="1" Color="#FFFFCF8A" />
+                  </LinearGradientBrush.GradientStops>
+               </LinearGradientBrush>
+            </Run.Foreground>
+         </Run>
       </TextBlock>
 
       <Image Grid.Row="1"

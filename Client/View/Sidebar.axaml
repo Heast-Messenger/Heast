@@ -6,25 +6,27 @@
              xmlns:vm="clr-namespace:Client.ViewModel"
              mc:Ignorable="d"
              x:Class="Client.View.Sidebar">
-	<Design.DataContext>
-		<vm:SidebarViewModel />
-	</Design.DataContext>
+   <Design.DataContext>
+      <vm:SidebarViewModel />
+   </Design.DataContext>
 
-	<TransitioningContentControl Name="ParentControl"
-	                             Width="{Binding CurrentSidebarWidth}">
-		<TransitioningContentControl.Content>
-			<Binding Path="CurrentSidebar" />
-		</TransitioningContentControl.Content>
+   <TransitioningContentControl Name="ParentControl"
+                                Width="{Binding CurrentSidebarWidth}"
+                                BorderThickness="0 0 1 0"
+                                BorderBrush="{DynamicResource Border}">
+      <TransitioningContentControl.Content>
+         <Binding Path="CurrentSidebar" />
+      </TransitioningContentControl.Content>
 
-		<TransitioningContentControl.Transitions>
-			<Transitions>
-				<DoubleTransition Property="Width"
-				                  Duration="0:0:1.0">
-					<DoubleTransition.Easing>
-						<view:SidebarEasing />
-					</DoubleTransition.Easing>
-				</DoubleTransition>
-			</Transitions>
-		</TransitioningContentControl.Transitions>
-	</TransitioningContentControl>
+      <TransitioningContentControl.Transitions>
+         <Transitions>
+            <DoubleTransition Property="Width"
+                              Duration="0:0:0.2">
+               <DoubleTransition.Easing>
+                  <view:SidebarEasing />
+               </DoubleTransition.Easing>
+            </DoubleTransition>
+         </Transitions>
+      </TransitioningContentControl.Transitions>
+   </TransitioningContentControl>
 </UserControl>

@@ -14,10 +14,11 @@
                     CornerRadius="{TemplateBinding CornerRadius}">
                <TextBlock Text="{TemplateBinding Source}"
                           FontFamily="{StaticResource Icons}"
-                          FontSize="{TemplateBinding FontSize}"
+                          FontSize="18.0"
                           TextAlignment="Center"
                           Padding="{TemplateBinding Padding}"
-                          LineHeight="{TemplateBinding FontSize}" />
+                          LineHeight="{TemplateBinding FontSize}"
+                          Foreground="{TemplateBinding Foreground}" />
             </Border>
          </ControlTemplate>
       </Setter>

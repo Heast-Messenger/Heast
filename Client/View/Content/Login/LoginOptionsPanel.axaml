@@ -14,17 +14,17 @@
       <controls:IconText
          x:Key="Content.Signup"
          Text="Sign up"
-         Icon="{StaticResource Icon.Add}"
+         Source="{StaticResource Icon.Add}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Login"
          Text="Log in"
-         Icon="{StaticResource Icon.Login-Box}"
+         Source="{StaticResource Icon.Login-Box}"
          Foreground="{DynamicResource White}" />
       <controls:IconText
          x:Key="Content.Guest"
          Text="Continue"
-         Icon="{StaticResource Icon.User}"
+         Source="{StaticResource Icon.User}"
          Foreground="{DynamicResource White}" />
    </view:LoginBase.Resources>
 
