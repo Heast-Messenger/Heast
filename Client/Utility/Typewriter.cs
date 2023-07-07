@@ -12,7 +12,7 @@ public class Typewriter : TextBlock
 	public static readonly StyledProperty<TimeSpan> IntervalProperty = AvaloniaProperty.Register<Run, TimeSpan>(
 		nameof(Interval), defaultBindingMode: BindingMode.TwoWay);
 
-	private string _initial = string.Empty;
+	private string _text = string.Empty;
 	private DispatcherTimer? _timer;
 
 	public TimeSpan Interval
@@ -23,7 +23,7 @@ public class Typewriter : TextBlock
 
 	protected override void OnInitialized()
 	{
-		_initial = Text!;
+		_text = Text!;
 		_timer = new DispatcherTimer(Interval, DispatcherPriority.Normal, Callback);
 		Text = string.Empty;
 		InvalidateTextLayout();
@@ -31,16 +31,16 @@ public class Typewriter : TextBlock
 
 	private void Callback(object? sender, EventArgs e)
 	{
-		if (Text != null)
+		if (Text == null)
 		{
-			var i = Text.Length + 1;
-			Text = _initial[..i];
-			if (i >= _initial.Length)
-			{
-				Text = string.Empty;
-			}
-
-			InvalidateTextLayout();
+			return;
 		}
+
+		var i = Text.Length + 1;
+		Text = i > _text.Length
+			? string.Empty
+			: _text[..i];
+
+		InvalidateTextLayout();
 	}
 }

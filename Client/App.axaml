@@ -13,9 +13,14 @@
 
    <Application.Styles>
       <SimpleTheme />
+
       <StyleInclude Source="/View/Controls/Icon.axaml" />
       <StyleInclude Source="/View/Controls/IconText.axaml" />
+
+      <StyleInclude Source="/Styles/Scrollbars.axaml" />
       <StyleInclude Source="/Styles/Buttons.axaml" />
       <StyleInclude Source="/Styles/TextBlocks.axaml" />
+      <StyleInclude Source="/Styles/TextBox.axaml" />
+      <StyleInclude Source="/Styles/ListBox.axaml" />
    </Application.Styles>
 </Application>

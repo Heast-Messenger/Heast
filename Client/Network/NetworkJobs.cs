@@ -61,7 +61,7 @@ public class Job : IJob
 		{
 			_action();
 		}
-		catch (Exception e)
+		catch (Exception)
 		{
 			// ignored
 		}

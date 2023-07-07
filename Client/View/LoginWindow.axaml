@@ -4,7 +4,7 @@
         xmlns:utility="clr-namespace:Client.Converter"
         xmlns:controls="clr-namespace:Client.View.Controls"
         x:Class="Client.View.LoginWindow"
-        ExtendClientAreaChromeHints="OSXThickTitleBar, PreferSystemChrome"
+        ExtendClientAreaChromeHints="OSXThickTitleBar, NoChrome"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen"
         Title="Welcome to Heast!"
@@ -22,21 +22,30 @@
 
    <Panel>
       <Border
-         Background="{DynamicResource Middle}"
+         Background="{DynamicResource Dark}"
          IsHitTestVisible="False" />
 
       <Grid RowDefinitions="38, *, Auto">
          <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
-            <Button Name="BackButton"
-                    Click="BackButton_OnClick"
-                    Loaded="BackButton_OnLoaded"
-                    IsVisible="{Binding Content.Back,
-                    Converter={StaticResource IsNotNull}}"
-                    Width="38.0" Height="38.0"
-                    Padding="10.0"
-                    Classes="Unstyled">
-               <controls:Icon Source="{StaticResource Icon.Arrow-Left-S-Fill}" />
-            </Button>
+            <StackPanel Name="MenuBar" Orientation="Horizontal"
+                        Loaded="MenuBar_OnLoaded">
+               <Button Click="BackButton_OnClick"
+                       IsVisible="{Binding Content.Back,
+                       Converter={StaticResource IsNotNull}}"
+                       Width="38.0" Height="38.0"
+                       Padding="10.0"
+                       Classes="Unstyled">
+                  <controls:Icon Source="{StaticResource Icon.Arrow-Left-S-Fill}"
+                                 Foreground="{DynamicResource Light}" />
+               </Button>
+               <Button Click="MenuBar_OnClick"
+                       Width="38.0" Height="38.0"
+                       Padding="10.0"
+                       Classes="Unstyled">
+                  <controls:Icon Source="{StaticResource Icon.More-Fill}"
+                                 Foreground="{DynamicResource Light}" />
+               </Button>
+            </StackPanel>
          </Grid>
 
          <TransitioningContentControl

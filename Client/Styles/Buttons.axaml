@@ -50,6 +50,7 @@
    <Style Selector="Button.Unstyled">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Margin" Value="0.0" />
    </Style>
 
    <Style Selector="Button:pointerover.Unstyled /template/ ContentPresenter">
@@ -58,9 +59,9 @@
    </Style>
 
    <Style Selector="Button TextBlock">
-      <Setter Property="FontSize" Value="16.0" />
+      <Setter Property="FontSize" Value="14.0" />
       <Setter Property="Margin" Value="0" />
       <Setter Property="Padding" Value="0" />
-      <Setter Property="LineHeight" Value="16.0" />
+      <Setter Property="LineHeight" Value="14.0" />
    </Style>
 </Styles>

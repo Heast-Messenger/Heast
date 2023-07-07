@@ -48,7 +48,7 @@
       <Canvas Grid.Row="2">
          <Button Click="Button_OnOfficial"
                  Padding="16.0"
-                 Canvas.Top="70.0"
+                 Canvas.Top="40.0"
                  Canvas.Left="80.0">
             <controls:IconText
                Text="Heast Network"
@@ -59,7 +59,7 @@
 
          <Button Click="Button_OnCustom"
                  Padding="16.0"
-                 Canvas.Top="250.0"
+                 Canvas.Top="270.0"
                  Canvas.Left="20.0">
             <controls:IconText
                Text="Custom Server"

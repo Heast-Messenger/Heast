@@ -4,9 +4,9 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:templates="clr-namespace:Client.View.Content.Templates"
+   xmlns:converter="clr-namespace:Client.Converter"
+   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
    x:Class="Client.View.Content.Login.CustomServerPanel">
-
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
@@ -15,7 +15,15 @@
       <StyleInclude Source="Templates/TitleTemplate.axaml" />
    </UserControl.Styles>
 
-   <templates:TitleTemplate Title="Custom Servers">
+   <UserControl.Resources>
+      <converter:StringValueConverter x:Key="StatusTextConverter" />
+      <converter:StatusColorConverter x:Key="StatusColorConverter" />
+   </UserControl.Resources>
+
+   <templates:TitleTemplate>
+      <templates:TitleTemplate.Title>
+         <Run Text="Custom Servers" />
+      </templates:TitleTemplate.Title>
       <templates:TitleTemplate.Subtitle>
          <Run Text="Connect" FontWeight="Bold" />
          <Run Text="to a custom server that is" />
@@ -23,57 +31,86 @@
       </templates:TitleTemplate.Subtitle>
 
       <Grid RowDefinitions="Auto Auto *">
-         <Grid Grid.Row="0" ColumnDefinitions="*, Auto, Auto"
-               Margin="0 20.0 0 0">
-            <TextBox Grid.Column="0"
-                     Watermark="Address"
-                     Text="{Binding CustomServerAddress}"
-                     Margin="0" />
-            <Button Grid.Column="1"
-                    Click="Button_OnAdd"
-                    Margin="10.0 0 0 0">
-               <controls:Icon
-                  Source="{StaticResource Icon.Add-Fill}" />
-            </Button>
-            <Button Grid.Column="2"
-                    Click="Button_OnConnect"
-                    Margin="10.0 0 0 0">
-               <controls:Icon
-                  Source="{StaticResource Icon.Flashlight-Fill}" />
-            </Button>
-         </Grid>
+         <Border Grid.Row="0"
+                 Background="{DynamicResource Middle}"
+                 CornerRadius="6.0"
+                 Padding="6.0"
+                 Margin="0 0 0 20.0">
+            <Grid ColumnDefinitions="*, Auto, Auto">
+               <TextBox Grid.Column="0"
+                        Watermark="Address"
+                        Text="{Binding CustomServerAddress}"
+                        Margin="0"
+                        Classes="Unstyled" />
+
+               <Button Grid.Column="1"
+                       Click="Button_OnAdd"
+                       Classes="Unstyled"
+                       BorderBrush="{DynamicResource Border}"
+                       BorderThickness="1.0 0 0 0">
+                  <controls:Icon
+                     Source="{StaticResource Icon.Add-Fill}" />
+               </Button>
+
+               <Button Grid.Column="2"
+                       Click="Button_OnConnect"
+                       Classes="Unstyled"
+                       BorderBrush="{DynamicResource Border}"
+                       BorderThickness="1.0 0 0 0">
+                  <controls:Icon
+                     Source="{StaticResource Icon.Flashlight-Fill}" />
+               </Button>
+            </Grid>
+         </Border>
 
          <TextBlock Grid.Row="1"
                     Text="Added servers:"
-                    Classes="Subtitle" />
+                    Classes="Subtitle"
+                    FontWeight="Bold" />
 
          <ListBox Grid.Row="2"
-                  ItemsSource="{Binding CustomServers}"
-                  Background="{DynamicResource Mid}"
-                  CornerRadius="10.0"
-                  BorderBrush="Transparent"
-                  Margin="0 10.0">
+                  ItemsSource="{Binding CustomServers}">
             <ListBox.ItemTemplate>
                <DataTemplate>
-                  <Grid ColumnDefinitions="80, *"
-                        RowDefinitions="Auto, Auto, Auto"
-                        PointerPressed="CustomServer_OnClick"
-                        Background="{DynamicResource Transparent}">
-                     <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                  <DockPanel PointerPressed="CustomServer_OnClick"
+                             LastChildFill="False">
+                     <Image DockPanel.Dock="Left"
                             VerticalAlignment="Top"
                             Margin="5"
-                            Source="{Binding Image^}" />
-                     <TextBlock Grid.Column="1" Grid.Row="0"
-                                Text="{Binding Name}"
-                                TextWrapping="Wrap" />
-                     <TextBlock Grid.Column="1" Grid.Row="1"
-                                Text="{Binding Address}"
-                                TextWrapping="Wrap" />
-                     <TextBlock Grid.Column="1" Grid.Row="2"
-                                Text="{Binding Description}"
+                            Source="{Binding Image^, 
+                               FallbackValue=''}" />
+
+                     <Grid ColumnDefinitions="*"
+                           RowDefinitions="Auto, Auto"
+                           DockPanel.Dock="Left">
+                        <TextBlock Grid.Row="0"
+                                   FontSize="12.0"
+                                   Margin="0 0 0 2.0">
+                           <Run
+                              Text="{Binding Status, 
+                              Converter={StaticResource StatusTextConverter}}"
+                              Foreground="{Binding Status,
+                              Converter={StaticResource StatusColorConverter}}"
+                              FontWeight="Bold" />
+                           <Run Text="·"
                                 Foreground="{DynamicResource Light}"
-                                TextWrapping="Wrap" />
-                  </Grid>
+                                FontWeight="Bold" />
+                           <Run Text="{Binding Address}"
+                                Foreground="{DynamicResource White}" />
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Description^, 
+                                   FallbackValue='Fetching description...'}"
+                                   Foreground="{DynamicResource Light}"
+                                   FontSize="10.0" />
+                     </Grid>
+
+                     <Button DockPanel.Dock="Right"
+                             Classes="Unstyled">
+                        <controls:Icon Source="{StaticResource Icon.More-Fill}" />
+                     </Button>
+                  </DockPanel>
                </DataTemplate>
             </ListBox.ItemTemplate>
          </ListBox>

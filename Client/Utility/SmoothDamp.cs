@@ -1,8 +1,8 @@
 using Avalonia;
 
-namespace Client.Converter;
+namespace Client.Utility;
 
-public class SmoothDamp
+public static class SmoothDamp
 {
 	public static double Read(double from, double to, ref double vel, double st, double dt)
 	{

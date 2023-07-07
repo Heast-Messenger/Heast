@@ -5,21 +5,24 @@
              mc:Ignorable="d"
              x:Class="Client.View.Titlebar"
              Height="38">
-   <DockPanel>
-      <!-- ReSharper Disable InconsistentNaming -->
-      <Rectangle Name="OSXControlSpacer"
-                 Width="70.0"
-                 DockPanel.Dock="Left" />
+   <Border BorderThickness="0 0 0 1"
+           BorderBrush="{DynamicResource Border}">
+      <DockPanel>
+         <!-- ReSharper Disable InconsistentNaming -->
+         <Rectangle Name="OSXControlSpacer"
+                    Width="70.0"
+                    DockPanel.Dock="Left" />
 
-      <!-- <TextBlock DockPanel.Dock="Left" -->
-      <!--            VerticalAlignment="Center" -->
-      <!--            Text="Welcome Back!" -->
-      <!--            Classes="Bold" /> -->
+         <!-- <TextBlock DockPanel.Dock="Left" -->
+         <!--            VerticalAlignment="Center" -->
+         <!--            Text="Welcome Back!" -->
+         <!--            Classes="Bold" /> -->
 
-      <Rectangle Name="WinControlSpacer"
-                 Width="140.0"
-                 DockPanel.Dock="Right" />
+         <Rectangle Name="WinControlSpacer"
+                    Width="140.0"
+                    DockPanel.Dock="Right" />
 
-      <Border Background="Transparent" />
-   </DockPanel>
+         <Border Background="Transparent" />
+      </DockPanel>
+   </Border>
 </UserControl>

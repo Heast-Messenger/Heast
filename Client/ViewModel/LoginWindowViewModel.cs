@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
-using Client.Converter;
 using Client.Model;
 using Client.Network;
+using Client.Utility;
 using Client.View.Content;
 using Client.View.Content.Login;
 using Core.Network;
@@ -13,7 +14,6 @@ using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Utility;
 using static Client.Hooks;
-using ConnectPanel = Client.View.Content.Login.ConnectPanel;
 
 namespace Client.ViewModel;
 
@@ -47,7 +47,7 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 	}
 
-	public string Version => App.Version;
+	public string? Version => App.Version;
 
 	public string Error
 	{
@@ -207,7 +207,11 @@ public class LoginWindowViewModel : ViewModelBase
 		Error = string.Empty;
 		var isIpv4 = Validation.IsIpv4(CustomServerAddress);
 		var isDomain = Validation.IsDomain(CustomServerAddress);
-		if (isIpv4 || isDomain)
+		if (CustomServers.Any(x => x.Address == CustomServerAddress))
+		{
+			Error = "Server already added";
+		}
+		else if (isIpv4 || isDomain)
 		{
 			var server = new CustomServer
 			{

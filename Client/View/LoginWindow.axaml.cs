@@ -19,15 +19,20 @@ public partial class LoginWindow : Window
 		LoginWindowViewModel.Back();
 	}
 
-	private void BackButton_OnLoaded(object? sender, RoutedEventArgs e)
+	private void MenuBar_OnLoaded(object? sender, RoutedEventArgs e)
 	{
 		if (OperatingSystem.IsWindows())
 		{
-			BackButton.SetValue(Grid.ColumnProperty, 0);
+			MenuBar.SetValue(Grid.ColumnProperty, 0);
 		}
 		else if (OperatingSystem.IsMacOS())
 		{
-			BackButton.SetValue(Grid.ColumnProperty, 2);
+			MenuBar.SetValue(Grid.ColumnProperty, 2);
 		}
+	}
+
+	private void MenuBar_OnClick(object? sender, RoutedEventArgs e)
+	{
+		throw new NotImplementedException();
 	}
 }

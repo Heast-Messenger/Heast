@@ -9,7 +9,9 @@
    <SolidColorBrush x:Key="White" Color="#FFE4E7F3" />
    <SolidColorBrush x:Key="Accent" Color="#FF5363F0" />
 
-   <SolidColorBrush x:Key="Red" Color="#FFF45449" />
-   <SolidColorBrush x:Key="Green" Color="#FF67FF76" />
+   <SolidColorBrush x:Key="Gray" Color="#FF908F97" />
+   <SolidColorBrush x:Key="Red" Color="#FFE86F58" />
+   <SolidColorBrush x:Key="Green" Color="#FF5CC681" />
+   <SolidColorBrush x:Key="Orange" Color="#FFE9A66B" />
    <SolidColorBrush x:Key="Blue" Color="#FF67B6FF" />
 </ResourceDictionary>
