@@ -3,9 +3,13 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:view="clr-namespace:Client.View.Content"
-   xmlns:controls="clr-namespace:Client.View.Controls"
    xmlns:utility="clr-namespace:Client.Utility"
    xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
+   xmlns:controls="clr-namespace:Client.View.Controls"
+   xmlns:converter="clr-namespace:Client.Converter"
+   xmlns:model="clr-namespace:Client.Model"
+   xmlns:system="clr-namespace:System;assembly=System.Runtime"
+   xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
    x:Class="Client.View.Content.Login.ConnectPanel">
 
    <Design.DataContext>
@@ -16,18 +20,20 @@
       <StyleInclude Source="Templates/TitleTemplate.axaml" />
    </UserControl.Styles>
 
+   <UserControl.Resources>
+      <converter:DictionaryConverter x:Key="ConnectionStatusConverter" />
+   </UserControl.Resources>
+
    <templates:TitleTemplate>
       <templates:TitleTemplate.Title>
-         <TextBlock VerticalAlignment="Center"
-                    Classes="H1">
-            <Run Text="Connecting" />
-            <utility:Typewriter
-               Text="..."
-               Interval="0:00:00.500" />
-         </TextBlock>
+         <Run Text="Connecting" />
+         <utility:Typewriter
+            Text="..."
+            Interval="0:00:00.500" />
       </templates:TitleTemplate.Title>
       <templates:TitleTemplate.Subtitle>
-         <Run Text="Connection handshake"
+         <Run Text="Hold on tight as the" />
+         <Run Text="connection handshake"
               FontWeight="Bold" />
          <Run Text="is in progress." />
       </templates:TitleTemplate.Subtitle>
@@ -35,12 +41,57 @@
       <ItemsControl ItemsSource="{Binding ConnectionSteps}">
          <ItemsControl.ItemTemplate>
             <DataTemplate>
-               <Grid ColumnDefinitions="Auto, Auto, *"
-                     RowDefinitions="Auto, Auto">
-                  <Button Grid.Row="0" Grid.Column="0">
-                     <controls:Icon Source="{StaticResource Icon.Arrow-Down-S-Fill}" />
-                  </Button>
-               </Grid>
+               <Border Padding="0.0 8.0"
+                       Background="Transparent"
+                       Margin="0 0 0 10.0"
+                       PointerPressed="InputElement_OnPointerPressed">
+                  <Grid ColumnDefinitions="Auto, *"
+                        RowDefinitions="Auto, Auto"
+                        Cursor="Hand">
+                     <controls:Icon Grid.Row="0" Grid.Column="0"
+                                    Margin="8.0 0.0"
+                                    VerticalAlignment="Center">
+                        <controls:Icon.Source>
+                           <Binding Path="Status"
+                                    Converter="{StaticResource ConnectionStatusConverter}">
+                              <Binding.ConverterParameter>
+                                 <generic:Dictionary x:TypeArguments="model:ConnectionStatus, system:Object">
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Pending}"
+                                                    ResourceKey="Icon.Question-Fill" />
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Failed}"
+                                                    ResourceKey="Icon.Close-Circle-Fill" />
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Successful}"
+                                                    ResourceKey="Icon.Checkbox-Circle-Fill" />
+                                 </generic:Dictionary>
+                              </Binding.ConverterParameter>
+                           </Binding>
+                        </controls:Icon.Source>
+                        <controls:Icon.Foreground>
+                           <Binding Path="Status"
+                                    Converter="{StaticResource ConnectionStatusConverter}">
+                              <Binding.ConverterParameter>
+                                 <generic:Dictionary x:TypeArguments="model:ConnectionStatus, system:Object">
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Pending}"
+                                                    ResourceKey="Gray" />
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Failed}"
+                                                    ResourceKey="Red" />
+                                    <StaticResource x:Key="{x:Static model:ConnectionStatus.Successful}"
+                                                    ResourceKey="Green" />
+                                 </generic:Dictionary>
+                              </Binding.ConverterParameter>
+                           </Binding>
+                        </controls:Icon.Foreground>
+                     </controls:Icon>
+                     <TextBlock Grid.Row="0" Grid.Column="1"
+                                Text="{Binding Title}"
+                                Classes="H2"
+                                Margin="0 0 0 0.0" />
+                     <TextBlock Grid.Row="1" Grid.Column="1"
+                                Text="{Binding Description}"
+                                Classes="Subtitle"
+                                Margin="0 10.0 0 0" />
+                  </Grid>
+               </Border>
             </DataTemplate>
          </ItemsControl.ItemTemplate>
       </ItemsControl>

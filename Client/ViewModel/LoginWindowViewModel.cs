@@ -70,7 +70,12 @@ public class LoginWindowViewModel : ViewModelBase
 	}
 
 	public ObservableCollection<CustomServer> CustomServers { get; set; } = new();
-	public ObservableCollection<ConnectionStep> ConnectionSteps { get; set; } = new();
+
+	public ObservableCollection<ConnectionStep> ConnectionSteps { get; set; } = new()
+	{
+		Model.ConnectionSteps.HelloC2S,
+		Model.ConnectionSteps.HelloS2C
+	};
 
 	public void Resize(object? sender, EventArgs args)
 	{

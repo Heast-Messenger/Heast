@@ -10,7 +10,7 @@ namespace Client.Converter;
 
 public class ImageLoaderConverter : IValueConverter
 {
-	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+	public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
 		if (value is string path && targetType == typeof(IImage))
 		{

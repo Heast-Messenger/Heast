@@ -64,4 +64,8 @@
       <Setter Property="FontSize" Value="14.0" />
       <Setter Property="Margin" Value="0 0 0 8" />
    </Style>
+
+   <Style Selector="TextBlock.Unstyled">
+      <Setter Property="Margin" Value="0.0" />
+   </Style>
 </Styles>

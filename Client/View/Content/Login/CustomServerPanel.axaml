@@ -6,6 +6,9 @@
    xmlns:controls="clr-namespace:Client.View.Controls"
    xmlns:converter="clr-namespace:Client.Converter"
    xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
+   xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
+   xmlns:model="clr-namespace:Client.Model"
+   xmlns:system="clr-namespace:System;assembly=System.Runtime"
    x:Class="Client.View.Content.Login.CustomServerPanel">
    <Design.DataContext>
       <vm:LoginWindowViewModel />
@@ -17,7 +20,7 @@
 
    <UserControl.Resources>
       <converter:StringValueConverter x:Key="StatusTextConverter" />
-      <converter:StatusColorConverter x:Key="StatusColorConverter" />
+      <converter:DictionaryConverter x:Key="StatusColorConverter" />
    </UserControl.Resources>
 
    <templates:TitleTemplate>
@@ -87,11 +90,27 @@
                                    FontSize="12.0"
                                    Margin="0 0 0 2.0">
                            <Run
-                              Text="{Binding Status, 
-                              Converter={StaticResource StatusTextConverter}}"
-                              Foreground="{Binding Status,
-                              Converter={StaticResource StatusColorConverter}}"
-                              FontWeight="Bold" />
+                              FontWeight="Bold"
+                              Text="{Binding Status,
+                              Converter={StaticResource StatusTextConverter}}">
+                              <Run.Foreground>
+                                 <Binding Path="Status"
+                                          Converter="{StaticResource StatusColorConverter}">
+                                    <Binding.ConverterParameter>
+                                       <generic:Dictionary x:TypeArguments="model:ServerStatus, system:Object">
+                                          <StaticResource x:Key="{x:Static model:ServerStatus.Pending}"
+                                                          ResourceKey="Gray" />
+                                          <StaticResource x:Key="{x:Static model:ServerStatus.Closed}"
+                                                          ResourceKey="Red" />
+                                          <StaticResource x:Key="{x:Static model:ServerStatus.Running}"
+                                                          ResourceKey="Green" />
+                                          <StaticResource x:Key="{x:Static model:ServerStatus.Slow}"
+                                                          ResourceKey="Orange" />
+                                       </generic:Dictionary>
+                                    </Binding.ConverterParameter>
+                                 </Binding>
+                              </Run.Foreground>
+                           </Run>
                            <Run Text="·"
                                 Foreground="{DynamicResource Light}"
                                 FontWeight="Bold" />

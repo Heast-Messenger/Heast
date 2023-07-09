@@ -25,8 +25,9 @@ public class Hyperlink : TextBlock
 		Cursor = new Cursor(StandardCursorType.Hand);
 		PointerPressed += (_, _) =>
 		{
-			Process.Start(new ProcessStartInfo(Url)
+			Process.Start(new ProcessStartInfo
 			{
+				FileName = Url,
 				UseShellExecute = true
 			});
 		};
