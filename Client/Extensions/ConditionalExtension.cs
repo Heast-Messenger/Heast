@@ -21,13 +21,19 @@ public class ConditionalExtension : MarkupExtension
 
 	public override object ProvideValue(IServiceProvider serviceProvider)
 	{
+		Binding.Mode = BindingMode.OneWay;
+		if (Binding.ConverterParameter is bool)
 		{
-			Binding.Mode = BindingMode.OneWay;
 			Binding.Converter = new FuncValueConverter<bool, object>(
 				value => value ? True : False);
 		}
 
-		// return Binding.ProvideValue(serviceProvider);
+		if (Binding.ConverterParameter != null)
+		{
+			Binding.Converter = new FuncValueConverter<object, object>(
+				value => value != null ? True : False);
+		}
+
 		return Binding;
 	}
 }

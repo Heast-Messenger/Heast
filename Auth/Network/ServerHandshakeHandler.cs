@@ -49,26 +49,23 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 	/// <param name="packet">The received packet containing the client's AES key.</param>
 	public async void OnKey(KeyC2SPacket packet)
 	{
-		byte[] key;
-		byte[] iv;
+		using var keypair = Aes.Create();
 		try
 		{
-			key = ServerNetwork.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
-			iv = ServerNetwork.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
+			var key = ServerNetwork.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
+			var iv = ServerNetwork.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
+			{
+				keypair.Mode = CipherMode.CFB;
+				keypair.Padding = PaddingMode.PKCS7;
+				keypair.Key = key;
+				keypair.IV = iv;
+			}
 		}
 		catch (CryptographicException)
 		{
 			await Ctx.Send(new ErrorS2CPacket(Error.InvalidKey));
 			await ServerNetwork.Disconnect(Ctx);
 			return;
-		}
-
-		using var keypair = Aes.Create();
-		{
-			keypair.Mode = CipherMode.CFB;
-			keypair.Padding = PaddingMode.PKCS7;
-			keypair.Key = key;
-			keypair.IV = iv;
 		}
 
 		await Ctx.Send(new SuccessS2CPacket());

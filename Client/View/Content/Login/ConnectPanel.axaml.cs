@@ -22,7 +22,7 @@ public partial class ConnectPanel : LoginBase
 
 	private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
 	{
-		if (sender is Control { DataContext: ConnectionStep step })
+		if (sender is Control { DataContext: ConnectionStep { Helplink: not null } step })
 		{
 			Process.Start(new ProcessStartInfo
 			{

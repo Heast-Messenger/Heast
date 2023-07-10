@@ -16,7 +16,7 @@ public class ConnectionStep : ViewModelBase
 	public NetworkSide Target { get; init; } = NetworkSide.Client;
 	public string Title { get; init; } = string.Empty;
 	public string Description { get; init; } = string.Empty;
-	public string Helplink { get; init; } = string.Empty;
+	public string? Helplink { get; init; }
 
 	public void Complete()
 	{

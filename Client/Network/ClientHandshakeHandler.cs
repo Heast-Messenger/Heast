@@ -39,6 +39,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 		Vm.Add(Vm.RequestConnection);
 		await Ctx.Send(new ConnectC2SPacket(ClientNetwork.ClientInfo));
 		Vm.RequestConnection.Complete();
+		Vm.Add(Vm.ReceivedPublicKey);
 	}
 
 	/// <summary>
@@ -47,6 +48,8 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 	/// <param name="packet">The received packet containing the server's public RSA key.</param>
 	public async void OnConnect(ConnectS2CPacket packet)
 	{
+		Vm.ReceivedPublicKey.Complete();
+		Vm.Add(Vm.GeneratingKey);
 		using (KeyPair = Aes.Create())
 		{
 			KeyPair.Mode = CipherMode.CFB;
@@ -71,6 +74,8 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 		}
 
 		await Ctx.Send(new KeyC2SPacket(encryptedKey, encryptedIv));
+		Vm.GeneratingKey.Complete();
+		Vm.Add(Vm.Encrypting);
 	}
 
 	/// <summary>
@@ -83,6 +88,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 		Ctx.EnableEncryption(KeyPair!);
 		Ctx.State = NetworkState.Auth;
 		Ctx.Listener = new ClientAuthHandler(Ctx);
+		Vm.Encrypting.Complete();
 	}
 
 	/// <summary>
@@ -92,6 +98,6 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 	/// <param name="packet">The received packet containing information about the error.</param>
 	public void OnError(ErrorS2CPacket packet)
 	{
-		throw new NotImplementedException();
+		Vm.Error(packet.Error);
 	}
 }
