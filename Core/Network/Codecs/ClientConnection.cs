@@ -32,7 +32,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 		set => Channel.GetAttribute(ProtocolKey).Set(value);
 	}
 
-	public static async Task<ClientConnection> ServerConnect(string host, int port)
+	public static async Task<ClientConnection> ServerConnect(IPAddress host, int port)
 	{
 		var connection = new ClientConnection(NetworkSide.Client);
 		var workerGroup = new MultithreadEventLoopGroup();
@@ -42,7 +42,7 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 			.Channel<TcpSocketChannel>()
 			.Option(ChannelOption.TcpNodelay, true)
 			.Handler(new ClientConnectionInitializer(connection))
-			.ConnectAsync(IPAddress.Parse(host), port);
+			.ConnectAsync(host, port);
 
 		return connection;
 	}
@@ -87,6 +87,10 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 	public async Task EnableSecureSocketLayer(X509Certificate2? certificate = null)
 	{
 		var taskCompletionSource = new TaskCompletionSource();
+		// Needs to be temporarily disabled because the
+		//  SSL handshake must not have our own packet handlers.
+		// Normally, SSL is enabled before any custom packets are sent,
+		//  but we need packet handling in order to send the capabilities.
 		DisablePacketHandling();
 
 		if (Side == NetworkSide.Server)

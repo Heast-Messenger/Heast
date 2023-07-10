@@ -25,7 +25,7 @@ public partial class CustomServerPanel : LoginBase
 
 	private void Button_OnConnect(object? sender, RoutedEventArgs e)
 	{
-		LoginWindowViewModel.Connect();
+		LoginWindowViewModel.ConnectCustom();
 	}
 
 	private void Button_OnAdd(object? sender, RoutedEventArgs e)
@@ -43,7 +43,7 @@ public partial class CustomServerPanel : LoginBase
 
 		if (e.ClickCount == 2)
 		{
-			LoginWindowViewModel.Connect();
+			LoginWindowViewModel.ConnectCustom();
 		}
 	}
 }

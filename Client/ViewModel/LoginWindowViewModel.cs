@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -19,6 +21,7 @@ namespace Client.ViewModel;
 
 public class LoginWindowViewModel : ViewModelBase
 {
+	private ConnectionViewModel _connectionViewModel = null!;
 	private LoginBase _content;
 	private string _customServerAddress = string.Empty;
 	private string _error = string.Empty;
@@ -71,11 +74,11 @@ public class LoginWindowViewModel : ViewModelBase
 
 	public ObservableCollection<CustomServer> CustomServers { get; set; } = new();
 
-	public ObservableCollection<ConnectionStep> ConnectionSteps { get; set; } = new()
+	public ConnectionViewModel ConnectionViewModel
 	{
-		Model.ConnectionSteps.HelloC2S,
-		Model.ConnectionSteps.HelloS2C
-	};
+		get => _connectionViewModel;
+		private set => RaiseAndSetIfChanged(ref _connectionViewModel, value);
+	}
 
 	public void Resize(object? sender, EventArgs args)
 	{
@@ -100,21 +103,6 @@ public class LoginWindowViewModel : ViewModelBase
 		if (Content.Back is not null)
 		{
 			Content = Content.Back;
-		}
-	}
-
-	public async void ConnectOfficial()
-	{
-		try
-		{
-			Error = string.Empty;
-			const string host = "heast.ddns.net";
-			const int port = 23010;
-			await ClientNetwork.Connect(host, port);
-		}
-		catch (Exception e)
-		{
-			Error = e.Message;
 		}
 	}
 
@@ -174,59 +162,93 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 	}
 
-	public async void Connect()
+	public async void ConnectOfficial()
 	{
-		try
-		{
-			Error = string.Empty;
-			var isIpv4 = Validation.IsIpv4(CustomServerAddress);
-			var isDomain = Validation.IsDomain(CustomServerAddress);
-			if (isIpv4 || isDomain)
-			{
-				var host = CustomServerAddress.Split(":")[0];
-				var port = 23010;
-				if (CustomServerAddress.Split(":").Length == 2)
-				{
-					port = int.Parse(CustomServerAddress.Split(":")[1]);
-				}
+		Error = await ConnectInternal(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort) ?? "";
+	}
 
-				Content = new ConnectPanel
-				{
-					DataContext = this
-				};
-				await ClientNetwork.Connect(host, port);
-			}
-			else
-			{
-				throw new Exception("Invalid server address");
-			}
-		}
-		catch (Exception e)
+	public async void ConnectCustom()
+	{
+		Validation.Split(CustomServerAddress, out var host, out var port);
+		host ??= ClientNetwork.DefaultHost;
+		port ??= ClientNetwork.DefaultPort;
+		Error = await ConnectInternal(host, (int)port) ?? "";
+	}
+
+	private async void ConnectServer(IPAddress h, int p)
+	{
+		Content = new ConnectPanel
 		{
-			Error = e.Message;
-		}
+			DataContext = this
+		};
+
+		ConnectionViewModel = new ConnectionViewModel();
+		await ClientNetwork.Connect(h, p, ConnectionViewModel);
 	}
 
 	public void AddServer()
 	{
 		Error = string.Empty;
-		var isIpv4 = Validation.IsIpv4(CustomServerAddress);
-		var isDomain = Validation.IsDomain(CustomServerAddress);
-		if (CustomServers.Any(x => x.Address == CustomServerAddress))
-		{
-			Error = "Server already added";
-		}
-		else if (isIpv4 || isDomain)
-		{
-			var server = new CustomServer
-			{
-				Address = CustomServerAddress
-			};
-			CustomServers.Add(server);
-		}
-		else
+
+		Validation.Split(CustomServerAddress, out var host, out var port);
+		host ??= ClientNetwork.DefaultHost;
+		port ??= ClientNetwork.DefaultPort;
+		if (!Validation.Validate(host, (int)port, out _, out _, out _))
 		{
 			Error = "Invalid server address";
+			return;
 		}
+
+		if (CustomServers.Any(x => x.Address == $"{host}:{port}"))
+		{
+			Error = "Server already added";
+			return;
+		}
+
+		CustomServers.Add(new CustomServer
+		{
+			Address = $"{host}:{port}"
+		});
+	}
+
+	private async Task<string?> ConnectInternal(string host, int port)
+	{
+		try
+		{
+			IPAddress address = null!;
+			if (!Validation.Validate(host, port, out var localhost, out var domain, out var ipv4))
+			{
+				throw new Exception("Invalid server address");
+			}
+
+			if (localhost)
+			{
+				address = IPAddress.Parse("127.0.0.1");
+			}
+
+			if (domain)
+			{
+				var entry = await Dns.GetHostEntryAsync(host);
+				if (entry.AddressList.Length <= 0)
+				{
+					throw new Exception("Hostname could not be resolved");
+				}
+
+				address = entry.AddressList[0];
+			}
+
+			if (ipv4)
+			{
+				address = IPAddress.Parse(host);
+			}
+
+			ConnectServer(address, port);
+		}
+		catch (Exception e)
+		{
+			return e.Message;
+		}
+
+		return null;
 	}
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Client.ViewModel;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 
@@ -10,6 +12,8 @@ namespace Client.Network;
 
 public static class ClientNetwork
 {
+	public const string DefaultHost = "heast.ddns.net";
+	public const int DefaultPort = 23010;
 	public static string ClientInfo => "Some Client";
 	public static ClientConnection? Ctx { get; set; }
 	public static ConcurrentQueue<IJob> ActionQueue { get; } = new();
@@ -51,14 +55,19 @@ public static class ClientNetwork
 		ActionQueue.Enqueue(job);
 	}
 
-	public static Task Connect(string host, int port)
+	public static Task Connect(IPAddress host, int port, ConnectionViewModel vm)
 	{
 		return RunAsync(async () =>
 		{
 			Console.WriteLine($"Connecting to {host}:{port}...");
+			vm.Add(vm.HelloC2S);
+
 			Ctx = await ClientConnection.ServerConnect(host, port);
-			Ctx.Listener = new ClientHandshakeHandler(Ctx);
+			Ctx.Listener = new ClientHandshakeHandler(Ctx, vm);
+
 			await Ctx.Send(new HelloC2SPacket());
+			vm.HelloC2S.Complete();
+			vm.Add(vm.HelloS2C);
 		});
 	}
 }

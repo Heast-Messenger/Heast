@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using Client.ViewModel;
 using Core.Network;
 using Core.Network.Codecs;
 using Core.Network.Listeners;
@@ -10,13 +11,14 @@ namespace Client.Network;
 
 public class ClientHandshakeHandler : IClientHandshakeListener
 {
-	public ClientHandshakeHandler(ClientConnection ctx)
+	public ClientHandshakeHandler(ClientConnection ctx, ConnectionViewModel vm)
 	{
 		Ctx = ctx;
+		Vm = vm;
 	}
 
+	private ConnectionViewModel Vm { get; }
 	private ClientConnection Ctx { get; }
-
 	private Aes? KeyPair { get; set; }
 
 	/// <summary>
@@ -26,12 +28,17 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 	/// <param name="packet">The received packet containing the server capabilities.</param>
 	public async void OnHello(HelloS2CPacket packet)
 	{
+		Vm.HelloS2C.Complete();
 		if (packet.Capabilities.HasFlag(Capabilities.Ssl))
 		{
+			Vm.Add(Vm.EstablishSsl);
 			await Ctx.EnableSecureSocketLayer();
+			Vm.EstablishSsl.Complete();
 		}
 
+		Vm.Add(Vm.RequestConnection);
 		await Ctx.Send(new ConnectC2SPacket(ClientNetwork.ClientInfo));
+		Vm.RequestConnection.Complete();
 	}
 
 	/// <summary>

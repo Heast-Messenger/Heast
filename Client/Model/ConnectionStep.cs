@@ -1,32 +1,36 @@
+using Client.ViewModel;
 using Core.Network;
 
 namespace Client.Model;
 
-public class ConnectionStep
+public class ConnectionStep : ViewModelBase
 {
+	private ConnectionStatus _status = ConnectionStatus.Pending;
+
+	public ConnectionStatus Status
+	{
+		get => _status;
+		private set => RaiseAndSetIfChanged(ref _status, value);
+	}
+
 	public NetworkSide Target { get; init; } = NetworkSide.Client;
-	public ConnectionStatus Status { get; set; } = ConnectionStatus.Pending;
 	public string Title { get; init; } = string.Empty;
 	public string Description { get; init; } = string.Empty;
 	public string Helplink { get; init; } = string.Empty;
-}
 
-public static class ConnectionSteps
-{
-	public static ConnectionStep HelloC2S => new()
+	public void Complete()
 	{
-		Target = NetworkSide.Server,
-		Title = "Pinging Server",
-		Description = "The first step of the HNEP (Heast Network Exchange Protocol). " +
-		              "Informs the server to get ready to connect.",
-		Helplink = "https://google.com"
-	};
+		if (Status == ConnectionStatus.Pending)
+		{
+			Status = ConnectionStatus.Successful;
+		}
+	}
 
-	public static ConnectionStep HelloS2C => new()
+	public void Fail()
 	{
-		Target = NetworkSide.Client,
-		Title = "Sending Capabilities",
-		Description = "The server now sends their capabilities to the client. " +
-		              "These include flags such as if SSL communication is supported."
-	};
+		if (Status == ConnectionStatus.Pending)
+		{
+			Status = ConnectionStatus.Failed;
+		}
+	}
 }
