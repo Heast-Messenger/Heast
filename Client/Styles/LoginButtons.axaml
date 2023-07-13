@@ -1,0 +1,67 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Client.View.Controls">
+   <Design.PreviewWith>
+      <Border Padding="20.0" Background="Black">
+         <StackPanel Orientation="Vertical" Spacing="20.0">
+            <StackPanel.Styles>
+               <StyleInclude Source="/View/Controls/Icon.axaml" />
+            </StackPanel.Styles>
+            <Button Foreground="Red">
+               <controls:Icon
+                  Source="{StaticResource Icon.Compass-Fill}"
+                  Text="Hello" />
+            </Button>
+            <Button>
+               <controls:Icon
+                  Source="{StaticResource Icon.Compass-Fill}"
+                  Text="Hello" />
+            </Button>
+            <Button IsEnabled="False">
+               <controls:Icon
+                  Source="{StaticResource Icon.Compass-Fill}"
+                  Text="Hello" />
+            </Button>
+         </StackPanel>
+      </Border>
+   </Design.PreviewWith>
+
+   <!-- Add Styles Here -->
+   <Style Selector="Button">
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="15.0 18.0" />
+      <Setter Property="CornerRadius" Value="10.0" />
+      <Setter Property="Background" Value="{DynamicResource Middle}" />
+      <Setter Property="Foreground" Value="{DynamicResource Light}" />
+      <Setter Property="ClipToBounds" Value="False" />
+   </Style>
+
+   <Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="BoxShadow" Value="0 8 #FF5363F0" />
+      <Setter Property="RenderTransform" Value="translateY(0px)" />
+      <Setter Property="Transitions">
+         <Setter.Value>
+            <Transitions>
+               <BoxShadowsTransition Property="BoxShadow"
+                                     Duration="0:0:0.2"
+                                     Easing="CubicEaseOut" />
+               <TransformOperationsTransition Property="RenderTransform"
+                                              Duration="0:0:0.2"
+                                              Easing="SineEaseOut" />
+            </Transitions>
+         </Setter.Value>
+      </Setter>
+   </Style>
+
+   <Style Selector="Button:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Selection}" />
+      <Setter Property="Foreground" Value="{DynamicResource White}" />
+      <Setter Property="BoxShadow" Value="0 4 #FF5363F0" />
+      <Setter Property="RenderTransform" Value="translateY(4px)" />
+   </Style>
+
+   <Style Selector="Button controls|Icon">
+      <Setter Property="FontSize" Value="18.0" />
+      <Setter Property="FontFamily" Value="{DynamicResource Outfit}" />
+   </Style>
+</Styles>

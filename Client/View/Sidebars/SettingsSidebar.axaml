@@ -28,7 +28,7 @@
          <controls:RadioButton
             Command="{Binding Button_OnAccount}">
             <controls:RadioButton.Content>
-               <controls:IconText
+               <controls:Icon
                   Text="Account"
                   Source="{extensions:Conditional {CompiledBinding 
                   Path=$parent[controls:RadioButton].IsChecked}, 
@@ -39,7 +39,7 @@
          <controls:RadioButton
             Command="{Binding Button_OnSecurity}">
             <controls:RadioButton.Content>
-               <controls:IconText
+               <controls:Icon
                   Text="Security"
                   Source="{extensions:Conditional {CompiledBinding 
                   Path=$parent[controls:RadioButton].IsChecked}, 
@@ -50,7 +50,7 @@
          <controls:RadioButton
             Command="{Binding Button_OnNotifications}">
             <controls:RadioButton.Content>
-               <controls:IconText
+               <controls:Icon
                   Text="Notifications"
                   Source="{extensions:Conditional {CompiledBinding 
                   Path=$parent[controls:RadioButton].IsChecked}, 
@@ -61,7 +61,7 @@
          <controls:RadioButton
             Command="{Binding Button_OnAppearance}">
             <controls:RadioButton.Content>
-               <controls:IconText
+               <controls:Icon
                   Text="Appearance"
                   Source="{extensions:Conditional {CompiledBinding 
                   Path=$parent[controls:RadioButton].IsChecked}, 
@@ -72,7 +72,7 @@
          <controls:RadioButton
             Command="{Binding Button_OnStatus}">
             <controls:RadioButton.Content>
-               <controls:IconText
+               <controls:Icon
                   Text="Status"
                   Source="{extensions:Conditional {CompiledBinding 
                   Path=$parent[controls:RadioButton].IsChecked}, 

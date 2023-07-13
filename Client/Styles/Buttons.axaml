@@ -29,6 +29,19 @@
                           Text="Hello World" />
             </Button>
          </WrapPanel>
+         <WrapPanel Background="{DynamicResource Middle}">
+            <Button Classes="Unstyled">
+               <TextBlock FontFamily="{StaticResource Icons}"
+                          Text="{DynamicResource Icon.Apple-Fill}"
+                          Foreground="{DynamicResource White}" />
+            </Button>
+            <Button Classes="Unstyled">
+               <TextBlock FontFamily="{StaticResource Inter}"
+                          FontWeight="Light"
+                          Foreground="{DynamicResource White}"
+                          Text="Hello World" />
+            </Button>
+         </WrapPanel>
       </StackPanel>
    </Design.PreviewWith>
 
@@ -44,18 +57,21 @@
 
    <Style Selector="Button:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
-      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
    </Style>
 
    <Style Selector="Button.Unstyled">
+      <Setter Property="CornerRadius" Value="0.0" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
       <Setter Property="Margin" Value="0.0" />
    </Style>
 
    <Style Selector="Button:pointerover.Unstyled /template/ ContentPresenter">
-      <Setter Property="Background" Value="Transparent" />
-      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Background" Value="{TemplateBinding Background}" />
+      <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
+      <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}" />
    </Style>
 
    <Style Selector="Button TextBlock">

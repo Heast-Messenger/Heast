@@ -3,56 +3,54 @@
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
                 xmlns:controls="clr-namespace:Client.View.Controls"
+                xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
                 x:Class="Client.View.Content.Login.SignupPanel">
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Resources>
-      <controls:IconText
-         x:Key="Content.Signup"
-         Text="Sign up"
-         Source="{StaticResource Icon.Add}"
-         Foreground="{DynamicResource White}" />
-   </view:LoginBase.Resources>
+   <UserControl.Styles>
+      <StyleInclude Source="Templates/TitleTemplate.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+   </UserControl.Styles>
 
-   <Grid RowDefinitions="Auto, Auto, *, Auto">
-      <TextBlock Grid.Row="0"
-                 VerticalAlignment="Center"
-                 Classes="Bold Title">
-         Welcome!
-      </TextBlock>
+   <templates:TitleTemplate>
+      <templates:TitleTemplate.Title>
+         <Run Text="Welcome!" />
+      </templates:TitleTemplate.Title>
+      <templates:TitleTemplate.Subtitle>
+         <Run Text="Tell us your" />
+         <Run Text="name, email" FontWeight="Black" />
+         <Run Text="address and choose a" />
+         <Run Text="strong password." FontWeight="Black" />
+      </templates:TitleTemplate.Subtitle>
 
-      <TextBlock Grid.Row="1"
-                 VerticalAlignment="Center"
-                 TextWrapping="Wrap"
-                 Classes="Subtitle">
-         <!-- <Run Text="Tell us your" /> -->
-         <!-- <Run Text="name, email" Classes="Bold" /> -->
-         <!-- <Run Text="address and choose a" /> -->
-         <!-- <Run Text="strong password." Classes="Bold" /> -->
-      </TextBlock>
+      <StackPanel Orientation="Vertical">
+         <StackPanel.Styles>
+            <Style Selector="TextBlock.Subtitle">
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Margin" Value="0 30.0 0 0" />
+            </Style>
+         </StackPanel.Styles>
 
-      <Border Grid.Row="2" />
+         <TextBox Watermark="Username"
+                  Text="{Binding SignupUsername}" />
+         <TextBox Watermark="Email address"
+                  Text="{Binding SignupEmail}" />
+         <TextBox Watermark="Password"
+                  Classes="Password"
+                  Text="{Binding SignupPassword}" />
 
-      <StackPanel Grid.Row="3"
-                  Orientation="Vertical">
-         <TextBox
-            Watermark="Username"
-            Text="{Binding SignupUsername}" />
-         <TextBox
-            Watermark="Email address"
-            Text="{Binding SignupEmail}" />
-         <TextBox
-            Watermark="Password"
-            Classes="Password"
-            Text="{Binding SignupPassword}" />
-         <TextBlock
-            Text="Sign up when you're ready!"
-            Classes="Watermark Bold" />
-         <Button
-            Content="{StaticResource Content.Signup}"
-            Command="{Binding Signup}" />
+         <TextBlock Text="Sign up when you're ready!"
+                    Classes="Subtitle" />
+         <Button Command="{Binding Signup}">
+            <Button.Content>
+               <controls:Icon
+                  Text="Sign up"
+                  Source="{StaticResource Icon.Add-Fill}"
+                  Foreground="{DynamicResource White}" />
+            </Button.Content>
+         </Button>
       </StackPanel>
-   </Grid>
+   </templates:TitleTemplate>
 </view:LoginBase>

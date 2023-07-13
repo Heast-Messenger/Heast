@@ -29,6 +29,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 	public async void OnHello(HelloS2CPacket packet)
 	{
 		Vm.HelloS2C.Complete();
+		Vm.Capabilities = packet.Capabilities;
 		if (packet.Capabilities.HasFlag(Capabilities.Ssl))
 		{
 			Vm.Add(Vm.EstablishSsl);
@@ -89,6 +90,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 		Ctx.State = NetworkState.Auth;
 		Ctx.Listener = new ClientAuthHandler(Ctx);
 		Vm.Encrypting.Complete();
+		Vm.Complete();
 	}
 
 	/// <summary>

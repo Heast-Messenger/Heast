@@ -1,20 +1,55 @@
-<Styles xmlns="https://github.com/avaloniaui"
+﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Client.View.Controls"
         xmlns:converter="clr-namespace:Client.Converter">
    <Design.PreviewWith>
       <Border Padding="20.0" Background="{DynamicResource Dark}">
-         <StackPanel>
-            <Button Foreground="{DynamicResource White}">
-               <controls:Icon
-                  FontFamily="{StaticResource Inter}"
-                  Source="{StaticResource Icon.Compass-Fill}" />
-            </Button>
-            <Button Foreground="{DynamicResource White}">
-               <controls:Icon
-                  FontFamily="{StaticResource Inter}"
-                  Source="avares://Client/Assets/Logos/Google.png" />
-            </Button>
+         <StackPanel Orientation="Horizontal" Spacing="20.0">
+            <StackPanel Spacing="20.0">
+               <Button Foreground="{DynamicResource White}">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Text="Hello"
+                     Source="{StaticResource Icon.Compass-Fill}"
+                     Orientation="Horizontal" />
+               </Button>
+               <Button Foreground="{DynamicResource White}">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Text="Hello"
+                     FontSize="30"
+                     Source="{StaticResource Icon.Compass-Fill}"
+                     Orientation="Horizontal" />
+               </Button>
+               <Button Foreground="{DynamicResource White}">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Text="Vertical"
+                     Source="{StaticResource Icon.Compass-Fill}"
+                     Orientation="Vertical" />
+               </Button>
+            </StackPanel>
+
+            <StackPanel Spacing="20.0">
+               <Button Foreground="Red">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Source="{StaticResource Icon.Compass-Fill}"
+                     Orientation="Horizontal" />
+               </Button>
+               <Button Foreground="Aquamarine">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Text="Hello"
+                     FontSize="30"
+                     Orientation="Horizontal" />
+               </Button>
+               <Button Foreground="{DynamicResource White}">
+                  <controls:Icon
+                     FontFamily="{StaticResource Inter}"
+                     Source="avares://Client/Assets/Logos/Google.png" />
+               </Button>
+            </StackPanel>
          </StackPanel>
       </Border>
    </Design.PreviewWith>
@@ -27,34 +62,60 @@
 
    <Style Selector="controls|Icon">
       <!-- Set Defaults -->
-      <Setter Property="Foreground" Value="{DynamicResource White}" />
-      <Setter Property="Background" Value="Transparent" />
-      <Setter Property="CornerRadius" Value="3.0" />
+      <Setter Property="CornerRadius" Value="6.0" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="FontFamily" Value="{StaticResource Inter}" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="IconSize" Value="18.0" />
       <Setter Property="Template">
          <ControlTemplate>
-            <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
-               <Panel>
-                  <TextBlock
-                     IsVisible="{TemplateBinding Source,
-                     Converter={StaticResource IsIconConverter}}"
-                     Text="{TemplateBinding Source}"
-                     FontFamily="{StaticResource Icons}"
-                     FontSize="18.0"
-                     TextAlignment="Center"
-                     Padding="{TemplateBinding Padding}"
-                     LineHeight="{TemplateBinding FontSize}"
-                     Foreground="{TemplateBinding Foreground}" />
-                  <Image
-                     IsVisible="{TemplateBinding Source,
-                     Converter={StaticResource IsImageConverter}}"
-                     Source="{TemplateBinding Source,
-                     Converter={StaticResource ImageLoader}}"
-                     Width="18.0" Height="18.0" />
-               </Panel>
-            </Border>
+            <StackPanel Orientation="{TemplateBinding Orientation}"
+                        Spacing="10.0">
+
+               <!-- Icon -->
+               <Border
+                  IsVisible="{TemplateBinding Source,
+                  Converter={x:Static ObjectConverters.IsNotNull}}"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  VerticalAlignment="Center">
+                  <Panel>
+                     <TextBlock
+                        IsVisible="{TemplateBinding Source,
+                        Converter={StaticResource IsIconConverter}}"
+                        Text="{TemplateBinding Source}"
+                        TextAlignment="Center"
+                        Padding="{TemplateBinding Padding}"
+                        LineHeight="{TemplateBinding FontSize}"
+                        FontSize="{TemplateBinding IconSize}"
+                        FontFamily="{StaticResource Icons}"
+                        Foreground="{TemplateBinding Foreground}" />
+                     <Image
+                        IsVisible="{TemplateBinding Source,
+                        Converter={StaticResource IsImageConverter}}"
+                        Source="{TemplateBinding Source,
+                        Converter={StaticResource ImageLoader}}"
+                        Width="{TemplateBinding IconSize}"
+                        Height="{TemplateBinding IconSize}" />
+                  </Panel>
+               </Border>
+
+               <!-- Text -->
+               <TextBlock
+                  IsVisible="{TemplateBinding Text,
+                  Converter={x:Static ObjectConverters.IsNotNull}}"
+                  Foreground="{TemplateBinding Foreground}"
+                  TextWrapping="Wrap"
+                  FontSize="{TemplateBinding FontSize}"
+                  FontFamily="{TemplateBinding FontFamily}"
+                  FontWeight="{TemplateBinding FontWeight}"
+                  Text="{TemplateBinding Text}"
+                  VerticalAlignment="Center"
+                  LineHeight="{TemplateBinding FontSize}"
+                  TextAlignment="Center" />
+            </StackPanel>
          </ControlTemplate>
       </Setter>
    </Style>

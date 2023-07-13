@@ -22,10 +22,6 @@ public partial class ServerOptionsPanel : LoginBase
 
 	private void Button_OnOfficial(object? sender, RoutedEventArgs e)
 	{
-		LoginWindowViewModel.Content = new LoginOptionsPanel
-		{
-			DataContext = DataContext
-		};
 		LoginWindowViewModel.ConnectOfficial();
 	}
 

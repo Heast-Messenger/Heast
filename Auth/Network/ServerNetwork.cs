@@ -26,6 +26,12 @@ public static class ServerNetwork
 		{
 			Capabilities |= Capabilities.Ssl;
 		}
+
+		{
+			Capabilities |= Capabilities.Signup |
+			                Capabilities.Login |
+			                Capabilities.Guest;
+		}
 	}
 
 	public static Task Disconnect(ClientConnection connection)

@@ -2,7 +2,9 @@ using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Client.Model;
+using Client.ViewModel;
 
 namespace Client.View.Content.Login;
 
@@ -13,12 +15,14 @@ public partial class ConnectPanel : LoginBase
 		InitializeComponent();
 	}
 
-	public override LoginBase Back => new CustomServerPanel
+	public override LoginBase Back => new ServerOptionsPanel
 	{
 		DataContext = DataContext
 	};
 
 	public override Size? WindowSize => new(400.0, 500.0);
+
+	private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 
 	private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
 	{
@@ -30,5 +34,13 @@ public partial class ConnectPanel : LoginBase
 				UseShellExecute = true
 			});
 		}
+	}
+
+	private void Button_OnClick(object? sender, RoutedEventArgs e)
+	{
+		LoginWindowViewModel.Content = new LoginOptionsPanel
+		{
+			DataContext = DataContext
+		};
 	}
 }

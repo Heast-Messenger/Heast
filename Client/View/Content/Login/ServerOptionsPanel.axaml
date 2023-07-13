@@ -4,33 +4,19 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:utility="clr-namespace:Client.Utility"
+   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
    x:Class="Client.View.Content.Login.ServerOptionsPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
+   <UserControl.Styles>
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+   </UserControl.Styles>
+
    <Grid RowDefinitions="Auto, Auto, *">
-      <TextBlock Grid.Row="0"
-                 VerticalAlignment="Center"
-                 FontSize="32.0"
-                 FontFamily="{StaticResource Poppins}"
-                 Margin="0 0 0 12.0">
-         <Run Text="Welcome to"
-              Foreground="{DynamicResource White}" />
-         <LineBreak />
-         <Run Text="Heast Messenger">
-            <Run.Foreground>
-               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                  <LinearGradientBrush.GradientStops>
-                     <GradientStop Offset="0" Color="#FFFDB242" />
-                     <GradientStop Offset="1" Color="#FFFFCF8A" />
-                  </LinearGradientBrush.GradientStops>
-               </LinearGradientBrush>
-            </Run.Foreground>
-         </Run>
-      </TextBlock>
+      <templates:Title Grid.Row="0" />
 
       <TextBlock Grid.Row="1" Classes="Subtitle">
          <Run Text="Choose whether to connect to an" />
@@ -38,7 +24,7 @@
          <Run Text="or" />
          <Run Text="custom server." FontWeight="Bold" />
          <Run Text="For more info click" />
-         <utility:Hyperlink Text="here" Url="https://www.google.com" />
+         <controls:Hyperlink Text="here" Url="https://www.google.com" />
       </TextBlock>
 
       <Grid Grid.Row="2">
@@ -50,7 +36,7 @@
                  Padding="16.0"
                  Canvas.Top="40.0"
                  Canvas.Left="80.0">
-            <controls:IconText
+            <controls:Icon
                Text="Heast Network"
                Source="avares://Client/Assets/Logos/Heast.png"
                FontSize="18.0"
@@ -61,7 +47,7 @@
                  Padding="16.0"
                  Canvas.Top="270.0"
                  Canvas.Left="20.0">
-            <controls:IconText
+            <controls:Icon
                Text="Custom Server"
                Source="{StaticResource Icon.Cloud-Fill}"
                FontSize="18.0"

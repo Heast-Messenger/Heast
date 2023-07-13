@@ -15,7 +15,7 @@ public partial class WelcomePanel : LoginBase
 
 	public override Size? WindowSize => null;
 
-	public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
+	private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 
 	private void Button_OnClick(object? sender, RoutedEventArgs e)
 	{

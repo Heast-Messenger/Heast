@@ -15,7 +15,6 @@
       <SimpleTheme />
 
       <StyleInclude Source="/View/Controls/Icon.axaml" />
-      <StyleInclude Source="/View/Controls/IconText.axaml" />
 
       <StyleInclude Source="/Styles/Scrollbars.axaml" />
       <StyleInclude Source="/Styles/Buttons.axaml" />

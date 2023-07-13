@@ -13,7 +13,7 @@ public class ConditionalExtension : MarkupExtension
 		Binding = binding;
 	}
 
-	public CompiledBindingExtension Binding { get; }
+	private CompiledBindingExtension Binding { get; }
 
 	public object True { get; set; } = null!;
 
@@ -22,7 +22,7 @@ public class ConditionalExtension : MarkupExtension
 	public override object ProvideValue(IServiceProvider serviceProvider)
 	{
 		Binding.Mode = BindingMode.OneWay;
-		if (Binding.ConverterParameter is bool)
+		if (Binding.ConverterParameter is bool or null)
 		{
 			Binding.Converter = new FuncValueConverter<bool, object>(
 				value => value ? True : False);

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Client.ViewModel;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
+using Core.Utility;
 
 namespace Client.Network;
 
 public static class ClientNetwork
 {
-	public const string DefaultHost = "heast.ddns.net";
-	public const int DefaultPort = 23010;
+	public static string DefaultHost { get; } = Shared.Config["default-host"]!;
+	public static int DefaultPort { get; } = int.Parse(Shared.Config["default-port"]!);
 	public static string ClientInfo => "Some Client";
 	public static ClientConnection? Ctx { get; set; }
 	public static ConcurrentQueue<IJob> ActionQueue { get; } = new();

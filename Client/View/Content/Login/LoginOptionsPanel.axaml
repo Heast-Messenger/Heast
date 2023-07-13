@@ -4,70 +4,74 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:controls="clr-namespace:Client.View.Controls"
+   xmlns:extensions="clr-namespace:Client.Extensions"
+   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
    x:Class="Client.View.Content.Login.LoginOptionsPanel">
 
    <Design.DataContext>
       <vm:LoginWindowViewModel />
    </Design.DataContext>
 
-   <view:LoginBase.Resources>
-      <controls:IconText
-         x:Key="Content.Signup"
-         Text="Sign up"
-         Source="{StaticResource Icon.Add}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Login"
-         Text="Log in"
-         Source="{StaticResource Icon.Login-Box}"
-         Foreground="{DynamicResource White}" />
-      <controls:IconText
-         x:Key="Content.Guest"
-         Text="Continue"
-         Source="{StaticResource Icon.User}"
-         Foreground="{DynamicResource White}" />
-   </view:LoginBase.Resources>
+   <UserControl.Styles>
+      <StyleInclude Source="Templates/TitleTemplate.axaml" />
+      <StyleInclude Source="/Styles/LoginButtons.axaml" />
+   </UserControl.Styles>
 
-   <Grid RowDefinitions="Auto, *, Auto">
-      <TextBlock Grid.Row="0" VerticalAlignment="Center"
-                 Classes="Bold Title">
-         <!-- <Run Text="Welcome to" -->
-         <!--      Foreground="{DynamicResource White}" /> -->
-         <!-- <LineBreak /> -->
-         <!-- <Run Text="Heast Messenger"> -->
-         <!--    <Run.Foreground> -->
-         <!--       <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%"> -->
-         <!--          <LinearGradientBrush.GradientStops> -->
-         <!--             <GradientStop Offset="0" Color="#FFFDB242" /> -->
-         <!--             <GradientStop Offset="1" Color="#FFFFCF8A" /> -->
-         <!--          </LinearGradientBrush.GradientStops> -->
-         <!--       </LinearGradientBrush> -->
-         <!--    </Run.Foreground> -->
-         <!-- </Run> -->
-      </TextBlock>
+   <Grid RowDefinitions="Auto, *">
+      <templates:Title Grid.Row="0" />
 
-      <Border Grid.Row="1" />
+      <StackPanel Grid.Row="1" Orientation="Vertical">
+         <StackPanel.Styles>
+            <Style Selector="TextBlock.Subtitle">
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Margin" Value="0 30.0 0 0" />
+            </Style>
+         </StackPanel.Styles>
 
-      <StackPanel Grid.Row="2"
-                  Orientation="Vertical">
          <TextBlock
-            Text="New to Heast?"
-            Classes="Watermark Bold" />
-         <Button
-            Content="{StaticResource Content.Signup}"
-            Click="Button_OnSignup" />
+            x:DataType="vm:LoginWindowViewModel"
+            Text="{extensions:Conditional {CompiledBinding SignupAllowed},
+            True='New to Heast?',
+            False='Account creation is disabled on this server.'}"
+            Classes="Subtitle" />
+         <Button Click="Button_OnSignup"
+                 IsEnabled="{Binding SignupAllowed}">
+            <Button.Content>
+               <controls:Icon
+                  Text="Sign up"
+                  Source="{StaticResource Icon.Add-Fill}" />
+            </Button.Content>
+         </Button>
+
          <TextBlock
-            Text="Already a member?"
-            Classes="Watermark Bold" />
-         <Button
-            Content="{StaticResource Content.Login}"
-            Click="Button_OnLogin" />
+            x:DataType="vm:LoginWindowViewModel"
+            Text="{extensions:Conditional {CompiledBinding LoginAllowed},
+            True='Already a member?',
+            False='Login is disabled on this server.'}"
+            Classes="Subtitle" />
+         <Button Click="Button_OnLogin"
+                 IsEnabled="{Binding LoginAllowed}">
+            <Button.Content>
+               <controls:Icon
+                  Text="Log in"
+                  Source="{StaticResource Icon.Login-Box-Fill}" />
+            </Button.Content>
+         </Button>
+
          <TextBlock
-            Text="Continue as a guest:"
-            Classes="Watermark Bold" />
-         <Button
-            Content="{StaticResource Content.Guest}"
-            Click="Button_OnGuest" />
+            x:DataType="vm:LoginWindowViewModel"
+            Text="{extensions:Conditional {CompiledBinding GuestAllowed},
+            True='Continue as a guest:',
+            False='Guest accounts are disabled on this server.'}"
+            Classes="Subtitle" />
+         <Button Click="Button_OnGuest"
+                 IsEnabled="{Binding GuestAllowed}">
+            <Button.Content>
+               <controls:Icon
+                  Text="Continue"
+                  Source="{StaticResource Icon.User-Fill}" />
+            </Button.Content>
+         </Button>
       </StackPanel>
    </Grid>
 </view:LoginBase>

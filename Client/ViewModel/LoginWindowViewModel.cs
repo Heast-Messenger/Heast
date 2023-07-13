@@ -2,13 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Threading;
+using System.Net.Sockets;
 using Client.Model;
 using Client.Network;
-using Client.Utility;
 using Client.View.Content;
 using Client.View.Content.Login;
 using Core.Network;
@@ -22,35 +18,17 @@ namespace Client.ViewModel;
 public class LoginWindowViewModel : ViewModelBase
 {
 	private ConnectionViewModel _connectionViewModel = null!;
-	private LoginBase _content;
+	private LoginBase _content = new WelcomePanel();
 	private string _customServerAddress = string.Empty;
 	private string _error = string.Empty;
-	private Size _velocity;
-	private Size _windowSize = new(400.0, 660.0);
-
-	public LoginWindowViewModel()
-	{
-		_content = new WelcomePanel();
-		DispatcherTimer resizeTimer = new();
-		resizeTimer.Interval = TimeSpan.FromMilliseconds(1);
-		resizeTimer.Tick += Resize;
-		resizeTimer.Start();
-	}
 
 	private static Func<ClientConnection?> Connection => UseNetworking();
-	private static Func<Window> Window => UseCurrentWindow();
 
 	public LoginBase Content
 	{
 		get => _content;
-		set
-		{
-			_windowSize = value.WindowSize ?? new Size(400.0, 660.0);
-			RaiseAndSetIfChanged(ref _content, value);
-		}
+		set => RaiseAndSetIfChanged(ref _content, value);
 	}
-
-	public string? Version => App.Version;
 
 	public string Error
 	{
@@ -80,23 +58,9 @@ public class LoginWindowViewModel : ViewModelBase
 		private set => RaiseAndSetIfChanged(ref _connectionViewModel, value);
 	}
 
-	public void Resize(object? sender, EventArgs args)
-	{
-		var window = Window();
-		if (window.PlatformImpl is null)
-		{
-			return;
-		}
-
-		var from = window.FrameSize!.Value;
-		var to = _windowSize;
-		var diff = to - from;
-		if (Math.Abs(diff.Width) > 0.1 || Math.Abs(diff.Height) > 0.1)
-		{
-			var val = SmoothDamp.Read2d(from, to, ref _velocity, 1.0f, 0.1f);
-			// window.Size = val;
-		}
-	}
+	public bool GuestAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Guest);
+	public bool LoginAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Login);
+	public bool SignupAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Signup);
 
 	public void Back()
 	{
@@ -116,6 +80,7 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 		else
 		{
+			// Replace with dynamic translations
 			Error = "Wait for Heast services to connect...";
 		}
 	}
@@ -162,17 +127,17 @@ public class LoginWindowViewModel : ViewModelBase
 		}
 	}
 
-	public async void ConnectOfficial()
+	public void ConnectOfficial()
 	{
-		Error = await ConnectInternal(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort) ?? "";
+		Error = ConnectInternal(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort);
 	}
 
-	public async void ConnectCustom()
+	public void ConnectCustom()
 	{
 		Validation.Split(CustomServerAddress, out var host, out var port);
 		host ??= ClientNetwork.DefaultHost;
 		port ??= ClientNetwork.DefaultPort;
-		Error = await ConnectInternal(host, (int)port) ?? "";
+		Error = ConnectInternal(host, (int)port);
 	}
 
 	private async void ConnectServer(IPAddress h, int p)
@@ -211,44 +176,48 @@ public class LoginWindowViewModel : ViewModelBase
 		});
 	}
 
-	private async Task<string?> ConnectInternal(string host, int port)
+	private string ConnectInternal(string host, int port)
 	{
-		try
+		IPAddress address = null!;
+		if (!Validation.Validate(host, port, out var localhost, out var domain, out var ipv4))
 		{
-			IPAddress address = null!;
-			if (!Validation.Validate(host, port, out var localhost, out var domain, out var ipv4))
-			{
-				throw new Exception("Invalid server address");
-			}
+			return "Invalid server address";
+		}
 
-			if (localhost)
+		if (localhost)
+		{
+			try
 			{
 				address = IPAddress.Parse("127.0.0.1");
 			}
-
-			if (domain)
+			catch (FormatException)
 			{
-				var entry = await Dns.GetHostEntryAsync(host);
-				if (entry.AddressList.Length <= 0)
-				{
-					throw new Exception("Hostname could not be resolved");
-				}
-
-				address = entry.AddressList[0];
+				return "Invalid IPv4 address format";
 			}
-
-			if (ipv4)
-			{
-				address = IPAddress.Parse(host);
-			}
-
-			ConnectServer(address, port);
 		}
-		catch (Exception e)
+
+		if (domain)
 		{
-			return e.Message;
+			try
+			{
+				var entry = Dns.GetHostEntry(host);
+				if (entry.AddressList.Length > 0)
+				{
+					address = entry.AddressList[0];
+				}
+			}
+			catch (SocketException)
+			{
+				return "The hostname could not be resolved";
+			}
 		}
 
-		return null;
+		if (ipv4)
+		{
+			address = IPAddress.Parse(host);
+		}
+
+		ConnectServer(address, port);
+		return string.Empty;
 	}
 }

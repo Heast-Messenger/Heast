@@ -8,6 +8,7 @@ namespace Client.ViewModel;
 public class ConnectionViewModel : ViewModelBase
 {
 	public ObservableCollection<ConnectionStep> ConnectionSteps { get; set; } = new();
+	public bool ConnectingDone { get; set; }
 
 	public ConnectionStep HelloC2S { get; } = new()
 	{
@@ -66,6 +67,8 @@ public class ConnectionViewModel : ViewModelBase
 		              "telling the client to finally enable the encryption handlers in the pipeline."
 	};
 
+	public Capabilities Capabilities { get; set; }
+
 	public void Add(ConnectionStep step)
 	{
 		if (!ConnectionSteps.Contains(step))
@@ -78,5 +81,11 @@ public class ConnectionViewModel : ViewModelBase
 	{
 		var step = ConnectionSteps.Last();
 		step.Fail();
+	}
+
+	public void Complete()
+	{
+		ConnectingDone = true;
+		RaisePropertyChanged(nameof(ConnectingDone));
 	}
 }

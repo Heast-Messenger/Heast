@@ -5,7 +5,7 @@ using Avalonia.Controls.Documents;
 using Avalonia.Data;
 using Avalonia.Threading;
 
-namespace Client.Utility;
+namespace Client.View.Controls;
 
 public class Typewriter : TextBlock
 {

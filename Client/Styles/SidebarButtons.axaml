@@ -9,12 +9,12 @@
             </StackPanel.Styles>
             <controls:RadioButton IsChecked="False"
                                   Foreground="White">
-               <controls:IconText
+               <controls:Icon
                   Source="{StaticResource Icon.Compass-Fill}"
                   Text="Hello" />
             </controls:RadioButton>
             <controls:RadioButton IsChecked="True">
-               <controls:IconText
+               <controls:Icon
                   Source="{StaticResource Icon.Compass-Fill}"
                   Text="Hello" />
             </controls:RadioButton>
@@ -27,7 +27,7 @@
       <Setter Property="DockPanel.Dock" Value="Top" />
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="HorizontalContentAlignment" Value="Left" />
-      <Setter Property="Padding" Value="10.0" />
+      <Setter Property="Padding" Value="14.0" />
    </Style>
 
    <Style Selector="Button:pointerover /template/ ContentPresenter">
@@ -40,17 +40,16 @@
    </Style>
 
    <Style Selector="Button:unchecked /template/ ContentPresenter">
-      <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="{DynamicResource Light}" />
+      <Setter Property="Background" Value="Transparent" />
    </Style>
 
    <Style Selector="Button:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
    </Style>
 
-   <Style Selector="Button controls|IconText">
+   <Style Selector="Button controls|Icon">
       <Setter Property="FontSize" Value="14.0" />
-      <Setter Property="Padding" Value="8.0" />
       <Setter Property="CornerRadius" Value="8.0" />
    </Style>
 

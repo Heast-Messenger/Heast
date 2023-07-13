@@ -6,7 +6,7 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Media;
 
-namespace Client.Utility;
+namespace Client.View.Controls;
 
 public class Hyperlink : TextBlock
 {

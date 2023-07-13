@@ -16,6 +16,7 @@
                           Inlines="{TemplateBinding Title}" />
                <TextBlock Grid.Row="1"
                           Classes="Subtitle"
+                          FontWeight="Normal"
                           Inlines="{TemplateBinding Subtitle}" />
                <ContentPresenter Grid.Row="2"
                                  Margin="0 20.0 0 0"

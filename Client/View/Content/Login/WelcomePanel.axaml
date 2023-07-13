@@ -4,6 +4,7 @@
    xmlns:view="clr-namespace:Client.View.Content"
    xmlns:vm="clr-namespace:Client.ViewModel"
    xmlns:controls="clr-namespace:Client.View.Controls"
+   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
    x:Class="Client.View.Content.Login.WelcomePanel">
 
    <Design.DataContext>
@@ -11,24 +12,7 @@
    </Design.DataContext>
 
    <Grid RowDefinitions="Auto, *, 50.0">
-      <TextBlock Grid.Row="0"
-                 VerticalAlignment="Center"
-                 FontSize="32.0"
-                 FontFamily="{StaticResource Poppins}">
-         <Run Text="Welcome to"
-              Foreground="{DynamicResource White}" />
-         <LineBreak />
-         <Run Text="Heast Messenger">
-            <Run.Foreground>
-               <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                  <LinearGradientBrush.GradientStops>
-                     <GradientStop Offset="0" Color="#FFFDB242" />
-                     <GradientStop Offset="1" Color="#FFFFCF8A" />
-                  </LinearGradientBrush.GradientStops>
-               </LinearGradientBrush>
-            </Run.Foreground>
-         </Run>
-      </TextBlock>
+      <templates:Title Grid.Row="0" />
 
       <Image Grid.Row="1" Source="/Assets/Logos/Heast.png" />
 
