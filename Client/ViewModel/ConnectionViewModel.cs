@@ -24,7 +24,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Client,
 		Title = "Receiving Capabilities",
 		Description = "The server now sends their capabilities to the client. " +
-		              "These include flags such as if SSL communication is supported."
+		              "These include flags such as if SSL communication is supported.",
+		Helplink = null
 	};
 
 	public ConnectionStep EstablishSsl { get; } = new()
@@ -32,7 +33,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Client,
 		Title = "Secure Socket Layer Detected",
 		Description = "The server is capable of handling inbound SSL connections. " +
-		              "The client will now try to establish an SSL connection."
+		              "The client will now try to establish an SSL connection.",
+		Helplink = null
 	};
 
 	public ConnectionStep RequestConnection { get; } = new()
@@ -40,7 +42,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Server,
 		Title = "Sending Client Information",
 		Description = "The client now sends their information to the server. " +
-		              "The information includes cookies such as the UA (user-agent) and more."
+		              "The information includes cookies such as the UA (user-agent) and more.",
+		Helplink = null
 	};
 
 	public ConnectionStep ReceivedPublicKey { get; } = new()
@@ -48,7 +51,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Client,
 		Title = "Received Public Key",
 		Description = "The server sent its public key to the client. " +
-		              "This key is now used to encrypt a shared, symmetric key."
+		              "This key is now used to encrypt a shared, symmetric key.",
+		Helplink = null
 	};
 
 	public ConnectionStep GeneratingKey { get; } = new()
@@ -56,7 +60,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Server,
 		Title = "Generating Symmetric Key",
 		Description = "The client now generates a random symmetric key, " +
-		              "encrypts it using the public key, and sends it off to the server."
+		              "encrypts it using the public key, and sends it off to the server.",
+		Helplink = null
 	};
 
 	public ConnectionStep Encrypting { get; } = new()
@@ -64,7 +69,8 @@ public class ConnectionViewModel : ViewModelBase
 		Target = NetworkSide.Client,
 		Title = "Encrypting",
 		Description = "If everything went right, the server responds with a success message, " +
-		              "telling the client to finally enable the encryption handlers in the pipeline."
+		              "telling the client to finally enable the encryption handlers in the pipeline.",
+		Helplink = null
 	};
 
 	public Capabilities Capabilities { get; set; }

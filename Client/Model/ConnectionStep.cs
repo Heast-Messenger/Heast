@@ -13,10 +13,10 @@ public class ConnectionStep : ViewModelBase
 		private set => RaiseAndSetIfChanged(ref _status, value);
 	}
 
-	public NetworkSide Target { get; init; } = NetworkSide.Client;
-	public string Title { get; init; } = string.Empty;
-	public string Description { get; init; } = string.Empty;
-	public string? Helplink { get; init; }
+	public required NetworkSide Target { get; init; } = NetworkSide.Client;
+	public required string Title { get; init; } = string.Empty;
+	public required string Description { get; init; } = string.Empty;
+	public required string? Helplink { get; init; }
 
 	public void Complete()
 	{
