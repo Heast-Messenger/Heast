@@ -12,6 +12,7 @@
    <UserControl.Styles>
       <StyleInclude Source="Templates/TitleTemplate.axaml" />
       <StyleInclude Source="/Styles/LoginButtons.axaml" />
+      <StyleInclude Source="/Styles/LoginTextBox.axaml" />
    </UserControl.Styles>
 
    <templates:TitleTemplate>

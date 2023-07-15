@@ -1,0 +1,59 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <Design.PreviewWith>
+      <Border Padding="20"
+              Background="{DynamicResource Dark}">
+         <Border.Styles>
+            <StyleInclude Source="/View/Controls/Icon.axaml" />
+         </Border.Styles>
+
+         <!-- Add Controls for Previewer Here -->
+         <StackPanel>
+            <DockPanel>
+               <TextBox DockPanel.Dock="Top"
+                        Watermark="Password"
+                        Foreground="{DynamicResource White}" />
+               <TextBox DockPanel.Dock="Top"
+                        Watermark="Password"
+                        Text="Nice"
+                        Foreground="{DynamicResource White}" />
+            </DockPanel>
+         </StackPanel>
+      </Border>
+   </Design.PreviewWith>
+
+   <Style Selector="TextBox">
+      <Setter Property="Foreground" Value="{DynamicResource White}" />
+      <Setter Property="Background" Value="{DynamicResource Middle}" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Padding" Value="15.0 18.0" />
+      <Setter Property="CornerRadius" Value="10.0" />
+      <Setter Property="Margin" Value="0.0 4.0" />
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="FontFamily" Value="{DynamicResource Inter}" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="ClipToBounds" Value="False" />
+      <Setter Property="Cursor" Value="Ibeam" />
+   </Style>
+
+   <Style Selector="TextBox /template/ TextBlock">
+      <Setter Property="FontSize" Value="14.0" />
+      <Setter Property="FontWeight" Value="Bold" />
+   </Style>
+
+   <Style Selector="TextBox:pointerover /template/ Border">
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Background" Value="{DynamicResource Selection}" />
+   </Style>
+
+   <Style Selector="TextBox:focus /template/ Border">
+      <Setter Property="BorderBrush" Value="Transparent" />
+   </Style>
+
+   <Style Selector="TextBox.Unstyled">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Margin" Value="0.0" />
+   </Style>
+</Styles>
