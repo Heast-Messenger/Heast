@@ -2,30 +2,30 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.S2C;
 
-public class ConnectS2CPacket : AbstractPacket
+public class PingS2CPacket : AbstractPacket
 {
-	public ConnectS2CPacket(byte[] key)
+	public PingS2CPacket(long startMs)
 	{
-		Key = key;
+		StartMs = startMs;
 	}
 
-	public ConnectS2CPacket(PacketBuf buf)
+	public PingS2CPacket(PacketBuf buf)
 	{
-		Key = buf.ReadByteArray();
+		StartMs = buf.ReadLong();
 	}
 
-	public byte[] Key { get; }
+	public long StartMs { get; }
 
 	public override void Write(PacketBuf buf)
 	{
-		buf.WriteByteArray(Key);
+		buf.WriteLong(StartMs);
 	}
 
 	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IClientHandshakeListener handshakeListener)
 		{
-			handshakeListener.OnConnect(this);
+			handshakeListener.OnPing(this);
 		}
 	}
 }

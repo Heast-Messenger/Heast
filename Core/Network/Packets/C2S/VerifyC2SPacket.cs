@@ -2,9 +2,8 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class VerifyC2SPacket : IPacket
+public class VerifyC2SPacket : AbstractPacket
 {
-
 	public VerifyC2SPacket(string code)
 	{
 		Code = code;
@@ -17,12 +16,12 @@ public class VerifyC2SPacket : IPacket
 
 	public string Code { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteString(Code);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerAuthListener authListener)
 		{

@@ -2,9 +2,8 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class ResetC2SPacket : IPacket
+public class ResetC2SPacket : AbstractPacket
 {
-
 	public ResetC2SPacket(string usernameOrEmail, string password)
 	{
 		UsernameOrEmail = usernameOrEmail;
@@ -20,13 +19,13 @@ public class ResetC2SPacket : IPacket
 	public string UsernameOrEmail { get; }
 	public string Password { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteString(UsernameOrEmail);
 		buf.WriteString(Password);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerAuthListener authListener)
 		{

@@ -11,17 +11,17 @@ using DotNetty.Transport.Channels.Sockets;
 
 namespace Core.Network.Codecs;
 
-public class ClientConnection : SimpleChannelInboundHandler<IPacket>
+public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>
 {
+	private readonly Dictionary<Guid, TaskCompletionSource<AbstractPacket>> _awaitingResponse = new();
+
 	public ClientConnection(NetworkSide side)
 	{
 		Side = side;
 	}
 
 	public override bool IsSharable => true;
-
 	public static AttributeKey<NetworkState> ProtocolKey => AttributeKey<NetworkState>.ValueOf("protocol");
-
 	public NetworkSide Side { get; }
 	public IChannel Channel { get; private set; } = null!;
 	public IPacketListener Listener { get; set; } = null!;
@@ -61,11 +61,17 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 		}
 	}
 
-	protected override void ChannelRead0(IChannelHandlerContext ctx, IPacket msg)
+	protected override void ChannelRead0(IChannelHandlerContext ctx, AbstractPacket msg)
 	{
 		if (Listener == null)
 		{
-			throw new IllegalStateException("Listener was null whilst a message was received");
+			throw new IllegalStateException("Listener was null whilst receiving a message");
+		}
+
+		if (_awaitingResponse.TryGetValue(msg.Guid, out var value))
+		{
+			value.SetResult(msg);
+			_awaitingResponse.Remove(msg.Guid);
 		}
 
 		msg.Apply(Listener);
@@ -77,11 +83,36 @@ public class ClientConnection : SimpleChannelInboundHandler<IPacket>
 		base.ExceptionCaught(context, exception);
 	}
 
-	public Task Send(IPacket packet)
+	public Task Send(AbstractPacket packet, Guid? guid = null!)
 	{
-		return Channel is { IsOpen: true }
-			? Channel.WriteAndFlushAsync(packet)
-			: throw new IllegalStateException("Channel was null whilst trying to send a packet");
+		packet.Guid = guid ?? Guid.NewGuid();
+		if (Channel is { IsOpen: true })
+		{
+			return Channel.WriteAndFlushAsync(packet);
+		}
+
+		throw new IllegalStateException("Channel was null whilst trying to send a packet");
+	}
+
+	public async Task<TResult?> SendAndWait<TResult>(AbstractPacket packet, Guid? guid = null!)
+		where TResult : AbstractPacket
+	{
+		packet.Guid = guid ?? Guid.NewGuid();
+		var tcs = new TaskCompletionSource<AbstractPacket>();
+		_awaitingResponse[packet.Guid] = tcs;
+		if (Channel is { IsOpen: true })
+		{
+			await Channel.WriteAndFlushAsync(packet);
+			var result = await tcs.Task;
+			if (result is TResult tResult)
+			{
+				return tResult;
+			}
+
+			return null;
+		}
+
+		throw new IllegalStateException("Channel was null whilst trying to send a packet");
 	}
 
 	public async Task EnableSecureSocketLayer(X509Certificate2? certificate = null)

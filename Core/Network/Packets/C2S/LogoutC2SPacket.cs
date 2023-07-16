@@ -2,11 +2,14 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class LogoutC2SPacket : IPacket
+public class LogoutC2SPacket : AbstractPacket
 {
 	public enum LogoutReason
 	{
-		Logout, Quit, Kick, Ban
+		Logout,
+		Quit,
+		Kick,
+		Ban
 	}
 
 	public LogoutC2SPacket(LogoutReason reason)
@@ -21,12 +24,12 @@ public class LogoutC2SPacket : IPacket
 
 	public LogoutReason Reason { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteEnum(Reason);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerAuthListener authListener)
 		{

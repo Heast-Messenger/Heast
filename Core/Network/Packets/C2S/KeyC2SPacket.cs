@@ -2,9 +2,8 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.C2S;
 
-public class KeyC2SPacket : IPacket
+public class KeyC2SPacket : AbstractPacket
 {
-
 	public KeyC2SPacket(byte[] key, byte[] iv)
 	{
 		Key = key;
@@ -20,13 +19,13 @@ public class KeyC2SPacket : IPacket
 	public byte[] Key { get; }
 	public byte[] Iv { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteByteArray(Key);
 		buf.WriteByteArray(Iv);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerHandshakeListener handshakeListener)
 		{

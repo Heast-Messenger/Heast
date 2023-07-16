@@ -17,6 +17,7 @@ public class PacketDecoder : ReplayingDecoder
 	{
 		var buffer = new PacketBuf(input);
 		var id = buffer.ReadVarInt();
+		var guid = buffer.ReadGuid();
 
 		var packet = context.Channel
 			.GetAttribute(ClientConnection.ProtocolKey).Get()
@@ -27,6 +28,8 @@ public class PacketDecoder : ReplayingDecoder
 		{
 			throw new InvalidDataException($"Bad packet id ({id})");
 		}
+
+		packet.Guid = guid;
 
 		output.Add(packet);
 	}

@@ -10,12 +10,14 @@ public class NetworkState
 		.Setup(NetworkSide.Server, new PacketHandler<IServerHandshakeListener>()
 			.Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf))
 			.Register<ConnectC2SPacket>(buf => new ConnectC2SPacket(buf))
-			.Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf)))
+			.Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf))
+			.Register<PingC2SPacket>(buf => new PingC2SPacket(buf)))
 		.Setup(NetworkSide.Client, new PacketHandler<IClientHandshakeListener>()
 			.Register<HelloS2CPacket>(buf => new HelloS2CPacket(buf))
 			.Register<ConnectS2CPacket>(buf => new ConnectS2CPacket(buf))
 			.Register<SuccessS2CPacket>(buf => new SuccessS2CPacket(buf))
-			.Register<ErrorS2CPacket>(buf => new ErrorS2CPacket(buf)));
+			.Register<ErrorS2CPacket>(buf => new ErrorS2CPacket(buf))
+			.Register<PingS2CPacket>(buf => new PingS2CPacket(buf)));
 
 	public static readonly NetworkState Auth = new NetworkState()
 		.Setup(NetworkSide.Server, new PacketHandler<IServerAuthListener>()
@@ -41,24 +43,24 @@ public class NetworkState
 		return _handlers[side];
 	}
 
-	public int GetPacketId(NetworkSide side, IPacket packet)
+	public int GetPacketId(NetworkSide side, AbstractPacket packet)
 	{
 		return GetPacketHandler(side).GetId(packet.GetType());
 	}
 
 	public interface IPacketHandler<out TPl> where TPl : IPacketListener
 	{
-		IPacketHandler<TPl> Register<TP>(Func<PacketBuf, IPacket> packetFactory) where TP : IPacket;
+		IPacketHandler<TPl> Register<TP>(Func<PacketBuf, AbstractPacket> packetFactory) where TP : AbstractPacket;
 		int GetId(Type packet);
-		IPacket? CreatePacket(int id, PacketBuf buf);
+		AbstractPacket? CreatePacket(int id, PacketBuf buf);
 	}
 
 	private class PacketHandler<TPl> : IPacketHandler<TPl> where TPl : IPacketListener
 	{
 		private Dictionary<Type, int> PacketIds { get; } = new();
-		private List<Func<PacketBuf, IPacket>> PacketFactories { get; } = new();
+		private List<Func<PacketBuf, AbstractPacket>> PacketFactories { get; } = new();
 
-		public IPacketHandler<TPl> Register<TP>(Func<PacketBuf, IPacket> packetFactory) where TP : IPacket
+		public IPacketHandler<TPl> Register<TP>(Func<PacketBuf, AbstractPacket> packetFactory) where TP : AbstractPacket
 		{
 			PacketIds[typeof(TP)] = PacketFactories.Count;
 			PacketFactories.Add(packetFactory);
@@ -71,7 +73,7 @@ public class NetworkState
 			return id < 0 ? -1 : id;
 		}
 
-		public IPacket? CreatePacket(int id, PacketBuf buf)
+		public AbstractPacket? CreatePacket(int id, PacketBuf buf)
 		{
 			return PacketFactories.Count > id
 				? PacketFactories[id](buf)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Client.ViewModel;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
+using Core.Network.Packets.S2C;
 using Core.Utility;
 
 namespace Client.Network;
@@ -70,5 +71,16 @@ public static class ClientNetwork
 			vm.HelloC2S.Complete();
 			vm.Add(vm.HelloS2C);
 		});
+	}
+
+	public static async Task<long> Ping(IPAddress host, int port)
+	{
+		Console.WriteLine($"Pinging {host}:{port}...");
+		Ctx = await ClientConnection.ServerConnect(host, port);
+		Ctx.Listener = new ClientHandshakeHandler(Ctx, null!);
+		var oldMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+		await Ctx.SendAndWait<PingS2CPacket>(new PingC2SPacket(oldMs));
+		var newMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+		return newMs - oldMs;
 	}
 }

@@ -2,9 +2,8 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class SignupC2SPacket : IPacket
+public class SignupC2SPacket : AbstractPacket
 {
-
 	public SignupC2SPacket(string username, string email, string password)
 	{
 		Username = username;
@@ -23,14 +22,14 @@ public class SignupC2SPacket : IPacket
 	public string Email { get; }
 	public string Password { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteString(Username);
 		buf.WriteString(Email);
 		buf.WriteString(Password);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerAuthListener authListener)
 		{

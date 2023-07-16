@@ -2,15 +2,21 @@
 
 namespace Core.Network.Packets.S2C;
 
-public class SuccessS2CPacket : IPacket
+public class SuccessS2CPacket : AbstractPacket
 {
-	public SuccessS2CPacket() { }
+	public SuccessS2CPacket()
+	{
+	}
 
-	public SuccessS2CPacket(PacketBuf buf) { }
+	public SuccessS2CPacket(PacketBuf buf)
+	{
+	}
 
-	public void Write(PacketBuf buf) { }
+	public override void Write(PacketBuf buf)
+	{
+	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IClientHandshakeListener handshakeListener)
 		{
@@ -18,4 +24,3 @@ public class SuccessS2CPacket : IPacket
 		}
 	}
 }
-

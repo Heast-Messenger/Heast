@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using Client.Model;
 using Client.Network;
 using Client.View.Content;
@@ -151,7 +152,7 @@ public class LoginWindowViewModel : ViewModelBase
 		await ClientNetwork.Connect(h, p, ConnectionViewModel);
 	}
 
-	public void AddServer()
+	public async Task AddServer()
 	{
 		Error = string.Empty;
 
@@ -174,6 +175,10 @@ public class LoginWindowViewModel : ViewModelBase
 		{
 			Address = $"{host}:{port}"
 		});
+
+		// Todo: REMOVE THESE LINES
+		var ms = await ClientNetwork.Ping(IPAddress.Parse(host), (int)port);
+		Console.Out.WriteLine($"Ping: {ms}");
 	}
 
 	private string ConnectInternal(string host, int port)

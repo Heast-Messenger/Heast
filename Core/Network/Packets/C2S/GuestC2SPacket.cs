@@ -2,9 +2,8 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class GuestC2SPacket : IPacket
+public class GuestC2SPacket : AbstractPacket
 {
-
 	public GuestC2SPacket(string username)
 	{
 		Username = username;
@@ -17,12 +16,12 @@ public class GuestC2SPacket : IPacket
 
 	public string Username { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteString(Username);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IServerAuthListener authListener)
 		{

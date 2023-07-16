@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.S2C;
 
-public class HelloS2CPacket : IPacket
+public class HelloS2CPacket : AbstractPacket
 {
 	public HelloS2CPacket(Capabilities capabilities)
 	{
@@ -16,12 +16,12 @@ public class HelloS2CPacket : IPacket
 
 	public Capabilities Capabilities { get; }
 
-	public void Write(PacketBuf buf)
+	public override void Write(PacketBuf buf)
 	{
 		buf.WriteEnum(Capabilities);
 	}
 
-	public void Apply(IPacketListener listener)
+	public override void Apply(IPacketListener listener)
 	{
 		if (listener is IClientHandshakeListener handshakeListener)
 		{

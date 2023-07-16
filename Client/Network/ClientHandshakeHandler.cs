@@ -102,4 +102,8 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 	{
 		Vm.Error(packet.Error);
 	}
+
+	public void OnPing(PingS2CPacket packet)
+	{
+	}
 }

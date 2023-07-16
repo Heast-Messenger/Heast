@@ -90,4 +90,16 @@ public class PacketBuf : ByteBufImpl
 	{
 		return DateTime.ParseExact(ReadString(), "yyyyMMddHHmmss", null);
 	}
+
+	public void WriteGuid(Guid guid)
+	{
+		var result = guid.ToString();
+		WriteString(result);
+	}
+
+	public Guid ReadGuid()
+	{
+		var result = ReadString();
+		return Guid.Parse(result);
+	}
 }

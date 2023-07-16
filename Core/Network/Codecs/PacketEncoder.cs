@@ -5,7 +5,7 @@ using DotNetty.Transport.Channels;
 
 namespace Core.Network.Codecs;
 
-public class PacketEncoder : MessageToByteEncoder<IPacket>
+public class PacketEncoder : MessageToByteEncoder<AbstractPacket>
 {
 	public PacketEncoder(NetworkSide side)
 	{
@@ -14,7 +14,7 @@ public class PacketEncoder : MessageToByteEncoder<IPacket>
 
 	public NetworkSide Side { get; }
 
-	protected override void Encode(IChannelHandlerContext ctx, IPacket message, IByteBuffer output)
+	protected override void Encode(IChannelHandlerContext ctx, AbstractPacket message, IByteBuffer output)
 	{
 		var state = ctx.Channel.GetAttribute(ClientConnection.ProtocolKey).Get();
 		var id = state.GetPacketId(Side, message);
@@ -22,6 +22,7 @@ public class PacketEncoder : MessageToByteEncoder<IPacket>
 		{
 			var buffer = new PacketBuf(output);
 			buffer.WriteVarInt(id);
+			buffer.WriteGuid(message.Guid);
 			message.Write(buffer);
 		}
 		else
