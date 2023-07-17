@@ -21,6 +21,7 @@
    <UserControl.Resources>
       <converter:StringValueConverter x:Key="StatusTextConverter" />
       <converter:DictionaryConverter x:Key="StatusColorConverter" />
+      <converter:RangeDictionaryConverter x:Key="PingColorConverter" />
    </UserControl.Resources>
 
    <templates:TitleTemplate>
@@ -104,7 +105,7 @@
                                                           ResourceKey="Red" />
                                           <StaticResource x:Key="{x:Static model:ServerStatus.Running}"
                                                           ResourceKey="Green" />
-                                          <StaticResource x:Key="{x:Static model:ServerStatus.Slow}"
+                                          <StaticResource x:Key="{x:Static model:ServerStatus.Unstable}"
                                                           ResourceKey="Orange" />
                                        </generic:Dictionary>
                                     </Binding.ConverterParameter>
@@ -126,9 +127,31 @@
                      </Grid>
 
                      <Button DockPanel.Dock="Right"
-                             Classes="Unstyled">
+                             Classes="Unstyled"
+                             Foreground="{DynamicResource Light}">
                         <controls:Icon Source="{StaticResource Icon.More-Fill}" />
                      </Button>
+
+                     <TextBlock DockPanel.Dock="Right"
+                                Text="{Binding Ping}"
+                                FontSize="10.0"
+                                VerticalAlignment="Center">
+                        <TextBlock.Foreground>
+                           <Binding Path="Ping"
+                                    Converter="{StaticResource PingColorConverter}">
+                              <Binding.ConverterParameter>
+                                 <generic:Dictionary x:TypeArguments="x:Int64, system:Object">
+                                    <StaticResource x:Key="0"
+                                                    ResourceKey="Green" />
+                                    <StaticResource x:Key="100"
+                                                    ResourceKey="Orange" />
+                                    <StaticResource x:Key="500"
+                                                    ResourceKey="Red" />
+                                 </generic:Dictionary>
+                              </Binding.ConverterParameter>
+                           </Binding>
+                        </TextBlock.Foreground>
+                     </TextBlock>
                   </DockPanel>
                </DataTemplate>
             </ListBox.ItemTemplate>

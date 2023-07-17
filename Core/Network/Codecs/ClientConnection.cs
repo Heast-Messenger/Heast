@@ -11,7 +11,7 @@ using DotNetty.Transport.Channels.Sockets;
 
 namespace Core.Network.Codecs;
 
-public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>
+public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDisposable
 {
 	private readonly Dictionary<Guid, TaskCompletionSource<AbstractPacket>> _awaitingResponse = new();
 
@@ -32,6 +32,12 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>
 		set => Channel.GetAttribute(ProtocolKey).Set(value);
 	}
 
+	public void Dispose()
+	{
+		Close();
+		GC.SuppressFinalize(this);
+	}
+
 	public static async Task<ClientConnection> ServerConnect(IPAddress host, int port)
 	{
 		var connection = new ClientConnection(NetworkSide.Client);
@@ -45,6 +51,11 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>
 			.ConnectAsync(host, port);
 
 		return connection;
+	}
+
+	public void Close()
+	{
+		Channel.CloseSafe();
 	}
 
 	public override void ChannelActive(IChannelHandlerContext context)

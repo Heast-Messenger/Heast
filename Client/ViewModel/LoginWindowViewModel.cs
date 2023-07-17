@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
+using Avalonia.Threading;
 using Client.Model;
 using Client.Network;
 using Client.View.Content;
@@ -12,31 +12,41 @@ using Core.Network;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Utility;
+using DotNetty.Transport.Channels;
 using static Client.Hooks;
 
 namespace Client.ViewModel;
 
 public class LoginWindowViewModel : ViewModelBase
 {
+	private readonly DispatcherTimer _pingTimer;
 	private ConnectionViewModel _connectionViewModel = null!;
 	private LoginBase _content = new WelcomePanel();
 	private string _customServerAddress = string.Empty;
-	private string _error = string.Empty;
+	private string? _error = string.Empty;
+
+	public LoginWindowViewModel()
+	{
+		_pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, PingAllServers);
+	}
 
 	private static Func<ClientConnection?> Connection => UseNetworking();
 
 	public LoginBase Content
 	{
 		get => _content;
-		set => RaiseAndSetIfChanged(ref _content, value);
+		set
+		{
+			RaiseAndSetIfChanged(ref _content, value);
+			_pingTimer.Start();
+		}
 	}
 
-	public string Error
+	public string? Error
 	{
 		get => _error;
 		set => RaiseAndSetIfChanged(ref _error, value);
 	}
-
 
 	public string SignupUsername { get; set; } = string.Empty;
 	public string SignupEmail { get; set; } = string.Empty;
@@ -130,7 +140,11 @@ public class LoginWindowViewModel : ViewModelBase
 
 	public void ConnectOfficial()
 	{
-		Error = ConnectInternal(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort);
+		Error = Parse(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort, out var ipv4);
+		if (ipv4 is not null)
+		{
+			ConnectServer(ipv4, ClientNetwork.DefaultPort);
+		}
 	}
 
 	public void ConnectCustom()
@@ -138,7 +152,11 @@ public class LoginWindowViewModel : ViewModelBase
 		Validation.Split(CustomServerAddress, out var host, out var port);
 		host ??= ClientNetwork.DefaultHost;
 		port ??= ClientNetwork.DefaultPort;
-		Error = ConnectInternal(host, (int)port);
+		Error = Parse(host, (int)port, out var ipv4);
+		if (ipv4 is not null)
+		{
+			ConnectServer(ipv4, (int)port);
+		}
 	}
 
 	private async void ConnectServer(IPAddress h, int p)
@@ -152,7 +170,7 @@ public class LoginWindowViewModel : ViewModelBase
 		await ClientNetwork.Connect(h, p, ConnectionViewModel);
 	}
 
-	public async Task AddServer()
+	public void AddServer()
 	{
 		Error = string.Empty;
 
@@ -171,19 +189,60 @@ public class LoginWindowViewModel : ViewModelBase
 			return;
 		}
 
-		CustomServers.Add(new CustomServer
+		var customServer = new CustomServer
 		{
-			Address = $"{host}:{port}"
-		});
+			Host = host,
+			Port = (int)port
+		};
 
-		// Todo: REMOVE THESE LINES
-		var ms = await ClientNetwork.Ping(IPAddress.Parse(host), (int)port);
-		Console.Out.WriteLine($"Ping: {ms}");
+		CustomServers.Add(customServer);
+		PingServer(customServer);
 	}
 
-	private string ConnectInternal(string host, int port)
+	private static async void PingServer(CustomServer server)
 	{
-		IPAddress address = null!;
+		server.Error = Parse(server.Host, server.Port, out var ipv4);
+		if (ipv4 is null)
+		{
+			return;
+		}
+
+		try
+		{
+			server.Ping = await ClientNetwork.Ping(ipv4, server.Port);
+			server.Status = ServerStatus.Running;
+		}
+		catch (Exception e)
+		{
+			if (e is ConnectTimeoutException or ConnectException)
+			{
+				server.Status = ServerStatus.Closed;
+				return;
+			}
+
+			throw;
+		}
+	}
+
+	private void PingAllServers()
+	{
+		foreach (var server in CustomServers)
+		{
+			PingServer(server);
+		}
+	}
+
+	private void PingAllServers(object? sender, EventArgs e)
+	{
+		if (Content is CustomServerPanel)
+		{
+			PingAllServers();
+		}
+	}
+
+	private static string? Parse(string host, int port, out IPAddress? address)
+	{
+		address = null;
 		if (!Validation.Validate(host, port, out var localhost, out var domain, out var ipv4))
 		{
 			return "Invalid server address";
@@ -222,7 +281,6 @@ public class LoginWindowViewModel : ViewModelBase
 			address = IPAddress.Parse(host);
 		}
 
-		ConnectServer(address, port);
-		return string.Empty;
+		return null;
 	}
 }
