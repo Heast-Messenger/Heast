@@ -2,5 +2,5 @@ namespace Core.Server;
 
 public interface ICommandsProvider
 {
-	public Command[] List { get; }
+    public Command[] List { get; }
 }

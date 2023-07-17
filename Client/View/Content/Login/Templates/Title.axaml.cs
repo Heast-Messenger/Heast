@@ -6,13 +6,13 @@ namespace Client.View.Content.Login.Templates;
 
 public partial class Title : UserControl
 {
-	public Title()
-	{
-		InitializeComponent();
-	}
+    public Title()
+    {
+        InitializeComponent();
+    }
 
-	private void InitializeComponent()
-	{
-		AvaloniaXamlLoader.Load(this);
-	}
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
 }

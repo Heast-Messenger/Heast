@@ -22,16 +22,16 @@ namespace Client.View;
 
 public class SidebarEasing : Easing
 {
-	public override double Ease(double t)
-	{
-		return -(Math.Cos(Math.PI * t) - 1) / 2;
-	}
+    public override double Ease(double t)
+    {
+        return -(Math.Cos(Math.PI * t) - 1) / 2;
+    }
 }
 
 public partial class Sidebar : UserControl
 {
-	public Sidebar()
-	{
-		InitializeComponent();
-	}
+    public Sidebar()
+    {
+        InitializeComponent();
+    }
 }

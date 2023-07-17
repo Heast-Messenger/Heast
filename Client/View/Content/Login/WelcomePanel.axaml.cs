@@ -6,22 +6,22 @@ namespace Client.View.Content.Login;
 
 public partial class WelcomePanel : LoginBase
 {
-	public WelcomePanel()
-	{
-		InitializeComponent();
-	}
+    public WelcomePanel()
+    {
+        InitializeComponent();
+    }
 
-	public override LoginBase? Back => null;
+    public override LoginBase? Back => null;
 
-	public override Size? WindowSize => null;
+    public override Size? WindowSize => null;
 
-	private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
+    private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 
-	private void Button_OnClick(object? sender, RoutedEventArgs e)
-	{
-		LoginWindowViewModel.Content = new ServerOptionsPanel
-		{
-			DataContext = DataContext
-		};
-	}
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+        LoginWindowViewModel.Content = new ServerOptionsPanel
+        {
+            DataContext = DataContext
+        };
+    }
 }

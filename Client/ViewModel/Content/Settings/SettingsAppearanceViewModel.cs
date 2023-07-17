@@ -1,3 +1,5 @@
 namespace Client.ViewModel.Content;
 
-public class SettingsAppearanceViewModel : ContentViewModelBase { }
+public class SettingsAppearanceViewModel : ContentViewModelBase
+{
+}

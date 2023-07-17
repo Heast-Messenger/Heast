@@ -1,15 +1,15 @@
-﻿using Auth.Modules;
-using Auth.Structure;
+﻿using Auth.Structure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Auth;
 
 public static class Program
 {
-	public static Dispatcher Dispatcher { get; } = new Dispatcher();
+    public static Dispatcher Dispatcher { get; } = new();
+
     public static void Main(string[] args)
     {
-	    try
+        try
         {
             Dispatcher.Dispatch(args);
         }
@@ -23,5 +23,7 @@ public static class Program
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
-        => services.AddDbContext<AuthContext>();
+    {
+        services.AddDbContext<AuthContext>();
+    }
 }

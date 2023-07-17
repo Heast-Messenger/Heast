@@ -5,5 +5,5 @@ namespace Client.View.Controls;
 
 public class RadioButton : Avalonia.Controls.RadioButton
 {
-	protected override Type StyleKeyOverride => typeof(Button);
+    protected override Type StyleKeyOverride => typeof(Button);
 }

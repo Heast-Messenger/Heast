@@ -9,41 +9,41 @@ namespace Client.View.Content.Login;
 
 public partial class CustomServerPanel : LoginBase
 {
-	public CustomServerPanel()
-	{
-		InitializeComponent();
-	}
+    public CustomServerPanel()
+    {
+        InitializeComponent();
+    }
 
-	public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
+    public LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 
-	public override LoginBase Back => new ServerOptionsPanel
-	{
-		DataContext = DataContext
-	};
+    public override LoginBase Back => new ServerOptionsPanel
+    {
+        DataContext = DataContext
+    };
 
-	public override Size? WindowSize => new Size(500.0, 800.0);
+    public override Size? WindowSize => new Size(500.0, 800.0);
 
-	private void Button_OnConnect(object? sender, RoutedEventArgs e)
-	{
-		LoginWindowViewModel.ConnectCustom();
-	}
+    private void Button_OnConnect(object? sender, RoutedEventArgs e)
+    {
+        LoginWindowViewModel.ConnectCustom();
+    }
 
-	private void Button_OnAdd(object? sender, RoutedEventArgs e)
-	{
-		LoginWindowViewModel.AddServer();
-	}
+    private void Button_OnAdd(object? sender, RoutedEventArgs e)
+    {
+        LoginWindowViewModel.AddServer();
+    }
 
-	private void CustomServer_OnClick(object? sender, PointerPressedEventArgs e)
-	{
-		if (e.ClickCount == 1)
-		{
-			var server = ((sender as Control)!.DataContext as CustomServer)!;
-			LoginWindowViewModel.CustomServerAddress = server.Address;
-		}
+    private void CustomServer_OnClick(object? sender, PointerPressedEventArgs e)
+    {
+        if (e.ClickCount == 1)
+        {
+            var server = ((sender as Control)!.DataContext as CustomServer)!;
+            LoginWindowViewModel.CustomServerAddress = server.Address;
+        }
 
-		if (e.ClickCount == 2)
-		{
-			LoginWindowViewModel.ConnectCustom();
-		}
-	}
+        if (e.ClickCount == 2)
+        {
+            LoginWindowViewModel.ConnectCustom();
+        }
+    }
 }

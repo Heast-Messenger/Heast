@@ -2,5 +2,5 @@
 
 public enum Error
 {
-    InvalidKey,
+    InvalidKey
 }

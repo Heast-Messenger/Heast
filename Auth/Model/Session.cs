@@ -6,13 +6,6 @@ namespace Auth.Model;
 [Table("sessions")]
 public class Session
 {
-    [Key]
-    public int Id { get; private set; }
-    public string Token { get; set; }
-    public int UserId { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime Expires { get; set; }
-
     public Session(string token, int userId, DateTime created, DateTime expires)
     {
         Token = token;
@@ -21,5 +14,14 @@ public class Session
         Expires = expires;
     }
 
-    public bool IsExpired() => DateTime.Now > Expires;
+    [Key] public int Id { get; }
+    public string Token { get; set; }
+    public int UserId { get; set; }
+    public DateTime Created { get; set; }
+    public DateTime Expires { get; set; }
+
+    public bool IsExpired()
+    {
+        return DateTime.Now > Expires;
+    }
 }

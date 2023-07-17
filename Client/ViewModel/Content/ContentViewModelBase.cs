@@ -1,3 +1,5 @@
 namespace Client.ViewModel.Content;
 
-public class ContentViewModelBase : ViewModelBase { }
+public class ContentViewModelBase : ViewModelBase
+{
+}

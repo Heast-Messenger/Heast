@@ -5,9 +5,9 @@ namespace Client;
 
 public static partial class Hooks
 {
-	public static Func<LoginWindowViewModel> UseLoginViewModel()
-	{
-		var window = UseCurrentWindow();
-		return () => (LoginWindowViewModel)window().DataContext!;
-	}
+    public static Func<LoginWindowViewModel> UseLoginViewModel()
+    {
+        var window = UseCurrentWindow();
+        return () => (LoginWindowViewModel)window().DataContext!;
+    }
 }

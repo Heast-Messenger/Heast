@@ -10,26 +10,26 @@ namespace Client.View.Controls;
 
 public class Hyperlink : TextBlock
 {
-	public static readonly StyledProperty<string> UrlProperty = AvaloniaProperty.Register<Run, string>(
-		nameof(Text), defaultBindingMode: BindingMode.TwoWay);
+    public static readonly StyledProperty<string> UrlProperty = AvaloniaProperty.Register<Run, string>(
+        nameof(Text), defaultBindingMode: BindingMode.TwoWay);
 
-	public string Url
-	{
-		get => GetValue(UrlProperty);
-		set => SetValue(UrlProperty, value);
-	}
+    public string Url
+    {
+        get => GetValue(UrlProperty);
+        set => SetValue(UrlProperty, value);
+    }
 
-	protected override void OnInitialized()
-	{
-		Foreground = Brushes.CornflowerBlue;
-		Cursor = new Cursor(StandardCursorType.Hand);
-		PointerPressed += (_, _) =>
-		{
-			Process.Start(new ProcessStartInfo
-			{
-				FileName = Url,
-				UseShellExecute = true
-			});
-		};
-	}
+    protected override void OnInitialized()
+    {
+        Foreground = Brushes.CornflowerBlue;
+        Cursor = new Cursor(StandardCursorType.Hand);
+        PointerPressed += (_, _) =>
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Url,
+                UseShellExecute = true
+            });
+        };
+    }
 }

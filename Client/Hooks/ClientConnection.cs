@@ -6,8 +6,8 @@ namespace Client;
 
 public static partial class Hooks
 {
-	public static Func<ClientConnection?> UseNetworking()
-	{
-		return () => ClientNetwork.Ctx;
-	}
+    public static Func<ClientConnection?> UseNetworking()
+    {
+        return () => ClientNetwork.Ctx;
+    }
 }

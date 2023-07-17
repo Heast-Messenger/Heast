@@ -1,11 +1,16 @@
 root = true
 
 [*.cs]
-indent_style = tab
+indent_style = space
+
+# ReSharper properties
+resharper_csharp_indent_style = space
+resharper_csharp_max_line_length = 200
+indent_size = 4
 tab_width = 4
 
 [{*.axaml, *.xaml, *.csproj, *.json}]
 indent_style = space
 indent_size = 3
 
-#https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options?view=vs-2019
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options?view=vs-2019

@@ -9,45 +9,39 @@ namespace Auth.Network;
 
 public static class ServerBootstrap
 {
-	public static IChannel Channel { get; private set; } = null!;
+    public static IChannel Channel { get; private set; } = null!;
 
-	public static async void Initialize()
-	{
-		WriteLine("Initializing netty bootstrap...");
-		var bossGroup = new MultithreadEventLoopGroup(1);
-		var workerGroup = new MultithreadEventLoopGroup();
+    public static async void Initialize()
+    {
+        WriteLine("Initializing netty bootstrap...");
+        var bossGroup = new MultithreadEventLoopGroup(1);
+        var workerGroup = new MultithreadEventLoopGroup();
 
-		Channel = await new NettyBootstrap.ServerBootstrap()
-			.Group(bossGroup, workerGroup)
-			.Channel<TcpServerSocketChannel>()
-			.Option(ChannelOption.SoBacklog, 128)
-			.ChildHandler(new ClientHandler())
-			.BindAsync(ServerNetwork.Port);
+        Channel = await new NettyBootstrap.ServerBootstrap()
+            .Group(bossGroup, workerGroup)
+            .Channel<TcpServerSocketChannel>()
+            .Option(ChannelOption.SoBacklog, 128)
+            .ChildHandler(new ClientHandler())
+            .BindAsync(ServerNetwork.Port);
 
-		WriteLine($"Server listening on {ServerNetwork.Port}");
+        WriteLine($"Server listening on {ServerNetwork.Port}");
 
-		await Task.Delay(-1, ServerNetwork.CancellationToken);
+        await Task.Delay(-1, ServerNetwork.CancellationToken);
 
-		WriteLine("Shutting down server...");
+        WriteLine("Shutting down server...");
 
-		await Task.WhenAll(
-			bossGroup.ShutdownGracefullyAsync(),
-			workerGroup.ShutdownGracefullyAsync());
-	}
+        await Task.WhenAll(
+            bossGroup.ShutdownGracefullyAsync(),
+            workerGroup.ShutdownGracefullyAsync());
+    }
 }
 
 public class ClientHandler : ChannelInitializer<ISocketChannel>
 {
-	protected override void InitChannel(ISocketChannel channel)
-	{
-		var connection = new ClientConnection(NetworkSide.Server);
-		connection.Listener = new ServerHandshakeHandler(connection);
-
-		channel.Pipeline
-			// Here will be the packet decryptor
-			.AddLast("decoder", new PacketDecoder(NetworkSide.Server))
-			// Here will be the packet encryptor
-			.AddLast("encoder", new PacketEncoder(NetworkSide.Client))
-			.AddLast("handler", connection);
-	}
+    protected override void InitChannel(ISocketChannel channel)
+    {
+        var connection = new ClientConnection(NetworkSide.Server);
+        connection.Listener = new ServerHandshakeHandler(connection);
+        connection.EnablePacketHandling(channel, connection);
+    }
 }

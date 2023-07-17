@@ -9,32 +9,32 @@ namespace Client;
 
 public class App : Application
 {
-	public static string? Version { get; set; }
+    public static string? Version { get; set; }
 
-	public override void Initialize()
-	{
-		Console.WriteLine("Initializing client gui...");
-		AvaloniaXamlLoader.Load(this);
-	}
+    public override void Initialize()
+    {
+        Console.WriteLine("Initializing client gui...");
+        AvaloniaXamlLoader.Load(this);
+    }
 
-	public override void OnFrameworkInitializationCompleted()
-	{
-		base.OnFrameworkInitializationCompleted();
+    public override void OnFrameworkInitializationCompleted()
+    {
+        base.OnFrameworkInitializationCompleted();
 
-		if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-		{
-			desktop.MainWindow = desktop.Args?[0] switch
-			{
-				"--home" => new MainWindow
-				{
-					DataContext = new MainWindowViewModel()
-				},
-				"--login" => new LoginWindow
-				{
-					DataContext = new LoginWindowViewModel()
-				},
-				_ => throw new ArgumentOutOfRangeException()
-			};
-		}
-	}
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = desktop.Args?[0] switch
+            {
+                "--home" => new MainWindow
+                {
+                    DataContext = new MainWindowViewModel()
+                },
+                "--login" => new LoginWindow
+                {
+                    DataContext = new LoginWindowViewModel()
+                },
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+    }
 }
