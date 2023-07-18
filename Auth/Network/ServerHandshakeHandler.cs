@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using Auth.Services;
 using Core.Network;
 using Core.Network.Codecs;
 using Core.Network.Listeners;
@@ -9,12 +10,14 @@ namespace Auth.Network;
 
 public class ServerHandshakeHandler : IServerHandshakeListener
 {
-    public ServerHandshakeHandler(ClientConnection ctx)
+    public ServerHandshakeHandler(ClientConnection ctx, NetworkService networkService)
     {
         Ctx = ctx;
+        NetworkService = networkService;
     }
 
     private ClientConnection Ctx { get; }
+    private NetworkService NetworkService { get; }
 
     /// <summary>
     ///     Called when the client wants to connect to the server.
@@ -23,11 +26,11 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     /// <param name="packet">The received packet.</param>
     public async void OnHello(HelloC2SPacket packet)
     {
-        var capabilities = ServerNetwork.Capabilities;
+        var capabilities = NetworkService.Capabilities;
         await Ctx.Send(new HelloS2CPacket(capabilities), packet.Guid);
         if (capabilities.HasFlag(Capabilities.Ssl))
         {
-            var certificate = ServerNetwork.Certificate;
+            var certificate = NetworkService.Certificate;
             await Ctx.EnableSecureSocketLayer(certificate);
         }
     }
@@ -39,7 +42,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     /// <param name="packet">The received packet containing client information.</param>
     public async void OnConnect(ConnectC2SPacket packet)
     {
-        var publicKey = ServerNetwork.KeyPair.ExportRSAPublicKey();
+        var publicKey = NetworkService.KeyPair.ExportRSAPublicKey();
         await Ctx.Send(new ConnectS2CPacket(publicKey), packet.Guid);
     }
 
@@ -52,8 +55,8 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         using var keypair = Aes.Create();
         try
         {
-            var key = ServerNetwork.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
-            var iv = ServerNetwork.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
+            var key = NetworkService.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
+            var iv = NetworkService.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
             {
                 keypair.Mode = CipherMode.CFB;
                 keypair.Padding = PaddingMode.PKCS7;
@@ -64,7 +67,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         catch (CryptographicException)
         {
             await Ctx.Send(new ErrorS2CPacket(Error.InvalidKey), packet.Guid);
-            await ServerNetwork.Disconnect(Ctx);
+            await NetworkService.Disconnect(Ctx);
             return;
         }
 

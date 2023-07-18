@@ -1,32 +1,40 @@
+using Auth.Network;
 using Core.Network;
 using Core.Network.Codecs;
+using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
-using NettyBootstrap = DotNetty.Transport.Bootstrapping;
 using static System.Console;
 
-namespace Auth.Network;
+namespace Auth.Services;
 
-public static class ServerBootstrap
+public class BootstrapService
 {
-    public static IChannel Channel { get; private set; } = null!;
+    public BootstrapService(NetworkService networkService)
+    {
+        NetworkService = networkService;
+    }
 
-    public static async void Initialize()
+    private NetworkService NetworkService { get; }
+
+    public IChannel Channel { get; private set; } = null!;
+
+    public async void Initialize()
     {
         WriteLine("Initializing netty bootstrap...");
         var bossGroup = new MultithreadEventLoopGroup(1);
         var workerGroup = new MultithreadEventLoopGroup();
 
-        Channel = await new NettyBootstrap.ServerBootstrap()
+        Channel = await new ServerBootstrap()
             .Group(bossGroup, workerGroup)
             .Channel<TcpServerSocketChannel>()
             .Option(ChannelOption.SoBacklog, 128)
-            .ChildHandler(new ClientHandler())
-            .BindAsync(ServerNetwork.Port);
+            .ChildHandler(new ClientHandler(NetworkService))
+            .BindAsync(NetworkService.Port);
 
-        WriteLine($"Server listening on {ServerNetwork.Port}");
+        WriteLine($"Server listening on {NetworkService.Port}");
 
-        await Task.Delay(-1, ServerNetwork.CancellationToken);
+        await Task.Delay(-1, NetworkService.CancellationToken);
 
         WriteLine("Shutting down server...");
 
@@ -38,10 +46,17 @@ public static class ServerBootstrap
 
 public class ClientHandler : ChannelInitializer<ISocketChannel>
 {
+    public ClientHandler(NetworkService networkService)
+    {
+        NetworkService = networkService;
+    }
+
+    private NetworkService NetworkService { get; }
+
     protected override void InitChannel(ISocketChannel channel)
     {
         var connection = new ClientConnection(NetworkSide.Server);
-        connection.Listener = new ServerHandshakeHandler(connection);
+        connection.Listener = new ServerHandshakeHandler(connection, NetworkService);
         connection.EnablePacketHandling(channel, connection);
     }
 }

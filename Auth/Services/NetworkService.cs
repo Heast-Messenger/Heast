@@ -1,27 +1,23 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using Auth.Modules;
-using Auth.Structure;
 using Core.Network;
 using Core.Network.Codecs;
 using Core.Utility;
 using static System.Console;
 
-namespace Auth.Network;
+namespace Auth.Services;
 
-public static class ServerNetwork
+public class NetworkService
 {
-    public static int Port { get; set; } = 23010;
-    public static CancellationToken CancellationToken { get; } = new();
-    private static List<ClientConnection> Clients { get; } = new();
-    public static Capabilities Capabilities { get; set; } = Capabilities.None;
-    public static RSACryptoServiceProvider KeyPair { get; } = new(4096);
-    public static X509Certificate2? Certificate { get; private set; }
-    public static AuthContext? Db => Database.Db;
+    public int Port { get; set; } = 23010;
+    public CancellationToken CancellationToken { get; } = new();
+    public List<ClientConnection> Clients { get; } = new();
+    public Capabilities Capabilities { get; private set; } = Capabilities.None;
+    public RSACryptoServiceProvider KeyPair { get; } = new(4096);
+    public X509Certificate2? Certificate { get; private set; }
 
-    public static void Initialize()
+    public void Initialize()
     {
-        WriteLine("Initializing server network...");
         if (Certificate is not null)
         {
             Capabilities |= Capabilities.Ssl;
@@ -34,17 +30,16 @@ public static class ServerNetwork
         }
     }
 
-    public static Task Disconnect(ClientConnection connection)
+    public Task Disconnect(ClientConnection connection)
     {
         Clients.Remove(connection);
         return Task.CompletedTask;
     }
 
-    public static void SetCertificate(string filepath)
+    public void SetCertificate(string filepath)
     {
         try
         {
-            // Doesnt have private key?!??!
             Certificate = new X509Certificate2(filepath, Shared.Config["ssh-password"]);
         }
         catch (CryptographicException e)

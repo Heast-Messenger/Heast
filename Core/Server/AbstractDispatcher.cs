@@ -7,17 +7,29 @@ namespace Core.Server;
 
 public abstract class AbstractDispatcher
 {
-    protected abstract ICommandsProvider CommandsProvider { get; }
+    protected AbstractDispatcher(ICommandsProvider commandsProvider)
+    {
+        CommandsProvider = commandsProvider;
+    }
+
+    private ICommandsProvider CommandsProvider { get; }
 
     public void Dispatch(string[] args)
     {
-        if (args.Length <= 0)
+        try
         {
-            PrintHelp();
-            return;
-        }
+            if (args.Length <= 0)
+            {
+                PrintHelp();
+                return;
+            }
 
-        Dispatch(args, CommandsProvider.List);
+            Dispatch(args, CommandsProvider.List);
+        }
+        catch (Exception e)
+        {
+            Crash(e);
+        }
     }
 
     public void Dispatch(string[] args, Command[] commands)

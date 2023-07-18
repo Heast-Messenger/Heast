@@ -11,6 +11,7 @@
         <None Remove=".gitignore"/>
         <None Remove="Assets\Navigation\Illustrator.ai"/>
         <None Remove="Todo.md"/>
+        <None Remove="Client.csproj.DotSettings"/>
     </ItemGroup>
 
     <ItemGroup>

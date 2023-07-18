@@ -1,13 +1,22 @@
-using Auth.Modules;
-using Auth.Network;
 using Auth.Structure;
 using Core.Server;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Auth.Console;
+namespace Auth.Services;
 
-public class Commands : ICommandsProvider
+public class CommandsService : ICommandsProvider
 {
-    private static dynamic Translation => Global.Translation;
+    public CommandsService(IServiceProvider serviceProvider)
+    {
+        ServiceProvider = serviceProvider;
+    }
+
+    private IServiceProvider ServiceProvider { get; }
+    private DispatcherService DispatcherService => ServiceProvider.GetRequiredService<DispatcherService>();
+    private NetworkService NetworkService => ServiceProvider.GetRequiredService<NetworkService>();
+    private InfoService InfoService => ServiceProvider.GetRequiredService<InfoService>();
+
+    private dynamic Translation => InfoService.Translation;
 
     public Command[] List => new Command[]
     {
@@ -17,7 +26,7 @@ public class Commands : ICommandsProvider
             Short = "-l",
             Long = "--language",
             Argc = 1,
-            Action = argv => Global.Translation = Translations.Load(argv[0])
+            Action = argv => InfoService.Translation = Translations.Load(argv[0])
         },
         new()
         {
@@ -25,7 +34,7 @@ public class Commands : ICommandsProvider
             Short = "-h",
             Long = "--help",
             Argc = 0,
-            Action = _ => Program.Dispatcher.PrintHelp()
+            Action = _ => DispatcherService.PrintHelp()
         },
         new()
         {
@@ -33,7 +42,7 @@ public class Commands : ICommandsProvider
             Short = "-v",
             Long = "--version",
             Argc = 0,
-            Action = _ => Program.Dispatcher.PrintVersion()
+            Action = _ => DispatcherService.PrintVersion()
         },
         new()
         {
@@ -41,7 +50,7 @@ public class Commands : ICommandsProvider
             Short = "start",
             Long = "start",
             Argc = 0,
-            Action = _ => Program.Dispatcher.Start(),
+            Action = _ => DispatcherService.Start(),
             SubCommands = new Command[]
             {
                 new()
@@ -51,7 +60,7 @@ public class Commands : ICommandsProvider
                     Long = "--port",
                     Default = "23010",
                     Argc = 1,
-                    Action = argv => ServerNetwork.Port = int.Parse(argv[0])
+                    Action = argv => NetworkService.Port = int.Parse(argv[0])
                 },
                 new()
                 {
@@ -60,7 +69,7 @@ public class Commands : ICommandsProvider
                     Long = "--dbhost",
                     Default = "localhost",
                     Argc = 1,
-                    Action = argv => Database.Host = argv[0]
+                    Action = argv => AuthDbContext.Host = argv[0]
                 },
                 new()
                 {
@@ -69,7 +78,7 @@ public class Commands : ICommandsProvider
                     Long = "--dbport",
                     Default = "3306",
                     Argc = 1,
-                    Action = argv => Database.Port = int.Parse(argv[0])
+                    Action = argv => AuthDbContext.Port = int.Parse(argv[0])
                 },
                 new()
                 {
@@ -78,7 +87,7 @@ public class Commands : ICommandsProvider
                     Long = "--ssh",
                     Default = "~/.ssh/auth_server.pfx",
                     Argc = 1,
-                    Action = argv => ServerNetwork.SetCertificate(argv[0])
+                    Action = argv => NetworkService.SetCertificate(argv[0])
                 }
             }
         }
