@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using Client.Services;
 using Client.ViewModel;
 using Core.Network;
 using Core.Network.Codecs;
@@ -38,7 +39,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
         }
 
         Vm.Add(Vm.RequestConnection);
-        await Ctx.Send(new ConnectC2SPacket(ClientNetwork.ClientInfo));
+        await Ctx.Send(new ConnectC2SPacket(NetworkService.ClientInfo));
         Vm.RequestConnection.Complete();
         Vm.Add(Vm.ReceivedPublicKey);
     }

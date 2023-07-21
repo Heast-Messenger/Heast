@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using Avalonia.Threading;
 using Client.Model;
-using Client.Network;
+using Client.Services;
 using Client.View.Content;
 using Client.View.Content.Login;
 using Core.Network;
@@ -13,6 +13,7 @@ using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Utility;
 using DotNetty.Transport.Channels;
+using Microsoft.Extensions.DependencyInjection;
 using static Client.Hooks;
 
 namespace Client.ViewModel;
@@ -20,15 +21,21 @@ namespace Client.ViewModel;
 public class LoginWindowViewModel : ViewModelBase
 {
     private readonly DispatcherTimer _pingTimer;
-    private ConnectionViewModel _connectionViewModel = null!;
+    private ConnectionViewModel _connectionService;
     private LoginBase _content = new WelcomePanel();
     private string _customServerAddress = string.Empty;
     private string? _error = string.Empty;
 
-    public LoginWindowViewModel()
+    public LoginWindowViewModel(IServiceProvider serviceProvider, NetworkService networkService, ConnectionViewModel connectionService)
     {
+        _connectionService = connectionService;
         _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, PingAllServers);
+        ServiceProvider = serviceProvider;
+        NetworkService = networkService;
     }
+
+    private IServiceProvider ServiceProvider { get; }
+    private NetworkService NetworkService { get; }
 
     private static Func<ClientConnection?> Connection => UseNetworking();
 
@@ -65,8 +72,8 @@ public class LoginWindowViewModel : ViewModelBase
 
     public ConnectionViewModel ConnectionViewModel
     {
-        get => _connectionViewModel;
-        private set => RaiseAndSetIfChanged(ref _connectionViewModel, value);
+        get => _connectionService;
+        private set => RaiseAndSetIfChanged(ref _connectionService, value);
     }
 
     public bool GuestAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Guest);
@@ -140,18 +147,18 @@ public class LoginWindowViewModel : ViewModelBase
 
     public void ConnectOfficial()
     {
-        Error = Parse(ClientNetwork.DefaultHost, ClientNetwork.DefaultPort, out var ipv4);
+        Error = Parse(NetworkService.DefaultHost, NetworkService.DefaultPort, out var ipv4);
         if (ipv4 is not null)
         {
-            ConnectServer(ipv4, ClientNetwork.DefaultPort);
+            ConnectServer(ipv4, NetworkService.DefaultPort);
         }
     }
 
     public void ConnectCustom()
     {
         Validation.Split(CustomServerAddress, out var host, out var port);
-        host ??= ClientNetwork.DefaultHost;
-        port ??= ClientNetwork.DefaultPort;
+        host ??= NetworkService.DefaultHost;
+        port ??= NetworkService.DefaultPort;
         Error = Parse(host, (int)port, out var ipv4);
         if (ipv4 is not null)
         {
@@ -166,8 +173,8 @@ public class LoginWindowViewModel : ViewModelBase
             DataContext = this
         };
 
-        ConnectionViewModel = new ConnectionViewModel();
-        await ClientNetwork.Connect(h, p, ConnectionViewModel);
+        ConnectionViewModel = ServiceProvider.GetService<ConnectionViewModel>();
+        await NetworkService.Connect(h, p, ConnectionViewModel);
     }
 
     public void AddServer()
@@ -175,8 +182,8 @@ public class LoginWindowViewModel : ViewModelBase
         Error = string.Empty;
 
         Validation.Split(CustomServerAddress, out var host, out var port);
-        host ??= ClientNetwork.DefaultHost;
-        port ??= ClientNetwork.DefaultPort;
+        host ??= NetworkService.DefaultHost;
+        port ??= NetworkService.DefaultPort;
         if (!Validation.Validate(host, (int)port, out _, out _, out _))
         {
             Error = "Invalid server address";
@@ -199,7 +206,7 @@ public class LoginWindowViewModel : ViewModelBase
         PingServer(customServer);
     }
 
-    private static async void PingServer(CustomServer server)
+    private async void PingServer(CustomServer server)
     {
         server.Error = Parse(server.Host, server.Port, out var ipv4);
         if (ipv4 is null)
@@ -209,7 +216,7 @@ public class LoginWindowViewModel : ViewModelBase
 
         try
         {
-            server.Ping = await ClientNetwork.Ping(ipv4, server.Port);
+            server.Ping = await NetworkService.Ping(ipv4, server.Port);
             server.Status = ServerStatus.Running;
         }
         catch (Exception e)

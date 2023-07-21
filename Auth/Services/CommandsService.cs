@@ -78,7 +78,7 @@ public class CommandsService : ICommandsProvider
                     Long = "--dbport",
                     Default = "3306",
                     Argc = 1,
-                    Action = argv => AuthDbContext.Port = int.Parse(argv[0])
+                    Action = argv => AuthDbContext.Port = argv[0]
                 },
                 new()
                 {

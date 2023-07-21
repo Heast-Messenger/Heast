@@ -1,11 +1,10 @@
-﻿using Auth.Network;
-using Auth.Services;
+﻿using Auth.Services;
 using Core.Server;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Auth;
 
-public static class Program
+internal static class Program
 {
     public static void Main(string[] args)
     {
@@ -27,7 +26,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // services.AddDbContext<AuthDbContext>();
+        services.AddDbContext<AuthDbContext>();
 
         services.AddSingleton<NetworkService>();
         services.AddSingleton<BootstrapService>();

@@ -9,7 +9,7 @@ namespace Auth.Services;
 public class DispatcherService : AbstractDispatcher
 {
     public DispatcherService(
-        AuthDbContext? databaseService,
+        AuthDbContext databaseService,
         ICommandsProvider commandsProvider,
         NetworkService networkService,
         BootstrapService bootstrapService,
@@ -22,20 +22,7 @@ public class DispatcherService : AbstractDispatcher
         InfoService = infoService;
     }
 
-    public DispatcherService(
-        ICommandsProvider commandsProvider,
-        NetworkService networkService,
-        BootstrapService bootstrapService,
-        InfoService infoService) : base(commandsProvider)
-    {
-        DatabaseService = null;
-        CommandsProvider = commandsProvider;
-        NetworkService = networkService;
-        BootstrapService = bootstrapService;
-        InfoService = infoService;
-    }
-
-    private AuthDbContext? DatabaseService { get; }
+    private AuthDbContext DatabaseService { get; }
     private ICommandsProvider CommandsProvider { get; }
     private NetworkService NetworkService { get; }
     public BootstrapService BootstrapService { get; }
@@ -104,7 +91,7 @@ public class DispatcherService : AbstractDispatcher
             { "Time", time },
             { "Port", NetworkService.Port },
             {
-                "Db", DatabaseService == null
+                "Db", !DatabaseService.Database.CanConnect()
                     ? "§4No database connected"
                     : $"{DatabaseService.Database.ProviderName}@{AuthDbContext.Host}:{AuthDbContext.Port}"
             },

@@ -1,7 +1,9 @@
 ﻿using System;
 using Avalonia;
 using Client.Extensions;
-using Client.Network;
+using Client.Services;
+using Client.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client;
 
@@ -13,9 +15,6 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        BuildClientConnection()
-            .StartInNewThread(args);
-
         BuildAvaloniaApp()
             .WithVersion(0, 0, 1)
             .StartWithClassicDesktopLifetime(args);
@@ -28,10 +27,18 @@ internal static class Program
             .UsePlatformDetect()
             .LogToTrace();
     }
+}
 
-    // DotNetty configuration.
-    public static ConnectionBuilder BuildClientConnection()
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
     {
-        return ConnectionBuilder.Configure();
+        services
+            .AddSingleton<NetworkService>()
+            .AddTransient<ConnectionViewModel>();
+
+        services.AddTransient<MainWindowViewModel>();
+
+        services.AddTransient<LoginWindowViewModel>();
     }
 }

@@ -1,9 +1,12 @@
 using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Client.Services;
 using Client.View;
 using Client.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client;
 
@@ -19,7 +22,19 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        base.OnFrameworkInitializationCompleted();
+        var services = new ServiceCollection();
+        var startup = new Startup();
+
+        startup.ConfigureServices(services);
+        var serviceProvider = services.BuildServiceProvider();
+
+        {
+            var network = serviceProvider.GetService<NetworkService>();
+            new Thread(() =>
+            {
+                network.Initialize();
+            }).Start();
+        }
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -27,11 +42,11 @@ public class App : Application
             {
                 "--home" => new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = serviceProvider.GetService<MainWindowViewModel>()
                 },
                 "--login" => new LoginWindow
                 {
-                    DataContext = new LoginWindowViewModel()
+                    DataContext = serviceProvider.GetService<LoginWindowViewModel>()
                 },
                 _ => throw new ArgumentOutOfRangeException()
             };

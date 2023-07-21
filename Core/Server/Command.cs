@@ -2,14 +2,12 @@ namespace Core.Server;
 
 public class Command
 {
-    public string Short { get; init; } = string.Empty;
-    public string Long { get; init; } = string.Empty;
+    public required string Short { get; init; }
+    public required string Long { get; init; }
     public int Argc { get; init; }
-    public string Description { get; init; } = string.Empty;
+    public required string Description { get; init; }
     public string? Default { get; init; }
     public Command[]? SubCommands { get; init; }
 
-    public Action<string[]> Action { get; init; } = _ =>
-    {
-    };
+    public required Action<string[]> Action { get; init; }
 }

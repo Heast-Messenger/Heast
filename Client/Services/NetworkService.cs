@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Client.Network;
 using Client.ViewModel;
 using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
 using Core.Utility;
 
-namespace Client.Network;
+namespace Client.Services;
 
-public static class ClientNetwork
+public class NetworkService
 {
     public static string DefaultHost { get; } = Shared.Config["default-host"]!;
     public static int DefaultPort { get; } = int.Parse(Shared.Config["default-port"]!);
@@ -20,8 +20,7 @@ public static class ClientNetwork
     public static ClientConnection? Ctx { get; set; }
     public static ConcurrentQueue<IJob> ActionQueue { get; } = new();
 
-    [SuppressMessage("ReSharper", "FunctionNeverReturns")]
-    public static void Initialize(string[] args)
+    public void Initialize()
     {
         Console.WriteLine("Initializing client network...");
 
@@ -44,20 +43,20 @@ public static class ClientNetwork
         }
     }
 
-    public static Task<TResult> RunAsync<TResult>(Func<TResult> function)
+    public Task<TResult> RunAsync<TResult>(Func<TResult> function)
     {
         var job = new JobWithResult<TResult>(function);
         ActionQueue.Enqueue(job);
         return job.Task;
     }
 
-    public static void Post(Action action)
+    public void Post(Action action)
     {
         var job = new Job(action);
         ActionQueue.Enqueue(job);
     }
 
-    public static Task Connect(IPAddress host, int port, ConnectionViewModel vm)
+    public Task Connect(IPAddress host, int port, ConnectionViewModel vm)
     {
         return RunAsync(async () =>
         {
@@ -73,7 +72,7 @@ public static class ClientNetwork
         });
     }
 
-    public static async Task<long> Ping(IPAddress host, int port)
+    public async Task<long> Ping(IPAddress host, int port)
     {
         using (Ctx = await ClientConnection.ServerConnect(host, port))
         {
