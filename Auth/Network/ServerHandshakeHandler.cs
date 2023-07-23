@@ -18,6 +18,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 
     private ClientConnection Ctx { get; }
     private NetworkService NetworkService { get; }
+    private Aes? KeyPair { get; set; }
 
     /// <summary>
     ///     Called when the client wants to connect to the server.
@@ -52,15 +53,16 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     /// <param name="packet">The received packet containing the client's AES key.</param>
     public async void OnKey(KeyC2SPacket packet)
     {
-        using var keypair = Aes.Create();
+        using (KeyPair = Aes.Create())
+        {
+            KeyPair.Mode = CipherMode.CFB;
+            KeyPair.Padding = PaddingMode.PKCS7;
+        }
+
         try
         {
-            var key = NetworkService.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
-            var iv = NetworkService.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
-            keypair.Mode = CipherMode.CFB;
-            keypair.Padding = PaddingMode.PKCS7;
-            keypair.Key = key;
-            keypair.IV = iv;
+            KeyPair.Key = NetworkService.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
+            KeyPair.IV = NetworkService.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
         }
         catch (CryptographicException)
         {
@@ -70,7 +72,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         }
 
         await Ctx.Send(new SuccessS2CPacket());
-        Ctx.EnableEncryption(keypair);
+        Ctx.EnableEncryption(KeyPair);
         Ctx.State = NetworkState.Auth;
         Ctx.Listener = new ServerAuthHandler(Ctx);
     }

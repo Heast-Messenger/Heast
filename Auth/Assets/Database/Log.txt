@@ -854,3 +854,171 @@ dbug: 7/23/2023 10:24:33.775 RelationalEventId.ConnectionDisposing[20007] (Micro
       Disposing connection to database '' on server 'localhost'.
 dbug: 7/23/2023 10:24:33.776 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
       Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:08:30.211 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:08:30.215 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:08:30.216 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:08:30.219 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:08:30.232 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:08:30.233 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:08:30.234 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:11:58.274 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:11:58.277 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:11:58.278 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:11:58.281 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:11:58.294 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:11:58.296 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:11:58.296 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:13:00.393 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:13:00.396 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:13:00.397 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:13:00.401 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:13:00.414 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:13:00.415 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:13:00.416 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:16:02.958 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:16:02.963 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:16:02.964 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:16:02.968 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:16:02.990 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:16:02.991 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:16:02.992 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:17:34.269 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:17:34.274 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:17:34.275 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:17:34.279 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:17:34.294 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:17:34.296 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:17:34.297 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:44:56.648 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:44:56.653 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:44:56.654 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:44:56.658 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:44:56.672 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:44:56.673 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:44:56.674 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:45:39.661 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:45:39.664 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:45:39.665 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:45:39.669 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:45:39.682 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:45:39.684 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:45:39.685 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:53:56.235 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:53:56.239 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:53:56.240 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:53:56.243 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:53:56.256 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:53:56.257 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:53:56.258 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:55:17.025 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:55:17.028 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:55:17.029 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:55:17.032 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:55:17.044 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:55:17.046 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:55:17.047 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 16:58:39.168 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 16:58:39.172 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 16:58:39.173 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 16:58:39.176 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 16:58:39.189 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:58:39.191 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 16:58:39.192 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 20:46:56.593 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 20:46:56.598 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 20:46:56.602 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (2ms).
+dbug: 7/23/2023 20:46:56.607 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 20:46:56.622 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 20:46:56.624 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 20:46:56.625 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 20:48:00.300 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 20:48:00.304 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 20:48:00.305 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 20:48:00.308 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+fail: 7/23/2023 20:48:00.322 RelationalEventId.ConnectionError[20004] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      An error occurred using the connection to database '' on server 'localhost'.
+dbug: 7/23/2023 20:48:00.324 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 20:48:00.325 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).

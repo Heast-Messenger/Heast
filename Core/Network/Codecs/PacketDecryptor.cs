@@ -1,4 +1,3 @@
-using System.Security;
 using System.Security.Cryptography;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
@@ -8,12 +7,12 @@ namespace Core.Network.Codecs;
 
 public class PacketDecryptor : MessageToMessageDecoder<IByteBuffer>
 {
-    public PacketDecryptor(Aes keyPair)
+    public PacketDecryptor(ICryptoTransform transform)
     {
-        KeyPair = keyPair;
+        Transform = transform;
     }
 
-    private Aes KeyPair { get; }
+    private ICryptoTransform Transform { get; }
 
     protected override void Decode(IChannelHandlerContext context, IByteBuffer message, List<object> output)
     {
@@ -21,17 +20,15 @@ public class PacketDecryptor : MessageToMessageDecoder<IByteBuffer>
         var bytes = new byte[rb];
         message.ReadBytes(bytes);
 
-        try
-        {
-            var buf = context.Allocator.HeapBuffer();
-            var decrypted = KeyPair.DecryptCfb(bytes, KeyPair.IV, PaddingMode.PKCS7);
-            buf.WriteBytes(decrypted);
-            output.Add(buf);
-        }
-        catch (CryptographicException)
-        {
-            throw new SecurityException("Failed to decrypt packet!");
-        }
+        using var memoryStream = new MemoryStream();
+        using var cryptoStream = new CryptoStream(memoryStream, Transform, CryptoStreamMode.Write);
+        cryptoStream.Write(bytes);
+        cryptoStream.FlushFinalBlock();
+
+        var buf = context.Allocator.HeapBuffer();
+        var decrypted = memoryStream.ToArray();
+        buf.WriteBytes(decrypted);
+        output.Add(buf);
     }
 
     public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)

@@ -158,17 +158,24 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
 
     public void EnableEncryption(Aes key)
     {
-        Channel.Pipeline.AddBefore("encoder", "encryptor", new PacketEncryptor(key));
-        Channel.Pipeline.AddBefore("decoder", "decryptor", new PacketDecryptor(key));
+        {
+            var cryptoTransform = key.CreateEncryptor();
+            var packetEncryptor = new PacketEncryptor(cryptoTransform);
+            Channel.Pipeline.AddBefore("encoder", "encryptor", packetEncryptor);
+        }
+        {
+            var cryptoTransform = key.CreateDecryptor();
+            var packetDecryptor = new PacketDecryptor(cryptoTransform);
+            Channel.Pipeline.AddBefore("decoder", "decryptor", packetDecryptor);
+        }
     }
 
     private void DisablePacketHandling()
     {
-        Channel.Pipeline.Remove("decompressor");
-        Channel.Pipeline.Remove("compressor");
-        Channel.Pipeline.Remove("decoder");
-        Channel.Pipeline.Remove("encoder");
-        Channel.Pipeline.Remove("handler");
+        foreach (var handler in Channel.Pipeline.ToList())
+        {
+            Channel.Pipeline.Remove(handler);
+        }
     }
 
     private void EnablePacketHandling()

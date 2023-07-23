@@ -56,7 +56,6 @@ public class ClientHandshakeHandler : IClientHandshakeListener
         {
             KeyPair.Mode = CipherMode.CFB;
             KeyPair.Padding = PaddingMode.PKCS7;
-            KeyPair.KeySize = 256;
             KeyPair.GenerateKey();
         }
 
