@@ -4,21 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Auth.Model;
 
 [Table("sessions")]
+// ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 public class Session
 {
-    public Session(string token, int userId, DateTime created, DateTime expires)
-    {
-        Token = token;
-        UserId = userId;
-        Created = created;
-        Expires = expires;
-    }
-
     [Key] public int Id { get; }
-    public string Token { get; set; }
-    public int UserId { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime Expires { get; set; }
+    public required string Token { get; init; }
+    public virtual required Account Account { get; init; }
+    public required DateTime Created { get; init; }
+    public required DateTime Expires { get; init; }
 
     public bool IsExpired()
     {

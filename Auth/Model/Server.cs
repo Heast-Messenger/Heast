@@ -4,17 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Auth.Model;
 
 [Table("servers")]
+// ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 public class Server
 {
-    public Server(string ip, Status status)
-    {
-        Ip = ip;
-        Status = status;
-    }
-
     [Key] public int Id { get; }
-    public string Ip { get; set; }
-    public Status Status { get; set; }
+    public required string Ip { get; init; }
+    public required Status Status { get; init; }
+    [InverseProperty("AddedServers")] public virtual required List<Account> Members { get; init; } = new();
 }
 
 public enum Status

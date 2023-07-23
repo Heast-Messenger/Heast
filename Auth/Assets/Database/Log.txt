@@ -1036,3 +1036,1535 @@ dbug: 7/23/2023 20:57:50.722 RelationalEventId.ConnectionDisposing[20007] (Micro
       Disposing connection to database '' on server 'localhost'.
 dbug: 7/23/2023 20:57:50.723 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
       Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 7/23/2023 21:31:04.218 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 7/23/2023 21:31:04.223 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 21:31:04.223 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 7/23/2023 21:31:04.227 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 7/23/2023 21:31:04.293 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 7/23/2023 21:31:04.293 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 7/23/2023 21:31:04.293 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 7/23/2023 21:31:04.304 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 7/23/2023 21:31:04.305 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.654 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:34:39.662 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.663 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:34:39.666 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.667 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.667 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:34:39.668 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.723 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.737 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.738 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.738 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.738 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:34:39.738 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.751 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.752 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.752 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.760 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.760 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:34:39.760 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.768 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.770 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:34:39.772 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:34:39.774 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.775 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.775 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (1ms).
+dbug: 23.07.2023 21:34:39.777 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE DATABASE `Heast`;
+info: 23.07.2023 21:34:39.787 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE DATABASE `Heast`;
+dbug: 23.07.2023 21:34:39.788 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:34:39.789 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:34:39.790 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:34:39.790 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.791 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.794 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.794 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.794 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.794 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:34:39.794 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.803 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.804 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.804 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.834 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.835 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.835 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.835 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.851 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.851 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `__EFMigrationsHistory` (
+          `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+          `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+          CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+      ) CHARACTER SET=utf8mb4;
+info: 23.07.2023 21:34:39.869 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `__EFMigrationsHistory` (
+          `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+          `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+          CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+      ) CHARACTER SET=utf8mb4;
+dbug: 23.07.2023 21:34:39.869 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.870 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.870 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:34:39.870 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:34:39.870 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.877 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.878 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.878 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.879 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:34:39.879 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:34:39.879 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:34:39.879 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.880 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.881 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:34:39.885 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:34:39.885 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.885 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.885 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:34:39.885 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:34:39.886 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:34:39.886 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.886 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.886 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:34:39.888 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:34:39.889 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.889 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:34:39.889 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.889 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:34:39.895 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230221063853_InitialCreate'.
+dbug: 23.07.2023 21:34:39.902 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.905 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.905 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:34:39.906 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:34:39.908 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.908 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.908 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.909 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER DATABASE CHARACTER SET utf8mb4;
+info: 23.07.2023 21:34:39.911 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER DATABASE CHARACTER SET utf8mb4;
+dbug: 23.07.2023 21:34:39.911 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.911 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.911 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.911 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `accounts` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+          `Email` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+          `Password` longtext CHARACTER SET utf8mb4 NOT NULL,
+          CONSTRAINT `PK_accounts` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+info: 23.07.2023 21:34:39.920 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `accounts` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+          `Email` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+          `Password` longtext CHARACTER SET utf8mb4 NOT NULL,
+          CONSTRAINT `PK_accounts` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+dbug: 23.07.2023 21:34:39.920 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.920 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.920 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.920 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `servers` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Ip` longtext CHARACTER SET utf8mb4 NOT NULL,
+          `Status` int NOT NULL,
+          CONSTRAINT `PK_servers` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+info: 23.07.2023 21:34:39.925 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `servers` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Ip` longtext CHARACTER SET utf8mb4 NOT NULL,
+          `Status` int NOT NULL,
+          CONSTRAINT `PK_servers` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+dbug: 23.07.2023 21:34:39.925 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.925 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.925 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.925 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX `IX_accounts_Email` ON `accounts` (`Email`);
+info: 23.07.2023 21:34:39.932 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX `IX_accounts_Email` ON `accounts` (`Email`);
+dbug: 23.07.2023 21:34:39.932 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.932 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.932 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.932 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX `IX_accounts_Name` ON `accounts` (`Name`);
+info: 23.07.2023 21:34:39.939 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX `IX_accounts_Name` ON `accounts` (`Name`);
+dbug: 23.07.2023 21:34:39.939 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:34:39.939 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.939 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:34:39.939 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230221063853_InitialCreate', '7.0.3');
+info: 23.07.2023 21:34:39.940 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230221063853_InitialCreate', '7.0.3');
+dbug: 23.07.2023 21:34:39.940 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:34:39.941 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:34:39.941 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:34:39.941 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.941 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:34:39.942 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:34:39.942 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:34:39.942 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:40.625 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:35:40.690 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:35:45.437 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:35:45.445 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:35:45.446 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:35:45.449 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.450 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:35:45.450 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:35:45.451 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.509 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.524 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.526 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:45.528 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:35:45.529 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:35:45.530 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:35:45.530 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.549 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.550 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:35:45.560 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:35:45.561 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.562 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:45.562 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:35:45.562 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:35:45.562 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.576 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:35:45.578 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.580 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.580 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:35:45.582 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:35:45.582 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.582 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:45.588 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:35:45.588 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:35:45.588 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:35:45.588 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.589 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.589 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:35:45.591 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:35:45.592 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.592 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:35:45.592 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.592 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:35:45.599 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723193540_AddSessions'.
+dbug: 23.07.2023 21:35:45.617 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.619 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.619 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:35:45.623 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:35:45.623 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:35:45.623 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:35:45.624 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:35:45.624 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `sessions` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Token` longtext CHARACTER SET utf8mb4 NOT NULL,
+          `UserId` int NOT NULL,
+          `Created` datetime NOT NULL,
+          `Expires` datetime NOT NULL,
+          CONSTRAINT `PK_sessions` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+info: 23.07.2023 21:35:45.641 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `sessions` (
+          `Id` int NOT NULL AUTO_INCREMENT,
+          `Token` longtext CHARACTER SET utf8mb4 NOT NULL,
+          `UserId` int NOT NULL,
+          `Created` datetime NOT NULL,
+          `Expires` datetime NOT NULL,
+          CONSTRAINT `PK_sessions` PRIMARY KEY (`Id`)
+      ) CHARACTER SET=utf8mb4;
+dbug: 23.07.2023 21:35:45.641 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:35:45.641 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:35:45.642 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:35:45.642 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723193540_AddSessions', '7.0.3');
+info: 23.07.2023 21:35:45.643 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723193540_AddSessions', '7.0.3');
+dbug: 23.07.2023 21:35:45.644 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:35:45.645 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:35:45.645 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:35:45.646 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.646 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:35:45.646 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:35:45.646 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:35:45.646 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:37:58.629 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:37:58.680 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:38:04.151 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.3 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:38:04.159 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:38:04.160 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:38:04.163 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.164 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:38:04.164 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:38:04.165 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.217 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.231 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.232 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:38:04.234 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:38:04.235 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:38:04.236 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:38:04.236 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.253 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.254 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:38:04.261 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:38:04.262 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.263 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:38:04.263 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:38:04.263 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:38:04.263 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.276 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:38:04.277 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.279 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.279 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:38:04.280 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:38:04.280 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.281 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:38:04.288 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:38:04.288 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:38:04.288 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:38:04.288 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.289 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.289 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:38:04.292 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:38:04.292 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.293 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:38:04.293 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.293 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:38:04.300 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723193758_ImprovedStructure'.
+dbug: 23.07.2023 21:38:04.304 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.306 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.307 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:38:04.310 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:38:04.311 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:38:04.311 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:38:04.311 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:38:04.311 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723193758_ImprovedStructure', '7.0.3');
+info: 23.07.2023 21:38:04.314 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723193758_ImprovedStructure', '7.0.3');
+dbug: 23.07.2023 21:38:04.314 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:38:04.319 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:38:04.320 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:38:04.320 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.320 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:38:04.321 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:38:04.321 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:38:04.321 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:32.034 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:40:32.078 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:40:32.091 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:40:32.150 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:40:35.467 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:40:35.513 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:40:35.520 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:40:35.521 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:40:35.524 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.525 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:40:35.525 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:40:35.526 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.590 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.607 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.609 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:35.612 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:40:35.614 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:40:35.614 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (3ms).
+dbug: 23.07.2023 21:40:35.615 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.630 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.632 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:40:35.639 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:40:35.640 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.641 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:35.641 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:40:35.641 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:40:35.641 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.650 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:40:35.651 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.653 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.653 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:40:35.654 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:40:35.654 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.654 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:35.663 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:40:35.663 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:40:35.663 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:40:35.664 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.664 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.665 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:40:35.666 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:40:35.667 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.668 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:40:35.668 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.668 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:40:35.675 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723194032_ChangedUserToNavigationProperty'.
+dbug: 23.07.2023 21:40:35.703 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.704 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.705 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:40:35.707 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:40:35.707 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:40:35.707 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.708 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.708 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `sessions` CHANGE `UserId` `AccountId` int NOT NULL;
+info: 23.07.2023 21:40:35.719 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `sessions` CHANGE `UserId` `AccountId` int NOT NULL;
+dbug: 23.07.2023 21:40:35.719 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:40:35.719 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.719 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.719 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_sessions_AccountId` ON `sessions` (`AccountId`);
+info: 23.07.2023 21:40:35.727 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_sessions_AccountId` ON `sessions` (`AccountId`);
+dbug: 23.07.2023 21:40:35.727 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:40:35.727 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.727 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.727 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `sessions` ADD CONSTRAINT `FK_sessions_accounts_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `accounts` (`Id`) ON DELETE CASCADE;
+info: 23.07.2023 21:40:35.742 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `sessions` ADD CONSTRAINT `FK_sessions_accounts_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `accounts` (`Id`) ON DELETE CASCADE;
+dbug: 23.07.2023 21:40:35.742 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:40:35.742 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.742 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:40:35.742 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194032_ChangedUserToNavigationProperty', '7.0.2');
+info: 23.07.2023 21:40:35.743 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194032_ChangedUserToNavigationProperty', '7.0.2');
+dbug: 23.07.2023 21:40:35.744 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:40:35.745 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:40:35.746 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:40:35.746 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.746 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:40:35.747 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:40:35.747 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:40:35.747 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:20.492 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:20.492 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:20.537 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:47:20.549 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:20.549 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:20.613 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:47:23.599 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:23.600 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:47:23.645 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:47:23.652 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:47:23.653 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:47:23.656 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.657 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:47:23.657 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:47:23.658 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.718 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.732 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.733 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:23.736 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:47:23.737 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:47:23.737 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:47:23.738 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.754 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.756 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:47:23.766 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:47:23.766 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.767 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:23.767 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:47:23.767 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:47:23.768 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.779 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:47:23.780 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.782 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.782 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:47:23.783 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:47:23.783 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.783 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:23.791 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:47:23.791 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:47:23.791 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:47:23.791 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.792 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.792 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:47:23.794 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:47:23.795 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.795 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:47:23.795 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.795 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:47:23.802 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723194720_AddAddedServersToAccount'.
+dbug: 23.07.2023 21:47:23.824 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.825 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.826 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:47:23.829 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:47:23.830 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:47:23.830 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.830 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.830 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` ADD `AccountId` int NULL;
+info: 23.07.2023 21:47:23.847 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (16ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` ADD `AccountId` int NULL;
+dbug: 23.07.2023 21:47:23.847 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:47:23.847 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.847 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.847 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_servers_AccountId` ON `servers` (`AccountId`);
+info: 23.07.2023 21:47:23.854 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_servers_AccountId` ON `servers` (`AccountId`);
+dbug: 23.07.2023 21:47:23.854 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:47:23.854 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.854 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.854 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` ADD CONSTRAINT `FK_servers_accounts_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `accounts` (`Id`);
+info: 23.07.2023 21:47:23.867 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` ADD CONSTRAINT `FK_servers_accounts_AccountId` FOREIGN KEY (`AccountId`) REFERENCES `accounts` (`Id`);
+dbug: 23.07.2023 21:47:23.867 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:47:23.867 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.867 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:47:23.867 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194720_AddAddedServersToAccount', '7.0.2');
+info: 23.07.2023 21:47:23.869 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194720_AddAddedServersToAccount', '7.0.2');
+dbug: 23.07.2023 21:47:23.870 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:47:23.871 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:47:23.871 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:47:23.871 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.872 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:47:23.872 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:47:23.872 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:47:23.872 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:48:37.653 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:48:37.653 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:48:37.699 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:48:37.711 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:48:37.711 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:48:37.720 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:49:40.061 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:40.062 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:40.107 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:49:40.118 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:40.119 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:40.128 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:49:49.855 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:49.855 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:49.902 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:49:49.914 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:49.914 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:49.971 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:49:53.805 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Server.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:53.805 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:49:53.853 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:49:53.861 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:49:53.862 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:49:53.864 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.866 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:49:53.866 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:49:53.866 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.927 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.941 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.942 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:49:53.944 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:49:53.946 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:49:53.946 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:49:53.946 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.963 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.964 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:49:53.975 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:49:53.976 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.976 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:49:53.979 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:49:53.979 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:49:53.979 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.990 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.990 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.990 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:49:53.991 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:49:53.991 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:49:53.991 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:49:53.991 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.992 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.992 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:49:53.994 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:49:53.994 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:53.994 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:49:54.001 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:49:54.002 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:49:54.002 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:49:54.002 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.002 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.003 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:49:54.004 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:49:54.005 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.005 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:49:54.005 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.005 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:49:54.013 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723194949_AddAddedServersToAccount'.
+dbug: 23.07.2023 21:49:54.024 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.025 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.026 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:49:54.030 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:49:54.030 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:49:54.030 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:49:54.030 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:49:54.030 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194949_AddAddedServersToAccount', '7.0.2');
+info: 23.07.2023 21:49:54.032 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723194949_AddAddedServersToAccount', '7.0.2');
+dbug: 23.07.2023 21:49:54.033 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:49:54.038 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:49:54.038 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:49:54.038 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.038 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:49:54.039 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:49:54.039 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:49:54.039 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:24.786 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).AddedServersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.787 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).MembersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.787 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.833 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:52:24.842 CoreEventId.RedundantIndexRemoved[10601] (Microsoft.EntityFrameworkCore.Model) 
+      The index {'AddedServersId'} was not created on entity type 'AccountServer (Dictionary<string, object>)' as the properties are already covered by the index {'AddedServersId', 'MembersId'}.
+dbug: 23.07.2023 21:52:24.848 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).AddedServersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.848 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).MembersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.848 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:24.930 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:52:32.044 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).AddedServersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:32.045 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).MembersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:32.045 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:52:32.092 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:52:32.100 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:52:32.101 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:52:32.103 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.105 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:52:32.105 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:52:32.105 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.168 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.182 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.183 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:32.185 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:52:32.187 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:52:32.187 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:52:32.187 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.205 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.207 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:52:32.217 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:52:32.218 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.219 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:32.219 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:52:32.219 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:52:32.219 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.232 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.232 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.232 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:32.233 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:52:32.233 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:52:32.233 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:52:32.233 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.235 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.235 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:52:32.236 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:52:32.236 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.236 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:32.243 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:52:32.243 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:52:32.243 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:52:32.243 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.244 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.244 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:52:32.246 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:52:32.247 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.247 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:52:32.247 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.247 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:52:32.254 RelationalEventId.MigrationApplying[20402] (Microsoft.EntityFrameworkCore.Migrations) 
+      Applying migration '20230723195224_AddServersAndMembers'.
+dbug: 23.07.2023 21:52:32.282 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.285 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.285 RelationalEventId.TransactionStarting[20209] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Beginning transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:52:32.288 RelationalEventId.TransactionStarted[20200] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Began transaction with isolation level 'Unspecified'.
+dbug: 23.07.2023 21:52:32.288 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.288 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.289 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.289 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP FOREIGN KEY `FK_servers_accounts_AccountId`;
+info: 23.07.2023 21:52:32.308 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (19ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP FOREIGN KEY `FK_servers_accounts_AccountId`;
+dbug: 23.07.2023 21:52:32.308 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.308 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.308 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.308 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP INDEX `IX_servers_AccountId`;
+info: 23.07.2023 21:52:32.313 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP INDEX `IX_servers_AccountId`;
+dbug: 23.07.2023 21:52:32.313 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.313 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.313 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.313 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP COLUMN `AccountId`;
+info: 23.07.2023 21:52:32.320 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `servers` DROP COLUMN `AccountId`;
+dbug: 23.07.2023 21:52:32.320 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.320 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.320 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.320 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `AccountServer` (
+          `AddedServersId` int NOT NULL,
+          `MembersId` int NOT NULL,
+          CONSTRAINT `PK_AccountServer` PRIMARY KEY (`AddedServersId`, `MembersId`),
+          CONSTRAINT `FK_AccountServer_accounts_MembersId` FOREIGN KEY (`MembersId`) REFERENCES `accounts` (`Id`) ON DELETE CASCADE,
+          CONSTRAINT `FK_AccountServer_servers_AddedServersId` FOREIGN KEY (`AddedServersId`) REFERENCES `servers` (`Id`) ON DELETE CASCADE
+      ) CHARACTER SET=utf8mb4;
+info: 23.07.2023 21:52:32.329 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE `AccountServer` (
+          `AddedServersId` int NOT NULL,
+          `MembersId` int NOT NULL,
+          CONSTRAINT `PK_AccountServer` PRIMARY KEY (`AddedServersId`, `MembersId`),
+          CONSTRAINT `FK_AccountServer_accounts_MembersId` FOREIGN KEY (`MembersId`) REFERENCES `accounts` (`Id`) ON DELETE CASCADE,
+          CONSTRAINT `FK_AccountServer_servers_AddedServersId` FOREIGN KEY (`AddedServersId`) REFERENCES `servers` (`Id`) ON DELETE CASCADE
+      ) CHARACTER SET=utf8mb4;
+dbug: 23.07.2023 21:52:32.329 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.329 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.329 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.330 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_AccountServer_MembersId` ON `AccountServer` (`MembersId`);
+info: 23.07.2023 21:52:32.336 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX `IX_AccountServer_MembersId` ON `AccountServer` (`MembersId`);
+dbug: 23.07.2023 21:52:32.336 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteNonQuery'.
+dbug: 23.07.2023 21:52:32.336 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.336 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteNonQuery' (0ms).
+dbug: 23.07.2023 21:52:32.336 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723195224_AddServersAndMembers', '7.0.2');
+info: 23.07.2023 21:52:32.337 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+      VALUES ('20230723195224_AddServersAndMembers', '7.0.2');
+dbug: 23.07.2023 21:52:32.338 RelationalEventId.TransactionCommitting[20210] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committing transaction.
+dbug: 23.07.2023 21:52:32.340 RelationalEventId.TransactionCommitted[20202] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Committed transaction.
+dbug: 23.07.2023 21:52:32.340 RelationalEventId.TransactionDisposed[20204] (Microsoft.EntityFrameworkCore.Database.Transaction) 
+      Disposing transaction.
+dbug: 23.07.2023 21:52:32.340 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.340 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:52:32.341 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:52:32.341 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:52:32.341 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:53:03.565 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).AddedServersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:53:03.566 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'AccountServer (Dictionary<string, object>).MembersId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:53:03.566 CoreEventId.ShadowPropertyCreated[10600] (Microsoft.EntityFrameworkCore.Model.Validation) 
+      The property 'Session.AccountId' was created in shadow state because there are no eligible CLR members with a matching name.
+dbug: 23.07.2023 21:53:03.611 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 7.0.2 initialized 'AuthDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:7.0.0' with options: ServerVersion 0.0-mysql DetailedErrorsEnabled 
+dbug: 23.07.2023 21:53:03.618 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:53:03.619 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (1ms).
+dbug: 23.07.2023 21:53:03.622 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.623 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:53:03.623 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:53:03.623 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.669 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.682 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.683 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:53:03.686 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:53:03.687 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (1ms).
+dbug: 23.07.2023 21:53:03.687 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (2ms).
+dbug: 23.07.2023 21:53:03.687 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.706 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.707 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:53:03.714 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:53:03.714 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.715 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:53:03.715 RelationalEventId.ConnectionCreating[20005] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Creating DbConnection.
+dbug: 23.07.2023 21:53:03.715 RelationalEventId.ConnectionCreated[20006] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Created DbConnection. (0ms).
+dbug: 23.07.2023 21:53:03.715 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.727 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database '' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database '' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.07.2023 21:53:03.728 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.730 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.730 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+info: 23.07.2023 21:53:03.732 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='Heast' AND TABLE_NAME='__EFMigrationsHistory';
+dbug: 23.07.2023 21:53:03.732 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.732 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+dbug: 23.07.2023 21:53:03.739 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.07.2023 21:53:03.739 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:53:03.739 RelationalEventId.CommandInitialized[20106] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Initialized DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.07.2023 21:53:03.739 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.740 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.740 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+info: 23.07.2023 21:53:03.741 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+dbug: 23.07.2023 21:53:03.742 RelationalEventId.DataReaderClosing[20301] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Closing data reader to 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.743 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader for 'Heast' on server 'localhost' is being disposed after spending 0ms reading results.
+dbug: 23.07.2023 21:53:03.743 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.743 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'Heast' on server 'localhost' (0ms).
+info: 23.07.2023 21:53:03.749 RelationalEventId.MigrationsNotApplied[20405] (Microsoft.EntityFrameworkCore.Migrations) 
+      No migrations were applied. The database is already up to date.
+dbug: 23.07.2023 21:53:03.750 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'AuthDbContext' disposed.
+dbug: 23.07.2023 21:53:03.750 RelationalEventId.ConnectionDisposing[20007] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposing connection to database 'Heast' on server 'localhost'.
+dbug: 23.07.2023 21:53:03.750 RelationalEventId.ConnectionDisposed[20008] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Disposed connection to database 'Heast' on server 'localhost' (0ms).

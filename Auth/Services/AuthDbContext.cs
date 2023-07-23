@@ -6,7 +6,7 @@ namespace Auth.Services;
 
 public class AuthDbContext : DbContext
 {
-    public IEnumerable<User> Accounts => Set<User>();
+    public IEnumerable<Account> Accounts => Set<Account>();
     public IEnumerable<Server> Servers => Set<Server>();
     public IEnumerable<Session> Sessions => Set<Session>();
 
@@ -33,23 +33,23 @@ public class AuthDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<User>().ToTable("accounts").HasKey(s => s.Id);
+        modelBuilder.Entity<Account>().ToTable("accounts").HasKey(s => s.Id);
         modelBuilder.Entity<Server>().ToTable("servers").HasKey(s => s.Id);
         modelBuilder.Entity<Session>().ToTable("sessions").HasKey(s => s.Id);
 
-        modelBuilder.Entity<User>(e =>
+        modelBuilder.Entity<Account>(e =>
         {
             e.HasIndex(u => u.Name).IsUnique();
             e.HasIndex(u => u.Email).IsUnique();
         });
     }
 
-    public static void WriteToFile(string message)
+    private static void WriteToFile(string message)
     {
         File.AppendAllText("Assets/Database/Log.txt", message + Environment.NewLine);
     }
 
-    public IEnumerable<User> GetUsers()
+    public IEnumerable<Account> GetUsers()
     {
         return Accounts.ToList();
     }
