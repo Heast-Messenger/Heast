@@ -9,12 +9,10 @@ using Client.Services;
 using Client.View.Content;
 using Client.View.Content.Login;
 using Core.Network;
-using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Utility;
 using DotNetty.Transport.Channels;
 using Microsoft.Extensions.DependencyInjection;
-using static Client.Hooks;
 
 namespace Client.ViewModel;
 
@@ -36,8 +34,6 @@ public class LoginWindowViewModel : ViewModelBase
 
     private IServiceProvider ServiceProvider { get; }
     private NetworkService NetworkService { get; }
-
-    private static Func<ClientConnection?> Connection => UseNetworking();
 
     public LoginBase Content
     {
@@ -90,25 +86,23 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Signup()
     {
-        var connection = Connection();
-        if (connection?.State == NetworkState.Auth)
+        if (NetworkService.Ctx?.State == NetworkState.Auth)
         {
-            await connection.Send(new SignupC2SPacket(
+            await NetworkService.Ctx.Send(new SignupC2SPacket(
                 SignupUsername, SignupEmail, SignupPassword));
         }
         else
         {
-            // Replace with dynamic translations
+            // TODO: Replace with dynamic translations
             Error = "Wait for Heast services to connect...";
         }
     }
 
     public async void Reset()
     {
-        var connection = Connection();
-        if (connection?.State == NetworkState.Auth)
+        if (NetworkService.Ctx?.State == NetworkState.Auth)
         {
-            await connection.Send(new ResetC2SPacket(
+            await NetworkService.Ctx.Send(new ResetC2SPacket(
                 LoginUsernameOrEmail, LoginPassword));
         }
         else
@@ -119,10 +113,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Login()
     {
-        var connection = Connection();
-        if (connection?.State == NetworkState.Auth)
+        if (NetworkService.Ctx?.State == NetworkState.Auth)
         {
-            await connection.Send(new LoginC2SPacket(
+            await NetworkService.Ctx.Send(new LoginC2SPacket(
                 LoginUsernameOrEmail, LoginPassword));
         }
         else
@@ -133,10 +126,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Guest()
     {
-        var connection = Connection();
-        if (connection?.State == NetworkState.Auth)
+        if (NetworkService.Ctx?.State == NetworkState.Auth)
         {
-            await connection.Send(new GuestC2SPacket(
+            await NetworkService.Ctx.Send(new GuestC2SPacket(
                 GuestUsername));
         }
         else

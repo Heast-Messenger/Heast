@@ -39,6 +39,6 @@
    </Style>
 
    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="Background" Value="{DynamicResource Hover}" />
    </Style>
 </Styles>

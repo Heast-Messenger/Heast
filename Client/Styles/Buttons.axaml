@@ -56,7 +56,7 @@
    </Style>
 
    <Style Selector="Button:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="Background" Value="{DynamicResource Hover}" />
       <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
    </Style>
 

@@ -58,10 +58,10 @@
    </Style>
 
    <Style Selector="ScrollBar:vertical Track Thumb:pointerover /template/ Border">
-      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="Background" Value="{DynamicResource Hover}" />
    </Style>
    <Style Selector="ScrollBar:horizontal Track Thumb:pointerover /template/ Border">
-      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="Background" Value="{DynamicResource Hover}" />
    </Style>
 
    <Style Selector="ScrollBar:vertical Track Thumb:pressed /template/ Border">

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using Avalonia;
 using Client.Extensions;
 using Client.Services;
-using Client.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Client;
 
@@ -33,12 +34,16 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddSingleton<NetworkService>()
-            .AddTransient<ConnectionViewModel>();
+        services.AddSingleton<NetworkService>();
 
-        services.AddTransient<MainWindowViewModel>();
-
-        services.AddTransient<LoginWindowViewModel>();
+        // Assembly-search all classes that end in 'ViewModel'
+        var types = Assembly.GetCallingAssembly().GetTypes();
+        foreach (var type in types)
+        {
+            if (type.Name.EndsWith("ViewModel"))
+            {
+                services.TryAddScoped(type);
+            }
+        }
     }
 }

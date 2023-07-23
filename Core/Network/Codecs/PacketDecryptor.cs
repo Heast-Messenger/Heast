@@ -28,7 +28,7 @@ public class PacketDecryptor : MessageToMessageDecoder<IByteBuffer>
             buf.WriteBytes(decrypted);
             output.Add(buf);
         }
-        catch (CryptographicException e)
+        catch (CryptographicException)
         {
             throw new SecurityException("Failed to decrypt packet!");
         }

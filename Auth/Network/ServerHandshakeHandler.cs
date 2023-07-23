@@ -57,12 +57,10 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         {
             var key = NetworkService.KeyPair.Decrypt(packet.Key, RSAEncryptionPadding.Pkcs1);
             var iv = NetworkService.KeyPair.Decrypt(packet.Iv, RSAEncryptionPadding.Pkcs1);
-            {
-                keypair.Mode = CipherMode.CFB;
-                keypair.Padding = PaddingMode.PKCS7;
-                keypair.Key = key;
-                keypair.IV = iv;
-            }
+            keypair.Mode = CipherMode.CFB;
+            keypair.Padding = PaddingMode.PKCS7;
+            keypair.Key = key;
+            keypair.IV = iv;
         }
         catch (CryptographicException)
         {
@@ -74,6 +72,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         await Ctx.Send(new SuccessS2CPacket());
         Ctx.EnableEncryption(keypair);
         Ctx.State = NetworkState.Auth;
+        Ctx.Listener = new ServerAuthHandler(Ctx);
     }
 
     public void OnPing(PingC2SPacket packet)

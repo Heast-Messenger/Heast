@@ -1,10 +1,10 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-   <SolidColorBrush x:Key="Dark" Color="#FF19191C" />
-   <SolidColorBrush x:Key="Middle" Color="#FF1C1C20" />
+   <SolidColorBrush x:Key="Dark" Color="#FF18181C" />
+   <SolidColorBrush x:Key="Middle" Color="#FF1C1C21" />
    <SolidColorBrush x:Key="Border" Color="#FF232529" />
    <SolidColorBrush x:Key="Selection" Color="#FF292A30" />
-   <SolidColorBrush x:Key="Selection-Hover" Color="#FF303138" />
+   <SolidColorBrush x:Key="Hover" Color="#FF303138" />
    <SolidColorBrush x:Key="Light" Color="#FF868B9D" />
    <SolidColorBrush x:Key="White" Color="#FFE4E7F3" />
    <SolidColorBrush x:Key="Accent" Color="#FF5363F0" />

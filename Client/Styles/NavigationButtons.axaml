@@ -39,7 +39,7 @@
    </Style>
 
    <Style Selector="Button:pointerover controls|Icon">
-      <Setter Property="Background" Value="{DynamicResource Selection-Hover}" />
+      <Setter Property="Background" Value="{DynamicResource Hover}" />
    </Style>
 
    <Style Selector="Button controls|Icon">

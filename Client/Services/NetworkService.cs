@@ -14,11 +14,10 @@ namespace Client.Services;
 
 public class NetworkService
 {
-    public static string DefaultHost { get; } = Shared.Config["default-host"]!;
-    public static int DefaultPort { get; } = int.Parse(Shared.Config["default-port"]!);
-    public static string ClientInfo => "Some Client";
-    public static ClientConnection? Ctx { get; set; }
-    public static ConcurrentQueue<IJob> ActionQueue { get; } = new();
+    public string DefaultHost { get; } = Shared.Config["default-host"]!;
+    public int DefaultPort { get; } = int.Parse(Shared.Config["default-port"]!);
+    public ClientConnection? Ctx { get; set; }
+    public ConcurrentQueue<IJob> ActionQueue { get; } = new();
 
     public void Initialize()
     {

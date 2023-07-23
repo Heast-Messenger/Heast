@@ -1,17 +1,18 @@
 using System;
 using Client.View.Content;
 using Client.ViewModel.Content;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client.ViewModel.Sidebars;
 
 public class SettingsSidebarViewModel : SidebarViewModelBase
 {
-    public SettingsSidebarViewModel(MainWindowViewModel mainWindowVm) : base(mainWindowVm.ContentViewModel)
+    public SettingsSidebarViewModel(
+        IServiceProvider serviceProvider,
+        MainWindowViewModel mainWindowVm) : base(mainWindowVm.ContentViewModel)
     {
-        ContentViewModel.Content = new SettingsAccountPanel
-        {
-            DataContext = new SettingsAccountViewModel()
-        };
+        ServiceProvider = serviceProvider;
+        Button_OnAccount();
     }
 
     public SettingsSidebarViewModel()
@@ -19,11 +20,13 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
         throw new InvalidOperationException("This constructor is only for design-time purposes.");
     }
 
+    private IServiceProvider ServiceProvider { get; }
+
     public void Button_OnAccount()
     {
         ContentViewModel.Content = new SettingsAccountPanel
         {
-            DataContext = new SettingsAccountViewModel()
+            DataContext = ServiceProvider.GetService<SettingsAccountViewModel>()
         };
     }
 
@@ -31,7 +34,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsSecurityPanel
         {
-            DataContext = new SettingsSecurityViewModel()
+            DataContext = ServiceProvider.GetService<SettingsSecurityViewModel>()
         };
     }
 
@@ -39,7 +42,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsNotificationsPanel
         {
-            DataContext = new SettingsNotificationsViewModel()
+            DataContext = ServiceProvider.GetService<SettingsNotificationsViewModel>()
         };
     }
 
@@ -47,7 +50,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsAppearancePanel
         {
-            DataContext = new SettingsAppearanceViewModel()
+            DataContext = ServiceProvider.GetService<SettingsAppearanceViewModel>()
         };
     }
 
@@ -55,7 +58,7 @@ public class SettingsSidebarViewModel : SidebarViewModelBase
     {
         ContentViewModel.Content = new SettingsStatusPanel
         {
-            DataContext = new SettingsStatusViewModel()
+            DataContext = ServiceProvider.GetService<SettingsStatusViewModel>()
         };
     }
 }

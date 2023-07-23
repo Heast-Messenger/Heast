@@ -1,50 +1,57 @@
 using System;
 using Client.View.Sidebars;
 using Client.ViewModel.Sidebars;
-using static Client.Hooks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client.ViewModel;
 
 public class NavigationViewModel : ViewModelBase
 {
-    private Func<MainWindowViewModel> MainWindow => UseMainViewModel();
+    public NavigationViewModel(IServiceProvider serviceProvider)
+    {
+        ServiceProvider = serviceProvider;
+    }
+
+    private IServiceProvider ServiceProvider { get; }
+
+    private MainWindowViewModel MainWindow => ServiceProvider.GetService<MainWindowViewModel>();
 
     public void Button_OnNav()
     {
-        MainWindow().SidebarViewModel.ToggleVisibility();
+        MainWindow.SidebarViewModel.ToggleVisibility();
     }
 
     public void Button_OnHome()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindow.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
 
     public void Button_OnChat()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindow.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnExplore()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindow.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnPeople()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindow.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnServers()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new EmptySidebar();
+        MainWindow.SidebarViewModel.CurrentSidebar = new EmptySidebar();
     }
 
     public void Button_OnSettings()
     {
-        MainWindow().SidebarViewModel.CurrentSidebar = new SettingsSidebar
+        MainWindow.SidebarViewModel.CurrentSidebar = new SettingsSidebar
         {
-            DataContext = new SettingsSidebarViewModel(MainWindow())
+            DataContext = ServiceProvider.GetService<SettingsSidebarViewModel>()
         };
     }
 }
