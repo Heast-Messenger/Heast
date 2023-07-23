@@ -20,20 +20,28 @@ public class PacketDecryptor : MessageToMessageDecoder<IByteBuffer>
         var bytes = new byte[rb];
         message.ReadBytes(bytes);
 
-        using var memoryStream = new MemoryStream();
-        using var cryptoStream = new CryptoStream(memoryStream, Transform, CryptoStreamMode.Write);
-        cryptoStream.Write(bytes);
-        cryptoStream.FlushFinalBlock();
-
         var buf = context.Allocator.HeapBuffer();
-        var decrypted = memoryStream.ToArray();
+        var decrypted = Decrypt(bytes);
         buf.WriteBytes(decrypted);
         output.Add(buf);
+    }
+
+    private byte[] Decrypt(byte[] data)
+    {
+        using (var memoryStream = new MemoryStream())
+        {
+            using (var cryptoStream = new CryptoStream(memoryStream, Transform, CryptoStreamMode.Write))
+            {
+                cryptoStream.Write(data);
+            }
+
+            return memoryStream.ToArray();
+        }
     }
 
     public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
     {
         context.DisconnectAsync();
-        Console.WriteLine($"Client kicked: {exception.Message}");
+        Console.WriteLine($"Exception whilst decrypting: {exception.Message}");
     }
 }

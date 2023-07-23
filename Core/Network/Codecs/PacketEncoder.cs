@@ -12,7 +12,7 @@ public class PacketEncoder : MessageToByteEncoder<AbstractPacket>
         Side = side;
     }
 
-    public NetworkSide Side { get; }
+    private NetworkSide Side { get; }
 
     protected override void Encode(IChannelHandlerContext ctx, AbstractPacket message, IByteBuffer output)
     {

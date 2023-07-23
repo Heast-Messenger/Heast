@@ -20,18 +20,26 @@ public class PacketEncryptor : MessageToByteEncoder<IByteBuffer>
         var bytes = new byte[rb];
         message.ReadBytes(bytes);
 
-        using var memoryStream = new MemoryStream();
-        using var cryptoStream = new CryptoStream(memoryStream, Transform, CryptoStreamMode.Write);
-        cryptoStream.Write(bytes);
-        cryptoStream.FlushFinalBlock();
-
-        var encrypted = memoryStream.ToArray();
+        var encrypted = Encrypt(bytes);
         output.WriteBytes(encrypted);
+    }
+
+    private byte[] Encrypt(byte[] data)
+    {
+        using (var memoryStream = new MemoryStream())
+        {
+            using (var cryptoStream = new CryptoStream(memoryStream, Transform, CryptoStreamMode.Write))
+            {
+                cryptoStream.Write(data);
+            }
+
+            return memoryStream.ToArray();
+        }
     }
 
     public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
     {
         context.DisconnectAsync();
-        Console.WriteLine($"Client kicked: {exception.Message}");
+        Console.WriteLine($"Exception whilst encrypting: {exception.Message}");
     }
 }
