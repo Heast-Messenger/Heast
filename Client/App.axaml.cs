@@ -29,7 +29,7 @@ public class App : Application
         var serviceProvider = services.BuildServiceProvider();
 
         {
-            var network = serviceProvider.GetService<NetworkService>();
+            var network = serviceProvider.GetRequiredService<NetworkService>();
             new Thread(() =>
             {
                 network.Initialize();

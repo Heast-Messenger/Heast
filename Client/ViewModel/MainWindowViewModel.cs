@@ -12,8 +12,8 @@ public class MainWindowViewModel : ViewModelBase
 
     private IServiceProvider ServiceProvider { get; }
 
-    public SidebarViewModel SidebarViewModel => ServiceProvider.GetService<SidebarViewModel>();
-    public ContentViewModel ContentViewModel => ServiceProvider.GetService<ContentViewModel>();
-    public NavigationViewModel NavigationViewModel => ServiceProvider.GetService<NavigationViewModel>();
-    public NotificationsViewModel NotificationsViewModel => ServiceProvider.GetService<NotificationsViewModel>();
+    public SidebarViewModel SidebarViewModel => ServiceProvider.GetRequiredService<SidebarViewModel>();
+    public ContentViewModel ContentViewModel => ServiceProvider.GetRequiredService<ContentViewModel>();
+    public NavigationViewModel NavigationViewModel => ServiceProvider.GetRequiredService<NavigationViewModel>();
+    public NotificationsViewModel NotificationsViewModel => ServiceProvider.GetRequiredService<NotificationsViewModel>();
 }

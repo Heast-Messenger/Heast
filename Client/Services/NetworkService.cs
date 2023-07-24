@@ -9,14 +9,25 @@ using Core.Network.Codecs;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
 using Core.Utility;
+using DotNetty.Transport.Bootstrapping;
+using DotNetty.Transport.Channels;
+using DotNetty.Transport.Channels.Sockets;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Client.Services;
 
 public class NetworkService
 {
+    public NetworkService(IServiceProvider serviceProvider)
+    {
+        ServiceProvider = serviceProvider;
+    }
+
+    private IServiceProvider ServiceProvider { get; }
+
     public string DefaultHost { get; } = Shared.Config["default-host"]!;
     public int DefaultPort { get; } = int.Parse(Shared.Config["default-port"]!);
-    public ClientConnection? Ctx { get; set; }
+    public ClientConnection? Connection { get; set; }
     public ConcurrentQueue<IJob> ActionQueue { get; } = new();
 
     public void Initialize()
@@ -55,29 +66,49 @@ public class NetworkService
         ActionQueue.Enqueue(job);
     }
 
-    public Task Connect(IPAddress host, int port, ConnectionViewModel vm)
+    public Task Connect(IPAddress host, int port, IServiceScope scope)
     {
         return RunAsync(async () =>
         {
             Console.WriteLine($"Connecting to {host}:{port}...");
+            var vm = scope.ServiceProvider.GetRequiredService<ConnectionViewModel>();
             vm.Add(vm.HelloC2S);
 
-            Ctx = await ClientConnection.ServerConnect(host, port);
-            Ctx.Listener = new ClientHandshakeHandler(Ctx, vm);
+            Connection = await ConnectInternal(host, port, scope);
+            await Connection.Send(new HelloC2SPacket());
 
-            await Ctx.Send(new HelloC2SPacket());
             vm.HelloC2S.Complete();
             vm.Add(vm.HelloS2C);
         });
     }
 
+    private async Task<ClientConnection> ConnectInternal(IPAddress host, int port, IServiceScope scope)
+    {
+        // warning! this may become an issue later, when the NetworkService (singleton)
+        //  is used twice to connect to different servers.
+        // Because ClientConnection is Scoped to a singleton, it's automatically also a
+        //  singleton and collides with further connections.
+        // Solution: Create either a scope for the NetworkService or ServerConnect().
+        var connection = scope.ServiceProvider.GetRequiredService<ClientConnection>();
+        var workerGroup = new MultithreadEventLoopGroup();
+
+        await new Bootstrap()
+            .Group(workerGroup)
+            .Channel<TcpSocketChannel>()
+            .Option(ChannelOption.TcpNodelay, true)
+            .Handler(new ClientConnectionInitializer(connection, scope))
+            .ConnectAsync(host, port);
+
+        return connection;
+    }
+
     public async Task<long> Ping(IPAddress host, int port)
     {
-        using (Ctx = await ClientConnection.ServerConnect(host, port))
+        using (Connection = await ConnectInternal(host, port, ServiceProvider.CreateScope()))
         {
-            Ctx.Listener = new ClientHandshakeHandler(Ctx, null!);
+            Connection.Listener = ServiceProvider.GetRequiredService<ClientHandshakeHandler>();
             var oldMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            await Ctx.SendAndWait<PingS2CPacket>(new PingC2SPacket(oldMs));
+            await Connection.SendAndWait<PingS2CPacket>(new PingC2SPacket(oldMs));
             var newMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             return newMs - oldMs;
         }

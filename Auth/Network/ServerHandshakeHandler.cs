@@ -12,6 +12,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 {
     public ServerHandshakeHandler(ClientConnection ctx, NetworkService networkService)
     {
+        TaskCompletionSource = new TaskCompletionSource();
         Ctx = ctx;
         NetworkService = networkService;
     }
@@ -19,6 +20,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     private ClientConnection Ctx { get; }
     private NetworkService NetworkService { get; }
     private Aes? KeyPair { get; set; }
+    public TaskCompletionSource TaskCompletionSource { get; }
 
     /// <summary>
     ///     Called when the client wants to connect to the server.
@@ -73,8 +75,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
 
         await Ctx.Send(new SuccessS2CPacket());
         Ctx.EnableEncryption(KeyPair);
-        Ctx.State = NetworkState.Auth;
-        Ctx.Listener = new ServerAuthHandler(Ctx);
+        TaskCompletionSource.SetResult();
     }
 
     public void OnPing(PingC2SPacket packet)

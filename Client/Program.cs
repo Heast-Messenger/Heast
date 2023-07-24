@@ -2,7 +2,11 @@
 using System.Reflection;
 using Avalonia;
 using Client.Extensions;
+using Client.Network;
 using Client.Services;
+using Client.ViewModel;
+using Core.Network;
+using Core.Network.Codecs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -34,11 +38,14 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<NetworkService>();
+        services.AddScoped<NetworkService>();
+        services.AddScoped<ConnectionViewModel>();
+        services.AddScoped<ClientConnection>(_ => new ClientConnection(NetworkSide.Client));
+        services.AddScoped<ClientAuthHandler>();
+        services.AddScoped<ClientHandshakeHandler>();
 
         // Assembly-search all classes that end in 'ViewModel'
-        var types = Assembly.GetCallingAssembly().GetTypes();
-        foreach (var type in types)
+        foreach (var type in Assembly.GetCallingAssembly().GetTypes())
         {
             if (type.Name.EndsWith("ViewModel"))
             {

@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -6,9 +5,7 @@ using Core.exceptions;
 using DotNetty.Codecs.Compression;
 using DotNetty.Common.Utilities;
 using DotNetty.Handlers.Tls;
-using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
-using DotNetty.Transport.Channels.Sockets;
 
 namespace Core.Network.Codecs;
 
@@ -39,21 +36,6 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
         GC.SuppressFinalize(this);
     }
 
-    public static async Task<ClientConnection> ServerConnect(IPAddress host, int port)
-    {
-        var connection = new ClientConnection(NetworkSide.Client);
-        var workerGroup = new MultithreadEventLoopGroup();
-
-        await new Bootstrap()
-            .Group(workerGroup)
-            .Channel<TcpSocketChannel>()
-            .Option(ChannelOption.TcpNodelay, true)
-            .Handler(new ClientConnectionInitializer(connection))
-            .ConnectAsync(host, port);
-
-        return connection;
-    }
-
     public void Close()
     {
         Channel.CloseSafe();
@@ -62,7 +44,7 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
     public override void ChannelActive(IChannelHandlerContext context)
     {
         Channel = context.Channel;
-        State = NetworkState.Login;
+        State = NetworkState.Handshake;
     }
 
     public override async void ChannelInactive(IChannelHandlerContext context)
@@ -180,10 +162,10 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
 
     private void EnablePacketHandling()
     {
-        EnablePacketHandling(Channel, this);
+        EnablePacketHandling(Channel);
     }
 
-    public void EnablePacketHandling(IChannel channel, ClientConnection connection)
+    public void EnablePacketHandling(IChannel channel)
     {
         channel.Pipeline
             .AddLast("decompressor", new JZlibDecoder(ZlibWrapper.Gzip))
@@ -192,21 +174,6 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
             .AddLast("compressor", new JZlibEncoder(ZlibWrapper.Gzip))
             // <Here will be the packet encryptor>
             .AddLast("encoder", new PacketEncoder(!Side))
-            .AddLast("handler", connection);
-    }
-}
-
-public class ClientConnectionInitializer : ChannelInitializer<ISocketChannel>
-{
-    public ClientConnectionInitializer(ClientConnection connection)
-    {
-        Connection = connection;
-    }
-
-    private ClientConnection Connection { get; }
-
-    protected override void InitChannel(ISocketChannel channel)
-    {
-        Connection.EnablePacketHandling(channel, Connection);
+            .AddLast("handler", this);
     }
 }

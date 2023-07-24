@@ -6,7 +6,7 @@ namespace Core.Network;
 
 public class NetworkState
 {
-    public static readonly NetworkState Login = new NetworkState()
+    public static readonly NetworkState Handshake = new NetworkState()
         .Setup(NetworkSide.Server, new PacketHandler<IServerHandshakeListener>()
             .Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf))
             .Register<ConnectC2SPacket>(buf => new ConnectC2SPacket(buf))

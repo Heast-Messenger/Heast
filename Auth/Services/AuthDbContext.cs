@@ -6,9 +6,9 @@ namespace Auth.Services;
 
 public class AuthDbContext : DbContext
 {
-    public IEnumerable<Account> Accounts => Set<Account>();
-    public IEnumerable<Server> Servers => Set<Server>();
-    public IEnumerable<Session> Sessions => Set<Session>();
+    public DbSet<Account> Accounts => Set<Account>();
+    public DbSet<Server> Servers => Set<Server>();
+    public DbSet<Session> Sessions => Set<Session>();
 
     public static string Host { get; set; } = Shared.Config["db-host"]!;
     public static string Port { get; set; } = Shared.Config["db-port"]!;
@@ -47,10 +47,5 @@ public class AuthDbContext : DbContext
     private static void WriteToFile(string message)
     {
         File.AppendAllText("Assets/Database/Log.txt", message + Environment.NewLine);
-    }
-
-    public IEnumerable<Account> GetUsers()
-    {
-        return Accounts.ToList();
     }
 }

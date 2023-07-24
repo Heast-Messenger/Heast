@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Client.ViewModel;
 using Core.Network;
 using Core.Network.Codecs;
@@ -13,6 +14,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
 {
     public ClientHandshakeHandler(ClientConnection ctx, ConnectionViewModel vm)
     {
+        TaskCompletionSource = new TaskCompletionSource();
         Ctx = ctx;
         Vm = vm;
     }
@@ -20,6 +22,8 @@ public class ClientHandshakeHandler : IClientHandshakeListener
     private ConnectionViewModel Vm { get; }
     private ClientConnection Ctx { get; }
     private Aes? KeyPair { get; set; }
+
+    public TaskCompletionSource TaskCompletionSource { get; }
 
     /// <summary>
     ///     Called when the server responds with their capabilities.
@@ -87,8 +91,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
     public void OnSuccess(SuccessS2CPacket packet)
     {
         Ctx.EnableEncryption(KeyPair!);
-        Ctx.State = NetworkState.Auth;
-        Ctx.Listener = new ClientAuthHandler(Ctx);
+        TaskCompletionSource.SetResult();
         Vm.Encrypting.Complete();
         Vm.Complete();
     }

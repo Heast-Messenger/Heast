@@ -86,9 +86,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Signup()
     {
-        if (NetworkService.Ctx?.State == NetworkState.Auth)
+        if (NetworkService.Connection?.State == NetworkState.Auth)
         {
-            await NetworkService.Ctx.Send(new SignupC2SPacket(
+            await NetworkService.Connection.Send(new SignupC2SPacket(
                 SignupUsername, SignupEmail, SignupPassword));
         }
         else
@@ -100,9 +100,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Reset()
     {
-        if (NetworkService.Ctx?.State == NetworkState.Auth)
+        if (NetworkService.Connection?.State == NetworkState.Auth)
         {
-            await NetworkService.Ctx.Send(new ResetC2SPacket(
+            await NetworkService.Connection.Send(new ResetC2SPacket(
                 LoginUsernameOrEmail, LoginPassword));
         }
         else
@@ -113,9 +113,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Login()
     {
-        if (NetworkService.Ctx?.State == NetworkState.Auth)
+        if (NetworkService.Connection?.State == NetworkState.Auth)
         {
-            await NetworkService.Ctx.Send(new LoginC2SPacket(
+            await NetworkService.Connection.Send(new LoginC2SPacket(
                 LoginUsernameOrEmail, LoginPassword));
         }
         else
@@ -126,9 +126,9 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Guest()
     {
-        if (NetworkService.Ctx?.State == NetworkState.Auth)
+        if (NetworkService.Connection?.State == NetworkState.Auth)
         {
-            await NetworkService.Ctx.Send(new GuestC2SPacket(
+            await NetworkService.Connection.Send(new GuestC2SPacket(
                 GuestUsername));
         }
         else
@@ -165,8 +165,12 @@ public class LoginWindowViewModel : ViewModelBase
             DataContext = this
         };
 
-        ConnectionViewModel = ServiceProvider.GetService<ConnectionViewModel>();
-        await NetworkService.Connect(h, p, ConnectionViewModel);
+        var scope = ServiceProvider.CreateScope();
+        {
+            ConnectionViewModel = scope.ServiceProvider.GetRequiredService<ConnectionViewModel>();
+            // TODO: Maybe make NetworkService scoped and require it here? Then I don't need to pass the scope around.
+            await NetworkService.Connect(h, p, scope);
+        }
     }
 
     public void AddServer()

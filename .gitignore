@@ -55,5 +55,7 @@ $RECYCLE.BIN/
 /.fleet/
 /Auth/Migrations/
 
+/Auth/Assets/Database/Log.txt
+
 Heast.sln.DotSettings
 Heast.sln.DotSettings.user
