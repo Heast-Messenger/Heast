@@ -9,6 +9,6 @@ public interface IServerAuthListener : IPacketListener
     void OnReset(ResetC2SPacket packet);
     void OnDelete(DeleteC2SPacket packet);
     void OnLogout(LogoutC2SPacket packet);
-    void OnVerify(VerifyC2SPacket packet);
+    void OnVerifyEmail(VerifyEmailC2SPacket packet);
     void OnGuest(GuestC2SPacket packet);
 }

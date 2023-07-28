@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Auth.Configuration;
 using Core.Server;
 using static System.Console;
 
@@ -10,12 +11,14 @@ public class DispatcherService : AbstractDispatcher
 {
     public DispatcherService(
         AuthDbContext databaseService,
+        AuthDbConfig databaseConfig,
         ICommandsProvider commandsProvider,
         NetworkService networkService,
         BootstrapService bootstrapService,
         InfoService infoService) : base(commandsProvider)
     {
         DatabaseService = databaseService;
+        AuthDbConfig = databaseConfig;
         CommandsProvider = commandsProvider;
         NetworkService = networkService;
         BootstrapService = bootstrapService;
@@ -23,9 +26,10 @@ public class DispatcherService : AbstractDispatcher
     }
 
     private AuthDbContext DatabaseService { get; }
+    private AuthDbConfig AuthDbConfig { get; }
     private ICommandsProvider CommandsProvider { get; }
     private NetworkService NetworkService { get; }
-    public BootstrapService BootstrapService { get; }
+    private BootstrapService BootstrapService { get; }
     private InfoService InfoService { get; }
 
     public override void PrintVersion()
@@ -33,22 +37,23 @@ public class DispatcherService : AbstractDispatcher
         Clear();
         OutputEncoding = Encoding.Default;
         var content = File.ReadAllText("Assets/Console/Version.txt");
-        WriteLine(Parser.ParseRichText(content, new Dictionary<string, object>
-        {
-            { "ArgsHelpVersionVersion", InfoService.Translation.Args.Version.Version },
-            { "ArgsHelpVersionBuild", InfoService.Translation.Args.Version.Build },
-            { "ArgsHelpVersionWebsite", InfoService.Translation.Args.Version.Website },
-            { "ArgsHelpVersionGithub", InfoService.Translation.Args.Version.Github },
-            { "ArgsHelpVersionDotnet", InfoService.Translation.Args.Version.Dotnet },
-            { "ArgsHelpVersionOs", InfoService.Translation.Args.Version.Os },
+        WriteLine(Parser.ParseRichText(content,
+            new Dictionary<string, object>
+            {
+                { "ArgsHelpVersionVersion", InfoService.Translation.Args.Version.Version },
+                { "ArgsHelpVersionBuild", InfoService.Translation.Args.Version.Build },
+                { "ArgsHelpVersionWebsite", InfoService.Translation.Args.Version.Website },
+                { "ArgsHelpVersionGithub", InfoService.Translation.Args.Version.Github },
+                { "ArgsHelpVersionDotnet", InfoService.Translation.Args.Version.Dotnet },
+                { "ArgsHelpVersionOs", InfoService.Translation.Args.Version.Os },
 
-            { "Version", InfoService.Version },
-            { "Build", InfoService.Build },
-            { "Website", InfoService.Website },
-            { "Github", InfoService.Github },
-            { "Dotnet", InfoService.DotNetInfo },
-            { "Os", InfoService.OsInfo }
-        }));
+                { "Version", InfoService.Version },
+                { "Build", InfoService.Build },
+                { "Website", InfoService.Website },
+                { "Github", InfoService.Github },
+                { "Dotnet", InfoService.DotNetInfo },
+                { "Os", InfoService.OsInfo }
+            }));
     }
 
     public override void PrintHelp()
@@ -57,10 +62,11 @@ public class DispatcherService : AbstractDispatcher
         OutputEncoding = Encoding.Default;
         {
             var content = File.ReadAllText("Assets/Console/Help.txt");
-            WriteLine(Parser.ParseRichText(content, new Dictionary<string, object>
-            {
-                { "ArgsHelpDescription", InfoService.Translation.Args.Help.Description }
-            }));
+            WriteLine(Parser.ParseRichText(content,
+                new Dictionary<string, object>
+                {
+                    { "ArgsHelpDescription", InfoService.Translation.Args.Help.Description }
+                }));
         }
 
         PrintHelp(CommandsProvider.List);
@@ -85,22 +91,23 @@ public class DispatcherService : AbstractDispatcher
         Clear();
         OutputEncoding = Encoding.Default;
         var content = File.ReadAllText("Assets/Console/Start.txt");
-        WriteLine(Parser.ParseRichText(content, new Dictionary<string, object>
-        {
-            { "Version", InfoService.Version },
-            { "Time", time },
-            { "Port", NetworkService.Port },
+        WriteLine(Parser.ParseRichText(content,
+            new Dictionary<string, object>
             {
-                "Db", !DatabaseService.Database.CanConnect()
-                    ? "§4No database connected"
-                    : $"{DatabaseService.Database.ProviderName}@{AuthDbContext.Host}:{AuthDbContext.Port}"
-            },
-            {
-                "Certificate", NetworkService.Certificate == null
-                    ? "§4No certificate specified"
-                    : $"Valid {NetworkService.KeyPair.KeyExchangeAlgorithm} certificate"
-            }
-        }));
+                { "Version", InfoService.Version },
+                { "Time", time },
+                { "Port", NetworkService.Port },
+                {
+                    "Db", !DatabaseService.Database.CanConnect()
+                        ? "§4No database connected"
+                        : $"{DatabaseService.Database.ProviderName}@{AuthDbConfig.Host}:{AuthDbConfig.Port}"
+                },
+                {
+                    "Certificate", NetworkService.Certificate == null
+                        ? "§4No certificate specified"
+                        : $"Valid {NetworkService.KeyPair.KeyExchangeAlgorithm} certificate"
+                }
+            }));
 
         while (true)
         {

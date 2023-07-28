@@ -18,6 +18,7 @@ public class PacketDecoder : ReplayingDecoder
         var buffer = new PacketBuf(input);
         var id = buffer.ReadVarInt();
         var guid = buffer.ReadGuid();
+        var errors = buffer.ReadEnum<ErrorCodes>();
 
         var packet = context.Channel
             .GetAttribute(ClientConnection.ProtocolKey).Get()
@@ -30,6 +31,7 @@ public class PacketDecoder : ReplayingDecoder
         }
 
         packet.Guid = guid;
+        packet.Errors = errors;
 
         output.Add(packet);
     }

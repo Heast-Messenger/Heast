@@ -7,28 +7,33 @@ namespace Core.Network;
 public class NetworkState
 {
     public static readonly NetworkState Handshake = new NetworkState()
-        .Setup(NetworkSide.Server, new PacketHandler<IServerHandshakeListener>()
-            .Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf))
-            .Register<ConnectC2SPacket>(buf => new ConnectC2SPacket(buf))
-            .Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf))
-            .Register<PingC2SPacket>(buf => new PingC2SPacket(buf)))
-        .Setup(NetworkSide.Client, new PacketHandler<IClientHandshakeListener>()
-            .Register<HelloS2CPacket>(buf => new HelloS2CPacket(buf))
-            .Register<ConnectS2CPacket>(buf => new ConnectS2CPacket(buf))
-            .Register<SuccessS2CPacket>(buf => new SuccessS2CPacket(buf))
-            .Register<ErrorS2CPacket>(buf => new ErrorS2CPacket(buf))
-            .Register<PingS2CPacket>(buf => new PingS2CPacket(buf)));
+        .Setup(NetworkSide.Server,
+            new PacketHandler<IServerHandshakeListener>()
+                .Register<HelloC2SPacket>(buf => new HelloC2SPacket(buf))
+                .Register<ConnectC2SPacket>(buf => new ConnectC2SPacket(buf))
+                .Register<KeyC2SPacket>(buf => new KeyC2SPacket(buf))
+                .Register<PingC2SPacket>(buf => new PingC2SPacket(buf)))
+        .Setup(NetworkSide.Client,
+            new PacketHandler<IClientHandshakeListener>()
+                .Register<HelloS2CPacket>(buf => new HelloS2CPacket(buf))
+                .Register<ConnectS2CPacket>(buf => new ConnectS2CPacket(buf))
+                .Register<KeyS2CPacket>(buf => new KeyS2CPacket(buf))
+                .Register<PingS2CPacket>(buf => new PingS2CPacket(buf)));
 
     public static readonly NetworkState Auth = new NetworkState()
-        .Setup(NetworkSide.Server, new PacketHandler<IServerAuthListener>()
-            .Register<SignupC2SPacket>(buf => new SignupC2SPacket(buf))
-            .Register<LoginC2SPacket>(buf => new LoginC2SPacket(buf))
-            .Register<ResetC2SPacket>(buf => new ResetC2SPacket(buf))
-            .Register<DeleteC2SPacket>(buf => new DeleteC2SPacket(buf))
-            .Register<LogoutC2SPacket>(buf => new LogoutC2SPacket(buf))
-            .Register<VerifyC2SPacket>(buf => new VerifyC2SPacket(buf))
-            .Register<GuestC2SPacket>(buf => new GuestC2SPacket(buf)))
-        .Setup(NetworkSide.Client, new PacketHandler<IClientAuthListener>());
+        .Setup(NetworkSide.Server,
+            new PacketHandler<IServerAuthListener>()
+                .Register<SignupC2SPacket>(buf => new SignupC2SPacket(buf))
+                .Register<LoginC2SPacket>(buf => new LoginC2SPacket(buf))
+                .Register<ResetC2SPacket>(buf => new ResetC2SPacket(buf))
+                .Register<DeleteC2SPacket>(buf => new DeleteC2SPacket(buf))
+                .Register<LogoutC2SPacket>(buf => new LogoutC2SPacket(buf))
+                .Register<VerifyEmailC2SPacket>(buf => new VerifyEmailC2SPacket(buf))
+                .Register<GuestC2SPacket>(buf => new GuestC2SPacket(buf)))
+        .Setup(NetworkSide.Client,
+            new PacketHandler<IClientAuthListener>()
+                .Register<SignupS2CPacket>(buf => new SignupS2CPacket(buf))
+                .Register<VerifyEmailS2CPacket>(buf => new VerifyEmailS2CPacket(buf)));
 
     private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 

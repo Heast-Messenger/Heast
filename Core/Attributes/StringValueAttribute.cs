@@ -1,6 +1,4 @@
-using System;
-
-namespace Client.Attributes;
+namespace Core.Attributes;
 
 public class StringValueAttribute : Attribute
 {

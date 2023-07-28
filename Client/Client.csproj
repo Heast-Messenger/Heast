@@ -36,4 +36,15 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="View\Content\Login\EmailVerificationPanel.axaml.cs">
+            <DependentUpon>EmailVerificationPanel.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Controls\VerificationCharacter.axaml.cs">
+            <DependentUpon>VerificationCharacter.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
 </Project>

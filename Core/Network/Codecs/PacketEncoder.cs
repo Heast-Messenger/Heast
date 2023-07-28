@@ -23,6 +23,7 @@ public class PacketEncoder : MessageToByteEncoder<AbstractPacket>
             var buffer = new PacketBuf(output);
             buffer.WriteVarInt(id);
             buffer.WriteGuid(message.Guid);
+            buffer.WriteEnum(message.Errors);
             message.Write(buffer);
         }
         else

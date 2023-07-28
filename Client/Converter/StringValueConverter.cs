@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Client.Attributes;
+using Core.Attributes;
 
 namespace Client.Converter;
 
@@ -15,7 +15,7 @@ public class StringValueConverter : IValueConverter
         {
             return value.GetType()
                 .GetField(value.ToString()!)!
-                .GetCustomAttributes(false)
+                .GetCustomAttributes(inherit: false)
                 .OfType<StringValueAttribute>()
                 .First().Value;
         }

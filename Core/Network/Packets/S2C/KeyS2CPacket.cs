@@ -2,13 +2,13 @@
 
 namespace Core.Network.Packets.S2C;
 
-public class SuccessS2CPacket : AbstractPacket
+public class KeyS2CPacket : AbstractPacket
 {
-    public SuccessS2CPacket()
+    public KeyS2CPacket()
     {
     }
 
-    public SuccessS2CPacket(PacketBuf buf)
+    public KeyS2CPacket(PacketBuf buf)
     {
     }
 
@@ -20,7 +20,7 @@ public class SuccessS2CPacket : AbstractPacket
     {
         if (listener is IClientHandshakeListener handshakeListener)
         {
-            handshakeListener.OnSuccess(this);
+            handshakeListener.OnKey(this);
         }
     }
 }

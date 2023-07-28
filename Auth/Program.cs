@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Auth.Configuration;
 using Auth.Network;
 using Auth.Services;
 using Core.Network;
@@ -8,6 +9,7 @@ using Core.Utility;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Auth;
 
@@ -27,6 +29,13 @@ internal static class Program
             application.Dispatch(args);
         }
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        var startup = new Startup(Shared.Config);
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureServices(collection => startup.ConfigureServices(collection));
+    }
 }
 
 public class Startup
@@ -36,22 +45,28 @@ public class Startup
         Configuration = configuration;
     }
 
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AuthDbContext>();
 
+        services.AddSingleton(Configuration.GetSection("db").Get<AuthDbConfig>()!);
+        services.AddSingleton(Configuration.GetSection("mail").Get<EmailConfig>()!);
+
         services.AddSingleton<NetworkService>();
         services.AddSingleton<BootstrapService>();
-        services.AddSingleton<DispatcherService>();
+        services.AddScoped<DispatcherService>();
 
         services.AddScoped<ClientConnection>(_ => new ClientConnection(NetworkSide.Server));
+        services.AddScoped<EmailService>();
 
         services.AddTransient<ICommandsProvider, CommandsService>();
         services.AddTransient<InfoService>();
         services.AddTransient<ServerAuthHandler>();
         services.AddTransient<ServerHandshakeHandler>();
+        services.AddTransient<HashingService>();
+        services.AddTransient<TwoFactorService>();
 
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
         services.AddValidatorsFromAssembly(Assembly.Load("Core"));

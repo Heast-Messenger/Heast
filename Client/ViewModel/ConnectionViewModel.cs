@@ -83,7 +83,7 @@ public class ConnectionViewModel : ViewModelBase
         }
     }
 
-    public void Error(Error error)
+    public void Error(ErrorCodes error)
     {
         var step = ConnectionSteps.Last();
         step.Fail();
