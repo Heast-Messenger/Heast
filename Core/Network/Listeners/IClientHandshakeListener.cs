@@ -8,7 +8,6 @@ public interface IClientHandshakeListener : IPacketListener
 {
     void OnHello(HelloS2CPacket packet);
     void OnConnect(ConnectS2CPacket packet);
-    void OnSuccess(SuccessS2CPacket packet);
-    void OnError(ErrorS2CPacket packet);
+    void OnKey(KeyS2CPacket packet);
     void OnPing(PingS2CPacket packet);
 }

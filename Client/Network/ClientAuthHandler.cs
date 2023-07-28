@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Core.Network.Codecs;
 using Core.Network.Listeners;
@@ -17,8 +16,13 @@ public class ClientAuthHandler : IClientAuthListener
     private ClientConnection Ctx { get; }
     public TaskCompletionSource TaskCompletionSource { get; }
 
-    public void OnError(ErrorS2CPacket packet)
+    public void OnSignupSuccess(SignupS2CPacket packet)
     {
-        throw new NotImplementedException();
+        // ignored
+    }
+
+    public void OnVerifyResponse(VerifyEmailS2CPacket packet)
+    {
+        // ignored
     }
 }

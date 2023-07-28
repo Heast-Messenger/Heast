@@ -1,8 +1,11 @@
 ﻿using Auth.Model;
 using Auth.Services;
+using Core.Extensions;
+using Core.Network;
 using Core.Network.Codecs;
 using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
+using Core.Network.Packets.S2C;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,36 +13,85 @@ namespace Auth.Network;
 
 public class ServerAuthHandler : IServerAuthListener
 {
-    public ServerAuthHandler(ClientConnection ctx, AuthDbContext db, IServiceProvider serviceProvider)
+    private readonly Dictionary<string, Confirmation> _awaitingConfirmation = new();
+
+    public ServerAuthHandler(
+        ClientConnection ctx,
+        AuthDbContext db,
+        IServiceProvider serviceProvider,
+        HashingService hashingService,
+        TwoFactorService twoFactorService,
+        EmailService emailService)
     {
         TaskCompletionSource = new TaskCompletionSource();
         Ctx = ctx;
         Db = db;
         ServiceProvider = serviceProvider;
+        HashingService = hashingService;
+        TwoFactorService = twoFactorService;
+        EmailService = emailService;
     }
 
     private ClientConnection Ctx { get; }
     private AuthDbContext Db { get; }
     private IServiceProvider ServiceProvider { get; }
+    private HashingService HashingService { get; }
+    private TwoFactorService TwoFactorService { get; }
+    private EmailService EmailService { get; }
+
     public TaskCompletionSource TaskCompletionSource { get; }
 
-    public void OnSignup(SignupC2SPacket packet)
+    public async void OnSignup(SignupC2SPacket packet)
     {
         var validator = ServiceProvider.GetRequiredService<IValidator<SignupC2SPacket>>();
-        var result = validator.Validate(packet);
-        if (result.IsValid)
+        var result = await validator.ValidateAsync(packet);
+        if (!result.IsValid)
         {
+            var errors = result.Errors.MapFlags(failure => (ErrorCodes)ulong.Parse(failure.ErrorCode));
+            await Ctx.Send(new SignupS2CPacket(SignupS2CPacket.ResponseStatus.Error), errors, packet.Guid);
+            return;
         }
+
+        if (Db.Accounts.Any(x => x.Name == packet.Username))
+        {
+            await Ctx.Send(new SignupS2CPacket(SignupS2CPacket.ResponseStatus.Error), ErrorCodes.UsernameExists, packet.Guid);
+            return;
+        }
+
+        if (Db.Accounts.Any(x => x.Email == packet.Email))
+        {
+            await Ctx.Send(new SignupS2CPacket(SignupS2CPacket.ResponseStatus.Error), ErrorCodes.EmailExists, packet.Guid);
+            return;
+        }
+
+        await Ctx.Send(new SignupS2CPacket(SignupS2CPacket.ResponseStatus.AwaitingConfirmation), guid: packet.Guid);
+
+        if (!await VerifyByEmail(packet.Email, packet.Username))
+        {
+            return;
+        }
+
+        var hash = HashingService.Hash(
+            packet.Password,
+            out var salt);
 
         Db.Accounts.Add(new Account
         {
             Name = packet.Username,
             Email = packet.Email,
-            Password = packet.Password, // TODO: HASH
+            Hash = hash,
+            Salt = salt,
             AddedServers = new List<Server>()
         });
 
-        Db.SaveChanges();
+        try
+        {
+            await Db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error whilst saving changes: {e.Message}");
+        }
     }
 
     public void OnLogin(LoginC2SPacket packet)
@@ -62,13 +114,55 @@ public class ServerAuthHandler : IServerAuthListener
         throw new NotImplementedException();
     }
 
-    public void OnVerify(VerifyC2SPacket packet)
+    public void OnVerifyEmail(VerifyEmailC2SPacket packet)
     {
-        throw new NotImplementedException();
+        if (_awaitingConfirmation.TryGetValue(packet.Email, out var confirmation))
+        {
+            if (confirmation.Code == packet.Code)
+            {
+                Ctx.Send(new VerifyEmailS2CPacket(VerifyEmailS2CPacket.ResponseStatus.Success), guid: packet.Guid);
+                confirmation.Confirmed();
+                return;
+            }
+
+            if (++confirmation.Attempts > 3)
+            {
+                Ctx.Send(new VerifyEmailS2CPacket(VerifyEmailS2CPacket.ResponseStatus.Unauthorized), guid: packet.Guid);
+                confirmation.Failed();
+                return;
+            }
+
+            Ctx.Send(new VerifyEmailS2CPacket(VerifyEmailS2CPacket.ResponseStatus.WrongCode), guid: packet.Guid);
+        }
     }
 
     public void OnGuest(GuestC2SPacket packet)
     {
         throw new NotImplementedException();
+    }
+
+    private Task<bool> VerifyByEmail(string email, string username)
+    {
+        Console.Out.WriteLine($"Sending code to {email}");
+        var verificationCode = TwoFactorService.GetVerificationCode();
+        EmailService.SendCode(email, username, verificationCode);
+        var tcs = new TaskCompletionSource();
+
+        _awaitingConfirmation.Remove(email);
+        _awaitingConfirmation.Add(email, new Confirmation { Tcs = tcs, Code = verificationCode });
+
+        var cts = new CancellationTokenSource();
+        var timeout = Task.Delay(TimeSpan.FromMinutes(value: 5), cts.Token);
+        return Task.WhenAny(tcs.Task, timeout).Then(task =>
+        {
+            _awaitingConfirmation.Remove(email);
+            if (task == timeout)
+            {
+                return false;
+            }
+
+            cts.Cancel();
+            return task.IsCompletedSuccessfully;
+        });
     }
 }

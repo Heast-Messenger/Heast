@@ -2,30 +2,34 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class VerifyC2SPacket : AbstractPacket
+public class VerifyEmailC2SPacket : AbstractPacket
 {
-    public VerifyC2SPacket(string code)
+    public VerifyEmailC2SPacket(string code, string email)
     {
         Code = code;
+        Email = email;
     }
 
-    public VerifyC2SPacket(PacketBuf buf)
+    public VerifyEmailC2SPacket(PacketBuf buf)
     {
         Code = buf.ReadString();
+        Email = buf.ReadString();
     }
 
     public string Code { get; }
+    public string Email { get; }
 
     public override void Write(PacketBuf buf)
     {
         buf.WriteString(Code);
+        buf.WriteString(Email);
     }
 
     public override void Apply(IPacketListener listener)
     {
         if (listener is IServerAuthListener authListener)
         {
-            authListener.OnVerify(this);
+            authListener.OnVerifyEmail(this);
         }
     }
 }

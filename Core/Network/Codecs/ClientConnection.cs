@@ -77,9 +77,10 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
         base.ExceptionCaught(context, exception);
     }
 
-    public Task Send(AbstractPacket packet, Guid? guid = null!)
+    public Task Send(AbstractPacket packet, ErrorCodes? errors = null, Guid? guid = null)
     {
         packet.Guid = guid ?? Guid.NewGuid();
+        packet.Errors = errors ?? ErrorCodes.None;
         if (Channel is { IsOpen: true })
         {
             return Channel.WriteAndFlushAsync(packet);
@@ -88,9 +89,10 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
         throw new IllegalStateException("Channel was null whilst trying to send a packet");
     }
 
-    public async Task<TResult?> SendAndWait<TResult>(AbstractPacket packet, Guid? guid = null!) where TResult : AbstractPacket
+    public async Task<TResult> SendAndWait<TResult>(AbstractPacket packet, ErrorCodes? errors = null, Guid? guid = null!) where TResult : AbstractPacket
     {
         packet.Guid = guid ?? Guid.NewGuid();
+        packet.Errors = errors ?? ErrorCodes.None;
         var tcs = new TaskCompletionSource<AbstractPacket>();
         _awaitingResponse[packet.Guid] = tcs;
         if (Channel is { IsOpen: true })
@@ -102,7 +104,8 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
                 return tResult;
             }
 
-            return null;
+            throw new NetworkException($"Packet type '{packet.GetType()}' is not applicable to" +
+                                       $"expected type '{typeof(TResult)}'");
         }
 
         throw new IllegalStateException("Channel was null whilst trying to send a packet");
@@ -125,13 +128,17 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
 
         if (Side == NetworkSide.Client)
         {
-            Channel.Pipeline.AddLast("tls", new TlsHandler(stream =>
-                new SslStream(stream, true, (_, _, _, _) =>
-                {
-                    taskCompletionSource.SetResult();
-                    Console.WriteLine("SSL Success");
-                    return true;
-                }), new ClientTlsSettings("")));
+            Channel.Pipeline.AddLast("tls",
+                new TlsHandler(stream =>
+                        new SslStream(stream,
+                            leaveInnerStreamOpen: true,
+                            (_, _, _, _) =>
+                            {
+                                taskCompletionSource.SetResult();
+                                Console.WriteLine("SSL Success");
+                                return true;
+                            }),
+                    new ClientTlsSettings("")));
         }
 
         await taskCompletionSource.Task;

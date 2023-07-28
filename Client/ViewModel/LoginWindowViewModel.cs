@@ -10,6 +10,7 @@ using Client.View.Content;
 using Client.View.Content.Login;
 using Core.Network;
 using Core.Network.Packets.C2S;
+using Core.Network.Packets.S2C;
 using Core.Utility;
 using DotNetty.Transport.Channels;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,7 @@ public class LoginWindowViewModel : ViewModelBase
     public LoginWindowViewModel(IServiceProvider serviceProvider, NetworkService networkService, ConnectionViewModel connectionService)
     {
         _connectionService = connectionService;
-        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, PingAllServers);
+        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2), DispatcherPriority.Background, PingAllServers);
         ServiceProvider = serviceProvider;
         NetworkService = networkService;
     }
@@ -86,55 +87,105 @@ public class LoginWindowViewModel : ViewModelBase
 
     public async void Signup()
     {
-        if (NetworkService.Connection?.State == NetworkState.Auth)
+        if (NetworkService.Connection?.State != NetworkState.Auth)
         {
-            await NetworkService.Connection.Send(new SignupC2SPacket(
-                SignupUsername, SignupEmail, SignupPassword));
-        }
-        else
-        {
-            // TODO: Replace with dynamic translations
             Error = "Wait for Heast services to connect...";
+            return;
+        }
+
+        var result = await NetworkService.Connection.SendAndWait<SignupS2CPacket>(new SignupC2SPacket(
+            SignupUsername,
+            SignupEmail,
+            SignupPassword));
+
+        if (result.HasErrors())
+        {
+            Error = result.GetErrors();
+        }
+
+        if (result.Status == SignupS2CPacket.ResponseStatus.AwaitingConfirmation)
+        {
+            Content = new EmailVerificationPanel
+            {
+                DataContext = this,
+                Origin = new SignupPanel
+                {
+                    DataContext = this
+                }
+            };
+        }
+    }
+
+    public async void VerifySignupCode(string code)
+    {
+        if (NetworkService.Connection?.State != NetworkState.Auth)
+        {
+            Error = "Wait for Heast services to connect...";
+            return;
+        }
+
+        var result = await NetworkService.Connection.SendAndWait<VerifyEmailS2CPacket>(
+            new VerifyEmailC2SPacket(code, SignupEmail));
+
+        if (result.Status == VerifyEmailS2CPacket.ResponseStatus.WrongCode)
+        {
+            return;
+        }
+
+        if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Unauthorized)
+        {
+            Content = new SignupPanel
+            {
+                DataContext = this
+            };
+            return;
+        }
+
+        if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Success)
+        {
+            // Content = new LoggedInPanel
+            // {
+            //     DataContext = this
+            // };
         }
     }
 
     public async void Reset()
     {
-        if (NetworkService.Connection?.State == NetworkState.Auth)
-        {
-            await NetworkService.Connection.Send(new ResetC2SPacket(
-                LoginUsernameOrEmail, LoginPassword));
-        }
-        else
+        if (NetworkService.Connection?.State != NetworkState.Auth)
         {
             Error = "Wait for Heast services to connect...";
+            return;
         }
+
+        await NetworkService.Connection.Send(new ResetC2SPacket(
+            LoginUsernameOrEmail,
+            LoginPassword));
     }
 
     public async void Login()
     {
-        if (NetworkService.Connection?.State == NetworkState.Auth)
-        {
-            await NetworkService.Connection.Send(new LoginC2SPacket(
-                LoginUsernameOrEmail, LoginPassword));
-        }
-        else
+        if (NetworkService.Connection?.State != NetworkState.Auth)
         {
             Error = "Wait for Heast services to connect...";
+            return;
         }
+
+        await NetworkService.Connection.Send(new LoginC2SPacket(
+            LoginUsernameOrEmail,
+            LoginPassword));
     }
 
     public async void Guest()
     {
-        if (NetworkService.Connection?.State == NetworkState.Auth)
-        {
-            await NetworkService.Connection.Send(new GuestC2SPacket(
-                GuestUsername));
-        }
-        else
+        if (NetworkService.Connection?.State != NetworkState.Auth)
         {
             Error = "Wait for Heast services to connect...";
+            return;
         }
+
+        await NetworkService.Connection.Send(new GuestC2SPacket(
+            GuestUsername));
     }
 
     public void ConnectOfficial()

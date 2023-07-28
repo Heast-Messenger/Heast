@@ -1,7 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Core.Network;
-using Core.Network.Codecs;
 using Core.Utility;
 using static System.Console;
 
@@ -11,10 +10,9 @@ public class NetworkService
 {
     public int Port { get; set; } = 23010;
     public CancellationToken CancellationToken { get; } = new();
-    public List<ClientConnection> Clients { get; } = new();
     public Capabilities Capabilities { get; private set; } = Capabilities.None;
-    public RSACryptoServiceProvider KeyPair { get; } = new(4096);
-    public X509Certificate2? Certificate { get; private set; }
+    public RSACryptoServiceProvider KeyPair { get; } = new(dwKeySize: 4096);
+    public X509Certificate2? Certificate { get; set; }
 
     public void Initialize()
     {
@@ -28,12 +26,6 @@ public class NetworkService
                             Capabilities.Login |
                             Capabilities.Guest;
         }
-    }
-
-    public Task Disconnect(ClientConnection connection)
-    {
-        Clients.Remove(connection);
-        return Task.CompletedTask;
     }
 
     public void SetCertificate(string filepath)

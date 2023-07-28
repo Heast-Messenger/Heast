@@ -32,7 +32,14 @@ public class ClientHandshakeHandler : IClientHandshakeListener
     /// <param name="packet">The received packet containing the server capabilities.</param>
     public async void OnHello(HelloS2CPacket packet)
     {
+        if (packet.HasErrors())
+        {
+            Vm.HelloS2C.Fail();
+            return;
+        }
+
         Vm.HelloS2C.Complete();
+
         Vm.Capabilities = packet.Capabilities;
         if (packet.Capabilities.HasFlag(Capabilities.Ssl))
         {
@@ -42,8 +49,7 @@ public class ClientHandshakeHandler : IClientHandshakeListener
         }
 
         Vm.Add(Vm.RequestConnection);
-        // TODO: Client info
-        await Ctx.Send(new ConnectC2SPacket("Some client"));
+        await Ctx.Send(new ConnectC2SPacket("Some client")); // TODO: Client info
         Vm.RequestConnection.Complete();
         Vm.Add(Vm.ReceivedPublicKey);
     }
@@ -54,6 +60,12 @@ public class ClientHandshakeHandler : IClientHandshakeListener
     /// <param name="packet">The received packet containing the server's public RSA key.</param>
     public async void OnConnect(ConnectS2CPacket packet)
     {
+        if (packet.HasErrors())
+        {
+            Vm.ReceivedPublicKey.Fail();
+            return;
+        }
+
         Vm.ReceivedPublicKey.Complete();
         Vm.Add(Vm.GeneratingKey);
         using (KeyPair = Aes.Create())
@@ -88,25 +100,24 @@ public class ClientHandshakeHandler : IClientHandshakeListener
     ///     Both parties now enable the RSA encryption by modifying the pipeline.
     /// </summary>
     /// <param name="packet">The received packet to acknowledge the request.</param>
-    public void OnSuccess(SuccessS2CPacket packet)
+    public void OnKey(KeyS2CPacket packet)
     {
+        if (packet.HasErrors())
+        {
+            Vm.Encrypting.Fail();
+            return;
+        }
+
         Ctx.EnableEncryption(KeyPair!);
         TaskCompletionSource.SetResult();
         Vm.Encrypting.Complete();
         Vm.Complete();
     }
 
-    /// <summary>
-    ///     Called when the server experiences an error.
-    ///     The client is then automatically disconnected from the network.
-    /// </summary>
-    /// <param name="packet">The received packet containing information about the error.</param>
-    public void OnError(ErrorS2CPacket packet)
-    {
-        Vm.Error(packet.Error);
-    }
-
     public void OnPing(PingS2CPacket packet)
     {
+        if (packet.HasErrors())
+        {
+        }
     }
 }

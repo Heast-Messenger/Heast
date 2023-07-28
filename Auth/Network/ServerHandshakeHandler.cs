@@ -30,7 +30,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     public async void OnHello(HelloC2SPacket packet)
     {
         var capabilities = NetworkService.Capabilities;
-        await Ctx.Send(new HelloS2CPacket(capabilities), packet.Guid);
+        await Ctx.Send(new HelloS2CPacket(capabilities), guid: packet.Guid);
         if (capabilities.HasFlag(Capabilities.Ssl))
         {
             var certificate = NetworkService.Certificate;
@@ -46,7 +46,7 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     public async void OnConnect(ConnectC2SPacket packet)
     {
         var publicKey = NetworkService.KeyPair.ExportRSAPublicKey();
-        await Ctx.Send(new ConnectS2CPacket(publicKey), packet.Guid);
+        await Ctx.Send(new ConnectS2CPacket(publicKey), guid: packet.Guid);
     }
 
     /// <summary>
@@ -68,12 +68,11 @@ public class ServerHandshakeHandler : IServerHandshakeListener
         }
         catch (CryptographicException)
         {
-            await Ctx.Send(new ErrorS2CPacket(Error.InvalidKey), packet.Guid);
-            await NetworkService.Disconnect(Ctx);
+            await Ctx.Send(new KeyS2CPacket(), ErrorCodes.InvalidKey, packet.Guid);
             return;
         }
 
-        await Ctx.Send(new SuccessS2CPacket());
+        await Ctx.Send(new KeyS2CPacket(), guid: packet.Guid);
         Ctx.EnableEncryption(KeyPair);
         TaskCompletionSource.SetResult();
     }
@@ -81,6 +80,6 @@ public class ServerHandshakeHandler : IServerHandshakeListener
     public void OnPing(PingC2SPacket packet)
     {
         var startMs = packet.StartMs;
-        Ctx.Send(new PingS2CPacket(startMs), packet.Guid);
+        Ctx.Send(new PingS2CPacket(startMs), guid: packet.Guid);
     }
 }

@@ -1,27 +1,34 @@
+using Auth.Configuration;
 using Auth.Model;
-using Core.Utility;
 using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Services;
 
 public class AuthDbContext : DbContext
 {
+    public AuthDbContext(AuthDbConfig config)
+    {
+        Config = config;
+    }
+
+    public AuthDbContext(AuthDbConfig config, DbContextOptions<AuthDbContext> options)
+        : base(options)
+    {
+        Config = config;
+    }
+
+    private AuthDbConfig Config { get; }
+
     public DbSet<Account> Accounts => Set<Account>();
     public DbSet<Server> Servers => Set<Server>();
     public DbSet<Session> Sessions => Set<Session>();
 
-    public static string Host { get; set; } = Shared.Config["db-host"]!;
-    public static string Port { get; set; } = Shared.Config["db-port"]!;
-    public static string Username { get; set; } = Shared.Config["db-user"]!;
-    public static string Password { get; set; } = Shared.Config["db-password"]!;
-    public static string Name { get; set; } = Shared.Config["db-name"]!;
-
-    public static string ConnectionString => File.ReadAllText("Assets/Database/Connection.txt")
-        .Replace("{host}", Host)
-        .Replace("{port}", Port)
-        .Replace("{user}", Username)
-        .Replace("{password}", Password)
-        .Replace("{db}", Name);
+    public string ConnectionString => File.ReadAllText("Assets/Database/Connection.txt")
+        .Replace("{host}", Config.Host)
+        .Replace("{port}", Config.Port)
+        .Replace("{user}", Config.Username)
+        .Replace("{password}", Config.Password)
+        .Replace("{db}", Config.Name);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

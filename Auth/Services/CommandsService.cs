@@ -1,3 +1,4 @@
+using Auth.Configuration;
 using Auth.Structure;
 using Core.Server;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ public class CommandsService : ICommandsProvider
     private DispatcherService DispatcherService => ServiceProvider.GetRequiredService<DispatcherService>();
     private NetworkService NetworkService => ServiceProvider.GetRequiredService<NetworkService>();
     private InfoService InfoService => ServiceProvider.GetRequiredService<InfoService>();
+    private AuthDbConfig AuthDbConfig => ServiceProvider.GetRequiredService<AuthDbConfig>();
 
     private dynamic Translation => InfoService.Translation;
 
@@ -69,7 +71,7 @@ public class CommandsService : ICommandsProvider
                     Long = "--dbhost",
                     Default = "localhost",
                     Argc = 1,
-                    Action = argv => AuthDbContext.Host = argv[0]
+                    Action = argv => AuthDbConfig.Host = argv[0]
                 },
                 new()
                 {
@@ -78,7 +80,7 @@ public class CommandsService : ICommandsProvider
                     Long = "--dbport",
                     Default = "3306",
                     Argc = 1,
-                    Action = argv => AuthDbContext.Port = argv[0]
+                    Action = argv => AuthDbConfig.Port = argv[0]
                 },
                 new()
                 {
