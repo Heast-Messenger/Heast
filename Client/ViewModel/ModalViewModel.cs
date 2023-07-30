@@ -1,11 +1,11 @@
-using Client.View.Content;
 using Client.View.Content.Modals;
+using Client.View.Controls;
 
 namespace Client.ViewModel;
 
 public class ModalViewModel : ViewModelBase
 {
-    private ModalBase? _modal = new EmailVerificationModal(null!);
+    private ModalBase? _modal;
 
     public ModalBase? Modal
     {
@@ -30,5 +30,8 @@ public class ModalViewModel : ViewModelBase
         }
     }
 
-    // TODO: maybe modal queuing?
+    public void Close()
+    {
+        Modal = null;
+    }
 }

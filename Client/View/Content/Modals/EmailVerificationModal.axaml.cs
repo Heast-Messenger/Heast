@@ -1,4 +1,5 @@
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
@@ -14,14 +15,26 @@ public partial class EmailVerificationModal : ModalBase
 {
     private const string Charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+    public static readonly DirectProperty<EmailVerificationModal, bool> CanSubmitProperty =
+        AvaloniaProperty.RegisterDirect<EmailVerificationModal, bool>(nameof(CanSubmit),
+            o => o.CanSubmit,
+            (o, v) => o.CanSubmit = v);
+
+    private bool _canSubmit;
+
     public EmailVerificationModal(IEmailVerifiable emailVerifiable)
     {
         EmailVerifiable = emailVerifiable;
         InitializeComponent();
         KeyDownEvent.AddClassHandler<TopLevel>(OnKeyDown, handledEventsToo: true);
+        SubmitButton.Focus();
     }
 
-    public bool CanSubmit => Characters.All(x => x.Character is not null);
+    public bool CanSubmit
+    {
+        get => _canSubmit;
+        set => SetAndRaise(CanSubmitProperty, ref _canSubmit, value);
+    }
 
     private IClipboard? ClipBoardService => TopLevel.GetTopLevel(this)?.Clipboard;
 
@@ -53,7 +66,7 @@ public partial class EmailVerificationModal : ModalBase
 
         else if (e.Key is Key.Back or Key.Delete && CursorIndex > 0)
         {
-            Characters[--CursorIndex].Character = ' ';
+            Characters[--CursorIndex].Character = null;
         }
 
         else if (e.Key is Key.V && e.KeyModifiers.HasFlag(KeyModifiers.Control))
@@ -74,6 +87,9 @@ public partial class EmailVerificationModal : ModalBase
                         {
                             Characters[i].Character = text[i];
                         }
+
+                        CursorIndex = Characters.Length;
+                        CheckCanSubmit();
                     }
                 });
             });
@@ -101,6 +117,14 @@ public partial class EmailVerificationModal : ModalBase
                 Characters[i].Classes.Add("Selected");
             }
         }
+
+        CheckCanSubmit();
+    }
+
+    private void CheckCanSubmit()
+    {
+        var canSubmit = Characters.All(x => x.Character is not null);
+        SetAndRaise(CanSubmitProperty, ref _canSubmit, canSubmit);
     }
 
     private void Button_Submit(object? sender, RoutedEventArgs e)
@@ -109,5 +133,10 @@ public partial class EmailVerificationModal : ModalBase
         {
             EmailVerifiable.VerifySignupCode(VerificationCode);
         }
+    }
+
+    public void WrongCode()
+    {
+        Animations.Shake.RunAsync(VerificationContainer);
     }
 }

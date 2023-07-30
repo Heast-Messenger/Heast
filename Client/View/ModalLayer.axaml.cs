@@ -18,7 +18,7 @@ public partial class ModalLayer : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            ModalViewModel.Modal = null;
+            ModalViewModel.Close();
         }
     }
 }

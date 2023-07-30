@@ -4,36 +4,41 @@
              xmlns:extensions="clr-namespace:Client.Extensions"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              x:Class="Client.View.ModalLayer"
-             x:DataType="vm:ModalViewModel"
-             IsHitTestVisible="{Binding Modal, 
-             Converter={x:Static ObjectConverters.IsNotNull}}">
+             x:DataType="vm:ModalViewModel">
     <Design.DataContext>
         <vm:ModalViewModel />
     </Design.DataContext>
+
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/ModalTemplate.axaml" />
+    </UserControl.Styles>
 
     <UserControl.Resources>
         <system:Double x:Key="Active">0.6</system:Double>
         <system:Double x:Key="Inactive">0.0</system:Double>
     </UserControl.Resources>
 
-    <Grid>
-        <Border Background="Black"
+    <Grid RowDefinitions="38, *">
+        <Border Grid.Row="0" Grid.RowSpan="2"
+                Background="Black"
+                IsHitTestVisible="False"
                 Opacity="{extensions:Conditional {CompiledBinding
                 Path=Modal,
                 ConverterParameter={x:Type system:Double}}, 
-                True={StaticResource Active}, False={StaticResource Inactive}}">
-            <!-- <Border.Transitions> -->
-            <!--     <Transitions> -->
-            <!--         <DoubleTransition Property="Opacity" Duration="0:00:00.200" /> -->
-            <!--     </Transitions> -->
-            <!-- </Border.Transitions> -->
-        </Border>
+                True={StaticResource Active}, False={StaticResource Inactive}}" />
 
-        <TransitioningContentControl
-            Name="ParentControl"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Content="{Binding Modal}">
+        <Border Grid.Row="1"
+                Background="Transparent"
+                IsHitTestVisible="{Binding Modal, 
+                Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+        <TransitioningContentControl Grid.Row="1"
+                                     Name="ParentControl"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     Content="{Binding Modal}"
+                                     IsHitTestVisible="{Binding Modal, 
+                                     Converter={x:Static ObjectConverters.IsNotNull}}">
             <TransitioningContentControl.PageTransition>
                 <CrossFade Duration="0:00:00.200" />
             </TransitioningContentControl.PageTransition>

@@ -33,7 +33,7 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
         ModalViewModel modalService)
     {
         _connectionService = connectionService;
-        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2), DispatcherPriority.Background, PingAllServers);
+        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2), DispatcherPriority.Background, TryPingAllServers);
         ServiceProvider = serviceProvider;
         NetworkService = networkService;
         ModalService = modalService;
@@ -97,20 +97,25 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
 
         if (result.Status == VerifyEmailS2CPacket.ResponseStatus.WrongCode)
         {
-            return;
+            if (ModalService.Modal is EmailVerificationModal emailVerificationModal)
+            {
+                emailVerificationModal.WrongCode();
+            }
         }
 
-        if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Unauthorized)
+        else if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Unauthorized)
         {
+            Error = "Unauthorized.";
+            ModalService.Close();
             Content = new SignupPanel
             {
                 DataContext = this
             };
-            return;
         }
 
-        if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Success)
+        else if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Success)
         {
+            ModalService.Close();
             // Content = new LoggedInPanel
             // {
             //     DataContext = this
@@ -286,7 +291,7 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
         }
     }
 
-    private void PingAllServers(object? sender, EventArgs e)
+    private void TryPingAllServers(object? sender, EventArgs e)
     {
         if (Content is CustomServerPanel)
         {

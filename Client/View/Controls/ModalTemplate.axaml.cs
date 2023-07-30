@@ -4,4 +4,5 @@ namespace Client.View.Controls;
 
 public class ModalTemplate : ContentControl
 {
+    
 }

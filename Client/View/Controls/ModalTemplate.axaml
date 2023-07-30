@@ -9,12 +9,28 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <ContentPresenter
-                    Margin="0"
-                    Padding="30.0"
-                    CornerRadius="10.0"
-                    Background="{DynamicResource Middle}"
-                    Content="{TemplateBinding Content}" />
+                <Grid RowDefinitions="Auto, Auto">
+                    <Border Grid.Row="0"
+                            Margin="0 10.0">
+                        <Button Classes="Unstyled"
+                                Command="{Binding Path=Close, 
+                                RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType={x:Type controls:ModalBase}}}"
+                                HorizontalAlignment="Left">
+                            <controls:Icon
+                                Text="Close"
+                                Source="{StaticResource Icon.Close-Circle-Fill}"
+                                Foreground="{DynamicResource White}" />
+                        </Button>
+                    </Border>
+
+                    <ContentPresenter Grid.Row="1"
+                                      Margin="0"
+                                      Padding="30.0"
+                                      CornerRadius="10.0"
+                                      Background="{DynamicResource Middle}"
+                                      Content="{TemplateBinding Content}" />
+                </Grid>
             </ControlTemplate>
         </Setter>
     </Style>
