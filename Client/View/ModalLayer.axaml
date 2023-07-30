@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Client.ViewModel"
+             xmlns:extensions="clr-namespace:Client.Extensions"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             x:Class="Client.View.ModalLayer"
+             x:DataType="vm:ModalViewModel"
+             IsHitTestVisible="{Binding Modal, 
+             Converter={x:Static ObjectConverters.IsNotNull}}">
+    <Design.DataContext>
+        <vm:ModalViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <system:Double x:Key="Active">0.6</system:Double>
+        <system:Double x:Key="Inactive">0.0</system:Double>
+    </UserControl.Resources>
+
+    <Grid>
+        <Border Background="Black"
+                Opacity="{extensions:Conditional {CompiledBinding
+                Path=Modal,
+                ConverterParameter={x:Type system:Double}}, 
+                True={StaticResource Active}, False={StaticResource Inactive}}">
+            <!-- <Border.Transitions> -->
+            <!--     <Transitions> -->
+            <!--         <DoubleTransition Property="Opacity" Duration="0:00:00.200" /> -->
+            <!--     </Transitions> -->
+            <!-- </Border.Transitions> -->
+        </Border>
+
+        <TransitioningContentControl
+            Name="ParentControl"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Content="{Binding Modal}">
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0:00:00.200" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
+    </Grid>
+</UserControl>

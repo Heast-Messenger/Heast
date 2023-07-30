@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
 
-namespace Client.View.Content.Login.Templates;
+namespace Client.View.Controls;
 
 public class TitleTemplate : ContentControl
 {

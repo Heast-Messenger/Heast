@@ -1,8 +1,7 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Client.View.Content.Login.Templates;
+namespace Client.View.Controls;
 
 public partial class Title : UserControl
 {

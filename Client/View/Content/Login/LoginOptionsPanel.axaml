@@ -1,77 +1,76 @@
 <view:LoginBase
-   xmlns="https://github.com/avaloniaui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:view="clr-namespace:Client.View.Content"
-   xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:extensions="clr-namespace:Client.Extensions"
-   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
-   x:Class="Client.View.Content.Login.LoginOptionsPanel">
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Client.View.Content"
+    xmlns:vm="clr-namespace:Client.ViewModel"
+    xmlns:controls="clr-namespace:Client.View.Controls"
+    xmlns:extensions="clr-namespace:Client.Extensions"
+    x:Class="Client.View.Content.Login.LoginOptionsPanel">
 
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="Templates/TitleTemplate.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+        <StyleInclude Source="/Styles/LoginButtons.axaml" />
+    </UserControl.Styles>
 
-   <Grid RowDefinitions="Auto, *">
-      <templates:Title Grid.Row="0" />
+    <Grid RowDefinitions="Auto, *">
+        <controls:Title Grid.Row="0" />
 
-      <StackPanel Grid.Row="1" Orientation="Vertical">
-         <StackPanel.Styles>
-            <Style Selector="TextBlock.Subtitle">
-               <Setter Property="FontWeight" Value="Bold" />
-               <Setter Property="Margin" Value="0 30.0 0 0" />
-            </Style>
-         </StackPanel.Styles>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel.Styles>
+                <Style Selector="TextBlock.Subtitle">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Margin" Value="0 30.0 0 0" />
+                </Style>
+            </StackPanel.Styles>
 
-         <TextBlock
-            x:DataType="vm:LoginWindowViewModel"
-            Text="{extensions:Conditional {CompiledBinding SignupAllowed},
-            True='New to Heast?',
-            False='Account creation is disabled on this server.'}"
-            Classes="Subtitle" />
-         <Button Click="Button_OnSignup"
-                 IsEnabled="{Binding SignupAllowed}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Sign up"
-                  Source="{StaticResource Icon.Add-Fill}" />
-            </Button.Content>
-         </Button>
+            <TextBlock
+                x:DataType="vm:LoginWindowViewModel"
+                Text="{extensions:Conditional {CompiledBinding SignupAllowed},
+                True='New to Heast?',
+                False='Account creation is disabled on this server.'}"
+                Classes="Subtitle" />
+            <Button Click="Button_OnSignup"
+                    IsEnabled="{Binding SignupAllowed}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Sign up"
+                        Source="{StaticResource Icon.Add-Fill}" />
+                </Button.Content>
+            </Button>
 
-         <TextBlock
-            x:DataType="vm:LoginWindowViewModel"
-            Text="{extensions:Conditional {CompiledBinding LoginAllowed},
+            <TextBlock
+                x:DataType="vm:LoginWindowViewModel"
+                Text="{extensions:Conditional {CompiledBinding LoginAllowed},
             True='Already a member?',
             False='Login is disabled on this server.'}"
-            Classes="Subtitle" />
-         <Button Click="Button_OnLogin"
-                 IsEnabled="{Binding LoginAllowed}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Log in"
-                  Source="{StaticResource Icon.Login-Box-Fill}" />
-            </Button.Content>
-         </Button>
+                Classes="Subtitle" />
+            <Button Click="Button_OnLogin"
+                    IsEnabled="{Binding LoginAllowed}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Log in"
+                        Source="{StaticResource Icon.Login-Box-Fill}" />
+                </Button.Content>
+            </Button>
 
-         <TextBlock
-            x:DataType="vm:LoginWindowViewModel"
-            Text="{extensions:Conditional {CompiledBinding GuestAllowed},
+            <TextBlock
+                x:DataType="vm:LoginWindowViewModel"
+                Text="{extensions:Conditional {CompiledBinding GuestAllowed},
             True='Continue as a guest:',
             False='Guest accounts are disabled on this server.'}"
-            Classes="Subtitle" />
-         <Button Click="Button_OnGuest"
-                 IsEnabled="{Binding GuestAllowed}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Continue"
-                  Source="{StaticResource Icon.User-Fill}" />
-            </Button.Content>
-         </Button>
-      </StackPanel>
-   </Grid>
+                Classes="Subtitle" />
+            <Button Click="Button_OnGuest"
+                    IsEnabled="{Binding GuestAllowed}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Continue"
+                        Source="{StaticResource Icon.User-Fill}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
 </view:LoginBase>

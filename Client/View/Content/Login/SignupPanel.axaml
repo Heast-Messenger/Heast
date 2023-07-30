@@ -3,55 +3,54 @@
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
                 xmlns:controls="clr-namespace:Client.View.Controls"
-                xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
                 x:Class="Client.View.Content.Login.SignupPanel">
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="Templates/TitleTemplate.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-      <StyleInclude Source="/Styles/LoginTextBox.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+        <StyleInclude Source="/Styles/LoginButtons.axaml" />
+        <StyleInclude Source="/Styles/LoginTextBox.axaml" />
+    </UserControl.Styles>
 
-   <templates:TitleTemplate>
-      <templates:TitleTemplate.Title>
-         <Run Text="Welcome!" />
-      </templates:TitleTemplate.Title>
-      <templates:TitleTemplate.Subtitle>
-         <Run Text="Tell us your" />
-         <Run Text="name, email" FontWeight="Black" />
-         <Run Text="address and choose a" />
-         <Run Text="strong password." FontWeight="Black" />
-      </templates:TitleTemplate.Subtitle>
+    <controls:TitleTemplate>
+        <controls:TitleTemplate.Title>
+            <Run Text="Welcome!" />
+        </controls:TitleTemplate.Title>
+        <controls:TitleTemplate.Subtitle>
+            <Run Text="Tell us your" />
+            <Run Text="name, email" FontWeight="Black" />
+            <Run Text="address and choose a" />
+            <Run Text="strong password." FontWeight="Black" />
+        </controls:TitleTemplate.Subtitle>
 
-      <StackPanel Orientation="Vertical">
-         <StackPanel.Styles>
-            <Style Selector="TextBlock.Subtitle">
-               <Setter Property="FontWeight" Value="Bold" />
-               <Setter Property="Margin" Value="0 30.0 0 0" />
-            </Style>
-         </StackPanel.Styles>
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Styles>
+                <Style Selector="TextBlock.Subtitle">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Margin" Value="0 30.0 0 0" />
+                </Style>
+            </StackPanel.Styles>
 
-         <TextBox Watermark="Username"
-                  Text="{Binding SignupUsername}" />
-         <TextBox Watermark="Email address"
-                  Text="{Binding SignupEmail}" />
-         <TextBox Watermark="Password"
-                  Classes="Password"
-                  Text="{Binding SignupPassword}" />
+            <TextBox Watermark="Username"
+                     Text="{Binding SignupUsername}" />
+            <TextBox Watermark="Email address"
+                     Text="{Binding SignupEmail}" />
+            <TextBox Watermark="Password"
+                     Classes="Password"
+                     Text="{Binding SignupPassword}" />
 
-         <TextBlock Text="Sign up when you're ready!"
-                    Classes="Subtitle" />
-         <Button Command="{Binding Signup}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Sign up"
-                  Source="{StaticResource Icon.Add-Fill}"
-                  Foreground="{DynamicResource White}" />
-            </Button.Content>
-         </Button>
-      </StackPanel>
-   </templates:TitleTemplate>
+            <TextBlock Text="Sign up when you're ready!"
+                       Classes="Subtitle" />
+            <Button Command="{Binding Signup}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Sign up"
+                        Source="{StaticResource Icon.Add-Fill}"
+                        Foreground="{DynamicResource White}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </controls:TitleTemplate>
 </view:LoginBase>

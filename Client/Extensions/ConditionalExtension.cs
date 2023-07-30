@@ -28,7 +28,7 @@ public class ConditionalExtension : MarkupExtension
                 value => value ? True : False);
         }
 
-        if (Binding.ConverterParameter != null)
+        else if (Binding.ConverterParameter != null)
         {
             Binding.Converter = new FuncValueConverter<object, object>(
                 value => value != null ? True : False);

@@ -3,63 +3,62 @@
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
                 xmlns:controls="clr-namespace:Client.View.Controls"
-                xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
                 x:Class="Client.View.Content.Login.LoginPanel">
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="Templates/TitleTemplate.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-      <StyleInclude Source="/Styles/LoginTextBox.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+        <StyleInclude Source="/Styles/LoginButtons.axaml" />
+        <StyleInclude Source="/Styles/LoginTextBox.axaml" />
+    </UserControl.Styles>
 
-   <templates:TitleTemplate>
-      <templates:TitleTemplate.Title>
-         <Run Text="Welcome back!" />
-      </templates:TitleTemplate.Title>
-      <templates:TitleTemplate.Subtitle>
-         <Run Text="Click on" />
-         <Run Text="Reset" FontWeight="Bold" />
-         <Run Text="to change your" />
-         <Run Text="password" FontWeight="Bold" />
-         <Run Text="in case you forgot it." />
-      </templates:TitleTemplate.Subtitle>
+    <controls:TitleTemplate>
+        <controls:TitleTemplate.Title>
+            <Run Text="Welcome back!" />
+        </controls:TitleTemplate.Title>
+        <controls:TitleTemplate.Subtitle>
+            <Run Text="Click on" />
+            <Run Text="Reset" FontWeight="Bold" />
+            <Run Text="to change your" />
+            <Run Text="password" FontWeight="Bold" />
+            <Run Text="in case you forgot it." />
+        </controls:TitleTemplate.Subtitle>
 
-      <StackPanel Orientation="Vertical">
-         <StackPanel.Styles>
-            <Style Selector="TextBlock.Subtitle">
-               <Setter Property="FontWeight" Value="Bold" />
-               <Setter Property="Margin" Value="0 30.0 0 0" />
-            </Style>
-         </StackPanel.Styles>
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Styles>
+                <Style Selector="TextBlock.Subtitle">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Margin" Value="0 30.0 0 0" />
+                </Style>
+            </StackPanel.Styles>
 
-         <TextBox Watermark="Username / Email"
-                  Text="{Binding LoginUsernameOrEmail}" />
-         <TextBox Watermark="Password"
-                  Classes="Password"
-                  Text="{Binding LoginPassword}" />
+            <TextBox Watermark="Username / Email"
+                     Text="{Binding LoginUsernameOrEmail}" />
+            <TextBox Watermark="Password"
+                     Classes="Password"
+                     Text="{Binding LoginPassword}" />
 
-         <Button Command="{Binding Reset}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Reset"
-                  Source="{StaticResource Icon.Key-Fill}"
-                  Foreground="{DynamicResource White}" />
-            </Button.Content>
-         </Button>
+            <Button Command="{Binding Reset}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Reset"
+                        Source="{StaticResource Icon.Key-Fill}"
+                        Foreground="{DynamicResource White}" />
+                </Button.Content>
+            </Button>
 
-         <TextBlock Text="Log in when you're ready!"
-                    Classes="Subtitle" />
-         <Button Command="{Binding Login}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Log in"
-                  Source="{StaticResource Icon.Login-Box-Fill}"
-                  Foreground="{DynamicResource White}" />
-            </Button.Content>
-         </Button>
-      </StackPanel>
-   </templates:TitleTemplate>
+            <TextBlock Text="Log in when you're ready!"
+                       Classes="Subtitle" />
+            <Button Command="{Binding Login}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Log in"
+                        Source="{StaticResource Icon.Login-Box-Fill}"
+                        Foreground="{DynamicResource White}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </controls:TitleTemplate>
 </view:LoginBase>

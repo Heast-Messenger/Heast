@@ -1,5 +1,4 @@
 using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
@@ -9,27 +8,24 @@ using Avalonia.Threading;
 using Client.View.Controls;
 using Client.ViewModel;
 
-namespace Client.View.Content.Login;
+namespace Client.View.Content.Modals;
 
-public partial class EmailVerificationPanel : LoginBase
+public partial class EmailVerificationModal : ModalBase
 {
     private const string Charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    public EmailVerificationPanel()
+    public EmailVerificationModal(IEmailVerifiable emailVerifiable)
     {
+        EmailVerifiable = emailVerifiable;
         InitializeComponent();
         KeyDownEvent.AddClassHandler<TopLevel>(OnKeyDown, handledEventsToo: true);
     }
 
+    public bool CanSubmit => Characters.All(x => x.Character is not null);
+
     private IClipboard? ClipBoardService => TopLevel.GetTopLevel(this)?.Clipboard;
 
-    public required LoginBase Origin { get; init; }
-
-    public override LoginBase Back => Origin;
-
-    public override Size? WindowSize => new(width: 400.0, height: 500.0);
-
-    private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
+    private IEmailVerifiable EmailVerifiable { get; }
 
     private int CursorIndex { get; set; }
 
@@ -107,8 +103,11 @@ public partial class EmailVerificationPanel : LoginBase
         }
     }
 
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void Button_Submit(object? sender, RoutedEventArgs e)
     {
-        LoginWindowViewModel.VerifySignupCode(VerificationCode);
+        if (CanSubmit)
+        {
+            EmailVerifiable.VerifySignupCode(VerificationCode);
+        }
     }
 }

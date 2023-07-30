@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -19,8 +18,6 @@ public partial class ConnectPanel : LoginBase
     {
         DataContext = DataContext
     };
-
-    public override Size? WindowSize => new(400.0, 500.0);
 
     private LoginWindowViewModel LoginWindowViewModel => (DataContext as LoginWindowViewModel)!;
 

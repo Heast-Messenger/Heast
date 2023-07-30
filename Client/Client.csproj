@@ -38,12 +38,28 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="View\Content\Login\EmailVerificationPanel.axaml.cs">
+        <Compile Update="View\Controls\VerificationCharacter.axaml.cs">
+            <DependentUpon>VerificationCharacter.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Controls\TitleTemplate.axaml.cs">
+            <DependentUpon>TitleTemplate.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Controls\Title.axaml.cs">
+            <DependentUpon>Title.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\Content\Modals\EmailVerificationModal.axaml.cs">
             <DependentUpon>EmailVerificationPanel.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Update="View\Controls\VerificationCharacter.axaml.cs">
-            <DependentUpon>VerificationCharacter.axaml</DependentUpon>
+        <Compile Update="View\Controls\ModalTemplate.axaml.cs">
+            <DependentUpon>ModalTemplate.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="View\ModalLayer.axaml.cs">
+            <DependentUpon>ModalLayer.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

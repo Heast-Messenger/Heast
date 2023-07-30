@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -20,8 +19,6 @@ public partial class CustomServerPanel : LoginBase
     {
         DataContext = DataContext
     };
-
-    public override Size? WindowSize => new Size(500.0, 800.0);
 
     private void Button_OnConnect(object? sender, RoutedEventArgs e)
     {

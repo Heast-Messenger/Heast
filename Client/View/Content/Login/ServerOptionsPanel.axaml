@@ -1,58 +1,57 @@
 <view:LoginBase
-   xmlns="https://github.com/avaloniaui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:view="clr-namespace:Client.View.Content"
-   xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
-   x:Class="Client.View.Content.Login.ServerOptionsPanel">
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Client.View.Content"
+    xmlns:vm="clr-namespace:Client.ViewModel"
+    xmlns:controls="clr-namespace:Client.View.Controls"
+    x:Class="Client.View.Content.Login.ServerOptionsPanel">
 
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/LoginButtons.axaml" />
+    </UserControl.Styles>
 
-   <Grid RowDefinitions="Auto, Auto, *">
-      <templates:Title Grid.Row="0" />
+    <Grid RowDefinitions="Auto, Auto, *">
+        <controls:Title Grid.Row="0" />
 
-      <TextBlock Grid.Row="1" Classes="Subtitle">
-         <Run Text="Choose whether to connect to an" />
-         <Run Text="official" FontWeight="Bold" />
-         <Run Text="or" />
-         <Run Text="custom server." FontWeight="Bold" />
-         <Run Text="For more info click" />
-         <controls:Hyperlink Text="here" Url="https://www.google.com" />
-      </TextBlock>
+        <TextBlock Grid.Row="1" Classes="Subtitle">
+            <Run Text="Choose whether to connect to an" />
+            <Run Text="official" FontWeight="Bold" />
+            <Run Text="or" />
+            <Run Text="custom server." FontWeight="Bold" />
+            <Run Text="For more info click" />
+            <controls:Hyperlink Text="here" Url="https://www.google.com" />
+        </TextBlock>
 
-      <Grid Grid.Row="2">
-         <Image Source="/Assets/Images/ServerOptions.png" />
-      </Grid>
+        <Grid Grid.Row="2">
+            <Image Source="/Assets/Images/ServerOptions.png" />
+        </Grid>
 
-      <Canvas Grid.Row="2">
-         <Button Click="Button_OnOfficial"
-                 Padding="16.0"
-                 Canvas.Top="40.0"
-                 Canvas.Left="80.0">
-            <controls:Icon
-               Text="Heast Network"
-               Source="avares://Client/Assets/Logos/Heast.png"
-               FontSize="18.0"
-               FontFamily="{StaticResource Outfit}" />
-         </Button>
+        <Canvas Grid.Row="2">
+            <Button Click="Button_OnOfficial"
+                    Padding="16.0"
+                    Canvas.Top="40.0"
+                    Canvas.Left="80.0">
+                <controls:Icon
+                    Text="Heast Network"
+                    Source="avares://Client/Assets/Logos/Heast.png"
+                    FontSize="18.0"
+                    FontFamily="{StaticResource Outfit}" />
+            </Button>
 
-         <Button Click="Button_OnCustom"
-                 Padding="16.0"
-                 Canvas.Top="270.0"
-                 Canvas.Left="20.0">
-            <controls:Icon
-               Text="Custom Server"
-               Source="{StaticResource Icon.Cloud-Fill}"
-               FontSize="18.0"
-               FontFamily="{StaticResource Outfit}" />
-         </Button>
-      </Canvas>
-   </Grid>
+            <Button Click="Button_OnCustom"
+                    Padding="16.0"
+                    Canvas.Top="270.0"
+                    Canvas.Left="20.0">
+                <controls:Icon
+                    Text="Custom Server"
+                    Source="{StaticResource Icon.Cloud-Fill}"
+                    FontSize="18.0"
+                    FontFamily="{StaticResource Outfit}" />
+            </Button>
+        </Canvas>
+    </Grid>
 </view:LoginBase>

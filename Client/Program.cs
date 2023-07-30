@@ -21,7 +21,7 @@ internal static class Program
     public static void Main(string[] args)
     {
         BuildAvaloniaApp()
-            .WithVersion(0, 0, 1)
+            .WithVersion(major: 0, minor: 0, patch: 1)
             .StartWithClassicDesktopLifetime(args);
     }
 
@@ -40,6 +40,7 @@ public class Startup
     {
         services.AddScoped<NetworkService>();
         services.AddScoped<ConnectionViewModel>();
+        services.AddScoped<ModalViewModel>();
         services.AddScoped<ClientConnection>(_ => new ClientConnection(NetworkSide.Client));
         services.AddScoped<ClientAuthHandler>();
         services.AddScoped<ClientHandshakeHandler>();

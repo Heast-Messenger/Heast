@@ -1,28 +1,27 @@
 <view:LoginBase
-   xmlns="https://github.com/avaloniaui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:view="clr-namespace:Client.View.Content"
-   xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
-   x:Class="Client.View.Content.Login.WelcomePanel">
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Client.View.Content"
+    xmlns:vm="clr-namespace:Client.ViewModel"
+    xmlns:controls="clr-namespace:Client.View.Controls"
+    x:Class="Client.View.Content.Login.WelcomePanel">
 
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <Grid RowDefinitions="Auto, *, 50.0">
-      <templates:Title Grid.Row="0" />
+    <Grid RowDefinitions="Auto, *, 50.0">
+        <controls:Title Grid.Row="0" />
 
-      <Image Grid.Row="1" Source="/Assets/Logos/Heast.png" />
+        <Image Grid.Row="1" Source="/Assets/Logos/Heast.png" />
 
-      <Button Grid.Row="2"
-              Padding="10.0"
-              Click="Button_OnClick"
-              Classes="Unstyled">
-         <controls:Icon
-            Source="{StaticResource Icon.Arrow-Right-Fill}"
-            Foreground="{DynamicResource White}" />
-      </Button>
-   </Grid>
+        <Button Grid.Row="2"
+                Padding="10.0"
+                Click="Button_OnClick"
+                Classes="Unstyled">
+            <controls:Icon
+                Source="{StaticResource Icon.Arrow-Right-Fill}"
+                Foreground="{DynamicResource White}" />
+        </Button>
+    </Grid>
 </view:LoginBase>

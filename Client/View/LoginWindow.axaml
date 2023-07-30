@@ -3,6 +3,7 @@
         xmlns:vm="clr-namespace:Client.ViewModel"
         xmlns:controls="clr-namespace:Client.View.Controls"
         xmlns:client="clr-namespace:Client"
+        xmlns:view="clr-namespace:Client.View"
         x:Class="Client.View.LoginWindow"
         ExtendClientAreaChromeHints="OSXThickTitleBar, NoChrome"
         ExtendClientAreaToDecorationsHint="True"
@@ -12,69 +13,70 @@
         Width="400"
         Height="660">
 
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <Panel>
-      <Border
-         Background="{DynamicResource Dark}"
-         IsHitTestVisible="False" />
+    <Panel>
+        <Border Background="{DynamicResource Dark}"
+                IsHitTestVisible="False" />
 
-      <Grid RowDefinitions="38, *, Auto">
-         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
-            <StackPanel Name="MenuBar" Orientation="Horizontal"
-                        Loaded="MenuBar_OnLoaded">
-               <Button Click="BackButton_OnClick"
-                       IsVisible="{Binding Content.Back,
+        <Grid RowDefinitions="38, *, Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto">
+                <StackPanel Name="MenuBar" Orientation="Horizontal"
+                            Loaded="MenuBar_OnLoaded">
+                    <Button Click="BackButton_OnClick"
+                            IsVisible="{Binding Content.Back,
                        Converter={x:Static ObjectConverters.IsNotNull}}"
-                       Width="38.0" Height="38.0"
-                       Padding="10.0"
-                       Classes="Unstyled">
-                  <controls:Icon Source="{StaticResource Icon.Arrow-Left-S-Fill}"
-                                 Foreground="{DynamicResource Light}" />
-               </Button>
-               <Button Click="MenuBar_OnClick"
-                       Width="38.0" Height="38.0"
-                       Padding="10.0"
-                       Classes="Unstyled">
-                  <controls:Icon Source="{StaticResource Icon.More-Fill}"
-                                 Foreground="{DynamicResource Light}" />
-               </Button>
-            </StackPanel>
-         </Grid>
+                            Width="38.0" Height="38.0"
+                            Padding="10.0"
+                            Classes="Unstyled">
+                        <controls:Icon Source="{StaticResource Icon.Arrow-Left-S-Fill}"
+                                       Foreground="{DynamicResource Light}" />
+                    </Button>
+                    <Button Click="MenuBar_OnClick"
+                            Width="38.0" Height="38.0"
+                            Padding="10.0"
+                            Classes="Unstyled">
+                        <controls:Icon Source="{StaticResource Icon.More-Fill}"
+                                       Foreground="{DynamicResource Light}" />
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-         <TransitioningContentControl
-            Grid.Row="1"
-            Padding="55.0 20.0 55.0 40.0"
-            Content="{Binding Content}">
-            <TransitioningContentControl.PageTransition>
-               <!-- The custom page transition is not yet working -->
-               <!-- <util:PanelTransition Duration="0:00:00.500"/> -->
-               <CrossFade Duration="0:00:00.200" />
-            </TransitioningContentControl.PageTransition>
-         </TransitioningContentControl>
+            <TransitioningContentControl
+                Grid.Row="1"
+                Padding="55.0 20.0 55.0 40.0"
+                Content="{Binding Content}">
+                <TransitioningContentControl.PageTransition>
+                    <!-- The custom page transition is not yet working -->
+                    <!-- <util:PanelTransition Duration="0:00:00.500"/> -->
+                    <CrossFade Duration="0:00:00.200" />
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
 
-         <Border Grid.Row="2"
-                 Background="{DynamicResource Dark}"
-                 BorderThickness="0 1.0 0 0"
-                 BorderBrush="{DynamicResource Border}"
-                 Padding="5.0">
-            <StackPanel Orientation="Horizontal" Spacing="5.0">
-               <TextBlock Foreground="{DynamicResource Border}"
-                          TextWrapping="Wrap">
-                  <Run Text="Heast Messenger" />
-                  <Run Text="Version" />
-                  <Run Text="{x:Static client:App.Version}"
-                       FontWeight="Bold" />
-                  <LineBreak />
-                  <Run Text="Error:" />
-                  <Run Text="{Binding Error}"
-                       Foreground="{DynamicResource Red}"
-                       FontWeight="Bold" />
-               </TextBlock>
-            </StackPanel>
-         </Border>
-      </Grid>
-   </Panel>
+            <Border Grid.Row="2"
+                    Background="{DynamicResource Dark}"
+                    BorderThickness="0 1.0 0 0"
+                    BorderBrush="{DynamicResource Border}"
+                    Padding="5.0">
+                <StackPanel Orientation="Horizontal" Spacing="5.0">
+                    <TextBlock Foreground="{DynamicResource Border}"
+                               TextWrapping="Wrap">
+                        <Run Text="Heast Messenger" />
+                        <Run Text="Version" />
+                        <Run Text="{x:Static client:App.Version}"
+                             FontWeight="Bold" />
+                        <LineBreak />
+                        <Run Text="Error:" />
+                        <Run Text="{Binding Error}"
+                             Foreground="{DynamicResource Red}"
+                             FontWeight="Bold" />
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <view:ModalLayer DataContext="{Binding ModalService}" />
+    </Panel>
 </Window>

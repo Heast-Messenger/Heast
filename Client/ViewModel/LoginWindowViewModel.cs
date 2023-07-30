@@ -8,6 +8,7 @@ using Client.Model;
 using Client.Services;
 using Client.View.Content;
 using Client.View.Content.Login;
+using Client.View.Content.Modals;
 using Core.Network;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
@@ -17,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Client.ViewModel;
 
-public class LoginWindowViewModel : ViewModelBase
+public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
 {
     private readonly DispatcherTimer _pingTimer;
     private ConnectionViewModel _connectionService;
@@ -25,16 +26,22 @@ public class LoginWindowViewModel : ViewModelBase
     private string _customServerAddress = string.Empty;
     private string? _error = string.Empty;
 
-    public LoginWindowViewModel(IServiceProvider serviceProvider, NetworkService networkService, ConnectionViewModel connectionService)
+    public LoginWindowViewModel(
+        IServiceProvider serviceProvider,
+        NetworkService networkService,
+        ConnectionViewModel connectionService,
+        ModalViewModel modalService)
     {
         _connectionService = connectionService;
         _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2), DispatcherPriority.Background, PingAllServers);
         ServiceProvider = serviceProvider;
         NetworkService = networkService;
+        ModalService = modalService;
     }
 
     private IServiceProvider ServiceProvider { get; }
     private NetworkService NetworkService { get; }
+    public ModalViewModel ModalService { get; }
 
     public LoginBase Content
     {
@@ -77,45 +84,6 @@ public class LoginWindowViewModel : ViewModelBase
     public bool LoginAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Login);
     public bool SignupAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Signup);
 
-    public void Back()
-    {
-        if (Content.Back is not null)
-        {
-            Content = Content.Back;
-        }
-    }
-
-    public async void Signup()
-    {
-        if (NetworkService.Connection?.State != NetworkState.Auth)
-        {
-            Error = "Wait for Heast services to connect...";
-            return;
-        }
-
-        var result = await NetworkService.Connection.SendAndWait<SignupS2CPacket>(new SignupC2SPacket(
-            SignupUsername,
-            SignupEmail,
-            SignupPassword));
-
-        if (result.HasErrors())
-        {
-            Error = result.GetErrors();
-        }
-
-        if (result.Status == SignupS2CPacket.ResponseStatus.AwaitingConfirmation)
-        {
-            Content = new EmailVerificationPanel
-            {
-                DataContext = this,
-                Origin = new SignupPanel
-                {
-                    DataContext = this
-                }
-            };
-        }
-    }
-
     public async void VerifySignupCode(string code)
     {
         if (NetworkService.Connection?.State != NetworkState.Auth)
@@ -147,6 +115,38 @@ public class LoginWindowViewModel : ViewModelBase
             // {
             //     DataContext = this
             // };
+        }
+    }
+
+    public void Back()
+    {
+        if (Content.Back is not null)
+        {
+            Content = Content.Back;
+        }
+    }
+
+    public async void Signup()
+    {
+        if (NetworkService.Connection?.State != NetworkState.Auth)
+        {
+            Error = "Wait for Heast services to connect...";
+            return;
+        }
+
+        var result = await NetworkService.Connection.SendAndWait<SignupS2CPacket>(new SignupC2SPacket(
+            SignupUsername,
+            SignupEmail,
+            SignupPassword));
+
+        if (result.HasErrors())
+        {
+            Error = result.GetErrors();
+        }
+
+        if (result.Status == SignupS2CPacket.ResponseStatus.AwaitingConfirmation)
+        {
+            ModalService.Modal = new EmailVerificationModal(this);
         }
     }
 

@@ -1,5 +1,3 @@
-using Avalonia;
-
 namespace Client.View.Content.Login;
 
 public partial class GuestPanel : LoginBase
@@ -13,6 +11,4 @@ public partial class GuestPanel : LoginBase
     {
         DataContext = DataContext
     };
-
-    public override Size? WindowSize => new Size(400.0, 510.0);
 }

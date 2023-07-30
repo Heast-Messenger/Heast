@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Interactivity;
 using Client.ViewModel;
 
@@ -17,8 +16,6 @@ public partial class LoginOptionsPanel : LoginBase
     {
         DataContext = DataContext
     };
-
-    public override Size? WindowSize => new Size(400.0, 730.0);
 
     private void Button_OnSignup(object? sender, RoutedEventArgs e)
     {

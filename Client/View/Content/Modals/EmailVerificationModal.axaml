@@ -1,0 +1,58 @@
+<view:ModalBase
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Client.View.Content"
+    xmlns:controls="clr-namespace:Client.View.Controls"
+    xmlns:modals="clr-namespace:Client.View.Content.Modals"
+    x:Class="Client.View.Content.Modals.EmailVerificationModal"
+    Width="250">
+
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+        <StyleInclude Source="/View/Controls/ModalTemplate.axaml" />
+        <StyleInclude Source="/View/Controls/VerificationCharacter.axaml" />
+    </UserControl.Styles>
+
+    <controls:ModalTemplate>
+        <controls:TitleTemplate>
+            <controls:TitleTemplate.Title>
+                <Run Text="Verify your Email" />
+            </controls:TitleTemplate.Title>
+            <controls:TitleTemplate.Subtitle>
+                <Run Text="Our services sent you a little email with a" />
+                <Run Text="special code." FontWeight="Bold" />
+                <Run Text="Type it into the spaces below to continue!" />
+            </controls:TitleTemplate.Subtitle>
+
+            <Grid RowDefinitions="Auto, Auto">
+                <StackPanel Grid.Row="0"
+                            Spacing="10.0"
+                            VerticalAlignment="Center"
+                            Name="VerificationContainer"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                    <controls:VerificationCharacter Classes="Selected" />
+                    <controls:VerificationCharacter />
+                    <controls:VerificationCharacter />
+                    <controls:VerificationCharacter />
+                    <controls:VerificationCharacter />
+                </StackPanel>
+
+                <Border Grid.Row="1" Margin="0 10.0 0 0">
+                    <Button Padding="10.0"
+                            Classes="Unstyled"
+                            Click="Button_Submit"
+                            IsVisible="{Binding 
+                        RelativeSource={RelativeSource FindAncestor, 
+                        AncestorType={x:Type modals:EmailVerificationModal}},
+                        Path=CanSubmit}">
+                        <controls:Icon
+                            Text="Submit"
+                            Source="{StaticResource Icon.Arrow-Right-Fill}"
+                            Foreground="{DynamicResource White}" />
+                    </Button>
+                </Border>
+            </Grid>
+        </controls:TitleTemplate>
+    </controls:ModalTemplate>
+</view:ModalBase>

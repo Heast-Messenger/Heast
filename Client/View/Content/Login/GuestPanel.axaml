@@ -3,51 +3,50 @@
                 xmlns:view="clr-namespace:Client.View.Content"
                 xmlns:vm="clr-namespace:Client.ViewModel"
                 xmlns:controls="clr-namespace:Client.View.Controls"
-                xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
                 x:Class="Client.View.Content.Login.GuestPanel">
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="Templates/TitleTemplate.axaml" />
-      <StyleInclude Source="/Styles/LoginButtons.axaml" />
-      <StyleInclude Source="/Styles/LoginTextBox.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+        <StyleInclude Source="/Styles/LoginButtons.axaml" />
+        <StyleInclude Source="/Styles/LoginTextBox.axaml" />
+    </UserControl.Styles>
 
-   <templates:TitleTemplate>
-      <templates:TitleTemplate.Title>
-         <Run Text="Welcome back!" />
-      </templates:TitleTemplate.Title>
-      <templates:TitleTemplate.Subtitle>
-         <Run Text="Create a" />
-         <Run Text="guest account" FontWeight="Bold" />
-         <Run Text="to quickly continue. Upgrade to a" />
-         <Run Text="permanent account" FontWeight="Bold" />
-         <Run Text="anytime for free!" />
-      </templates:TitleTemplate.Subtitle>
+    <controls:TitleTemplate>
+        <controls:TitleTemplate.Title>
+            <Run Text="Welcome back!" />
+        </controls:TitleTemplate.Title>
+        <controls:TitleTemplate.Subtitle>
+            <Run Text="Create a" />
+            <Run Text="guest account" FontWeight="Bold" />
+            <Run Text="to quickly continue. Upgrade to a" />
+            <Run Text="permanent account" FontWeight="Bold" />
+            <Run Text="anytime for free!" />
+        </controls:TitleTemplate.Subtitle>
 
-      <StackPanel Orientation="Vertical">
-         <StackPanel.Styles>
-            <Style Selector="TextBlock.Subtitle">
-               <Setter Property="FontWeight" Value="Bold" />
-               <Setter Property="Margin" Value="0 30.0 0 0" />
-            </Style>
-         </StackPanel.Styles>
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Styles>
+                <Style Selector="TextBlock.Subtitle">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Margin" Value="0 30.0 0 0" />
+                </Style>
+            </StackPanel.Styles>
 
-         <TextBox Watermark="Username"
-                  Text="{Binding GuestUsername}" />
+            <TextBox Watermark="Username"
+                     Text="{Binding GuestUsername}" />
 
-         <TextBlock Text="Log in when you're ready!"
-                    Classes="Subtitle" />
-         <Button Command="{Binding Guest}">
-            <Button.Content>
-               <controls:Icon
-                  Text="Continue"
-                  Source="{StaticResource Icon.Arrow-Right-Fill}"
-                  Foreground="{DynamicResource White}" />
-            </Button.Content>
-         </Button>
-      </StackPanel>
-   </templates:TitleTemplate>
+            <TextBlock Text="Log in when you're ready!"
+                       Classes="Subtitle" />
+            <Button Command="{Binding Guest}">
+                <Button.Content>
+                    <controls:Icon
+                        Text="Continue"
+                        Source="{StaticResource Icon.Arrow-Right-Fill}"
+                        Foreground="{DynamicResource White}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </controls:TitleTemplate>
 </view:LoginBase>

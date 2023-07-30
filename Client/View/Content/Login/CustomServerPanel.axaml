@@ -1,161 +1,160 @@
 <view:LoginBase
-   xmlns="https://github.com/avaloniaui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:view="clr-namespace:Client.View.Content"
-   xmlns:vm="clr-namespace:Client.ViewModel"
-   xmlns:controls="clr-namespace:Client.View.Controls"
-   xmlns:converter="clr-namespace:Client.Converter"
-   xmlns:templates="clr-namespace:Client.View.Content.Login.Templates"
-   xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
-   xmlns:model="clr-namespace:Client.Model"
-   xmlns:system="clr-namespace:System;assembly=System.Runtime"
-   x:Class="Client.View.Content.Login.CustomServerPanel">
-   <Design.DataContext>
-      <vm:LoginWindowViewModel />
-   </Design.DataContext>
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:Client.View.Content"
+    xmlns:vm="clr-namespace:Client.ViewModel"
+    xmlns:controls="clr-namespace:Client.View.Controls"
+    xmlns:converter="clr-namespace:Client.Converter"
+    xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections"
+    xmlns:model="clr-namespace:Client.Model"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    x:Class="Client.View.Content.Login.CustomServerPanel">
+    <Design.DataContext>
+        <vm:LoginWindowViewModel />
+    </Design.DataContext>
 
-   <UserControl.Styles>
-      <StyleInclude Source="Templates/TitleTemplate.axaml" />
-   </UserControl.Styles>
+    <UserControl.Styles>
+        <StyleInclude Source="/View/Controls/TitleTemplate.axaml" />
+    </UserControl.Styles>
 
-   <UserControl.Resources>
-      <converter:StringValueConverter x:Key="StatusTextConverter" />
-      <converter:DictionaryConverter x:Key="StatusColorConverter" />
-      <converter:RangeDictionaryConverter x:Key="PingColorConverter" />
-   </UserControl.Resources>
+    <UserControl.Resources>
+        <converter:StringValueConverter x:Key="StatusTextConverter" />
+        <converter:DictionaryConverter x:Key="StatusColorConverter" />
+        <converter:RangeDictionaryConverter x:Key="PingColorConverter" />
+    </UserControl.Resources>
 
-   <templates:TitleTemplate>
-      <templates:TitleTemplate.Title>
-         <Run Text="Custom Servers" />
-      </templates:TitleTemplate.Title>
-      <templates:TitleTemplate.Subtitle>
-         <Run Text="Connect" FontWeight="Bold" />
-         <Run Text="to a custom server that is" />
-         <Run Text="not managed by Heast." FontWeight="Bold" />
-      </templates:TitleTemplate.Subtitle>
+    <controls:TitleTemplate>
+        <controls:TitleTemplate.Title>
+            <Run Text="Custom Servers" />
+        </controls:TitleTemplate.Title>
+        <controls:TitleTemplate.Subtitle>
+            <Run Text="Connect" FontWeight="Bold" />
+            <Run Text="to a custom server that is" />
+            <Run Text="not managed by Heast." FontWeight="Bold" />
+        </controls:TitleTemplate.Subtitle>
 
-      <Grid RowDefinitions="Auto Auto *">
-         <Border Grid.Row="0"
-                 Background="{DynamicResource Middle}"
-                 CornerRadius="6.0"
-                 Padding="6.0"
-                 Margin="0 0 0 20.0">
-            <Grid ColumnDefinitions="*, Auto, Auto">
-               <TextBox Grid.Column="0"
-                        Watermark="Address"
-                        Text="{Binding CustomServerAddress}"
-                        Margin="0"
-                        Classes="Unstyled" />
+        <Grid RowDefinitions="Auto Auto *">
+            <Border Grid.Row="0"
+                    Background="{DynamicResource Middle}"
+                    CornerRadius="6.0"
+                    Padding="6.0"
+                    Margin="0 0 0 20.0">
+                <Grid ColumnDefinitions="*, Auto, Auto">
+                    <TextBox Grid.Column="0"
+                             Watermark="Address"
+                             Text="{Binding CustomServerAddress}"
+                             Margin="0"
+                             Classes="Unstyled" />
 
-               <Button Grid.Column="1"
-                       Click="Button_OnAdd"
-                       Classes="Unstyled"
-                       BorderBrush="{DynamicResource Border}"
-                       BorderThickness="1.0 0 0 0">
-                  <controls:Icon
-                     Source="{StaticResource Icon.Add-Fill}" />
-               </Button>
+                    <Button Grid.Column="1"
+                            Click="Button_OnAdd"
+                            Classes="Unstyled"
+                            BorderBrush="{DynamicResource Border}"
+                            BorderThickness="1.0 0 0 0">
+                        <controls:Icon
+                            Source="{StaticResource Icon.Add-Fill}" />
+                    </Button>
 
-               <Button Grid.Column="2"
-                       Click="Button_OnConnect"
-                       Classes="Unstyled"
-                       BorderBrush="{DynamicResource Border}"
-                       BorderThickness="1.0 0 0 0">
-                  <controls:Icon
-                     Source="{StaticResource Icon.Flashlight-Fill}" />
-               </Button>
-            </Grid>
-         </Border>
+                    <Button Grid.Column="2"
+                            Click="Button_OnConnect"
+                            Classes="Unstyled"
+                            BorderBrush="{DynamicResource Border}"
+                            BorderThickness="1.0 0 0 0">
+                        <controls:Icon
+                            Source="{StaticResource Icon.Flashlight-Fill}" />
+                    </Button>
+                </Grid>
+            </Border>
 
-         <TextBlock Grid.Row="1"
-                    Text="Added servers:"
-                    Classes="Subtitle"
-                    FontWeight="Bold" />
+            <TextBlock Grid.Row="1"
+                       Text="Added servers:"
+                       Classes="Subtitle"
+                       FontWeight="Bold" />
 
-         <ListBox Grid.Row="2"
-                  ItemsSource="{Binding CustomServers}">
-            <ListBox.ItemTemplate>
-               <DataTemplate>
-                  <DockPanel PointerPressed="CustomServer_OnClick"
-                             LastChildFill="False">
-                     <Image DockPanel.Dock="Left"
-                            VerticalAlignment="Top"
-                            Margin="5"
-                            Source="{Binding Image^, 
+            <ListBox Grid.Row="2"
+                     ItemsSource="{Binding CustomServers}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel PointerPressed="CustomServer_OnClick"
+                                   LastChildFill="False">
+                            <Image DockPanel.Dock="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="5"
+                                   Source="{Binding Image^, 
                                FallbackValue=''}" />
 
-                     <Grid ColumnDefinitions="*"
-                           RowDefinitions="Auto, Auto"
-                           DockPanel.Dock="Left">
-                        <TextBlock Grid.Row="0"
-                                   FontSize="12.0"
-                                   Margin="0 0 0 2.0">
-                           <Run
-                              FontWeight="Bold"
-                              Text="{Binding Status,
+                            <Grid ColumnDefinitions="*"
+                                  RowDefinitions="Auto, Auto"
+                                  DockPanel.Dock="Left">
+                                <TextBlock Grid.Row="0"
+                                           FontSize="12.0"
+                                           Margin="0 0 0 2.0">
+                                    <Run
+                                        FontWeight="Bold"
+                                        Text="{Binding Status,
                               Converter={StaticResource StatusTextConverter}}">
-                              <Run.Foreground>
-                                 <Binding Path="Status"
-                                          Converter="{StaticResource StatusColorConverter}">
-                                    <Binding.ConverterParameter>
-                                       <generic:Dictionary x:TypeArguments="model:ServerStatus, system:Object">
-                                          <StaticResource x:Key="{x:Static model:ServerStatus.Pending}"
-                                                          ResourceKey="Gray" />
-                                          <StaticResource x:Key="{x:Static model:ServerStatus.Closed}"
-                                                          ResourceKey="Red" />
-                                          <StaticResource x:Key="{x:Static model:ServerStatus.Running}"
-                                                          ResourceKey="Green" />
-                                          <StaticResource x:Key="{x:Static model:ServerStatus.Unstable}"
-                                                          ResourceKey="Orange" />
-                                       </generic:Dictionary>
-                                    </Binding.ConverterParameter>
-                                 </Binding>
-                              </Run.Foreground>
-                           </Run>
-                           <Run Text="·"
-                                Foreground="{DynamicResource Light}"
-                                FontWeight="Bold" />
-                           <Run Text="{Binding Address}"
-                                Foreground="{DynamicResource White}" />
-                        </TextBlock>
+                                        <Run.Foreground>
+                                            <Binding Path="Status"
+                                                     Converter="{StaticResource StatusColorConverter}">
+                                                <Binding.ConverterParameter>
+                                                    <generic:Dictionary x:TypeArguments="model:ServerStatus, system:Object">
+                                                        <StaticResource x:Key="{x:Static model:ServerStatus.Pending}"
+                                                                        ResourceKey="Gray" />
+                                                        <StaticResource x:Key="{x:Static model:ServerStatus.Closed}"
+                                                                        ResourceKey="Red" />
+                                                        <StaticResource x:Key="{x:Static model:ServerStatus.Running}"
+                                                                        ResourceKey="Green" />
+                                                        <StaticResource x:Key="{x:Static model:ServerStatus.Unstable}"
+                                                                        ResourceKey="Orange" />
+                                                    </generic:Dictionary>
+                                                </Binding.ConverterParameter>
+                                            </Binding>
+                                        </Run.Foreground>
+                                    </Run>
+                                    <Run Text="·"
+                                         Foreground="{DynamicResource Light}"
+                                         FontWeight="Bold" />
+                                    <Run Text="{Binding Address}"
+                                         Foreground="{DynamicResource White}" />
+                                </TextBlock>
 
-                        <TextBlock Grid.Row="1"
-                                   Text="{Binding Description^, 
+                                <TextBlock Grid.Row="1"
+                                           Text="{Binding Description^, 
                                    FallbackValue='Fetching description...'}"
-                                   Foreground="{DynamicResource Light}"
-                                   FontSize="10.0" />
-                     </Grid>
+                                           Foreground="{DynamicResource Light}"
+                                           FontSize="10.0" />
+                            </Grid>
 
-                     <Button DockPanel.Dock="Right"
-                             Classes="Unstyled"
-                             Foreground="{DynamicResource Light}">
-                        <controls:Icon Source="{StaticResource Icon.More-Fill}" />
-                     </Button>
+                            <Button DockPanel.Dock="Right"
+                                    Classes="Unstyled"
+                                    Foreground="{DynamicResource Light}">
+                                <controls:Icon Source="{StaticResource Icon.More-Fill}" />
+                            </Button>
 
-                     <TextBlock DockPanel.Dock="Right"
-                                Text="{Binding Ping}"
-                                FontSize="10.0"
-                                VerticalAlignment="Center">
-                        <TextBlock.Foreground>
-                           <Binding Path="Ping"
-                                    Converter="{StaticResource PingColorConverter}">
-                              <Binding.ConverterParameter>
-                                 <generic:Dictionary x:TypeArguments="x:Int64, system:Object">
-                                    <StaticResource x:Key="0"
-                                                    ResourceKey="Green" />
-                                    <StaticResource x:Key="100"
-                                                    ResourceKey="Orange" />
-                                    <StaticResource x:Key="500"
-                                                    ResourceKey="Red" />
-                                 </generic:Dictionary>
-                              </Binding.ConverterParameter>
-                           </Binding>
-                        </TextBlock.Foreground>
-                     </TextBlock>
-                  </DockPanel>
-               </DataTemplate>
-            </ListBox.ItemTemplate>
-         </ListBox>
-      </Grid>
-   </templates:TitleTemplate>
+                            <TextBlock DockPanel.Dock="Right"
+                                       Text="{Binding Ping}"
+                                       FontSize="10.0"
+                                       VerticalAlignment="Center">
+                                <TextBlock.Foreground>
+                                    <Binding Path="Ping"
+                                             Converter="{StaticResource PingColorConverter}">
+                                        <Binding.ConverterParameter>
+                                            <generic:Dictionary x:TypeArguments="x:Int64, system:Object">
+                                                <StaticResource x:Key="0"
+                                                                ResourceKey="Green" />
+                                                <StaticResource x:Key="100"
+                                                                ResourceKey="Orange" />
+                                                <StaticResource x:Key="500"
+                                                                ResourceKey="Red" />
+                                            </generic:Dictionary>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </controls:TitleTemplate>
 </view:LoginBase>

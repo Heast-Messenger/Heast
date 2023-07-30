@@ -2,26 +2,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Client.View.Controls">
     <Design.PreviewWith>
-        <controls:TitleTemplate />
+        <controls:ModalTemplate />
     </Design.PreviewWith>
 
-    <Style Selector="controls|TitleTemplate">
+    <Style Selector="controls|ModalTemplate">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid RowDefinitions="Auto, Auto, *"
-                      Margin="0 0 0 10.0">
-                    <TextBlock Grid.Row="0"
-                               Classes="H1"
-                               Inlines="{TemplateBinding Title}" />
-                    <TextBlock Grid.Row="1"
-                               Classes="Subtitle"
-                               FontWeight="Normal"
-                               Inlines="{TemplateBinding Subtitle}" />
-                    <ContentPresenter Grid.Row="2"
-                                      Margin="0 20.0 0 0"
-                                      Content="{TemplateBinding Content}" />
-                </Grid>
+                <ContentPresenter
+                    Margin="0"
+                    Padding="30.0"
+                    CornerRadius="10.0"
+                    Background="{DynamicResource Middle}"
+                    Content="{TemplateBinding Content}" />
             </ControlTemplate>
         </Setter>
     </Style>

@@ -1,6 +1,6 @@
 namespace Client.ViewModel;
 
-public interface IEmailVerification
+public interface IEmailVerifiable
 {
     void VerifySignupCode(string code);
 }
