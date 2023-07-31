@@ -8,59 +8,32 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove=".gitignore" />
-        <None Remove="Assets\Navigation\Illustrator.ai" />
-        <None Remove="Todo.md" />
-        <None Remove="Client.csproj.DotSettings" />
+        <None Remove=".gitignore"/>
+        <None Remove="Assets\Navigation\Illustrator.ai"/>
+        <None Remove="Todo.md"/>
+        <None Remove="Client.csproj.DotSettings"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.0" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.0" />
+        <PackageReference Include="Avalonia" Version="11.0.0"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.0"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.0"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\Core\Core.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**" />
-        <AvaloniaResource Remove="Assets\appsettings.json" />
+        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Remove="Assets\appsettings.json"/>
     </ItemGroup>
 
     <ItemGroup>
         <Content Include="Assets\appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="View\Controls\VerificationCharacter.axaml.cs">
-            <DependentUpon>VerificationCharacter.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="View\Controls\TitleTemplate.axaml.cs">
-            <DependentUpon>TitleTemplate.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="View\Controls\Title.axaml.cs">
-            <DependentUpon>Title.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="View\Content\Modals\EmailVerificationModal.axaml.cs">
-            <DependentUpon>EmailVerificationPanel.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="View\ModalLayer.axaml.cs">
-            <DependentUpon>ModalLayer.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="View\Controls\ModalTemplate.axaml.cs">
-            <DependentUpon>ModalBase.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
     </ItemGroup>
 </Project>

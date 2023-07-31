@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.S2C;
 
-public class LoginS2CPacket : AbstractPacket
+public partial class LoginS2CPacket : AbstractPacket
 {
     public enum ResponseStatus
     {
@@ -15,17 +15,7 @@ public class LoginS2CPacket : AbstractPacket
         Status = responseStatus;
     }
 
-    public LoginS2CPacket(PacketBuf buf)
-    {
-        Status = buf.ReadEnum<ResponseStatus>();
-    }
-
     public ResponseStatus Status { get; }
-
-    public override void Write(PacketBuf buf)
-    {
-        buf.WriteEnum(Status);
-    }
 
     public override void Apply(IPacketListener listener)
     {

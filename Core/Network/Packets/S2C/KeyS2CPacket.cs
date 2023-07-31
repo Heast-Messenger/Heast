@@ -2,17 +2,9 @@
 
 namespace Core.Network.Packets.S2C;
 
-public class KeyS2CPacket : AbstractPacket
+public partial class KeyS2CPacket : AbstractPacket
 {
     public KeyS2CPacket()
-    {
-    }
-
-    public KeyS2CPacket(PacketBuf buf)
-    {
-    }
-
-    public override void Write(PacketBuf buf)
     {
     }
 

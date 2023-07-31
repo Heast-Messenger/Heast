@@ -19,23 +19,9 @@ public partial class VerifyEmailC2SPacket : AbstractPacket
         Purpose = verificationPurpose;
     }
 
-    public VerifyEmailC2SPacket(PacketBuf buf)
-    {
-        Code = buf.ReadString();
-        Email = buf.ReadString();
-        Purpose = buf.ReadEnum<VerificationPurpose>();
-    }
-
     public string Code { get; }
     public string Email { get; }
     public VerificationPurpose Purpose { get; }
-
-    public override void Write(PacketBuf buf)
-    {
-        buf.WriteString(Code);
-        buf.WriteString(Email);
-        buf.WriteEnum(Purpose);
-    }
 
     public override void Apply(IPacketListener listener)
     {

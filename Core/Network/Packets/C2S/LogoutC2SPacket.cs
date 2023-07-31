@@ -2,7 +2,7 @@
 
 namespace Core.Network.Packets.C2S;
 
-public class LogoutC2SPacket : AbstractPacket
+public partial class LogoutC2SPacket : AbstractPacket
 {
     public enum LogoutReason
     {
@@ -17,17 +17,7 @@ public class LogoutC2SPacket : AbstractPacket
         Reason = reason;
     }
 
-    public LogoutC2SPacket(PacketBuf buf)
-    {
-        Reason = buf.ReadEnum<LogoutReason>();
-    }
-
     public LogoutReason Reason { get; }
-
-    public override void Write(PacketBuf buf)
-    {
-        buf.WriteEnum(Reason);
-    }
 
     public override void Apply(IPacketListener listener)
     {

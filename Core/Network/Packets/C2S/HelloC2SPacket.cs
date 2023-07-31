@@ -2,17 +2,9 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.C2S;
 
-public class HelloC2SPacket : AbstractPacket
+public partial class HelloC2SPacket : AbstractPacket
 {
     public HelloC2SPacket()
-    {
-    }
-
-    public HelloC2SPacket(PacketBuf buf)
-    {
-    }
-
-    public override void Write(PacketBuf buf)
     {
     }
 
