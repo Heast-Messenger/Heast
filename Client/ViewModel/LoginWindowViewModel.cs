@@ -3,12 +3,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using Avalonia.Threading;
 using Client.Model;
 using Client.Services;
 using Client.View.Content;
 using Client.View.Content.Login;
 using Client.View.Content.Modals;
+using Core.Extensions;
 using Core.Network;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
@@ -18,7 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Client.ViewModel;
 
-public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
+public class LoginWindowViewModel : ViewModelBase
 {
     private readonly DispatcherTimer _pingTimer;
     private ConnectionViewModel _connectionService;
@@ -33,7 +35,9 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
         ModalViewModel modalService)
     {
         _connectionService = connectionService;
-        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2), DispatcherPriority.Background, TryPingAllServers);
+        _pingTimer = new DispatcherTimer(TimeSpan.FromSeconds(value: 2),
+            DispatcherPriority.Background,
+            TryPingAllServers);
         ServiceProvider = serviceProvider;
         NetworkService = networkService;
         ModalService = modalService;
@@ -62,7 +66,7 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
     public string SignupUsername { get; set; } = string.Empty;
     public string SignupEmail { get; set; } = string.Empty;
     public string SignupPassword { get; set; } = string.Empty;
-    public string LoginUsernameOrEmail { get; set; } = string.Empty;
+    public string LoginEmail { get; set; } = string.Empty;
     public string LoginPassword { get; set; } = string.Empty;
     public string GuestUsername { get; set; } = string.Empty;
 
@@ -84,16 +88,26 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
     public bool LoginAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Login);
     public bool SignupAllowed => ConnectionViewModel.Capabilities.HasFlag(Capabilities.Signup);
 
-    public async void VerifySignupCode(string code)
+    /// <summary>
+    ///     Verifies the signup code by sending a request to the server. The server checks the code by comparing the actual
+    ///     code that is linked to the email address to the received code. The code is only valid for <b>up to 5 minutes</b>.
+    ///     If the user exceeds this time frame, this function will 'not work' anymore and immediately return false.
+    /// </summary>
+    /// <param name="code">The code to check the actual code against</param>
+    /// <param name="email">The email that the code is linked to</param>
+    /// <param name="purpose">The purpose for which this email is being verified.</param>
+    /// <returns>True, if the code matches the actual code. False otherwise.</returns>
+    private async Task<bool> VerifySignupCode(string code, string email,
+        VerifyEmailC2SPacket.VerificationPurpose purpose)
     {
         if (NetworkService.Connection?.State != NetworkState.Auth)
         {
             Error = "Wait for Heast services to connect...";
-            return;
+            return false;
         }
 
         var result = await NetworkService.Connection.SendAndWait<VerifyEmailS2CPacket>(
-            new VerifyEmailC2SPacket(code, SignupEmail));
+            new VerifyEmailC2SPacket(code, email, purpose));
 
         if (result.Status == VerifyEmailS2CPacket.ResponseStatus.WrongCode)
         {
@@ -107,20 +121,16 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
         {
             Error = "Unauthorized.";
             ModalService.Close();
-            Content = new SignupPanel
-            {
-                DataContext = this
-            };
+            return false;
         }
 
         else if (result.Status == VerifyEmailS2CPacket.ResponseStatus.Success)
         {
             ModalService.Close();
-            // Content = new LoggedInPanel
-            // {
-            //     DataContext = this
-            // };
+            return true;
         }
+
+        return false;
     }
 
     public void Back()
@@ -139,10 +149,8 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
             return;
         }
 
-        var result = await NetworkService.Connection.SendAndWait<SignupS2CPacket>(new SignupC2SPacket(
-            SignupUsername,
-            SignupEmail,
-            SignupPassword));
+        var result = await NetworkService.Connection.SendAndWait<SignupS2CPacket>(
+            new SignupC2SPacket(SignupUsername, SignupEmail, SignupPassword));
 
         if (result.HasErrors())
         {
@@ -151,21 +159,26 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
 
         if (result.Status == SignupS2CPacket.ResponseStatus.AwaitingConfirmation)
         {
-            ModalService.Modal = new EmailVerificationModal(this);
+            ModalService.Modal = new EmailVerificationModal(code =>
+                VerifySignupCode(code, SignupEmail, VerifyEmailC2SPacket.VerificationPurpose.Signup).Run(success =>
+                {
+                    if (success)
+                    {
+                        Console.Out.WriteLine("Welcome new user!");
+                        // Content = new TutorialPanel
+                        // {
+                        //     DataContext = this
+                        // };
+                    }
+                    else
+                    {
+                        Content = new SignupPanel
+                        {
+                            DataContext = this
+                        };
+                    }
+                }));
         }
-    }
-
-    public async void Reset()
-    {
-        if (NetworkService.Connection?.State != NetworkState.Auth)
-        {
-            Error = "Wait for Heast services to connect...";
-            return;
-        }
-
-        await NetworkService.Connection.Send(new ResetC2SPacket(
-            LoginUsernameOrEmail,
-            LoginPassword));
     }
 
     public async void Login()
@@ -176,21 +189,61 @@ public class LoginWindowViewModel : ViewModelBase, IEmailVerifiable
             return;
         }
 
-        await NetworkService.Connection.Send(new LoginC2SPacket(
-            LoginUsernameOrEmail,
-            LoginPassword));
+        var result = await NetworkService.Connection.SendAndWait<LoginS2CPacket>(
+            new LoginC2SPacket(LoginEmail, LoginPassword));
+
+        if (result.HasErrors())
+        {
+            Error = result.GetErrors();
+        }
+
+        if (result.Status == LoginS2CPacket.ResponseStatus.AwaitingConfirmation)
+        {
+            ModalService.Modal = new EmailVerificationModal(code =>
+                VerifySignupCode(code, LoginEmail, VerifyEmailC2SPacket.VerificationPurpose.Login).Run(success =>
+                {
+                    if (success)
+                    {
+                        Console.Out.WriteLine("Welcome back!");
+                        // Content = new ClientLoader
+                        // {
+                        //     DataContext = this
+                        // };
+                    }
+                    else
+                    {
+                        Content = new LoginPanel
+                        {
+                            DataContext = this
+                        };
+                    }
+                }));
+        }
+    }
+
+    public async void Reset()
+    {
+        // if (NetworkService.Connection?.State != NetworkState.Auth)
+        // {
+        //     Error = "Wait for Heast services to connect...";
+        //     return;
+        // }
+        //
+        // await NetworkService.Connection.Send(new ResetC2SPacket(
+        //     LoginUsernameOrEmail,
+        //     LoginPassword));
     }
 
     public async void Guest()
     {
-        if (NetworkService.Connection?.State != NetworkState.Auth)
-        {
-            Error = "Wait for Heast services to connect...";
-            return;
-        }
-
-        await NetworkService.Connection.Send(new GuestC2SPacket(
-            GuestUsername));
+        // if (NetworkService.Connection?.State != NetworkState.Auth)
+        // {
+        //     Error = "Wait for Heast services to connect...";
+        //     return;
+        // }
+        //
+        // await NetworkService.Connection.Send(new GuestC2SPacket(
+        //     GuestUsername));
     }
 
     public void ConnectOfficial()

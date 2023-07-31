@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -7,7 +8,6 @@ using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using Avalonia.Threading;
 using Client.View.Controls;
-using Client.ViewModel;
 
 namespace Client.View.Content.Modals;
 
@@ -22,9 +22,9 @@ public partial class EmailVerificationModal : ModalBase
 
     private bool _canSubmit;
 
-    public EmailVerificationModal(IEmailVerifiable emailVerifiable)
+    public EmailVerificationModal(Action<string> onSubmit)
     {
-        EmailVerifiable = emailVerifiable;
+        OnSubmit = onSubmit;
         InitializeComponent();
         KeyDownEvent.AddClassHandler<TopLevel>(OnKeyDown, handledEventsToo: true);
         SubmitButton.Focus();
@@ -38,11 +38,12 @@ public partial class EmailVerificationModal : ModalBase
 
     private IClipboard? ClipBoardService => TopLevel.GetTopLevel(this)?.Clipboard;
 
-    private IEmailVerifiable EmailVerifiable { get; }
+    private Action<string> OnSubmit { get; }
 
     private int CursorIndex { get; set; }
 
-    private VerificationCharacter[] Characters => VerificationContainer.GetLogicalChildren().Cast<VerificationCharacter>().ToArray();
+    private VerificationCharacter[] Characters =>
+        VerificationContainer.GetLogicalChildren().Cast<VerificationCharacter>().ToArray();
 
     private string VerificationCode => string.Join("", Characters.Select(c => c.Character));
 
@@ -105,7 +106,7 @@ public partial class EmailVerificationModal : ModalBase
 
             if (Charset.Contains(keycode) && CursorIndex < Characters.Length)
             {
-                Characters[CursorIndex++].Character = keycode[0];
+                Characters[CursorIndex++].Character = keycode[index: 0];
             }
         }
 
@@ -131,7 +132,7 @@ public partial class EmailVerificationModal : ModalBase
     {
         if (CanSubmit)
         {
-            EmailVerifiable.VerifySignupCode(VerificationCode);
+            OnSubmit(VerificationCode);
         }
     }
 

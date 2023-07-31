@@ -2,7 +2,7 @@ using Core.Network.Listeners;
 
 namespace Core.Network.Packets.S2C;
 
-public class SignupS2CPacket : AbstractPacket
+public class LoginS2CPacket : AbstractPacket
 {
     public enum ResponseStatus
     {
@@ -10,12 +10,12 @@ public class SignupS2CPacket : AbstractPacket
         AwaitingConfirmation
     }
 
-    public SignupS2CPacket(ResponseStatus responseStatus)
+    public LoginS2CPacket(ResponseStatus responseStatus)
     {
         Status = responseStatus;
     }
 
-    public SignupS2CPacket(PacketBuf buf)
+    public LoginS2CPacket(PacketBuf buf)
     {
         Status = buf.ReadEnum<ResponseStatus>();
     }
@@ -31,7 +31,7 @@ public class SignupS2CPacket : AbstractPacket
     {
         if (listener is IClientAuthListener authListener)
         {
-            authListener.OnSignupResponse(this);
+            authListener.OnLoginResponse(this);
         }
     }
 }

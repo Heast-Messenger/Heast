@@ -16,12 +16,17 @@ public class ClientAuthHandler : IClientAuthListener
     private ClientConnection Ctx { get; }
     public TaskCompletionSource TaskCompletionSource { get; }
 
-    public void OnSignupSuccess(SignupS2CPacket packet)
+    public void OnSignupResponse(SignupS2CPacket packet)
     {
         // ignored
     }
 
     public void OnVerifyResponse(VerifyEmailS2CPacket packet)
+    {
+        // ignored
+    }
+
+    public void OnLoginResponse(LoginS2CPacket packet)
     {
         // ignored
     }

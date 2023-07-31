@@ -34,8 +34,8 @@
                 </Style>
             </StackPanel.Styles>
 
-            <TextBox Watermark="Username / Email"
-                     Text="{Binding LoginUsernameOrEmail}" />
+            <TextBox Watermark="Email"
+                     Text="{Binding LoginEmail}" />
             <TextBox Watermark="Password"
                      Classes="Password"
                      Text="{Binding LoginPassword}" />

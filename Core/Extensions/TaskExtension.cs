@@ -7,4 +7,10 @@ public static class TaskExtension
         var result = await task;
         return then(result);
     }
+
+    public static async void Run<T>(this Task<T> task, Action<T> run)
+    {
+        var result = await task;
+        run(result);
+    }
 }
