@@ -1,10 +1,24 @@
+using Core.Services;
+
 namespace Auth.Services;
 
-public class TwoFactorService
+public class TwoFactorService : ITwoFactorService
 {
-    // ReSharper disable StringLiteralTypo
     private const string Charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    public TwoFactorService(ILoggingService logger)
+    {
+        Logger = logger;
+    }
+
+    private ILoggingService Logger { get; }
     private Random Random { get; } = new();
+
+    public Task<bool> Initialize()
+    {
+        Logger.Info($"{GetType().Name}.POST");
+        return Task.FromResult(true);
+    }
 
     public string GetVerificationCode()
     {

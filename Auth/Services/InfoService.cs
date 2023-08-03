@@ -5,14 +5,12 @@ namespace Auth.Services;
 
 public class InfoService
 {
-    public string Build = "Dev 0.1";
-
-    public string DbConnectionPath = "Assets/Database/Connection.txt";
-    public string Github = "https://github.com/Heast-Messenger/Heast";
+    public const string Build = "Dev 0.1";
+    public const string Github = "https://github.com/Heast-Messenger/Heast";
+    public const string Version = "1.0.0";
+    public const string Website = "https://heast.net/"; // TODO: Fetch from server to prevent outdated links
     public dynamic Translation = Translations.Load("en-us");
-    public string Version = "1.0.0";
-    public string Website = "https://heast.net/"; // TODO: Fetch from server to prevent outdated links
 
-    public string DotNetInfo => Environment.Version.ToString();
-    public string OsInfo => $"{RuntimeInformation.OSDescription} ({RuntimeInformation.OSArchitecture})";
+    public static string DotNetInfo => Environment.Version.ToString();
+    public static string OsInfo => $"{RuntimeInformation.OSDescription} ({RuntimeInformation.OSArchitecture})";
 }

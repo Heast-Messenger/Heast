@@ -176,7 +176,7 @@ public class ServerAuthHandler : IServerAuthListener
     {
         Console.Out.WriteLine($"Sending code to {email}");
         var verificationCode = TwoFactorService.GetVerificationCode();
-        EmailService.SendCode(email, username, verificationCode);
+        EmailService.SendSignupCode(email, username, verificationCode);
         var tcs = new TaskCompletionSource();
 
         _awaitingConfirmation.Remove(email);
