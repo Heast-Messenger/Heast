@@ -6,6 +6,7 @@ using Core.Network.Codecs;
 using Core.Network.Listeners;
 using Core.Network.Packets.C2S;
 using Core.Network.Packets.S2C;
+using Core.Services;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +20,9 @@ public class ServerAuthHandler : IServerAuthListener
         ClientConnection ctx,
         AuthDbContext db,
         IServiceProvider serviceProvider,
-        HashingService hashingService,
-        TwoFactorService twoFactorService,
-        EmailService emailService)
+        IHashingService hashingService,
+        ITwoFactorService twoFactorService,
+        IEmailService emailService)
     {
         TaskCompletionSource = new TaskCompletionSource();
         Ctx = ctx;
@@ -35,9 +36,9 @@ public class ServerAuthHandler : IServerAuthListener
     private ClientConnection Ctx { get; }
     private AuthDbContext Db { get; }
     private IServiceProvider ServiceProvider { get; }
-    private HashingService HashingService { get; }
-    private TwoFactorService TwoFactorService { get; }
-    private EmailService EmailService { get; }
+    private IHashingService HashingService { get; }
+    private ITwoFactorService TwoFactorService { get; }
+    private IEmailService EmailService { get; }
 
     public TaskCompletionSource TaskCompletionSource { get; }
 
@@ -176,7 +177,7 @@ public class ServerAuthHandler : IServerAuthListener
     {
         Console.Out.WriteLine($"Sending code to {email}");
         var verificationCode = TwoFactorService.GetVerificationCode();
-        EmailService.SendCode(email, username, verificationCode);
+        EmailService.SendSignupCode(email, username, verificationCode);
         var tcs = new TaskCompletionSource();
 
         _awaitingConfirmation.Remove(email);

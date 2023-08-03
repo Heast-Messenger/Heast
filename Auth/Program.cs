@@ -5,6 +5,7 @@ using Auth.Services;
 using Core.Network;
 using Core.Network.Codecs;
 using Core.Server;
+using Core.Services;
 using Core.Utility;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
@@ -59,14 +60,14 @@ public class Startup
         services.AddScoped<DispatcherService>();
 
         services.AddScoped<ClientConnection>(_ => new ClientConnection(NetworkSide.Server));
-        services.AddScoped<EmailService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IHashingService, HashingService>();
+        services.AddScoped<ITwoFactorService, TwoFactorService>();
+        services.AddScoped< /*IInfoService*/ InfoService>();
 
         services.AddTransient<ICommandsProvider, CommandsService>();
-        services.AddTransient<InfoService>();
         services.AddTransient<ServerAuthHandler>();
         services.AddTransient<ServerHandshakeHandler>();
-        services.AddTransient<HashingService>();
-        services.AddTransient<TwoFactorService>();
 
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
         services.AddValidatorsFromAssembly(Assembly.Load("Core"));
