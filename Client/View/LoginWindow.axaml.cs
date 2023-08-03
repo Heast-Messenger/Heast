@@ -23,11 +23,11 @@ public partial class LoginWindow : Window
     {
         if (OperatingSystem.IsWindows())
         {
-            MenuBar.SetValue(Grid.ColumnProperty, 0);
+            MenuBar.SetValue(Grid.ColumnProperty, value: 0);
         }
         else if (OperatingSystem.IsMacOS())
         {
-            MenuBar.SetValue(Grid.ColumnProperty, 2);
+            MenuBar.SetValue(Grid.ColumnProperty, value: 2);
         }
     }
 

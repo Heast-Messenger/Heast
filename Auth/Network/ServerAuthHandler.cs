@@ -94,9 +94,40 @@ public class ServerAuthHandler : IServerAuthListener
         }
     }
 
-    public void OnLogin(LoginC2SPacket packet)
+    public async void OnLogin(LoginC2SPacket packet)
     {
-        throw new NotImplementedException();
+        var validator = ServiceProvider.GetRequiredService<IValidator<LoginC2SPacket>>();
+        var result = await validator.ValidateAsync(packet);
+        if (!result.IsValid)
+        {
+            var errors = result.Errors.MapFlags(failure => (ErrorCodes)ulong.Parse(failure.ErrorCode));
+            await Ctx.Send(new LoginS2CPacket(LoginS2CPacket.ResponseStatus.Error), errors, packet.Guid);
+            return;
+        }
+
+        var account = Db.Accounts.FirstOrDefault(x => x.Email == packet.Email);
+        if (account is null)
+        {
+            await Ctx.Send(new LoginS2CPacket(LoginS2CPacket.ResponseStatus.UserNotKnown), guid: packet.Guid);
+            return;
+        }
+
+        var passwordCorrect = HashingService.Verify(
+            packet.Password,
+            account.Hash,
+            account.Salt);
+
+        if (!passwordCorrect)
+        {
+            await Ctx.Send(new LoginS2CPacket(LoginS2CPacket.ResponseStatus.PasswordWrong), guid: packet.Guid);
+            return;
+        }
+
+        await Ctx.Send(new LoginS2CPacket(LoginS2CPacket.ResponseStatus.AwaitingConfirmation), guid: packet.Guid);
+
+        if (!await VerifyByEmail(packet.Email, packet.Email))
+        {
+        }
     }
 
     public void OnReset(ResetC2SPacket packet)

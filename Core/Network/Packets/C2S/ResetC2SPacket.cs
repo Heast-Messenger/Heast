@@ -4,13 +4,13 @@ namespace Core.Network.Packets.C2S;
 
 public partial class ResetC2SPacket : AbstractPacket
 {
-    public ResetC2SPacket(string usernameOrEmail, string password)
+    public ResetC2SPacket(string email, string password)
     {
-        UsernameOrEmail = usernameOrEmail;
+        Email = email;
         Password = password;
     }
 
-    public string UsernameOrEmail { get; }
+    public string Email { get; }
     public string Password { get; }
 
     public override void Apply(IPacketListener listener)

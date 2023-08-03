@@ -7,7 +7,9 @@ public partial class LoginS2CPacket : AbstractPacket
     public enum ResponseStatus
     {
         Error,
-        AwaitingConfirmation
+        UserNotKnown,
+        AwaitingConfirmation,
+        PasswordWrong
     }
 
     public LoginS2CPacket(ResponseStatus responseStatus)

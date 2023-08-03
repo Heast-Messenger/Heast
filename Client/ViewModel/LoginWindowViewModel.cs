@@ -52,6 +52,11 @@ public class LoginWindowViewModel : ViewModelBase
         get => _content;
         set
         {
+            if (value.GetType() == _content.GetType())
+            {
+                return;
+            }
+
             RaiseAndSetIfChanged(ref _content, value);
             _pingTimer.Start();
         }
