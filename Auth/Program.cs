@@ -11,6 +11,7 @@ using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Auth;
 
@@ -51,6 +52,15 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AuthDbContext>();
+        services.AddLogging(builder =>
+        {
+            builder.AddSimpleConsole(options =>
+            {
+                options.IncludeScopes = true;
+                options.SingleLine = true;
+                options.TimestampFormat = "[HH:mm:ss] ";
+            });
+        });
 
         services.AddSingleton(Configuration.GetSection("db").Get<AuthDbConfig>()!);
         services.AddSingleton(Configuration.GetSection("mail").Get<EmailConfig>()!);
@@ -62,6 +72,7 @@ public class Startup
         services.AddScoped<ClientConnection>(_ => new ClientConnection(NetworkSide.Server));
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IHashingService, HashingService>();
+        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ITwoFactorService, TwoFactorService>();
         services.AddScoped< /*IInfoService*/ InfoService>();
 

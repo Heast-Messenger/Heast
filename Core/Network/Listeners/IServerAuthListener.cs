@@ -11,4 +11,5 @@ public interface IServerAuthListener : IPacketListener
     void OnLogout(LogoutC2SPacket packet);
     void OnVerifyEmail(VerifyEmailC2SPacket packet);
     void OnGuest(GuestC2SPacket packet);
+    void OnAccountRequest(AccountRequestC2SPacket packet);
 }

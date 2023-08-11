@@ -88,7 +88,7 @@ public class PacketBuf : ByteBufImpl
 
     public DateTime ReadTimestamp()
     {
-        return DateTime.ParseExact(ReadString(), "yyyyMMddHHmmss", null);
+        return DateTime.ParseExact(ReadString(), "yyyyMMddHHmmss", provider: null);
     }
 
     public void WriteGuid(Guid guid)

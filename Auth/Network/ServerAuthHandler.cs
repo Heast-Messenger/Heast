@@ -22,7 +22,8 @@ public class ServerAuthHandler : IServerAuthListener
         IServiceProvider serviceProvider,
         IHashingService hashingService,
         ITwoFactorService twoFactorService,
-        IEmailService emailService)
+        IEmailService emailService,
+        ITokenService tokenService)
     {
         TaskCompletionSource = new TaskCompletionSource();
         Ctx = ctx;
@@ -31,12 +32,14 @@ public class ServerAuthHandler : IServerAuthListener
         HashingService = hashingService;
         TwoFactorService = twoFactorService;
         EmailService = emailService;
+        TokenService = tokenService;
     }
 
     private ClientConnection Ctx { get; }
     private AuthDbContext Db { get; }
     private IServiceProvider ServiceProvider { get; }
     private IHashingService HashingService { get; }
+    private ITokenService TokenService { get; }
     private ITwoFactorService TwoFactorService { get; }
     private IEmailService EmailService { get; }
 
@@ -85,14 +88,7 @@ public class ServerAuthHandler : IServerAuthListener
             AddedServers = new List<Server>()
         });
 
-        try
-        {
-            await Db.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error whilst saving changes: {e.Message}");
-        }
+        await Db.SaveChangesAsync();
     }
 
     public async void OnLogin(LoginC2SPacket packet)
@@ -173,11 +169,16 @@ public class ServerAuthHandler : IServerAuthListener
         throw new NotImplementedException();
     }
 
+    public void OnAccountRequest(AccountRequestC2SPacket packet)
+    {
+    }
+
     private Task<bool> VerifyByEmail(string email, string username)
     {
         Console.Out.WriteLine($"Sending code to {email}");
         var verificationCode = TwoFactorService.GetVerificationCode();
-        EmailService.SendSignupCode(email, username, verificationCode);
+        var blockLink = EmailService.GenerateBlockLink(email);
+        EmailService.SendSignupCode(email, username, verificationCode, blockLink);
         var tcs = new TaskCompletionSource();
 
         _awaitingConfirmation.Remove(email);

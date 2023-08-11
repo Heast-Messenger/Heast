@@ -2,12 +2,13 @@ using System.Net;
 using System.Net.Mail;
 using Auth.Configuration;
 using Core.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Auth.Services;
 
 public class EmailService : IEmailService
 {
-    public EmailService(EmailConfig emailConfig, ILoggingService logger)
+    public EmailService(EmailConfig emailConfig, ILogger<EmailService> logger)
     {
         EmailConfig = emailConfig;
         Logger = logger;
@@ -24,7 +25,7 @@ public class EmailService : IEmailService
         };
     }
 
-    private ILoggingService Logger { get; }
+    private ILogger<EmailService> Logger { get; }
     private EmailConfig EmailConfig { get; }
     private SmtpClient SmtpClient { get; }
 
@@ -32,7 +33,7 @@ public class EmailService : IEmailService
 
     public Task<bool> Initialize()
     {
-        Logger.Info($"{GetType().Name}.POST");
+        Logger.LogInformation(IService.Post);
         var tcs = new TaskCompletionSource<bool>();
         SmtpClient.SendCompleted += (sender, args) =>
         {
@@ -40,36 +41,15 @@ public class EmailService : IEmailService
         };
         try
         {
-            SmtpClient.SendAsync(
-                EmailConfig.Username,
-                EmailConfig.Username,
+            SendEmail(EmailConfig.Username,
                 "Power On Self Test",
-                "This is a power on self test",
-                userToken: null);
+                "This is a power on self test");
 
             return tcs.Task;
         }
         catch (Exception)
         {
             return Task.FromResult(false);
-        }
-    }
-
-    public void SendSignupCode(string recipient, string username, string code)
-    {
-        var body = SignupVerificationTemplate
-            .Replace("{{Username}}", username)
-            .Replace("{{Code}}", code)
-            .Replace("{{BlockLink}}", "" /*TODO*/);
-
-        using (var mailMessage = new MailMessage())
-        {
-            mailMessage.From = new MailAddress(EmailConfig.Username);
-            mailMessage.Subject = $"Your verification code: {code}";
-            mailMessage.Body = body;
-            mailMessage.IsBodyHtml = true;
-            mailMessage.To.Add(recipient);
-            SmtpClient.Send(mailMessage);
         }
     }
 
@@ -86,5 +66,33 @@ public class EmailService : IEmailService
     public void SendDeleteCode(string recipient, string username, string code)
     {
         throw new NotImplementedException();
+    }
+
+    public string GenerateBlockLink(string email)
+    {
+        return "'blockLink'";
+    }
+
+    public void SendSignupCode(string recipient, string username, string code, string blockLink)
+    {
+        var body = SignupVerificationTemplate
+            .Replace("{{Username}}", username)
+            .Replace("{{Code}}", code)
+            .Replace("{{BlockLink}}", blockLink);
+        SendEmail(recipient, $"Your verification code is: {code}", body);
+    }
+
+    private void SendEmail(string recipient, string subject, string body)
+    {
+        Logger.LogDebug("Sending email to {}", recipient);
+        using (var mailMessage = new MailMessage())
+        {
+            mailMessage.From = new MailAddress(EmailConfig.Username);
+            mailMessage.Subject = subject;
+            mailMessage.Body = body;
+            mailMessage.IsBodyHtml = true;
+            mailMessage.To.Add(recipient);
+            SmtpClient.Send(mailMessage);
+        }
     }
 }

@@ -13,6 +13,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
         <PackageReference Include="SpanNetty.Common" Version="0.7.2012.2221"/>
         <PackageReference Include="SpanNetty.Buffers" Version="0.7.2012.2221"/>
         <PackageReference Include="SpanNetty.Transport" Version="0.7.2012.2221"/>

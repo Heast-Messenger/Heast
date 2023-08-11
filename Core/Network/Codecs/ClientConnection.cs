@@ -2,6 +2,9 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Core.exceptions;
+using Core.Model;
+using Core.Network.Packets.C2S;
+using Core.Network.Packets.S2C;
 using DotNetty.Codecs.Compression;
 using DotNetty.Common.Utilities;
 using DotNetty.Handlers.Tls;
@@ -73,8 +76,7 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
 
     public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
     {
-        Console.WriteLine($"Exception: {exception.Message}");
-        base.ExceptionCaught(context, exception);
+        Console.WriteLine($"Error whilst executing logic: {exception.Message}");
     }
 
     public Task Send(AbstractPacket packet, ErrorCodes? errors = null, Guid? guid = null)
@@ -109,6 +111,11 @@ public class ClientConnection : SimpleChannelInboundHandler<AbstractPacket>, IDi
         }
 
         throw new IllegalStateException("Channel was null whilst trying to send a packet");
+    }
+
+    public async Task<Account?> RequestAccountData()
+    {
+        return await SendAndWait<AccountRequestS2CPacket>(new AccountRequestC2SPacket());
     }
 
     public async Task EnableSecureSocketLayer(X509Certificate2? certificate = null)

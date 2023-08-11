@@ -29,11 +29,13 @@ public class NetworkState
                 .Register<DeleteC2SPacket>(buf => new DeleteC2SPacket(buf))
                 .Register<LogoutC2SPacket>(buf => new LogoutC2SPacket(buf))
                 .Register<VerifyEmailC2SPacket>(buf => new VerifyEmailC2SPacket(buf))
-                .Register<GuestC2SPacket>(buf => new GuestC2SPacket(buf)))
+                .Register<GuestC2SPacket>(buf => new GuestC2SPacket(buf))
+                .Register<AccountRequestC2SPacket>(buf => new AccountRequestC2SPacket(buf)))
         .Setup(NetworkSide.Client,
             new PacketHandler<IClientAuthListener>()
                 .Register<SignupS2CPacket>(buf => new SignupS2CPacket(buf))
-                .Register<VerifyEmailS2CPacket>(buf => new VerifyEmailS2CPacket(buf)));
+                .Register<VerifyEmailS2CPacket>(buf => new VerifyEmailS2CPacket(buf))
+                .Register<AccountRequestS2CPacket>(buf => new AccountRequestS2CPacket(buf)));
 
     private readonly Dictionary<NetworkSide, IPacketHandler<IPacketListener>> _handlers = new();
 

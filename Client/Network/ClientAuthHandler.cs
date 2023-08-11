@@ -30,4 +30,9 @@ public class ClientAuthHandler : IClientAuthListener
     {
         // ignored
     }
+
+    public void OnAccountRequest(AccountRequestS2CPacket packet)
+    {
+        // ignored
+    }
 }

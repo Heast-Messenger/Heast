@@ -7,4 +7,5 @@ public interface IClientAuthListener : IPacketListener
     void OnSignupResponse(SignupS2CPacket packet);
     void OnVerifyResponse(VerifyEmailS2CPacket packet);
     void OnLoginResponse(LoginS2CPacket packet);
+    void OnAccountRequest(AccountRequestS2CPacket packet);
 }
